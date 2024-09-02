@@ -1,0 +1,103 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2022 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+
+<div class="conversational-search-wrapper"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-use.conversationalsearch="com.adobe.guides.aem.components.core.models.ConversationalSearch"
+     data-cmp-site-id="${conversationalsearch.siteId}"
+     data-cmp-is-enabled="${conversationalsearch.isEnabled}"
+     xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <button type="button" title="Open assistant" id="prompt-button" class="conversational-search-prompt">
+    </button>
+    <div class="conversational-search-window" id="search-window">
+        <div class="conversation-window-header">
+            <span class="header-label">AI Assistant</span>
+            <div class="beta-feature-flag"></div>
+            <div class="header-button-group">
+                <button type="button" title="Reset conversation" id="refresh-button" class="refresh-conversation">
+
+                </button>
+                <button type="button" title="Close" id="close-conversation-button" class="close-conversation">
+                </button>
+            </div>
+        </div>
+        <div class="conversation-chat">
+            <div class="chat-window" id="scrolling-window">
+                <ul class="chat-history" id="chat-history">
+                </ul>
+                <div class="loading-state" id="progress-state">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="17" viewBox="0 0 15 17" fill="none"
+                    class="loading-icon">
+                        <path d="M10.9109 0.359863L10.123 6.3269C10.0554 6.8384 10.2235 7.35293 10.58 7.72589L14.3742 11.6953L8.89381 11.3413C8.37907 11.3081 7.877 11.5101 7.52867 11.8905L3.46397 16.3298L4.24493 10.357C4.31167 9.84658 4.14383 9.33336 3.78835 8.96098L0 4.99254L5.47435 5.34473C5.9882 5.37778 6.4894 5.17648 6.8376 4.79714L10.9109 0.359863Z" fill="#909090"/>
+                    </svg>
+                    <label class="loading-label">Generating response...</label>
+                </div>
+                <div class="error-message" id="error-block">
+                    <div class="error-block-icon">
+                    </div>
+                    <label class="error-label">Please add additional context or rephrase your inquiry and try again.</label>
+                </div>
+                <button type="button" id="scroll-button" class="scroll-down-button"/>
+            </div>
+            <textarea class= "message-textbox" id="conversation-textbox" placeholder="Type in your question..."></textarea>
+            <button class="submit-message" title="Send" id="submit-button">
+            </button>
+            <div class="message-block">
+                <label class="warning-label">AI generated responses may be inaccurate or misleading. Be sure to double-check responses and its source.</label>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="overlay">
+        <div id="dialog" class="survey-content">
+            <div class="dialog-content" id="dialog-content">
+                <p class="dialog-heading">Thank you for your feedback</p>
+                <section>
+                    <span class="dialog-label">What did not go well?</span>
+                    <div style="display: grid; margin-top: 0.5rem;">
+                        <div class="checkbox-list">
+                            <span class="dialog-warning-label">Select all that apply(optional)</span>
+                            <div role="group" id="checklist-items">
+
+                            </div>
+                        </div>
+                        <span class="dialog-warning-label"style="margin-top: 0.5rem;">Anything else you'd like us to know
+                        </span>
+                        <span class="dialog-warning-label" style="font-style: italic;">
+                            Please don't submit any confidential or sensitive personal information
+                        </span>
+                        <div>
+                            <textarea class="user-textual-feedback"></textarea>
+                        </div>
+                    </div>
+                    <div class="dialog-actions">
+                        <button class="dialog-button secondary">
+                            <label>Cancel</label>
+                        </button>
+                        <button class="dialog-button primary">
+                            <label>Submit</label>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-widget" id="feedback-banner" >
+        <div class="banner-icon"></div>
+        <label class="banner-label">Thank you for the feedback</label>
+        <button class="close-banner-icon" id="banner-close-button"></button>
+    </div>
+</div>

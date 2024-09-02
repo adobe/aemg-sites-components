@@ -1,0 +1,45 @@
+{
+  "kb": {
+    "category": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:createdBy": "admin",
+      "jcr:created": "Thu Mar 09 2023 18:33:08 GMT+0530",
+      "jcr:content": {
+        "jcr:primaryType": "cq:PageContent",
+        "jcr:createdBy": "admin",
+        "jcr:title": "Category",
+        "cq:template": "/conf/Tragopan/settings/wcm/templates/kb-content",
+        "jcr:created": "Thu Mar 09 2023 18:33:08 GMT+0530",
+        "cq:lastModified": "Thu Jan 14 2021 23:04:08 GMT+0530",
+        "sling:resourceType": "core/wcm/components/page/v2/page",
+        "cq:lastModifiedBy": "admin",
+        "root": {
+          "jcr:primaryType": "nt:unstructured",
+          "sling:resourceType": "core/wcm/components/container/v1/container",
+          "container": {
+            "jcr:primaryType": "nt:unstructured",
+            "sling:resourceType": "core/wcm/components/container/v1/container",
+            "container4321": {
+              "jcr:primaryType": "nt:unstructured",
+              "layout": "responsiveGrid",
+              "sling:resourceType": "core/wcm/components/container/v1/container",
+              "text": {
+                "jcr:primaryType": "nt:unstructured",
+                "jcr:createdBy": "admin",
+                "jcr:lastModifiedBy": "admin",
+                "jcr:created": "Thu Jan 14 2021 22:37:19 GMT+0530",
+                "text": "$category.html$",
+                "jcr:lastModified": "Thu Jan 14 2021 22:37:38 GMT+0530",
+                "sling:resourceType": "core/wcm/components/text/v2/text",
+                "textIsRich": "true"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "random" : {
+
+  }
+}

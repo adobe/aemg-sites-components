@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/guides-components/clientlibs"/>
+    <filter root="/apps/guides-components/components"/>
+    <filter root="/apps/guides-components/i18n"/>
+</workspaceFilter>

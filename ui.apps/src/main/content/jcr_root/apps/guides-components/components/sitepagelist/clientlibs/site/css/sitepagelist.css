@@ -1,0 +1,91 @@
+/*
+ *  Copyright 2022 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+ .sitepage-list {
+    margin-bottom: 3rem;
+ }
+ .sitepage-list-item {
+    height: 16rem;
+    width: 20rem;
+    position: relative;
+    font-size: 2rem;
+    background: #EDEEFF;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: -5px 5px 10px 0px #00000040;
+    display: flex;
+    flex-direction: column;
+}
+
+.sitepage-list-item::before {
+    content: "";
+    display: block;
+    width: 100%;
+}
+
+.sitepage-list-item::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+
+.sitepage-list-item-image-container {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    flex: 1 1 auto;
+    background-size: 100% 100%;
+    background-image: url('data:image/svg+xml,%3Csvg%20width%3D%2261%22%20height%3D%2260%22%20viewBox%3D%220%200%2061%2060%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M30.25%200L56.2308%2015V45L30.25%2060L4.26923%2045V15L30.25%200ZM42.5328%2020.0146L30.228%2026.5564L17.9241%2020.0146L16.1636%2023.3256L28.353%2029.8058L28.3535%2044.3729H32.1035L32.103%2029.8039L44.2933%2023.3256L42.5328%2020.0146Z%22%20fill%3D%22%230C438C%22%2F%3E%3C%2Fsvg%3E');
+}
+
+.sitepage-list-item-title {
+    width: 100%;
+    margin-bottom: 0px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.cmp-sitepage-list-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;    
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .cmp-sitepage-list-group {
+        grid-template-columns: 1fr;
+    }
+
+    .wide {
+        grid-column: span 2;
+    }
+}

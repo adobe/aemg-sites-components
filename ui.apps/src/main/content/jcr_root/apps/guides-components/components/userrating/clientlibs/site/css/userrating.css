@@ -1,0 +1,185 @@
+/*
+ *  Copyright 2022 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+.userrating {
+   display: none;
+   flex-direction: row;
+   align-items: center;
+   padding: 0px !important;
+   gap: 24px;
+   height: 32px;
+}
+
+.cmp-userrating {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding: 0px !important;
+   height: 32px;
+   gap: 16px;
+}
+
+.cmp-userrating-rating-paragraph {
+   font-family: 'Adobe Clean' !important;
+   font-style: normal !important;
+   font-weight: 400 !important;
+   font-size: 12px !important;
+   line-height: 130% !important;
+   color: #464646;
+}
+
+.cmp-userrating-rating-group {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding: 0px !important;
+   gap: 8px;
+   height: 32px;
+   position: relative;
+}
+
+.cmp-userrating-stars-group {
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   padding: 0px !important;
+   height: 32px;
+}
+
+.cmp-userrating-stars {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   padding: 0px !important;
+   width: 24px;
+   height: 32px;
+}
+
+.cmp-userrating-stars-svg {
+   width: 18px;
+   height: 18px;
+}
+
+.cmp-userrating-vertical-divider {
+   width: 1px;
+   height: 24px;
+   background: #D5D5D5;
+   border-radius: 0.5px;
+}
+
+.cmp-userrating-average-rating {
+   font-family: 'Adobe Clean' !important;
+   font-style: normal !important;
+   font-weight: 700 !important;
+   font-size: 16px !important;
+   line-height: 130% !important;
+   color: #000000;
+}
+
+.cmp-userrating-total-reviews {
+   font-family: 'Adobe Clean' !important;
+   font-style: italic !important;
+   font-weight: 400 !important;
+   font-size: 16px !important;
+   line-height: 130% !important;
+   color: #464646;
+}
+
+.cmp-userrating-popup {
+   visibility: hidden;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+   padding: 16px 24px !important;
+   gap: 4px;
+   position: absolute;
+   left: 128px;
+   background: #FFFFFF;
+   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+   border-radius: 8px;
+   box-sizing: border-box !important;
+   border: 1px solid #D5D5D5 !important;
+   z-index: 1;
+}
+
+.cmp-userrating-popup-show {
+   visibility: visible;
+}
+
+.cmp-userrating-popup-text {
+   height: 24px;
+   font-family: 'Adobe Clean' !important;
+   font-style: normal !important;
+   font-weight: 700 !important;
+   font-size: 16px !important;
+   line-height: 150% !important;
+   display: flex;
+   align-items: center;
+   color: #000000;
+}
+
+.cmp-userrating-popup-star-frame {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+   padding: 0px !important;
+   gap: 8px;
+}
+
+.cmp-userrating-popup-star-group {
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   padding: 0px !important;
+}
+
+.cmp-userrating-popup-star {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   padding-right: 8px !important;
+}
+
+.cmp-userrating-popup-last-star {
+   padding-right: 0px !important;
+}
+
+.cmp-userrating-popup-star-svg {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 0px !important;
+   gap: 10px;
+   width: 25px;
+   height: 24px;
+}
+
+.cmp-userrating-popup-star-svg-fill-hover {
+   fill: #464646;
+}
+
+.cmp-userrating-popup-star-svg-fill-unselected {
+   fill: none;
+}
+
+.cmp-userrating-popup-star-svg-fill-selected {
+   fill: #222222;
+}

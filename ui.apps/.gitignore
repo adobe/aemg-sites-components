@@ -1,0 +1,3 @@
+src/main/content/jcr_root/apps/guides-components/clientlibs/clientlib-site
+src/main/content/jcr_root/apps/guides-components/clientlibs/clientlib-dependencies
+src/main/content/jcr_root/apps/guides-components/components/*/clientlibs/site/js/*.js

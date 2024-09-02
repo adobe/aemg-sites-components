@@ -1,0 +1,46 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2022 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     class="page-helpful-feedback-wrapper tcx-hide"
+     id="page-helpful-feedback-component">
+    <section id="page-helpful-feedback-yes-no" class="page-helpful-feedback-yes-no">
+        <span class="page-helpful-feedback-title">Was this helpful?</span>
+        <div class="page-helpful-feedback-yes-no-button-wrapper">
+            <button class="yes-button">Yes</button>
+            <button class="no-button">No</button>
+        </div>
+    </section>
+    <section id="page-helpful-feedback-yes-text" class="page-helpful-feedback-yes-text tcx-hide">
+        <span class="page-helpful-feedback-title"> We are sorry the content didn't meet your needs.</span>
+        <div class="page-helpful-feedback-no-additional-data">
+            <span class="page-helpful-feedback-subtitle">Share additional feedback to help us improve.</span>
+            <textarea class="page-helpful-feedback-inputbox"></textarea>
+            <div id="feedback-character-counter-wrapper" class="feedback-character-counter-wrapper">
+                <span class="feedback-character-counter">0/255</span>
+                <span class="feedback-character-counter-separator">|</span>
+                <span class="feedback-character-counter-warning-message">Character limit exceeded.</span>
+            </div>
+            <div class="page-helpful-feedback-submit-cancel-button-wrapper">
+                <button class="submit-button">Submit</button>
+                <button class="cancel-button">Skip</button>
+            </div>
+        </div>
+    </section>
+    <section id="page-helpful-feedback-given" class="page-helpful-feedback-given tcx-hide">
+        <span class="page-helpful-feedback-title">Thank you so much for sharing your feedback!</span>
+    </section>
+</div>

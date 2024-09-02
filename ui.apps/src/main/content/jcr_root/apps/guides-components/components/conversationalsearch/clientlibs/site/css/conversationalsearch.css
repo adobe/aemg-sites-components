@@ -1,0 +1,501 @@
+/*
+ *  Copyright 2022 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+.conversational-search-wrapper *,:after,:before {
+    --tw-ring-color: transparent !important;
+}
+
+.conversational-search-prompt {
+    position: fixed;
+    height: 2rem;
+    width: 2rem;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 10000000;
+    background-color: #5258E4 ;
+    border-radius: 0.25rem;
+    background-image: url("../resources/aiSparkle.svg");
+    background-repeat: no-repeat;
+    background-size: calc(100% - 0.5rem);
+    background-position: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.feedback-widget {
+    position: fixed;
+    bottom: 2rem;
+    z-index: 999;
+    width: 20rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007A4D;
+    height: 3rem;
+    border-radius: 0.5rem;
+    align-items: center;
+    padding-inline: 0.5rem;
+    display: none;
+}
+.conversational-search-prompt svg {
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: 0.25rem !important;
+}
+.conversational-search-prompt .cmp-button__icon {
+    height: 2rem;
+    width: 2rem;
+}
+
+.conversational-search-window {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    border-radius: 0.5rem;
+    height: 35rem;
+    width: 22.5rem;
+    background-color: #f5f5f5;
+    border: 0.0626rem solid #EAEAEA !important;
+}
+.conversation-window-header {
+    display: flex;
+    border-bottom: 0.0625rem solid #EAEAEA !important;
+    padding: 0rem 0.5rem !important;
+    height: 35px;
+    align-items: center;
+}
+.beta-feature-flag {
+    margin: 0.5rem !important;
+    background-color: rgb(13, 102, 208);
+    border-radius: 0.25rem;
+    height: 1.25rem;
+    display: inline-grid;
+    align-items: center;
+}
+
+.beta-feature-flag::before {
+    content: "Beta";
+    color: #f5f5f5;
+    margin-top: -0.25rem;
+    text-transform: capitalize;
+    padding: 0.25rem 0.35rem;
+    line-height: 1.5;
+}
+
+.header-label {
+    font-size: 1rem !important;
+    text-transform: capitalize;
+    font-weight: bold !important;
+}
+.close-conversation, .refresh-conversation {
+    background-size: calc(100% - 1rem) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 2rem;
+    width: 2rem;
+    margin-top: 0.5rem;
+}
+
+.close-conversation {
+    background-color: transparent;
+    background-image: url('../resources/close.svg');
+}
+.refresh-conversation {
+    background-color: transparent;
+    background-image: url('../resources/clear.svg');
+}
+
+.refresh-conversation svg {
+    height: 1rem;
+    width: 1rem;
+    margin-bottom: 0.25rem !important;
+    margin-left: 0.5rem;
+}
+
+.close-conversation svg {
+    margin-bottom: 0.2rem !important;
+    margin-left: 0.5rem;
+}
+
+.header-button-group {
+    margin-left: auto !important;
+    margin-right: 0rem !important;
+}
+.conversation-chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: calc(100% - 2.5rem);
+}
+
+.chat-window {
+    max-height: calc(100% - 8.5rem);
+    overflow-y: auto;
+}
+
+.message-block {
+    margin: 0rem 0.5rem !important;
+}
+
+.warning-label {
+    color: #b1b1b1;
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+}
+
+.message-textbox {
+    width: calc(100% - 1rem);
+    margin: 0.25rem 0.5rem;
+    height: 5rem;
+    resize: none;
+    overflow: auto;
+    padding: 0.25rem !important;
+}
+
+.message-textbox[disabled], .submit-message[disabled] {
+    background-color: #eaeaea;
+    border-color: #eaeaea;
+    color: #b3b3b3;
+}
+
+.submit-message {
+    height: 2rem;
+    width: 2rem;
+    background-color: #0d66d0;
+    background-image: url('../resources/send.svg');
+    background-repeat: no-repeat;
+    background-size: calc(100% - 0.5rem);
+    background-position: center;
+    position: absolute;
+    right: 1rem;
+    margin-bottom: 3.75rem;
+    border-radius: 0.25rem;
+}
+
+.submit-message svg {
+    margin-left: 0.25rem !important;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.chat-history {
+    margin: 0rem 0.5rem !important;
+    overflow: auto;
+    display: grid;
+}
+
+.chat-history li {
+    list-style-type: none !important;
+    margin: 0rem !important;
+}
+
+.chat-message {
+    border: solid 0.0625rem #eaeaea !important;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    list-style-type: none;
+    display: flex;
+    padding: 0.5rem !important;
+    margin: 0.25rem 0rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.125rem !important;
+}
+
+.user-query {
+    float: right;
+    border-radius: 0.5rem 0.5rem 0rem 0.5rem;
+}
+
+.chatbot-reply {
+    float: left;
+    border-radius: 0.5rem 0.5rem 0.5rem 0rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 10rem;
+}
+
+.display-picture {
+    height: 1.25rem;
+    width: 1.25rem;
+    min-width: 1.25rem;
+    margin-right: 0.5rem !important;
+    border-radius: 0.125rem;
+}
+
+.display-picture svg {
+    height: 1.125rem;
+    width: 1.125rem;
+    margin-left: 0.1rem !important;
+}
+
+.chatbot-image {
+    background-color: #5258E4;
+    background-image: url('../resources/aiSparkle.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.scroll-down-button {
+    position: absolute;
+    right: 1rem;
+    bottom: 9.5rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #000000 !important;
+    min-width: 1.5rem;
+    background-image: url('../resources/arrowDown.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.scroll-down-button svg {
+    margin-left: 0.2rem !important;
+}
+.error-message {
+    padding-inline: 0.5rem !important;
+    display: flex;
+}
+.error-block-icon {
+    background-image: url('../resources/errorSparkle.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.error-label {
+    font-size: 0.75rem !important;
+    line-height: 1.25rem !important;
+    margin-left: 0.25rem !important;
+}
+
+.chat-message a {
+    text-decoration: underline;
+    color: blue;
+}
+
+.copy-button, .like-button, .dislike-button, .report-button, .copied-button, .liked-button,
+.disliked-button, .reported-button {
+    height: 1.25rem;
+    width: 1.25rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0.25rem;
+}
+
+.like-button, .dislike-button, .report-button, .liked-button, .disliked-button, .reported-button {
+    margin-left: 0.5rem;
+}
+
+.copy-button {
+    margin-right: auto;
+    background-image: url('../resources/copy.svg');
+}
+
+.copied-button {
+    margin-right: auto;
+    background-image: url('../resources/checkmark.svg');
+}
+
+.like-button {
+    background-image: url('../resources/like.svg');
+}
+
+.liked-button {
+    background-image: url('../resources/liked.svg');
+}
+
+.dislike-button {
+    background-image: url('../resources/dislike.svg');
+}
+
+.disliked-button {
+    background-image: url('../resources/disliked.svg');
+}
+
+.reported-button {
+    background-image: url('../resources/reported.svg');
+}
+
+.report-button {
+    background-image: url('../resources/report.svg');
+}
+
+.user-message-block {
+    display: flex;
+}
+
+.chat-action-buttons {
+    display: flex;
+}
+
+
+.survey-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8f8f8;
+    padding: 2rem;
+    border-radius: 0.25rem;
+    z-index: 1000;
+    width: 25rem;
+}
+
+.survey-content textarea {
+    width: 100%;
+    border: solid 1px #f3f3f3;
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.dialog-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.dialog-label, .dialog-warning-label {
+    font-size: 0.875rem;
+}
+
+.dialog-warning-label {
+    font-size: 0.75rem;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.dialog-button {
+    border: solid 2px #d5d5d5;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    margin-left: 0.5rem;
+    height: 2.25rem;
+}
+
+.dialog-button.primary {
+    border-color: #0265dc;
+    background-color: #0265dc;
+}
+
+.dialog-button.primary label {
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.dialog-button.secondary label {
+    color: #222;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.checkbox-label-group {
+    display: flex;
+    height: 2rem;
+    align-items: center;
+}
+
+.checkbox-label {
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    line-height: 2rem;
+}
+
+.checklist-items {
+    margin-bottom: 0.5rem;
+}
+
+.banner-icon {
+    background-image: url("../resources/filledCheckmark.svg");
+}
+
+.close-banner-icon {
+    background-image: url("../resources/filledClose.svg");
+    margin-left: auto;
+}
+
+.banner-icon, .close-banner-icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.banner-label {
+    color: white;
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+.copied-button:after {
+    content: "Copied";
+    margin-left: 1.25rem;
+    line-height: 1.5rem;
+}
+
+.user-textual-feedback {
+    padding: 0.5rem;
+}
+
+.loading-state {
+    height: 3rem;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+.loading-label {
+    font-size: 0.75rem;
+    color: #6d6d6d;
+    font-style: italic;
+}
+.loading-icon {
+    animation: rotate 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: scale(1.0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(0.4);
+        opacity: 0.2;
+        transform-origin: 0% 100%;
+    }
+    51% {
+        transform: scale(0.4);
+        opacity: 0.2;
+        transform-origin: 0% 100%;
+    }
+    100% {
+        transform: scale(1.0);
+        opacity: 0.8;
+    }
+}
+

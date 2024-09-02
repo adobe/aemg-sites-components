@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/guides-components" mode="merge"/>
+    <filter root="/conf/global/settings/guides/rules"/>
+    <filter root="/content/guides-components" mode="merge"/>
+    <filter root="/content/dam/guides-components" mode="merge"/>
+    <filter root="/content/experience-fragments/guides-components" mode="merge"/>
+</workspaceFilter>
