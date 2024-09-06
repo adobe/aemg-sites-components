@@ -84,7 +84,7 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
 
         try {
             templateName = getTemplateName(cqTemplate);
-            categoryList = findPagesByTemplate(request.getResourceResolver(), FilenameUtils.concat(SLASH, FilenameUtils.concat(CONF_PATH_TOKEN,FilenameUtils.concat(templateName , TEMPLATE_PATH_TOKEN))), FilenameUtils.concat(SLASH, FilenameUtils.concat(CONTENT_PATH_TOKEN, templateName)));
+            categoryList = findPagesByTemplate(request.getResourceResolver(), FilenameUtils.concat(SLASH, FilenameUtils.concat(CONF_PATH_TOKEN,FilenameUtils.concat(templateName , TEMPLATE_PATH_TOKEN))), currentPage.getPath());
         } catch (RepositoryException e) {
             logger.error("Unable to retrieve category list for current template.", e);
         } catch (GuidesRuntimeException e) {
