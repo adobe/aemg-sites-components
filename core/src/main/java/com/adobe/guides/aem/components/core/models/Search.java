@@ -67,6 +67,12 @@ public interface Search extends ComponentExporter {
      * @since com.adobe.cq.wcm.core.components.models 12.2.0
      */
     String PN_RESULTS_SIZE = "resultsSize";
+    /**
+     * Name of the configuration policy property that defines the format of the results heading.
+     *
+     * @since com.adobe.cq.wcm.core.components.models 12.2.0
+     */
+    String RESULT_FORMAT = "resultCountFormat";
     
     /**
      * Name of the configuration policy property that defines the maximal number of results fetched by a search request.
@@ -254,5 +260,9 @@ public interface Search extends ComponentExporter {
 
 	default int getGuessTotal() {
 		throw new UnsupportedOperationException();
+    }
+
+    default String getResultFormat() {
+        throw new UnsupportedOperationException();
     }
 }

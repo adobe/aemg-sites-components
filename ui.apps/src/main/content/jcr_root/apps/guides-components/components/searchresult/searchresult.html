@@ -27,17 +27,13 @@
 	data-cmp-relative-path="${search.relativePath}"
 	class="search__field--view" id="js-display-diff-view">
 	<div class = "search-result-header">
-		<div class="cmp-search__total-records"></div>
-		<div class="sort-btn">
-			<p>Sort</p>
-			<button class = "sort-btn-option">Relevance</button>
-		</div>
+		<div data-cmp-format="${search.resultFormat}" class="cmp-search__total-records"></div>
+		<div id="js-searchResults-endData"><p>${search.noResultText}</p></div>
 	</div>
 	<ul class="cmp-search-list__item-group">
 	</ul>
-	<div classs="is--hidden" id="js-searchResults-endData"><p>${search.noResultText}</p></div>
 	<section class="search__results--footer">
-		<button>${search.loadMoreText}</button>
+		<button class="search__results--load-more">${search.loadMoreText}</button>
 	</section>
 </section>
 

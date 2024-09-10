@@ -44,6 +44,7 @@ import com.day.cq.tagging.TagManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.api.designer.Style;
+import com.day.cq.i18n.I18n;
 import org.jetbrains.annotations.Nullable;
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = { Search.class,
@@ -63,6 +64,7 @@ public class SearchImpl implements Search {
 	public static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "Load More";
 	public static final String PN_NO_RESULT_TEXT = "noResultText";
 	public static final String NO_RESULT_TEXT_DEFAULT_VALUE = "No more results";
+	public static final String DEFAULT_RESULT_FORMAT = "Showing {count} out of {total} results";
 
 	@Self
 	private SlingHttpServletRequest request;
@@ -81,7 +83,7 @@ public class SearchImpl implements Search {
 	private int resultsSize;
 	private int searchTermMinimumLength;
 	private int guessTotal;
-
+	private I18n i18n;
 	protected java.util.List<ListItem> tags;
 
 	@SlingObject
@@ -90,6 +92,8 @@ public class SearchImpl implements Search {
 	@ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
 	@Named("loadMoreText")
 	private String loadMoreText;
+
+	private String resultFormat;
 
 	@ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
 	@Named("facetTitle")
@@ -129,11 +133,15 @@ public class SearchImpl implements Search {
 
 	@PostConstruct
 	private void initModel() {
+		if (request != null) {
+			i18n = new I18n(request);
+		}
 		resultsSize = currentStyle.get(PN_RESULTS_SIZE, PROP_RESULTS_SIZE_DEFAULT);
 		searchTermMinimumLength = currentStyle.get(PN_SEARCH_TERM_MINIMUM_LENGTH,
 				PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT);
-		loadMoreText = properties.get(PN_LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE);
-		noResultText = properties.get(PN_NO_RESULT_TEXT, NO_RESULT_TEXT_DEFAULT_VALUE);
+		loadMoreText = translate(properties.get(PN_LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
+		noResultText = translate(properties.get(PN_NO_RESULT_TEXT, NO_RESULT_TEXT_DEFAULT_VALUE));
+		resultFormat = translate(properties.get(RESULT_FORMAT, DEFAULT_RESULT_FORMAT));
 		PageManager pageManager = currentPage.getPageManager();
 		Resource currentResource = request.getResource();
 		if (pageManager != null) {
@@ -142,6 +150,10 @@ public class SearchImpl implements Search {
 				relativePath = StringUtils.substringAfter(currentResource.getPath(), containingPage.getPath());
 			}
 		}
+	}
+
+	public String translate(String str) {
+		return (i18n != null ? i18n.getVar(str) : str);
 	}
 
 	public void populateTags() {
@@ -291,4 +303,9 @@ public class SearchImpl implements Search {
 		return guessTotal;
 	}
 
+	@NotNull
+	@Override
+	public String getResultFormat() {
+		return resultFormat;
+	}
 }
