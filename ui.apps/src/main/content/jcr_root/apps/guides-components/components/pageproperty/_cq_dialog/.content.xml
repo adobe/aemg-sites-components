@@ -25,6 +25,13 @@
                         fieldDescription="HTML ID attribute to apply to the component."
                         fieldLabel="ID"
                         name="./id"/>
+                    <dateFormat 
+                        jcr:primaryType="nt:unstructured" 
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield" 
+                        fieldDescription="Type in the date format"
+                        fieldLabel="Date format" 
+                        name="./dateFormat" 
+                        value="MMM d, yyyy" />
                 </items>
             </column>
         </items>
