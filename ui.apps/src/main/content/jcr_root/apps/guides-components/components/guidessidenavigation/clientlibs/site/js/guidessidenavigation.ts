@@ -32,6 +32,9 @@ class GuidesNavigation {
         return `${suffix}`
     }
 
+     static LOAD_MORE_TEXT_DEFAULT_VALUE: string = "load more...";
+     static LIMIT_DEFAULT_VALUE:string = "1000";
+
     getLoadMoreButton() {
         const button = document.createElement('button')
         button.innerText = this.loadMoreText
@@ -172,11 +175,11 @@ class GuidesNavigation {
         try {
             const navData = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-list"));
             const selectedPath = navigationParent.getAttribute("data-cmp-guides-side-nav-current-index");
-            const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || "1000";
-            const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || "load more...";
+            const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || GuidesNavigation.LIMIT_DEFAULT_VALUE;
+            const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || GuidesNavigation.LOAD_MORE_TEXT_DEFAULT_VALUE
             this.tokens = selectedPath.split('-')
             this.tokens = this.tokens.slice(1, this.tokens.length)
-            this.limit = parseInt(renderSize) || 1000
+            this.limit = parseInt(renderSize)
             this.selectedPath = this.tokens.join('-')
             this.loadMoreText = loadMoreText
             const ul = this.renderLevel(navData.children, 0, '', 0, 0)

@@ -51,6 +51,8 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/guidessidenavigation";
     protected static final String LIMIT = "limit";
     protected static final String LOAD_MORE_TEXT = "loadMoreText";
+    protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
+    protected static final String LIMIT_DEFAULT_VALUE = "1000";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -92,8 +94,8 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             Binary tocIndexBinary = node.getProperty("guides-navigation-index").getBinary();
             String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
             String tocIndexBinaryString = IOUtils.toString(tocIndexBinary.getStream(), CharEncoding.UTF_8);
-            limit = properties.get(LIMIT, "1000");
-            loadMoreText = translate(properties.get(LOAD_MORE_TEXT, "load more..."));
+            limit = properties.get(LIMIT, LIMIT_DEFAULT_VALUE);
+            loadMoreText = translate(properties.get(LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
             logger.info("AEMSITE: tocBinaryString: {}", tocBinaryString);
             logger.info("AEMSITE: tocIndexBinaryString: {}", tocIndexBinaryString);
             logger.info("AEMSITE: toc rendering limit: {}", limit);
