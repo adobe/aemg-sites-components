@@ -44,7 +44,29 @@ class MiniTOC {
         var minitocContainer = document.getElementsByClassName("minitoc")[0];
         var miniTOCList = document.createElement("ul");
         const htmlTag = document.getElementsByTagName('html').item(0)
-        this.headings = content.querySelectorAll("h1, h2, h3, h4, h5, h6");
+        const getListOfHeadings = () => {
+            let low
+            let high
+            try {
+                const start = parseInt(minitocContainer.getAttribute("data-start") || "1")
+                const end = parseInt(minitocContainer.getAttribute("data-end") || "6")
+                low = Math.min(start, end)
+                high = Math.max(start, end)
+            } catch(e) {
+                low = 1
+                high = 6
+            }
+            let selector = ""
+            for(let i=low;i<=high;i++) {
+                if(i==high) {
+                    selector += `h${i}`
+                } else {
+                    selector += `h${i},`
+                }
+            }
+            return selector
+        }
+        this.headings = content.querySelectorAll(getListOfHeadings());
         this.tagList = []
         for (var i = 0; i < this.headings.length; i++) {
             var heading = this.headings[i];
