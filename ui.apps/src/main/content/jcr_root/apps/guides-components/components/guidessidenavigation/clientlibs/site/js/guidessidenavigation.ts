@@ -23,6 +23,8 @@
 class GuidesNavigation {
     selectedPath: string
     tokens: string[]
+    limit: number
+    loadMoreText: string
     generatePath(prefix, suffix) {
         if(prefix) {
             return `${prefix}-${suffix}`
@@ -30,12 +32,20 @@ class GuidesNavigation {
         return `${suffix}`
     }
 
+     static LOAD_MORE_TEXT_DEFAULT_VALUE: string = "load more...";
+     static LIMIT_DEFAULT_VALUE:string = "1000";
+
+    getLoadMoreButton() {
+        const button = document.createElement('button')
+        button.innerText = this.loadMoreText
+        return button
+    }
 
     handleExpand(chevron, container:HTMLElement, currPath, item, tokenIndex = -1, incrementer: number) {
         let hasRenderedChildren = "true" === chevron.getAttribute("children-rendered")
         let ul;
         if(!hasRenderedChildren) {
-            ul = this.renderLevel(item.children, tokenIndex, currPath, incrementer)
+            ul = this.renderLevel(item.children, tokenIndex, currPath, incrementer, 0)
             container.appendChild(ul)
             chevron.setAttribute("children-rendered", "true")
         } else {
@@ -82,7 +92,7 @@ class GuidesNavigation {
         }
         let subtree;
         if(expandChildren) {
-            subtree = this.renderLevel(item.children, tokenIndex+1, currPath, incrementer)
+            subtree = this.renderLevel(item.children, tokenIndex+1, currPath, incrementer, 0)
             chevron.setAttribute("children-rendered", "true")
             chevron.classList.remove("hide-children")
             chevron.classList.add("show-children")
@@ -109,14 +119,16 @@ class GuidesNavigation {
         }
     }
 
-    renderLevel(children: Array<any>, idx: number, parentPath: string, incrementer: number) {
-        if(!children) {
-            children = [];
+    doRenderLevel(ul, offset, currIdx, children, parentPath, idx, incrementer, button) {
+        if(button) {
+            ul.removeChild(button)
         }
-        const ul = document.createElement("ul");
-        ul.classList.add("cmp-guidesnavigation__group")
-        for(let i=0;i<children.length;i++) {
-            const expandChildren = idx > -1 ? i.toString() === this.tokens[idx] : false
+        let idxMax = 0
+        if(currIdx)
+            idxMax = parseInt(currIdx) + 1;
+        const end = Math.max(idxMax, Math.min(children.length, offset + this.limit))
+        for(let i=offset;i<end;i++) {
+            const expandChildren = idx > -1 ? i.toString() === currIdx : false
             const item = children[i]
             const currPath = this.generatePath(parentPath, i)
             const listItem = document.createElement("li")
@@ -130,6 +142,28 @@ class GuidesNavigation {
             }
             ul.appendChild(listItem)
         }
+        const hasMore = end !== children.length;
+        if(hasMore) {
+            const button = this.getLoadMoreButton()
+            const marginDepth = 1.25*incrementer;
+            button.style.marginLeft = `${marginDepth}rem`;
+            button.addEventListener("click", () => {
+                this.doRenderLevel(ul, end, currIdx, children, parentPath, idx, incrementer, button)
+            })
+            ul.appendChild(button)
+        }
+        return ul;
+    }
+
+    renderLevel(children: Array<any>, idx: number, parentPath: string, incrementer: number, offset: number) {
+        if(!children) {
+            children = [];
+        }
+        const currIdx = this.tokens[idx]
+        const ul = document.createElement("ul");
+        ul.classList.add("cmp-guidesnavigation__group")
+        this.doRenderLevel(ul, offset, currIdx, children, parentPath, idx, incrementer, null)
+        
         return ul
     }
 
@@ -141,10 +175,14 @@ class GuidesNavigation {
         try {
             const navData = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-list"));
             const selectedPath = navigationParent.getAttribute("data-cmp-guides-side-nav-current-index");
+            const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || GuidesNavigation.LIMIT_DEFAULT_VALUE;
+            const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || GuidesNavigation.LOAD_MORE_TEXT_DEFAULT_VALUE
             this.tokens = selectedPath.split('-')
             this.tokens = this.tokens.slice(1, this.tokens.length)
+            this.limit = parseInt(renderSize)
             this.selectedPath = this.tokens.join('-')
-            const ul = this.renderLevel(navData.children, 0, '', 0)
+            this.loadMoreText = loadMoreText
+            const ul = this.renderLevel(navData.children, 0, '', 0, 0)
             navigationParent.appendChild(ul)
         } catch(e) {
 

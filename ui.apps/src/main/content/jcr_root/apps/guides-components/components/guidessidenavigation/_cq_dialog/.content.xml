@@ -11,6 +11,20 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
+                    <limit
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldDescription="Total items to show in a level"
+                            fieldLabel="Limit"
+                            name="./limit"
+                            value="1000" />
+                    <loadMoreText
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldDescription="Load more items button text"
+                            fieldLabel="Load more items text"
+                            name="./loadMoreText"
+                            value="load more..." />
                 </items>
             </column>
         </items>
