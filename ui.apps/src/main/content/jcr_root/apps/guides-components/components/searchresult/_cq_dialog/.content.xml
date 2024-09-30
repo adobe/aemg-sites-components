@@ -61,7 +61,7 @@
                                     <resultCountFormat
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                        emptyText="Displaying {count} of {total} results"
+                                        emptyText="Showing {count} out of {total} results"
                                         fieldLabel="Result Count Text Format"
                                         name="./resultCountFormat"/>
                                 </items>
