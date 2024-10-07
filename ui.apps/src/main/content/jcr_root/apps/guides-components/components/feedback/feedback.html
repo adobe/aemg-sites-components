@@ -1,0 +1,79 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2022 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2022 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div data-sly-use.feedback="com.adobe.guides.aem.components.core.models.Feedback"
+     class="feedback">
+      <div class="feedback-container">
+            <h2>${feedback.promptText}</h2>
+            <div class="rating-btns">
+                  <button id="like-btn">Like</button>
+                  <button id="dislike-btn">Dislike</button>
+            </div>
+            <div class="textarea-container">
+                  <textarea id="feedback-text" placeholder="Write your feedback here..."></textarea>
+            </div>
+            <button class="submit-btn" id="submit-btn">${feedback.submitBtnText}</button>
+      </div>
+
+      <script>
+            document.getElementById('like-btn').addEventListener('click', function() {
+                  console.log('Like button clicked');
+            });
+
+            document.getElementById('dislike-btn').addEventListener('click', function() {
+                  console.log('Dislike button clicked');
+            });
+
+            document.getElementById('submit-btn').addEventListener('click', function() {
+                  const feedbackText = document.getElementById('feedback-text').value;
+                  console.log('Feedback submitted: ' + feedbackText);
+                  fetch('http://localhost:8080/feedback', {
+                        method: 'POST',
+                        headers: {
+                              'Content-Type': 'application/json',
+                              mode: 'no-cors'
+
+                        },
+                        body: JSON.stringify({
+                              unique_id: "unique_id_1",
+                              overall: true,
+                              canned_feedback: [],
+                              textual_feedback: feedbackText
+                        })
+                  })
+                          .then(response => response.json())
+                          .then(data => console.log(data))
+                          .catch(error => console.error('Error:', error));
+            });
+      </script>
+
+</div>
