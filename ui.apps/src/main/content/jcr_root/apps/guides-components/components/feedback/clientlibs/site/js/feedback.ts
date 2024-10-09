@@ -15,14 +15,103 @@
  ******************************************************************************/
 
 class Feedback {
-  private protocol: string;
-  private host: string;
-  private pathName: string;
+  askFeedback: HTMLElement
+  submitFeedback: HTMLElement
+  acknowledgement: HTMLElement
+  textarea: any
+  yesButton: Element
+  noButton: Element
+  submitButton: any
+  cancelButton: Element
+  characterCounter: Element
+  characterCounterWrapper: HTMLElement
 
-  constructor() {
-    this.protocol = window.location.protocol;
-    this.host = window.location.host;
-    this.pathName = window.location.pathname;
+  hideclass = 'tcx-hide'
+  warningClass = 'feedback-overflow-warning'
+
+  hideSection(section: Element) {
+    section.classList.add(this.hideclass)
   }
 
+  showSection(section: Element) {
+    section.classList.remove(this.hideclass)
+  }
+
+  onDocumentReady() {
+    this.askFeedback = document.getElementById("feedback-yes-no")
+    this.submitFeedback = document.getElementById("feedback-yes-text")
+    this.acknowledgement = document.getElementById("feedback-given")
+    this.characterCounterWrapper = document.getElementById("feedback-character-counter-wrapper")
+
+    this.yesButton = this.askFeedback.getElementsByClassName("yes-button").item(0)
+    this.noButton = this.askFeedback.getElementsByClassName("no-button").item(0)
+
+    this.submitButton = this.submitFeedback.getElementsByClassName("submit-button").item(0)
+    this.cancelButton = this.submitFeedback.getElementsByClassName("cancel-button").item(0)
+
+    this.textarea = this.submitFeedback.getElementsByClassName("feedback-inputbox").item(0)
+    this.characterCounter = this.characterCounterWrapper.getElementsByClassName("feedback-character-counter").item(0)
+    this.subscribeEvents()
+  }
+
+  analyticsSendFeedbackHelpful() {
+
+  }
+
+  analyticsSendFeedbackNotHelpfulWithMessage() {
+    const text = this.textarea.value
+  }
+
+  addWarningOfCharLimit() {
+    this.characterCounterWrapper.classList.add(this.warningClass)
+    this.textarea.classList.add(this.warningClass)
+    this.submitButton.disabled = true
+    this.submitButton.classList.add(this.warningClass)
+  }
+
+  removeWarningOfCharLimit() {
+    this.characterCounterWrapper.classList.remove(this.warningClass)
+    this.textarea.classList.remove(this.warningClass)
+    this.submitButton.disabled = false
+    this.submitButton.classList.remove(this.warningClass)
+  }
+
+  updateCharacterCounter(count: number) {
+    this.characterCounter.textContent = `${count}/255`
+  }
+
+  subscribeEvents() {
+    this.yesButton.addEventListener('click', () => {
+      this.hideSection(this.askFeedback)
+      this.showSection(this.acknowledgement)
+      this.analyticsSendFeedbackHelpful()
+    })
+    this.noButton.addEventListener('click', () => {
+      this.hideSection(this.askFeedback)
+      this.showSection(this.submitFeedback)
+    })
+    this.submitButton.addEventListener('click', () => {
+      this.hideSection(this.submitFeedback)
+      this.showSection(this.acknowledgement)
+      this.analyticsSendFeedbackNotHelpfulWithMessage()
+    })
+    this.cancelButton.addEventListener('click', () => {
+      this.hideSection(this.submitFeedback)
+      this.showSection(this.askFeedback)
+    })
+    this.textarea.addEventListener('input', () => {
+      var currentLength = this.textarea.value.length;
+      this.updateCharacterCounter(currentLength)
+      if (currentLength > 255) {
+        this.addWarningOfCharLimit()
+      } else {
+        this.removeWarningOfCharLimit()
+      }
+
+    })
+  }
 }
+
+const feedback = new Feedback();
+
+document.addEventListener("DOMContentLoaded", feedback.onDocumentReady.bind(feedback));

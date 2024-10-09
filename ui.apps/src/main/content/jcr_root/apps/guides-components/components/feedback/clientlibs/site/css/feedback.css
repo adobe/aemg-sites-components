@@ -14,60 +14,159 @@
  *  limitations under the License.
  */
 
-.feedback-container {
+.tcx-hide {
+   display: none !important;
+}
+
+.feedback-wrapper {
+   background: #F8F8F8;
+}
+
+.feedback-yes-no {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+   padding: 20px 40px 20px 40px;
+}
+
+.feedback-title {
+   font-family: Adobe Clean;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 24px;
+   letter-spacing: 0em;
+   text-align: center;
+}
+
+.feedback-yes-no-button-wrapper {
+   display: flex;
+   gap: 1rem;
+}
+
+.yes-button {
+   background: #0054B6;
+   width: 4.5rem;
+   padding: 5px 24px 7px 24px;
+   border-radius: 28px;
+   height: 2rem;
+   color: white;
+}
+
+.no-button {
+   background: white;
+   width: 4.5rem;
+   padding: 5px 24px 7px 24px;
+   border-radius: 28px;
+   height: 2rem;
+   border: 1px solid #0054B6;
+   color: #0054B6;
+}
+
+.feedback-yes-text {
+   padding: 20px 40px 20px 40px;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.feedback-title {
+   font-family: Adobe Clean;
+   font-size: 20px;
+   font-weight: 700;
+   line-height: 30px;
+   letter-spacing: 0em;
+   text-align: center;
+}
+
+.feedback-no-additional-data {
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+   padding: 0 80px;
+}
+
+.feedback-subtitle {
+   font-family: Adobe Clean;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 24px;
+   letter-spacing: 0em;
+   text-align: left;
+}
+
+.feedback-inputbox {
+   border: 1px solid #292929;
+   resize: none;
+   border-radius: 8px;
+   padding: 0.5rem 0.5rem;
+}
+
+.feedback-submit-cancel-button-wrapper {
+   display: flex;
+   gap: 1rem;
+   flex-direction: row;
+   justify-content: center;
+   margin-top: 0.5rem;
+}
+
+.submit-button {
+   background: #0054B6;
+   width: 90px;
+   padding: 5px 24px 7px 24px;
+   border-radius: 28px;
+   height: 2rem;
+   color: white;
+}
+
+.cancel-button {
+   background: white;
+   width: 90px;
+   padding: 5px 24px 7px 24px;
+   border-radius: 28px;
+   height: 2rem;
+   border: 1px solid #0054B6;
+   color: #0054B6;
+}
+
+.feedback-given {
+   padding: 20px 40px 20px 40px;
    display: flex;
    flex-direction: row;
-   margin: 4px auto;
-   padding: 4px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
+   justify-content: center;
 }
 
-.rating-btns {
-   display: flex;
-   flex-direction: row;
+.feedback-title {
+   font-family: Adobe Clean;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 24px;
+   letter-spacing: 0em;
+   text-align: center;
 }
 
-.rating-btns button {
-   width: 48px;
-   height: 36px;
-   margin: 4px 4px;
-   border: none;
-   border-radius: 4px;
-   background-color: #0000CC;
-   color: #fff;
-   cursor: pointer;
+.feedback-character-counter-warning-message, .feedback-character-counter-separator {
+   display: none;
 }
 
-.rating-btns button:hover {
-   background-color: #3e8e41;
+.feedback-character-counter-wrapper.feedback-overflow-warning {
+   color: #D31510;
 }
-
-.textarea-container {
+.feedback-overflow-warning .feedback-character-counter-warning-message, .feedback-overflow-warning .feedback-character-counter-separator {
+   display: inline;
 }
-
-.textarea-container textarea {
-   display: flex;
-   flex-direction: row;
-   margin: 4px 4px;
-   width: 960px;
-   height: 36px;
-   padding: 4px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
+.feedback-inputbox.feedback-overflow-warning {
+   border: 2px solid #D31510
 }
-
-.submit-btn {
-   width: 48px;
-   height: 36px;
-   margin: 4px 4px;
-   background-color: #0000CC;
-   color: #fff;
-   border: none;
-   border-radius: 4px;
-   cursor: pointer;
+.submit-button.feedback-overflow-warning {
+   cursor: not-allowed;
+   background: #B1B1B1;
 }
-
-.submit-btn:hover {
-   background-color: #3e8e41;
+.feedback-character-counter-wrapper {
+   font-family: Adobe Clean;
+   font-size: 12px;
+   font-weight: 400;
+   line-height: 18px;
+   letter-spacing: 0em;
+   text-align: left;
 }
