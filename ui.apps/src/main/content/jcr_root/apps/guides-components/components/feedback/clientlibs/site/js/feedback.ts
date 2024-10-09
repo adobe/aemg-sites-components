@@ -43,6 +43,10 @@ class Feedback {
     this.acknowledgement = document.getElementById("feedback-given")
     this.characterCounterWrapper = document.getElementById("feedback-character-counter-wrapper")
 
+    if(this.askFeedback === null) {
+      return;
+    }
+
     this.yesButton = this.askFeedback.getElementsByClassName("yes-button").item(0)
     this.noButton = this.askFeedback.getElementsByClassName("no-button").item(0)
 

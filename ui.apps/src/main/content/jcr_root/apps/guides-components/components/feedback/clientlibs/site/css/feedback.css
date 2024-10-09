@@ -19,7 +19,7 @@
 }
 
 .feedback-wrapper {
-   background: #F8F8F8;
+   margin-bottom: 1rem;
 }
 
 .feedback-yes-no {
@@ -45,12 +45,13 @@
 }
 
 .yes-button {
-   background: #0054B6;
+   background: white;
    width: 4.5rem;
    padding: 5px 24px 7px 24px;
    border-radius: 28px;
    height: 2rem;
-   color: white;
+   border: 1px solid #0054B6;
+   color: #0054B6;
 }
 
 .no-button {
@@ -96,6 +97,7 @@
 }
 
 .feedback-inputbox {
+   width: 54rem;
    border: 1px solid #292929;
    resize: none;
    border-radius: 8px;
