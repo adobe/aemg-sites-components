@@ -34,4 +34,6 @@ public interface GuidesNavigation extends Component {
     List<String> getGuidesNavigation();
 
     String getCurrentPageTocIndex();
+    String getLimit();
+    String getLoadMoreText();
 }

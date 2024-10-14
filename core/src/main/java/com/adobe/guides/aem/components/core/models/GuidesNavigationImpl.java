@@ -27,6 +27,7 @@ import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
@@ -40,12 +41,18 @@ import org.slf4j.LoggerFactory;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.i18n.I18n;
+
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = {GuidesNavigation.class, ComponentExporter.class}, resourceType = {GuidesNavigationImpl.RESOURCE_TYPE_V1})
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class GuidesNavigationImpl extends AbstractComponentImpl implements GuidesNavigation {
 
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/guidessidenavigation";
+    protected static final String LIMIT = "limit";
+    protected static final String LOAD_MORE_TEXT = "loadMoreText";
+    protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
+    protected static final String LIMIT_DEFAULT_VALUE = "1000";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -56,6 +63,8 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
     @ScriptVariable
     private Page currentPage;
+    @ScriptVariable
+    private ValueMap properties;
 
     @Nullable
     private String templateName;
@@ -63,10 +72,17 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     private List<String> guidesNavigation;
 
     private String currentPageIndexInToc;
+    private String limit;
+    private String loadMoreText;
+    private I18n i18n;
+
 
     @PostConstruct
     private void initModel() {
         try {
+            if (request != null) {
+                i18n = new I18n(request);
+            }
             Session session = request.getResourceResolver().adaptTo(Session.class);
             String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
             logger.info("AEMSITE: sitePath: {}", sitePath);
@@ -78,9 +94,13 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             Binary tocIndexBinary = node.getProperty("guides-navigation-index").getBinary();
             String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
             String tocIndexBinaryString = IOUtils.toString(tocIndexBinary.getStream(), CharEncoding.UTF_8);
-
+            limit = properties.get(LIMIT, LIMIT_DEFAULT_VALUE);
+            loadMoreText = translate(properties.get(LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
             logger.info("AEMSITE: tocBinaryString: {}", tocBinaryString);
             logger.info("AEMSITE: tocIndexBinaryString: {}", tocIndexBinaryString);
+            logger.info("AEMSITE: toc rendering limit: {}", limit);
+            logger.info("AEMSITE: toc load more text: {}", loadMoreText);
+
             // convert tocIndexBinaryString to JSON
             JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
             try {
@@ -107,6 +127,18 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     @Override
     public String getCurrentPageTocIndex() {
         return currentPageIndexInToc;
+    }
+    @Override
+    public String getLimit() {
+        return limit;
+    }
+    @Override
+    public String getLoadMoreText() {
+        return loadMoreText;
+    }
+
+    public String translate(String str) {
+        return (i18n != null ? i18n.getVar(str) : str);
     }
 
     @NotNull
