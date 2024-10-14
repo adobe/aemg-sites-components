@@ -20,6 +20,14 @@
  </span>
  */
 
+ interface GuidesNavigationItem {
+    children: Array<GuidesNavigationItem>
+    displayName: string 
+    outputPath: string
+    active: boolean
+    visible: boolean
+ }
+
 class GuidesNavigation {
     selectedPath: string
     tokens: string[]
@@ -41,7 +49,7 @@ class GuidesNavigation {
         return button
     }
 
-    handleExpand(chevron, container:HTMLElement, currPath, item, tokenIndex = -1, incrementer: number) {
+    handleExpand(chevron, container:HTMLElement, currPath: string, item: GuidesNavigationItem, tokenIndex: number = -1, incrementer: number) {
         let hasRenderedChildren = "true" === chevron.getAttribute("children-rendered")
         let ul;
         if(!hasRenderedChildren) {
@@ -67,7 +75,7 @@ class GuidesNavigation {
         }
     }
 
-    getListItemContent(listItem: HTMLElement, item: {children: Array<any>, displayName: string, outputPath: string, active: boolean},  currPath: string, expandChildren: boolean, tokenIndex: number, incrementer: number) {
+    getListItemContent(listItem: HTMLElement, item: GuidesNavigationItem,  currPath: string, expandChildren: boolean, tokenIndex: number, incrementer: number) {
         const hasChildren = item.children.length > 0
         const container = document.createElement('span')
         const anchor = document.createElement('a')
@@ -119,7 +127,7 @@ class GuidesNavigation {
         }
     }
 
-    doRenderLevel(ul, offset, currIdx, children, parentPath, idx, incrementer, button) {
+    doRenderLevel(ul:HTMLUListElement, offset: number, currIdx:string, children: Array<GuidesNavigationItem>, parentPath:string, idx:number, incrementer: number, button: HTMLButtonElement) {
         if(button) {
             ul.removeChild(button)
         }
@@ -155,7 +163,7 @@ class GuidesNavigation {
         return ul;
     }
 
-    renderLevel(children: Array<any>, idx: number, parentPath: string, incrementer: number, offset: number) {
+    renderLevel(children: Array<GuidesNavigationItem>, idx: number, parentPath: string, incrementer: number, offset: number) {
         if(!children) {
             children = [];
         }
