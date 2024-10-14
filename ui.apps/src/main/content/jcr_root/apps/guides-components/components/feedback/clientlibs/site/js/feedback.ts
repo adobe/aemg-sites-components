@@ -64,6 +64,17 @@ class Feedback {
 
   analyticsSendFeedbackNotHelpfulWithMessage() {
     const text = this.textarea.value
+    console.log("Feedback not helpful with message-2 : " + text)
+
+    fetch('/bin/guides-component/feedback', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `feedback=${encodeURIComponent(text)}`
+    })
+        .then(response => response.text())
+        .then(data => console.log(data));
   }
 
   addWarningOfCharLimit() {

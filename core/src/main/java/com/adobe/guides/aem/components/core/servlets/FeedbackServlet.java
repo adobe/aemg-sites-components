@@ -15,14 +15,9 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 package com.adobe.guides.aem.components.core.servlets;
 
-import com.day.cq.commons.jcr.JcrConstants;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.servlets.HttpConstants;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
-import org.apache.sling.servlets.annotations.SlingServletResourceTypes;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.propertytypes.ServiceDescription;
 import org.slf4j.Logger;
@@ -34,12 +29,11 @@ import java.io.IOException;
 
 @Component(service = { Servlet.class },
         property = {
-            "sling.servlet.paths=/bin/feedback",
-            "sling.servlet.methods=POST",
+                "sling.servlet.paths=/bin/guides-component/feedback",
+                "sling.servlet.methods=POST"
         }
 )
 @ServiceDescription("Feedback Servlet")
-
 public class FeedbackServlet extends SlingAllMethodsServlet {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -47,6 +41,11 @@ public class FeedbackServlet extends SlingAllMethodsServlet {
     @Override
     protected void doPost(final SlingHttpServletRequest req,
                          final SlingHttpServletResponse resp) throws ServletException, IOException {
-        logger.info("FeedbackServlet is now running");
+        logger.info("Received feedback submit request => " + req.getParameter("feedback"));
+        String feedback = req.getParameter("feedback");
+        resp.setContentType("application/json");
+        resp.setStatus(200);
+        String jsonResponse = "{\"Status\": \"Success\", \"Feedback\": \"" + feedback + "\"}";
+        resp.getWriter().write(jsonResponse);
     }
 }
