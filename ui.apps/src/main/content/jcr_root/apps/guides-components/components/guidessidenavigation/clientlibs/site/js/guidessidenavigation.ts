@@ -20,13 +20,13 @@
  </span>
  */
 
- interface GuidesNavigationItem {
+interface GuidesNavigationItem {
     children: Array<GuidesNavigationItem>
-    displayName: string 
+    displayName: string
     outputPath: string
     active: boolean
     visible: boolean
- }
+}
 
 class GuidesNavigation {
     selectedPath: string
@@ -34,14 +34,14 @@ class GuidesNavigation {
     limit: number
     loadMoreText: string
     generatePath(prefix, suffix) {
-        if(prefix) {
+        if (prefix) {
             return `${prefix}-${suffix}`
         }
         return `${suffix}`
     }
 
-     static LOAD_MORE_TEXT_DEFAULT_VALUE: string = "load more...";
-     static LIMIT_DEFAULT_VALUE:string = "1000";
+    static LOAD_MORE_TEXT_DEFAULT_VALUE: string = "load more...";
+    static LIMIT_DEFAULT_VALUE: string = "1000";
 
     getLoadMoreButton() {
         const button = document.createElement('button')
@@ -49,23 +49,23 @@ class GuidesNavigation {
         return button
     }
 
-    handleExpand(chevron, container:HTMLElement, currPath: string, item: GuidesNavigationItem, tokenIndex: number = -1, incrementer: number) {
+    handleExpand(chevron, container: HTMLElement, currPath: string, item: GuidesNavigationItem, tokenIndex: number = -1, incrementer: number) {
         let hasRenderedChildren = "true" === chevron.getAttribute("children-rendered")
         let ul;
-        if(!hasRenderedChildren) {
+        if (!hasRenderedChildren) {
             ul = this.renderLevel(item.children, tokenIndex, currPath, incrementer, 0)
             container.appendChild(ul)
             chevron.setAttribute("children-rendered", "true")
         } else {
             ul = container.querySelector(':scope > ul')
         }
-        if(chevron.classList.contains('show-children')) {
+        if (chevron.classList.contains('show-children')) {
             ul.classList.remove('show-children')
             chevron.classList.remove('show-children')
 
             chevron.classList.add('hide-children')
             ul.classList.add('hide-children')
-            
+
         } else {
             chevron.classList.add('show-children')
             ul.classList.add('show-children')
@@ -75,7 +75,7 @@ class GuidesNavigation {
         }
     }
 
-    getListItemContent(listItem: HTMLElement, item: GuidesNavigationItem,  currPath: string, expandChildren: boolean, tokenIndex: number, incrementer: number) {
+    getListItemContent(listItem: HTMLElement, item: GuidesNavigationItem, currPath: string, expandChildren: boolean, tokenIndex: number, incrementer: number) {
         const hasChildren = item.children.length > 0
         const container = document.createElement('span')
         const anchor = document.createElement('a')
@@ -83,11 +83,11 @@ class GuidesNavigation {
         const isSelected = (currPath === this.selectedPath)
         const isActive = item.active !== false
         container.classList.add('toc-list-item')
-        const paddingDepth = 1.25*incrementer;
+        const paddingDepth = 1.25 * incrementer;
         container.style.paddingLeft = `${paddingDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
-        if(isActive) {
+        if (isActive) {
             anchor.setAttribute("href", item.outputPath + ".html")
         } else {
             anchor.style.cursor = "default";
@@ -95,12 +95,12 @@ class GuidesNavigation {
         anchor.setAttribute("title", item.displayName)
         anchor.innerText = item.displayName
         anchor.setAttribute("aria-current", "page")
-        if(isSelected) {
+        if (isSelected) {
             listItem.classList.add('cmp-nav-item-selected')
         }
         let subtree;
-        if(expandChildren) {
-            subtree = this.renderLevel(item.children, tokenIndex+1, currPath, incrementer, 0)
+        if (expandChildren) {
+            subtree = this.renderLevel(item.children, tokenIndex + 1, currPath, incrementer, 0)
             chevron.setAttribute("children-rendered", "true")
             chevron.classList.remove("hide-children")
             chevron.classList.add("show-children")
@@ -111,8 +111,8 @@ class GuidesNavigation {
             listItem.classList.add("cmp-guidesnavigation__item--inactive")
         }
 
-        if(hasChildren) {
-            if(!expandChildren) {
+        if (hasChildren) {
+            if (!expandChildren) {
                 chevron.classList.add('hide-children')
             }
             chevron.addEventListener('click', () => {
@@ -122,38 +122,38 @@ class GuidesNavigation {
         }
         container.appendChild(anchor)
         listItem.appendChild(container)
-        if(subtree) {
+        if (subtree) {
             listItem.appendChild(subtree)
         }
     }
 
-    doRenderLevel(ul:HTMLUListElement, offset: number, currIdx:string, children: Array<GuidesNavigationItem>, parentPath:string, idx:number, incrementer: number, button: HTMLButtonElement) {
-        if(button) {
+    doRenderLevel(ul: HTMLUListElement, offset: number, currIdx: string, children: Array<GuidesNavigationItem>, parentPath: string, idx: number, incrementer: number, button: HTMLButtonElement) {
+        if (button) {
             ul.removeChild(button)
         }
         let idxMax = 0
-        if(currIdx)
+        if (currIdx)
             idxMax = parseInt(currIdx) + 1;
         const end = Math.max(idxMax, Math.min(children.length, offset + this.limit))
-        for(let i=offset;i<end;i++) {
+        for (let i = offset; i < end; i++) {
             const expandChildren = idx > -1 ? i.toString() === currIdx : false
             const item = children[i]
             const currPath = this.generatePath(parentPath, i)
             const listItem = document.createElement("li")
             const isVisible = item.visible !== false
-            this.getListItemContent(listItem, item, currPath, expandChildren, idx, incrementer+1)
+            this.getListItemContent(listItem, item, currPath, expandChildren, idx, incrementer + 1)
             listItem.classList.add(`cmp-guidesnavigation__item`)
             listItem.classList.add(`cmp-guidesnavigation__item-level-${incrementer}`)
-            listItem.classList.add(`cmp-guidesnavigation__item-${item.children.length > 0 ? 'has-children': 'no-children'}`)
-            if(!isVisible) {
+            listItem.classList.add(`cmp-guidesnavigation__item-${item.children.length > 0 ? 'has-children' : 'no-children'}`)
+            if (!isVisible) {
                 listItem.style.display = 'none'
             }
             ul.appendChild(listItem)
         }
         const hasMore = end !== children.length;
-        if(hasMore) {
+        if (hasMore) {
             const button = this.getLoadMoreButton()
-            const marginDepth = 1.25*incrementer;
+            const marginDepth = 1.25 * incrementer;
             button.style.marginLeft = `${marginDepth}rem`;
             button.addEventListener("click", () => {
                 this.doRenderLevel(ul, end, currIdx, children, parentPath, idx, incrementer, button)
@@ -164,20 +164,20 @@ class GuidesNavigation {
     }
 
     renderLevel(children: Array<GuidesNavigationItem>, idx: number, parentPath: string, incrementer: number, offset: number) {
-        if(!children) {
+        if (!children) {
             children = [];
         }
         const currIdx = this.tokens[idx]
         const ul = document.createElement("ul");
         ul.classList.add("cmp-guidesnavigation__group")
         this.doRenderLevel(ul, offset, currIdx, children, parentPath, idx, incrementer, null)
-        
+
         return ul
     }
 
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
-        if(navigationParent === null) {
+        if (navigationParent === null) {
             return;
         }
         try {
@@ -192,7 +192,7 @@ class GuidesNavigation {
             this.loadMoreText = loadMoreText
             const ul = this.renderLevel(navData.children, 0, '', 0, 0)
             navigationParent.appendChild(ul)
-        } catch(e) {
+        } catch (e) {
 
         }
     }
