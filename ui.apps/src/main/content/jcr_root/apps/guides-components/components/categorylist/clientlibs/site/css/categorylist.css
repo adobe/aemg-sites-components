@@ -71,6 +71,7 @@
     color: #1532AD;
     font-family: Roboto, serif;
     font-weight: 600;
+    font-size: 20px;
     text-align: center;}
 
 .cmp-category-list-group {
@@ -88,6 +89,7 @@
         font-weight: 600;
         line-height: 24px;
         text-align: center;
+        margin-top: 1rem;
     }
     .cmp-category-list-group {
         grid-template-columns: 1fr;
