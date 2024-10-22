@@ -65,6 +65,7 @@ public class SearchImpl implements Search {
 	public static final String PN_NO_RESULT_TEXT = "noResultText";
 	public static final String NO_RESULT_TEXT_DEFAULT_VALUE = "No more results";
 	public static final String DEFAULT_RESULT_FORMAT = "Showing {count} out of {total} results";
+	public static final String DEFAULT_SORT_BY_TITLE = "By";
 
 	@Self
 	private SlingHttpServletRequest request;
@@ -102,6 +103,10 @@ public class SearchImpl implements Search {
 	@ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
 	@Named("sortTitle")
 	private String sortTitle;
+	
+	@ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
+	@Named("sortBy")
+	private String sortBy;
 
 	@ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
 	@Named("enableSort")
@@ -142,6 +147,7 @@ public class SearchImpl implements Search {
 		loadMoreText = translate(properties.get(PN_LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
 		noResultText = translate(properties.get(PN_NO_RESULT_TEXT, NO_RESULT_TEXT_DEFAULT_VALUE));
 		resultFormat = translate(properties.get(RESULT_FORMAT, DEFAULT_RESULT_FORMAT));
+		sortBy = translate(properties.get(SORT_BY_TITLE, DEFAULT_SORT_BY_TITLE));
 		PageManager pageManager = currentPage.getPageManager();
 		Resource currentResource = request.getResource();
 		if (pageManager != null) {
@@ -246,6 +252,11 @@ public class SearchImpl implements Search {
 	@Override
 	public String getSortTitle() {
 		return sortTitle;
+	}
+
+	@Override
+	public String getSortBy() {
+		return sortBy;
 	}
 
 	@Override

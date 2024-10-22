@@ -73,6 +73,13 @@ public interface Search extends ComponentExporter {
      * @since com.adobe.cq.wcm.core.components.models 12.2.0
      */
     String RESULT_FORMAT = "resultCountFormat";
+
+    /**
+     * Name of the configuration policy property that defines the label of the sort by dropdown.
+     *
+     * @since com.adobe.cq.wcm.core.components.models 12.2.0
+     */
+    String SORT_BY_TITLE = "sortBy";
     
     /**
      * Name of the configuration policy property that defines the maximal number of results fetched by a search request.
@@ -193,6 +200,16 @@ public interface Search extends ComponentExporter {
    default String getSortTitle() {
        throw new UnsupportedOperationException();
    }
+
+
+   /**
+    * @see ComponentExporter#getSortBy()
+    * @since com.adobe.cq.wcm.core.components.models 12.8.0
+    */
+   
+    default String getSortBy() {
+        throw new UnsupportedOperationException();
+    }
    
    /**
     * @see ComponentExporter#getProperty()
