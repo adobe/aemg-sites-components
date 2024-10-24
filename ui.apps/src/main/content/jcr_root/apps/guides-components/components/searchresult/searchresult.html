@@ -28,12 +28,12 @@
 	class="search__field--view" id="js-display-diff-view">
 	<div class = "search-result-header">
 		<div data-cmp-format="${search.resultFormat}" class="cmp-search__total-records"></div>
-		<div id="js-searchResults-endData"><p>${search.noResultText}</p></div>
+		<div id="js-searchResults-endData"><p>${search.noResultText @ i18n}</p></div>
 	</div>
 	<ul class="cmp-search-list__item-group">
 	</ul>
 	<section class="search__results--footer">
-		<button class="search__results--load-more">${search.loadMoreText}</button>
+		<button class="search__results--load-more">${search.loadMoreText @ i18n}</button>
 	</section>
 </section>
 
