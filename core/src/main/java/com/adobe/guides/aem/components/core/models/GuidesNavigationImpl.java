@@ -56,6 +56,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
     protected static final String LIMIT_DEFAULT_VALUE = "1000";
     protected static final String CATEGORY_PAGE_ID = "category-page";
+    protected static final String CONTENT_ROOT_PATH = "/content";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -147,12 +148,16 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     public String getCategoryPath() {
         Page page = currentPage;
         boolean isCategoryPage = false;
-        while (!isCategoryPage) {
+        while(page != null && !isCategoryPage) {
             if (page.getContentResource().getValueMap().containsKey("id") && page.getContentResource().getValueMap().get("id", String.class).equals(CATEGORY_PAGE_ID)) {
                 break;
             } else {
                 page = page.getParent();
             }
+        }
+        if(page == null) {
+            logger.warn("AEMSITE: Cannot find a page with id : category-page");
+            return CONTENT_ROOT_PATH;
         }
         String categoryPath = page.getPath();
         if (!categoryPath.endsWith("/")) {

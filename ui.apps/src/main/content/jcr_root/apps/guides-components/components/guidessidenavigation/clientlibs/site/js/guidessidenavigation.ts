@@ -90,8 +90,11 @@ class GuidesNavigation {
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
+        const bookmark = this.extractBookMark(item.outputPath);
         if (isActive) {
-            anchor.setAttribute("href", outputPath + ".html")
+            let url = outputPath + ".html";
+            url += bookmark.length > 0 ? "#" + bookmark : '';
+            anchor.setAttribute("href", url)
         } else {
             anchor.style.cursor = "default";
         }
@@ -211,6 +214,13 @@ class GuidesNavigation {
             url = url.substring(0, index)
         }
         return url
+    }
+    extractBookMark(url) {
+        let index = url.indexOf('#')
+        if (index !== -1) {
+            return url.substring(index + 1)
+        }
+        return ''
     }
 
 
