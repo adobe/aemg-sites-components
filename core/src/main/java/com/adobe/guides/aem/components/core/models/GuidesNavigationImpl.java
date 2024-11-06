@@ -74,8 +74,9 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     private String templateName;
 
     private List<String> guidesNavigation;
+    private JSONObject guidesNavigationIndex;
+    private String currentPageRelativeUrl;
 
-    private String currentPageIndexInToc;
     private String limit;
     private String loadMoreText;
     private I18n i18n;
@@ -107,12 +108,12 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
             // convert tocIndexBinaryString to JSON
             JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
+            guidesNavigationIndex = new JSONObject(tocIndexBinaryString);
             try {
                 String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
-                currentPageIndexInToc = tocIndexJson.getString(relativePath);
+                currentPageRelativeUrl = relativePath;
             } catch (Exception e) {
                 logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
-                currentPageIndexInToc = "0";
             }
             guidesNavigation = new ArrayList<>();
             guidesNavigation.add(tocBinaryString);
@@ -130,9 +131,15 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     }
 
     @Override
-    public String getCurrentPageTocIndex() {
-        return currentPageIndexInToc;
+    public JSONObject getGuidesNavigationIndex() {
+        return guidesNavigationIndex;
     }
+
+    @Override
+    public String getCurrentPageRelativeUrl() {
+        return currentPageRelativeUrl;
+    }
+
 
     @Override
     public String getLimit() {

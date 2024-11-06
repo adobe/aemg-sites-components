@@ -90,11 +90,8 @@ class GuidesNavigation {
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
-        const bookmark = this.extractBookMark(item.outputPath);
         if (isActive) {
-            let url = outputPath + ".html";
-            url += bookmark.length > 0 ? "#" + bookmark : '';
-            anchor.setAttribute("href", url)
+            anchor.setAttribute("href", outputPath);
         } else {
             anchor.style.cursor = "default";
         }
@@ -215,13 +212,6 @@ class GuidesNavigation {
         }
         return url
     }
-    extractBookMark(url) {
-        let index = url.indexOf('#')
-        if (index !== -1) {
-            return url.substring(index + 1)
-        }
-        return ''
-    }
 
 
     onDocumentReady() {
@@ -231,7 +221,13 @@ class GuidesNavigation {
         }
         try {
             const navData = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-list"));
-            const selectedPath = navigationParent.getAttribute("data-cmp-guides-side-nav-current-index");
+            const navDataIndex = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-index"));
+            const currentPageRelativeUrl = navigationParent.getAttribute("data-cmp-guides-current-page-relative-url") || "";
+            let bookMark = window.location.hash.substring(1).split('?')[0];
+            if(bookMark) {
+                bookMark = '#' + bookMark;
+            }
+            const selectedPath = navDataIndex[currentPageRelativeUrl + ".html" + bookMark] || "";
             const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || GuidesNavigation.LIMIT_DEFAULT_VALUE;
             const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || GuidesNavigation.LOAD_MORE_TEXT_DEFAULT_VALUE
             const categoryPath = navigationParent.getAttribute("data-cmp-guides-side-nav-category-path");
