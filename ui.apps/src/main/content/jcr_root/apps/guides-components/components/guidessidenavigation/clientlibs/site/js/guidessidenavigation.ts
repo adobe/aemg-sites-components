@@ -212,16 +212,6 @@ class GuidesNavigation {
         }
         return url
     }
-    extractBookMark(url) {
-        if(!url) {
-            return '';
-        }
-        let index = url.indexOf('#')
-        if (index !== -1) {
-            return url.substring(index + 1)
-        }
-        return ''
-    }
 
 
     onDocumentReady() {

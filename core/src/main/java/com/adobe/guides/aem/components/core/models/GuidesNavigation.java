@@ -36,7 +36,6 @@ public interface GuidesNavigation extends Component {
     JSONObject getGuidesNavigationIndex();
     String getCurrentPageRelativeUrl();
 
-    String getCurrentPageTocIndex();
     String getLimit();
     String getLoadMoreText();
     String getCategoryPath();
