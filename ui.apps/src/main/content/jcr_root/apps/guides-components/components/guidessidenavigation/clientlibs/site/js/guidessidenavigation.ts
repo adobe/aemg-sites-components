@@ -33,6 +33,8 @@ class GuidesNavigation {
     tokens: string[]
     limit: number
     loadMoreText: string
+    categoryPath: string
+
     generatePath(prefix, suffix) {
         if (prefix) {
             return `${prefix}-${suffix}`
@@ -87,8 +89,9 @@ class GuidesNavigation {
         container.style.paddingLeft = `${paddingDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
+        const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
-            anchor.setAttribute("href", item.outputPath + ".html")
+            anchor.setAttribute("href", outputPath);
         } else {
             anchor.style.cursor = "default";
         }
@@ -175,6 +178,42 @@ class GuidesNavigation {
         return ul
     }
 
+    makeFullPath(relUrl, baseUrl) {
+        relUrl = relUrl || ''
+
+        let baseParts = this.filePath(baseUrl).split('/'),
+            relPath = this.filePath(relUrl),
+            params = relUrl.substring(relPath.length),
+            relParts = relPath.split('/')
+
+        if(relParts.length > 1 || relParts[0]) {
+            baseParts.pop()
+            relParts.forEach(relPart => {
+                if(relPart === '..') {
+                    baseParts.pop()
+                } else if(relPart !== '.') {
+                    baseParts.push(relPart)
+                }
+            })
+        }
+
+        return `${baseParts.join('/')}${params}`
+    }
+    filePath(url) {
+        let index;
+        url = url || ''
+        index = url.indexOf('?')
+        if (index !== -1) {
+            url = url.substring(0, index)
+        }
+        index = url.indexOf('#')
+        if (index !== -1) {
+            url = url.substring(0, index)
+        }
+        return url
+    }
+
+
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
         if (navigationParent === null) {
@@ -182,14 +221,22 @@ class GuidesNavigation {
         }
         try {
             const navData = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-list"));
-            const selectedPath = navigationParent.getAttribute("data-cmp-guides-side-nav-current-index");
+            const navDataIndex = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-index"));
+            const currentPageRelativeUrl = navigationParent.getAttribute("data-cmp-guides-current-page-relative-url") || "";
+            let bookMark = window.location.hash.substring(1).split('?')[0];
+            if(bookMark) {
+                bookMark = '#' + bookMark;
+            }
+            const selectedPath = navDataIndex[currentPageRelativeUrl + ".html" + bookMark] || "";
             const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || GuidesNavigation.LIMIT_DEFAULT_VALUE;
             const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || GuidesNavigation.LOAD_MORE_TEXT_DEFAULT_VALUE
+            const categoryPath = navigationParent.getAttribute("data-cmp-guides-side-nav-category-path");
             this.tokens = selectedPath.split('-')
             this.tokens = this.tokens.slice(1, this.tokens.length)
             this.limit = parseInt(renderSize)
             this.selectedPath = this.tokens.join('-')
             this.loadMoreText = loadMoreText
+            this.categoryPath = categoryPath
             const ul = this.renderLevel(navData.children, 0, '', 0, 0)
             navigationParent.appendChild(ul)
         } catch (e) {
@@ -198,5 +245,6 @@ class GuidesNavigation {
     }
 
 }
+
 const guidesNavigation = new GuidesNavigation();
 document.addEventListener("DOMContentLoaded", guidesNavigation.onDocumentReady.bind(guidesNavigation));

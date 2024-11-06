@@ -18,6 +18,7 @@ package com.adobe.guides.aem.components.core.models;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.osgi.annotation.versioning.ConsumerType;
 
 import com.adobe.cq.wcm.core.components.models.Component;
@@ -32,8 +33,10 @@ public interface GuidesNavigation extends Component {
      * @since com.adobe.cq.wcm.core.components.models 11.0.0; marked <code>default</code> in 12.1.0
      */
     List<String> getGuidesNavigation();
+    JSONObject getGuidesNavigationIndex();
+    String getCurrentPageRelativeUrl();
 
-    String getCurrentPageTocIndex();
     String getLimit();
     String getLoadMoreText();
+    String getCategoryPath();
 }
