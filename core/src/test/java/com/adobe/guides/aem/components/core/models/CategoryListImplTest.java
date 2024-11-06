@@ -68,7 +68,7 @@ public class CategoryListImplTest {
         when(queryManager.createQuery(any(), any())).thenReturn(query);
         when(query.execute()).thenReturn(queryResult);
         when(queryResult.getNodes()).thenReturn(nodeIter);
-        List<String> sessionCategoryList = categoryListImpl.findPagesByTemplate(context.resourceResolver(), "/" + CONF_PATH_TOKEN + "/" + "Tragopan" + TEMPLATE_PATH_TOKEN, "/" + CONTENT_PATH_TOKEN + "/" + "Tragopan");
+        List<String> sessionCategoryList = categoryListImpl.findPagesByTemplate(context.resourceResolver(), "/" + CONTENT_PATH_TOKEN + "/" + "Tragopan");
         List<String> templateCategoryList = new ArrayList<>();
         assertEquals(templateCategoryList, sessionCategoryList);
     }
@@ -89,7 +89,7 @@ public class CategoryListImplTest {
         when(queryManager.createQuery(any(), any())).thenReturn(query);
         when(query.execute()).thenReturn(queryResult);
         when(queryResult.getNodes()).thenReturn(nodeIter);
-        List<String> sessionCategoryList = categoryListImpl.findPagesByTemplate(resourceResolver, "/" + CONF_PATH_TOKEN + "/" + "Tragopan" + TEMPLATE_PATH_TOKEN, "/" + CONTENT_PATH_TOKEN + "/" + "Tragopan");
+        List<String> sessionCategoryList = categoryListImpl.findPagesByTemplate(resourceResolver, "/" + CONTENT_PATH_TOKEN + "/" + "Tragopan");
         List<String> templateCategoryList = new ArrayList<>();
         templateCategoryList.add("/content/Tragopan/en/kb/category");
         templateCategoryList.add("Category");
