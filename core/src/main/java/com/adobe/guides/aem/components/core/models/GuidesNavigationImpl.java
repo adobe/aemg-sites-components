@@ -74,7 +74,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     private String templateName;
 
     private List<String> guidesNavigation;
-    private JSONObject guidesNavigationIndex;
+    private String guidesNavigationIndex;
     private String currentPageRelativeUrl;
 
     private String limit;
@@ -108,7 +108,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
             // convert tocIndexBinaryString to JSON
             JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
-            guidesNavigationIndex = new JSONObject(tocIndexBinaryString);
+            guidesNavigationIndex = tocIndexBinaryString;
             try {
                 String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
                 currentPageRelativeUrl = relativePath;
@@ -131,7 +131,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     }
 
     @Override
-    public JSONObject getGuidesNavigationIndex() {
+    public String getGuidesNavigationIndex() {
         return guidesNavigationIndex;
     }
 

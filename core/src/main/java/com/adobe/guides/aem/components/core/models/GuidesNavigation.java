@@ -33,7 +33,7 @@ public interface GuidesNavigation extends Component {
      * @since com.adobe.cq.wcm.core.components.models 11.0.0; marked <code>default</code> in 12.1.0
      */
     List<String> getGuidesNavigation();
-    JSONObject getGuidesNavigationIndex();
+    String getGuidesNavigationIndex();
     String getCurrentPageRelativeUrl();
 
     String getLimit();
