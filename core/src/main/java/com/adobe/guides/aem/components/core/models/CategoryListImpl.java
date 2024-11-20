@@ -53,11 +53,11 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/categorylist";
     private static final String SLASH = "/";
     private static final String QUERY_PATH_TOKEN = "{PATH}";
-    private static final String QUERY_TEMPLATE_TOKEN = "{TEMPLATE}";
-    private static final String PAGES_BY_TEMPLATE_QUERY = "SELECT * FROM [cq:Page] AS s WHERE ISDESCENDANTNODE([" + QUERY_PATH_TOKEN + "]) AND s.[jcr:content/cq:template]='" + QUERY_TEMPLATE_TOKEN + "'";
+    private static final String QUERY_ID_TOKEN = "{ID}";
+    private static final String PAGES_BY_TEMPLATE_QUERY = "SELECT * FROM [cq:Page] AS s WHERE ISDESCENDANTNODE([" + QUERY_PATH_TOKEN + "]) AND s.[jcr:content/id]='" + QUERY_ID_TOKEN + "'";
     private static final String CONF_PATH_TOKEN = "conf";
     private static final String CONTENT_PATH_TOKEN = "content";
-    private static final String TEMPLATE_PATH_TOKEN = "settings/wcm/templates/kb-content";
+    private static final String TEMPLATE_ID_TOKEN = "category-page";
     private static final Logger logger = LoggerFactory.getLogger(CategoryListImpl.class);
 
     @Self
@@ -84,7 +84,7 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
 
         try {
             templateName = getTemplateName(cqTemplate);
-            categoryList = findPagesByTemplate(request.getResourceResolver(), FilenameUtils.concat(SLASH, FilenameUtils.concat(CONF_PATH_TOKEN,FilenameUtils.concat(templateName , TEMPLATE_PATH_TOKEN))), FilenameUtils.concat(SLASH, FilenameUtils.concat(CONTENT_PATH_TOKEN, templateName)));
+            categoryList = findPagesByTemplate(request.getResourceResolver(), currentPage.getPath());
         } catch (RepositoryException e) {
             logger.error("Unable to retrieve category list for current template.", e);
         } catch (GuidesRuntimeException e) {
@@ -108,10 +108,10 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
         return cqTemplateStringArray[indexOfTemplateName];
     }
 
-    public static List<String> findPagesByTemplate(final ResourceResolver resourceResolver, final String template, final String path) throws RepositoryException {
+    public static List<String> findPagesByTemplate(final ResourceResolver resourceResolver, final String path) throws RepositoryException {
         Session session = resourceResolver.adaptTo(Session.class);
         QueryManager queryManager = session.getWorkspace().getQueryManager();
-        final String userQuery = PAGES_BY_TEMPLATE_QUERY.replace(QUERY_PATH_TOKEN, FilenameUtils.separatorsToUnix(path)).replace(QUERY_TEMPLATE_TOKEN, FilenameUtils.separatorsToUnix(template));
+        final String userQuery = PAGES_BY_TEMPLATE_QUERY.replace(QUERY_PATH_TOKEN, FilenameUtils.separatorsToUnix(path)).replace(QUERY_ID_TOKEN, TEMPLATE_ID_TOKEN);
         logger.info("QUERY for category list: {}", userQuery);
         Query query = queryManager.createQuery(userQuery, Query.JCR_SQL2);
         QueryResult res = query.execute();

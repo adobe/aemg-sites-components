@@ -52,7 +52,7 @@ class CategoryList {
                     const imageContainer = document.createElement('div');
                     imageContainer.classList.add('category-list-item-image-container');
                     imageContainer.style.backgroundImage = `url('${categoryTumbnail}')`
-                    const titleElement = document.createElement('h3');
+                    const titleElement = document.createElement('span');
                     titleElement.classList.add('category-list-item-title');
 
                     const linkElement = document.createElement('a');
