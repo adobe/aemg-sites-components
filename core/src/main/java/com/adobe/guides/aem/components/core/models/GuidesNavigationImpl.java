@@ -15,6 +15,8 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 package com.adobe.guides.aem.components.core.models;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,7 @@ import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
@@ -40,12 +43,20 @@ import org.slf4j.LoggerFactory;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.i18n.I18n;
+
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = {GuidesNavigation.class, ComponentExporter.class}, resourceType = {GuidesNavigationImpl.RESOURCE_TYPE_V1})
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class GuidesNavigationImpl extends AbstractComponentImpl implements GuidesNavigation {
 
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/guidessidenavigation";
+    protected static final String LIMIT = "limit";
+    protected static final String LOAD_MORE_TEXT = "loadMoreText";
+    protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
+    protected static final String LIMIT_DEFAULT_VALUE = "1000";
+    protected static final String CATEGORY_PAGE_ID = "category-page";
+    protected static final String CONTENT_ROOT_PATH = "/content";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -56,21 +67,31 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
     @ScriptVariable
     private Page currentPage;
+    @ScriptVariable
+    private ValueMap properties;
 
     @Nullable
     private String templateName;
 
     private List<String> guidesNavigation;
+    private String guidesNavigationIndex;
+    private String currentPageRelativeUrl;
 
-    private String currentPageIndexInToc;
+    private String limit;
+    private String loadMoreText;
+    private I18n i18n;
+
 
     @PostConstruct
     private void initModel() {
         try {
+            if (request != null) {
+                i18n = new I18n(request);
+            }
             Session session = request.getResourceResolver().adaptTo(Session.class);
             String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
             logger.info("AEMSITE: sitePath: {}", sitePath);
-            Node node = session.getNode( sitePath + "/jcr:content");
+            Node node = session.getNode(sitePath + "/jcr:content");
             System.out.println(node.getPath());
             logger.info("AEMSITE: nodePath: {}", node.getPath());
 
@@ -78,16 +99,21 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             Binary tocIndexBinary = node.getProperty("guides-navigation-index").getBinary();
             String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
             String tocIndexBinaryString = IOUtils.toString(tocIndexBinary.getStream(), CharEncoding.UTF_8);
-
+            limit = properties.get(LIMIT, LIMIT_DEFAULT_VALUE);
+            loadMoreText = translate(properties.get(LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
             logger.info("AEMSITE: tocBinaryString: {}", tocBinaryString);
             logger.info("AEMSITE: tocIndexBinaryString: {}", tocIndexBinaryString);
+            logger.info("AEMSITE: toc rendering limit: {}", limit);
+            logger.info("AEMSITE: toc load more text: {}", loadMoreText);
+
             // convert tocIndexBinaryString to JSON
             JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
+            guidesNavigationIndex = tocIndexBinaryString;
             try {
-                currentPageIndexInToc = tocIndexJson.getString(currentPage.getPath());
+                String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
+                currentPageRelativeUrl = relativePath;
             } catch (Exception e) {
                 logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
-                currentPageIndexInToc = "0";
             }
             guidesNavigation = new ArrayList<>();
             guidesNavigation.add(tocBinaryString);
@@ -105,8 +131,51 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     }
 
     @Override
-    public String getCurrentPageTocIndex() {
-        return currentPageIndexInToc;
+    public String getGuidesNavigationIndex() {
+        return guidesNavigationIndex;
+    }
+
+    @Override
+    public String getCurrentPageRelativeUrl() {
+        return currentPageRelativeUrl;
+    }
+
+
+    @Override
+    public String getLimit() {
+        return limit;
+    }
+
+    @Override
+    public String getLoadMoreText() {
+        return loadMoreText;
+    }
+
+    @Override
+    public String getCategoryPath() {
+        Page page = currentPage;
+        boolean isCategoryPage = false;
+        while(page != null && !isCategoryPage) {
+            if (page.getContentResource().getValueMap().containsKey("id") && page.getContentResource().getValueMap().get("id", String.class).equals(CATEGORY_PAGE_ID)) {
+                break;
+            } else {
+                page = page.getParent();
+            }
+        }
+        if(page == null) {
+            logger.warn("AEMSITE: Cannot find a page with id : category-page");
+            return CONTENT_ROOT_PATH;
+        }
+        String categoryPath = page.getPath();
+        if (!categoryPath.endsWith("/")) {
+            categoryPath = categoryPath + "/";
+        }
+        return categoryPath;
+    }
+
+
+    public String translate(String str) {
+        return (i18n != null ? i18n.getVar(str) : str);
     }
 
     @NotNull

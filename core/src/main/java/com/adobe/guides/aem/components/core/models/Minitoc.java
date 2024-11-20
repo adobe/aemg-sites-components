@@ -16,27 +16,29 @@
 
 package com.adobe.guides.aem.components.core.models;
 
-import java.util.List;
-
-import org.json.JSONObject;
+import com.adobe.cq.wcm.core.components.models.Component;
 import org.osgi.annotation.versioning.ConsumerType;
 
-import com.adobe.cq.wcm.core.components.models.Component;
 
 @ConsumerType
-public interface GuidesNavigation extends Component {
+public interface Minitoc extends Component {
 
     /**
-     * Returns the list of categories present in a template.
+     * Returns starting of the range of heading in the minitoc.
      *
-     * @return categories list if it exists and empty list otherwise
-     * @since com.adobe.cq.wcm.core.components.models 11.0.0; marked <code>default</code> in 12.1.0
+     * @return start number of heading type(h1-h6) minitoc 
      */
-    List<String> getGuidesNavigation();
-    String getGuidesNavigationIndex();
-    String getCurrentPageRelativeUrl();
+    int getStart();
 
-    String getLimit();
-    String getLoadMoreText();
-    String getCategoryPath();
+     /**
+     * Returns ending of the range of heading in the minitoc.
+     *
+     * @return end number of heading type(h1-h6) minitoc 
+     */
+    int getEnd();
+    /**
+     * Returns title of the minitoc component.
+     *
+     */
+    String getTitle();
 }
