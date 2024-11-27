@@ -65,6 +65,7 @@ it.
     $getFacetFilterCheckbox.forEach(function(getFacetFilterCheckbox) {
         getFacetFilterCheckbox.addEventListener("click", function(event) {
             resultSize = 0;
+            showCountVal = 0
             if (getFacetFilterCheckbox.checked) {
                 getCategory.push(getFacetFilterCheckbox.value);
             } else {
@@ -81,6 +82,7 @@ it.
     if($getSortAscDesVal) {
         $getSortAscDesVal.addEventListener("change", function(event) {
             resultSize = 0;
+            showCountVal = 0
             getSortAscDesVal = getSortingVal($getSortAscDesVal);
             getCategory.length > 0 ? fetchDataNew(getCategory) : fetchDataNew();
         });
@@ -89,6 +91,7 @@ it.
     if($getSortDirVal) {
         $getSortDirVal.addEventListener("change", function(event) {
             resultSize = 0;
+            showCountVal = 0
             getSortDirVal = getSortingVal($getSortDirVal.options);
             getCategory.length > 0 ? fetchDataNew(getCategory) : fetchDataNew();
         });
