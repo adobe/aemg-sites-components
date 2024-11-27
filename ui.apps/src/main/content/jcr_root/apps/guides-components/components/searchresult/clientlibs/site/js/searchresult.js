@@ -42,6 +42,7 @@ it.
 
     var getCategory = new Array();
     var resultSize = 0;
+    var showCountVal = 0;
     var LIST_GROUP;
     var NUMBER_OF_RECORDS;
 
@@ -145,7 +146,6 @@ it.
 
         totalRecords.innerHTML = "";
         NUMBER_OF_RECORDS = "";
-        var showCountVal = "";
 
         if (resultSize === parseInt(0)) {
             searchFieldListGroup.innerHTML = "";
@@ -158,10 +158,10 @@ it.
             searchResultEndMessage.style.display = "none";
             if (hasMore) {
                 getLoadMoreBtn.style.display = "block";
-                showCountVal += resultData.totalRecords;
+                showCountVal += resultData.data.length;
             } else {
                 getLoadMoreBtn.style.display = "none";
-                showCountVal += resultData.totalRecords;
+                showCountVal = resultData.totalRecords;
                 if (resultData.isLastPage !== true) {
                     getLoadMoreBtn.style.display = "block";
                 }
@@ -169,7 +169,7 @@ it.
         } else {
             searchResultEndMessage.style.display = "none";
             getLoadMoreBtn.style.display = "none";
-            showCountVal += resultData.totalRecords;
+            showCountVal = resultData.totalRecords;
         }
 
         for (var i = 0; i < dataCount; i++) {
@@ -179,7 +179,7 @@ it.
             LIST_GROUP += "<li class='cmp-searchresult-item'><h3 class='cmp-searchresult-title'><a class='cmp-searchresult-link' target='_blank' href=" + checkNull(data[i].url) + ">" + checkNull(data[i].title) + "</a></h3><span class='cmp-searchresult-tags'>" + checkNull(data[i].tags) + "<span class='cmp-searchresult-date'>" + checkNull(data[i].formattedLastModifiedDate) + "</span> <p class='cmp-searchresult-description'>" + checkNull(data[i].excerpt) + "</p><p class='cmp-searchresult-breadcrumb'>" + checkNull(breadcrumb) + "</p></li>";
         }
         searchFieldListGroup.innerHTML = LIST_GROUP;
-        let total = showCountVal
+        let total = resultData.totalRecords
         if(hasMore) {
             total = total + "+"
         }
