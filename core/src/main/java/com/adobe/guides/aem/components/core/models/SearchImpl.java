@@ -141,8 +141,8 @@ public class SearchImpl implements Search {
 		if (request != null) {
 			i18n = new I18n(request);
 		}
-		resultsSize = currentStyle.get(PN_RESULTS_SIZE, PROP_RESULTS_SIZE_DEFAULT);
-		searchTermMinimumLength = currentStyle.get(PN_SEARCH_TERM_MINIMUM_LENGTH,
+		resultsSize = properties.get(PN_RESULTS_SIZE, PROP_RESULTS_SIZE_DEFAULT);
+		searchTermMinimumLength = properties.get(PN_SEARCH_TERM_MINIMUM_LENGTH,
 				PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT);
 		loadMoreText = translate(properties.get(PN_LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
 		noResultText = translate(properties.get(PN_NO_RESULT_TEXT, NO_RESULT_TEXT_DEFAULT_VALUE));
