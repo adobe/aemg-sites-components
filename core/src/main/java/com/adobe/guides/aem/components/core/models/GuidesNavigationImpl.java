@@ -187,7 +187,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
         return categoryPath;
     }
 
-    public static String getPagesAsJson(Session session, String basePath) throws RepositoryException, JSONException {
+    public String getPagesAsJson(Session session, String basePath) throws RepositoryException, JSONException {
         QueryManager queryManager = session.getWorkspace().getQueryManager();
 
         String queryString = "SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE(page, '" + basePath + "')";
