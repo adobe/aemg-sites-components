@@ -23,7 +23,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.jcr.Binary;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
@@ -36,6 +41,7 @@ import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +81,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
     private List<String> guidesNavigation;
     private String guidesNavigationIndex;
+    private String guidesAllowedPages;
     private String currentPageRelativeUrl;
 
     private String limit;
@@ -108,6 +115,8 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
 
             // convert tocIndexBinaryString to JSON
             JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
+            guidesAllowedPages = getPagesAsJson(session, this.getCategoryPath());
+            logger.info("AEMSITE: guidesAllowedPages: {}", guidesAllowedPages);
             guidesNavigationIndex = tocIndexBinaryString;
             try {
                 String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
@@ -133,6 +142,11 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     @Override
     public String getGuidesNavigationIndex() {
         return guidesNavigationIndex;
+    }
+
+    @Override
+    public String getGuidesAllowedPages() {
+        return guidesAllowedPages;
     }
 
     @Override
@@ -173,6 +187,30 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
         return categoryPath;
     }
 
+    public String getPagesAsJson(Session session, String basePath) throws RepositoryException, JSONException {
+        QueryManager queryManager = session.getWorkspace().getQueryManager();
+
+        String queryString = "SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE(page, '" + basePath + "')";
+        Query query = queryManager.createQuery(queryString, Query.JCR_SQL2);
+
+        QueryResult result = query.execute();
+        NodeIterator nodes = result.getNodes();
+
+        List<String> paths = new ArrayList<>();
+
+        while (nodes.hasNext()) {
+            Node node = nodes.nextNode();
+//            String relativePath = node.getPath().substring(basePath.length());
+            paths.add(node.getPath());
+        }
+
+        JSONObject json = new JSONObject();
+        for (String path : paths) {
+            json.put(path, true);
+        }
+
+        return json.toString();
+    }
 
     public String translate(String str) {
         return (i18n != null ? i18n.getVar(str) : str);
