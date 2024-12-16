@@ -80,8 +80,10 @@ class GuidesNavigation {
 
     filterFromACL(items: Array<GuidesNavigationItem>): void {
         items.forEach((item: GuidesNavigationItem) => {
-            const outputPath = this.removeExtension(this.filePath(this.makeFullPath(item.outputPath, this.categoryPath)));
-            item.visible = !!this.allowedPagesPathJson[outputPath]
+            if(item.outputPath) {
+                const outputPath = this.removeExtension(this.filePath(this.makeFullPath(item.outputPath, this.categoryPath)));
+                item.visible = !!this.allowedPagesPathJson[outputPath]
+            }
         })
     }
 
