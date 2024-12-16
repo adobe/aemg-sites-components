@@ -31,6 +31,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.codec.CharEncoding;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -120,7 +121,8 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             guidesNavigationIndex = tocIndexBinaryString;
             try {
                 String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
-                currentPageRelativeUrl = relativePath;
+                String relativePathUnixPath = FilenameUtils.separatorsToUnix(relativePath);
+                currentPageRelativeUrl = relativePathUnixPath;
             } catch (Exception e) {
                 logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
             }
