@@ -34,6 +34,7 @@ class GuidesNavigation {
     limit: number
     loadMoreText: string
     categoryPath: string
+    allowedPagesPathJson: any
 
     generatePath(prefix, suffix) {
         if (prefix) {
@@ -77,8 +78,19 @@ class GuidesNavigation {
         }
     }
 
+    filterFromACL(items: Array<GuidesNavigationItem>): void {
+        items.forEach((item: GuidesNavigationItem) => {
+            if(item.outputPath) {
+                const outputPath = this.removeExtension(this.filePath(this.makeFullPath(item.outputPath, this.categoryPath)));
+                item.visible = !!this.allowedPagesPathJson[outputPath]
+            }
+        })
+    }
+
     getListItemContent(listItem: HTMLElement, item: GuidesNavigationItem, currPath: string, expandChildren: boolean, tokenIndex: number, incrementer: number) {
-        const hasChildren = item.children.length > 0
+        const children = item.children
+        this.filterFromACL(children)
+        const hasChildren = children.length > 0
         const container = document.createElement('span')
         const anchor = document.createElement('a')
         const chevron = document.createElement('span')
@@ -103,7 +115,7 @@ class GuidesNavigation {
         }
         let subtree;
         if (expandChildren) {
-            subtree = this.renderLevel(item.children, tokenIndex + 1, currPath, incrementer, 0)
+            subtree = this.renderLevel(children, tokenIndex + 1, currPath, incrementer, 0)
             chevron.setAttribute("children-rendered", "true")
             chevron.classList.remove("hide-children")
             chevron.classList.add("show-children")
@@ -213,6 +225,9 @@ class GuidesNavigation {
         return url
     }
 
+    removeExtension(path) {
+        return path.substring(0, path.lastIndexOf('.')) || path
+    }
 
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
@@ -231,12 +246,15 @@ class GuidesNavigation {
             const renderSize = navigationParent.getAttribute("data-cmp-guides-side-nav-items-limit") || GuidesNavigation.LIMIT_DEFAULT_VALUE;
             const loadMoreText = navigationParent.getAttribute("data-cmp-guides-side-nav-load-more-text") || GuidesNavigation.LOAD_MORE_TEXT_DEFAULT_VALUE
             const categoryPath = navigationParent.getAttribute("data-cmp-guides-side-nav-category-path");
+            const allowedPagesPath = navigationParent.getAttribute("data-cmp-guides-side-nav-allowed-pages");
             this.tokens = selectedPath.split('-')
             this.tokens = this.tokens.slice(1, this.tokens.length)
             this.limit = parseInt(renderSize)
             this.selectedPath = this.tokens.join('-')
             this.loadMoreText = loadMoreText
             this.categoryPath = categoryPath
+            this.allowedPagesPathJson = JSON.parse(allowedPagesPath || "{}")
+            this.filterFromACL(navData.children)
             const ul = this.renderLevel(navData.children, 0, '', 0, 0)
             navigationParent.appendChild(ul)
         } catch (e) {
