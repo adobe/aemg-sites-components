@@ -25,11 +25,23 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface Pager extends Component {
 
-    default ListItem getPrev() {
+    default PagerItem getPrev() {
         throw new UnsupportedOperationException();
     }
 
-    default ListItem getNext() {
+    default PagerItem getNext() {
+        throw new UnsupportedOperationException();
+    }
+    default  String getPrevUrl() {
+        throw new UnsupportedOperationException();
+    }
+    default  String getPrevTitle() {
+        throw new UnsupportedOperationException();
+    }
+    default  String getNextUrl() {
+        throw new UnsupportedOperationException();
+    }
+    default String getNextTitle() {
         throw new UnsupportedOperationException();
     }
 
