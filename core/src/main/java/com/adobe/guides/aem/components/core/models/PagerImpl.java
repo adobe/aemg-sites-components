@@ -59,6 +59,8 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerImpl.class);
 
     protected static final String RESOURCE_TYPE = "guides-components/components/pager";
+    protected static final String JCR_CONTENT = "jcr:content";
+    protected static final String SLASH_SEPARATOR = "/";
 
     @ScriptVariable
     private Resource resource;
@@ -91,7 +93,7 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
         Session session = request.getResourceResolver().adaptTo(Session.class);
         String categoryPath = Utils.getCategoryPathFromPage(currentPage);
-        Node node = session.getNode(sitePath + "/jcr:content");
+        Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
         System.out.println(node.getPath());
         Binary tocBinary = node.getProperty("guides-navigation").getBinary();
         String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
@@ -102,7 +104,6 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         ArrayList<PagerItem> flat = new ArrayList<>();
         flattenToc(toc, categoryPath, flat);
         int curr = findItem(flat, currentPage);
-        LOGGER.info("Pager: found index at {}", curr);
         prev = findPrev(flat, curr);
         next = findNext(flat, curr);
 
@@ -143,9 +144,11 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
             PagerItem item = flatToc.get(i);
             String filePath = Utils.removeExtension(Utils.filePath(item.getUrl()));
             if(filePath.equals(currentPagePath)) {
+                LOGGER.info("Pager: found item: {} at index {}", currentPagePath, i);
                 return i;
             }
         }
+        LOGGER.warn("Pager: item {} not found", currentPagePath);
         return -1;
     }
 
