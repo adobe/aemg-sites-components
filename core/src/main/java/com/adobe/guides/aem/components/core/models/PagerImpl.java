@@ -94,7 +94,6 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         Session session = request.getResourceResolver().adaptTo(Session.class);
         String categoryPath = Utils.getCategoryPathFromPage(currentPage);
         Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
-        System.out.println(node.getPath());
         Binary tocBinary = node.getProperty("guides-navigation").getBinary();
         String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
         String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
