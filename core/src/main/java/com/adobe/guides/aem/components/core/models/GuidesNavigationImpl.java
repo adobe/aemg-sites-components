@@ -42,6 +42,7 @@ import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -62,8 +63,6 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     protected static final String LOAD_MORE_TEXT = "loadMoreText";
     protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
     protected static final String LIMIT_DEFAULT_VALUE = "1000";
-    protected static final String CATEGORY_PAGE_ID = "category-page";
-    protected static final String CONTENT_ROOT_PATH = "/content";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -114,9 +113,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             logger.info("AEMSITE: toc rendering limit: {}", limit);
             logger.info("AEMSITE: toc load more text: {}", loadMoreText);
 
-            // convert tocIndexBinaryString to JSON
-            JSONObject tocIndexJson = new JSONObject(tocIndexBinaryString);
-            guidesAllowedPages = getPagesAsJson(session, this.getCategoryPath());
+            guidesAllowedPages = Utils.getPagesAsJson(session, this.getCategoryPath());
             logger.info("AEMSITE: guidesAllowedPages: {}", guidesAllowedPages);
             guidesNavigationIndex = tocIndexBinaryString;
             try {
@@ -127,13 +124,13 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
                 logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
             }
             guidesNavigation = new ArrayList<>();
-            guidesNavigation.add(tocBinaryString);
+            JSONObject toc = new JSONObject(tocBinaryString);
+            Utils.updateVisibility(toc, new JSONObject(guidesAllowedPages), this.getCategoryPath());
+            guidesNavigation.add(toc.toString());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             logger.error("AEMSITE: Error: {}", e.getMessage());
         }
-
-
     }
 
     @Override
@@ -170,48 +167,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     @Override
     public String getCategoryPath() {
         Page page = currentPage;
-        boolean isCategoryPage = false;
-        while(page != null && !isCategoryPage) {
-            if (page.getContentResource().getValueMap().containsKey("id") && page.getContentResource().getValueMap().get("id", String.class).equals(CATEGORY_PAGE_ID)) {
-                break;
-            } else {
-                page = page.getParent();
-            }
-        }
-        if(page == null) {
-            logger.warn("AEMSITE: Cannot find a page with id : category-page");
-            return CONTENT_ROOT_PATH;
-        }
-        String categoryPath = page.getPath();
-        if (!categoryPath.endsWith("/")) {
-            categoryPath = categoryPath + "/";
-        }
-        return categoryPath;
-    }
-
-    public String getPagesAsJson(Session session, String basePath) throws RepositoryException, JSONException {
-        QueryManager queryManager = session.getWorkspace().getQueryManager();
-
-        String queryString = "SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE(page, '" + basePath + "')";
-        Query query = queryManager.createQuery(queryString, Query.JCR_SQL2);
-
-        QueryResult result = query.execute();
-        NodeIterator nodes = result.getNodes();
-
-        List<String> paths = new ArrayList<>();
-
-        while (nodes.hasNext()) {
-            Node node = nodes.nextNode();
-//            String relativePath = node.getPath().substring(basePath.length());
-            paths.add(node.getPath());
-        }
-
-        JSONObject json = new JSONObject();
-        for (String path : paths) {
-            json.put(path, true);
-        }
-
-        return json.toString();
+        return Utils.getCategoryPathFromPage(page);
     }
 
     public String translate(String str) {

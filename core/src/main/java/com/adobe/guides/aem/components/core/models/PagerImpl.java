@@ -21,6 +21,8 @@ import com.adobe.cq.export.json.SlingModelFilter;
 import com.adobe.cq.wcm.core.components.models.ListItem;
 import com.day.cq.wcm.api.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.codec.CharEncoding;
+import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -30,24 +32,35 @@ import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.factory.ModelFactory;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.jcr.Binary;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @Model(adaptables = SlingHttpServletRequest.class,
        adapters = { Pager.class, ComponentExporter.class },
        resourceType = PagerImpl.RESOURCE_TYPE)
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
+
 public class PagerImpl extends AbstractComponentImpl implements Pager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerImpl.class);
 
     protected static final String RESOURCE_TYPE = "guides-components/components/pager";
+    protected static final String JCR_CONTENT = "jcr:content";
+    protected static final String SLASH_SEPARATOR = "/";
 
     @ScriptVariable
     private Resource resource;
@@ -68,85 +81,88 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
     @Self
     private SlingHttpServletRequest request;
 
-    private ListItem prev;
-    private ListItem next;
+    private PagerItem prev;
+    private PagerItem next;
+    private String prevTitle;
+    private String prevUrl;
+    private String nextUrl;
+    private String nextTitle;
 
     @PostConstruct
-    protected void initModel() {
-        prev = findPrev();
-        next = findNext(currentPage);
+    protected void initModel() throws RepositoryException, JSONException, IOException {
+        String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+        Session session = request.getResourceResolver().adaptTo(Session.class);
+        String categoryPath = Utils.getCategoryPathFromPage(currentPage);
+        Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
+        Binary tocBinary = node.getProperty("guides-navigation").getBinary();
+        String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
+        String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
+        JSONObject toc = new JSONObject(tocBinaryString);
+        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
+        toc.put("visible", true);
+        ArrayList<PagerItem> flat = new ArrayList<>();
+        flattenToc(toc, categoryPath, flat);
+        int curr = findItem(flat, currentPage);
+        prev = findPrev(flat, curr);
+        next = findNext(flat, curr);
+
+        nextTitle = (next != null) ? next.getTitle() : "";
+        nextUrl = (next != null) ? next.getUrl() : "";
+
+        prevTitle = (prev != null) ? prev.getTitle() : "";
+        prevUrl = (prev != null) ? prev.getUrl() : "";
     }
 
-    private boolean shouldSkipPage(Page page) {
-        Resource contentResource = page.getContentResource();
-        if (contentResource != null) {
-            Node contentNode = contentResource.adaptTo(Node.class);
-            try {
-                return contentNode != null && !contentNode.hasProperty("sourcePath");
-            } catch (RepositoryException e) {
-                LOGGER.error("Error in Pager components {}", e);
+    public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
+        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(true));
+        boolean hasDisplayName =  toc.has("displayName");
+        if (toc.has("outputPath") && isVisible && hasDisplayName) {
+            String outputPath = toc.getString("outputPath");
+            String fullPath = Paths.get(categoryPath, outputPath).normalize().toString();
+            PagerItem item = new PagerItem()
+                    .setTitle(toc.get("displayName").toString())
+                    .setUrl(fullPath);
+            collector.add(item);
+        }
+        if (toc.has("children") && isVisible) {
+            JSONArray children = toc.getJSONArray("children");
+            for (int i = 0; i < children.length(); i++) {
+                flattenToc(children.getJSONObject(i), categoryPath, collector);
             }
         }
-        return false;
     }
 
-    protected ListItem findNext(Page currentPage) {
-        Page parent = currentPage.getParent();
-        if (currentPage.getDepth() <= 5) {
-            // Prevent pager from leaving the book
-            // TODO: Push depth into edit dialog
-            return null;
-        }
-
-        if (parent != null) {
-            Iterator<Page> siblings = parent.listChildren();
-            while (siblings.hasNext()) {
-                Page sibling = siblings.next();
-                if (currentPage.getName().equals(sibling.getName())) {
-                    boolean hasNext = siblings.hasNext();
-                    Page nextPage = null;
-                    if(hasNext) {
-                        while (siblings.hasNext()) {
-                            Page tempNext = siblings.next();
-                            if (!shouldSkipPage(tempNext)) {
-                                nextPage = tempNext;
-                                break;
-                            }
-                        }
-                    }
-                    return hasNext && nextPage != null
-                        ? new PageListItemImpl(request, nextPage, "", false, null)
-                        : findNext(currentPage.getParent());
-                }
-            }
-        }
-        return null;
+    protected PagerItem findNext(ArrayList<PagerItem> flatToc, int index) {
+        if(index == -1 || index == flatToc.size() - 1) return null;
+        return flatToc.get(index + 1);
     }
 
-    protected ListItem findPrev() {
-        Page parent = currentPage.getParent();
-        if (parent != null) {
-            Page prevSibling = null;
-            Iterator<Page> siblings = parent.listChildren();
-            while (siblings.hasNext()) {
-                Page sibling = siblings.next();
-                if (prevSibling != null && currentPage.getName().equals(sibling.getName())) {
-                    return new PageListItemImpl(request, prevSibling, "", false, null);
-                }
-                if(!shouldSkipPage(sibling))
-                    prevSibling = sibling;
+    protected int findItem(ArrayList<PagerItem> flatToc, Page currentPage) {
+        String currentPagePath = currentPage.getPath();
+        for(int i=0; i < flatToc.size(); i++) {
+            PagerItem item = flatToc.get(i);
+            String filePath = Utils.removeExtension(Utils.filePath(item.getUrl()));
+            if(filePath.equals(currentPagePath)) {
+                LOGGER.info("Pager: found item: {} at index {}", currentPagePath, i);
+                return i;
             }
         }
-        return null;
+        LOGGER.warn("Pager: item {} not found", currentPagePath);
+        return -1;
+    }
+
+    protected PagerItem findPrev(ArrayList<PagerItem> flatToc, int index) {
+        if(index < 1) return null;
+        return flatToc.get(index - 1);
     }
 
     @Override
-    public ListItem getPrev() {
+    public PagerItem getPrev() {
         return prev;
     }
 
     @Override
-    public ListItem getNext() {
+    public PagerItem getNext() {
         return next;
     }
 
@@ -154,5 +170,25 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
     @Override
     public String getExportedType() {
         return resource.getResourceType();
+    }
+
+    @Override
+    public String getPrevTitle() {
+        return prevTitle;
+    }
+
+    @Override
+    public String getPrevUrl() {
+        return prevUrl;
+    }
+
+    @Override
+    public String getNextTitle() {
+        return nextTitle;
+    }
+
+    @Override
+    public String getNextUrl() {
+        return nextUrl;
     }
 }
