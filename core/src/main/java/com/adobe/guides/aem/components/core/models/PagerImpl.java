@@ -109,10 +109,13 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         next = findNext(flat, curr);
 
         nextTitle = (next != null) ? next.getTitle() : "";
-        nextUrl = (next != null) ? next.getUrl() : "";
+        nextUrl = FilenameUtils.separatorsToUnix((next != null) ? next.getUrl() : "");
 
         prevTitle = (prev != null) ? prev.getTitle() : "";
-        prevUrl = (prev != null) ? prev.getUrl() : "";
+        prevUrl = FilenameUtils.separatorsToUnix((prev != null) ? prev.getUrl() : "");
+        
+        LOGGER.info("nextTitle: {}, nextUrl: {}", nextTitle, nextUrl);
+        LOGGER.info("prevTitle: {}, prevUrl: {}", prevTitle, prevUrl);
     }
 
     public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
