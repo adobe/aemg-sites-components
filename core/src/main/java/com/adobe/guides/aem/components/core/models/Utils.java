@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -398,10 +400,11 @@ public class Utils {
     public static void updateVisibility(JSONObject mainJson, JSONObject AclJson, String basePath) throws JSONException {
         if (mainJson.has("outputPath")) {
             String outputPath = mainJson.getString("outputPath");
-            String fullPath = Paths.get(basePath, outputPath).normalize().toString();
+            String fullPath = FilenameUtils.separatorsToUnix(Paths.get(basePath, outputPath).normalize().toString());
             String key = Utils.removeExtension(Utils.filePath(fullPath));
             boolean contains = AclJson.has(key);
             mainJson.put("visible", contains);
+            logger.info("updateVisibility: hasOutputPath : outputPath: {}, fullPath: {},  key: {}",outputPath, fullPath, key);
         }
         if (mainJson.has("children")) {
             JSONArray children = mainJson.getJSONArray("children");
