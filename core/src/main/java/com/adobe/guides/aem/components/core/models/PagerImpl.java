@@ -22,6 +22,7 @@ import com.adobe.cq.wcm.core.components.models.ListItem;
 import com.day.cq.wcm.api.Page;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.codec.CharEncoding;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -102,15 +103,19 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
         flattenToc(toc, categoryPath, flat);
+        LOGGER.info("Pager: flatten toc {}", flat);
         int curr = findItem(flat, currentPage);
         prev = findPrev(flat, curr);
         next = findNext(flat, curr);
 
         nextTitle = (next != null) ? next.getTitle() : "";
-        nextUrl = (next != null) ? next.getUrl() : "";
+        nextUrl = FilenameUtils.separatorsToUnix((next != null) ? next.getUrl() : "");
 
         prevTitle = (prev != null) ? prev.getTitle() : "";
-        prevUrl = (prev != null) ? prev.getUrl() : "";
+        prevUrl = FilenameUtils.separatorsToUnix((prev != null) ? prev.getUrl() : "");
+        
+        LOGGER.info("nextTitle: {}, nextUrl: {}", nextTitle, nextUrl);
+        LOGGER.info("prevTitle: {}, prevUrl: {}", prevTitle, prevUrl);
     }
 
     public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
@@ -141,7 +146,9 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         String currentPagePath = currentPage.getPath();
         for(int i=0; i < flatToc.size(); i++) {
             PagerItem item = flatToc.get(i);
-            String filePath = Utils.removeExtension(Utils.filePath(item.getUrl()));
+            String filePath = FilenameUtils.separatorsToUnix(Utils.removeExtension(Utils.filePath(item.getUrl())));
+            LOGGER.info("Pager: comparing flat item {} with currentpge {}", filePath, currentPagePath);
+
             if(filePath.equals(currentPagePath)) {
                 LOGGER.info("Pager: found item: {} at index {}", currentPagePath, i);
                 return i;
