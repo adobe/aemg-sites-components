@@ -16,14 +16,19 @@
 package com.adobe.guides.aem.components.core.models;
 
 
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -39,11 +44,25 @@ import com.day.cq.wcm.foundation.AllowedComponentList;
 import com.google.common.collect.ImmutableSet;
 
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 public class Utils {
+    private static final Logger logger = LoggerFactory.getLogger(Utils.class);
+    protected static final String CATEGORY_PAGE_ID = "category-page";
 
+    protected static final String CONTENT_ROOT_PATH = "/content";
     private static final Set<String> INTERNAL_PARAMETER = ImmutableSet.of(
             ":formstart",
             "_charset_",
@@ -304,4 +323,95 @@ public class Utils {
         String sitePublishPath = currentPage.getContentResource().getValueMap().get("sitePublishPath", String.class);
         return sitePublishPath != null ? sitePublishPath : "";
     }
+
+    public static String filePath(String url) {
+        if (url == null || url.isEmpty()) {
+            return "";
+        }
+        int index = url.indexOf('?');
+        if (index != -1) {
+            url = url.substring(0, index);
+        }
+        index = url.indexOf('#');
+        if (index != -1) {
+            url = url.substring(0, index);
+        }
+        return url;
+    }
+
+    public static String removeExtension(String path) {
+        if (path == null || path.isEmpty()) {
+            return path;
+        }
+
+        int lastDotIndex = path.lastIndexOf('.');
+        if (lastDotIndex != -1) {
+            return path.substring(0, lastDotIndex);
+        }
+
+        return path;
+    }
+
+    public static String getPagesAsJson(Session session, String basePath) throws RepositoryException, JSONException {
+        QueryManager queryManager = session.getWorkspace().getQueryManager();
+
+        String queryString = "SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE(page, '" + basePath + "')";
+        Query query = queryManager.createQuery(queryString, Query.JCR_SQL2);
+
+        QueryResult result = query.execute();
+        NodeIterator nodes = result.getNodes();
+
+        List<String> paths = new ArrayList<>();
+
+        while (nodes.hasNext()) {
+            Node node = nodes.nextNode();
+//            String relativePath = node.getPath().substring(basePath.length());
+            paths.add(node.getPath());
+        }
+
+        JSONObject json = new JSONObject();
+        for (String path : paths) {
+            json.put(path, true);
+        }
+
+        return json.toString();
+    }
+
+    public static String getCategoryPathFromPage(Page page) {
+        boolean isCategoryPage = false;
+        while(page != null && !isCategoryPage) {
+            if (page.getContentResource().getValueMap().containsKey("id") && page.getContentResource().getValueMap().get("id", String.class).equals(CATEGORY_PAGE_ID)) {
+                break;
+            } else {
+                page = page.getParent();
+            }
+        }
+        if(page == null) {
+            logger.warn("AEMSITE: Cannot find a page with id : category-page");
+            return CONTENT_ROOT_PATH;
+        }
+        String categoryPath = page.getPath();
+        if (!categoryPath.endsWith("/")) {
+            categoryPath = categoryPath + "/";
+        }
+        return categoryPath;
+    }
+
+    public static void updateVisibility(JSONObject mainJson, JSONObject AclJson, String basePath) throws JSONException {
+        if (mainJson.has("outputPath")) {
+            String outputPath = mainJson.getString("outputPath");
+            String fullPath = FilenameUtils.separatorsToUnix(Paths.get(basePath, outputPath).normalize().toString());
+            String key = Utils.removeExtension(Utils.filePath(fullPath));
+            boolean contains = AclJson.has(key);
+            mainJson.put("visible", contains);
+            logger.info("updateVisibility: hasOutputPath : outputPath: {}, fullPath: {},  key: {}",outputPath, fullPath, key);
+        }
+        if (mainJson.has("children")) {
+            JSONArray children = mainJson.getJSONArray("children");
+            for (int i = 0; i < children.length(); i++) {
+                updateVisibility(children.getJSONObject(i), AclJson, basePath);
+            }
+        }
+    }
+
 }
