@@ -82,7 +82,9 @@ public class ContributionEditorImpl extends AbstractComponentImpl implements Con
     String buildUrl() throws RepositoryException, IOException {
         String topicUuid = currentPage.getContentResource().getValueMap().get("topicUUID", String.class);
         String topicVersion = currentPage.getContentResource().getValueMap().get("topicVersion", String.class);
-        return "/bin/guides/contribution/redirect?version=" + topicVersion+ "&topicUuid=" + topicUuid;
+        String author = currentPage.getContentResource().getValueMap().get("author", String.class);
+        String rootMapUUID = currentPage.getContentResource().getValueMap().get("rootMapUUID", String.class);
+        return "/bin/guides/v1/contribution/redirect?topicVersion=" + topicVersion + "&topicUuid=" + topicUuid + "&topicAuthor=" + author + "&mapUuid=" + rootMapUUID;
     }
 
     @NotNull
