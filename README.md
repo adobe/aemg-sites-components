@@ -26,6 +26,10 @@ To build all the modules run in the project root directory for on-prem:
 
     mvn clean install -Pclassic
 
+To build all the modules run in the project root directory for aemaacs:
+
+    mvn clean install
+
 
 To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the following command:
 
