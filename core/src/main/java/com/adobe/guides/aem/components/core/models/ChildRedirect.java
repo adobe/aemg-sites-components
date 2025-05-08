@@ -17,7 +17,6 @@ package com.adobe.guides.aem.components.core.models;
 
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.wcm.core.components.models.Component;
-import com.adobe.cq.wcm.core.components.models.ListItem;
 import org.jetbrains.annotations.NotNull;
 
 /**

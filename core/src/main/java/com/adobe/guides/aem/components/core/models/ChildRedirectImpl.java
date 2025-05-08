@@ -17,23 +17,16 @@ package com.adobe.guides.aem.components.core.models;
 
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
-import com.adobe.cq.export.json.SlingModelFilter;
-import com.adobe.cq.wcm.core.components.models.ListItem;
-import com.day.cq.wcm.api.Page;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.codec.CharEncoding;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import org.apache.sling.models.factory.ModelFactory;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.jcr.Binary;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -50,7 +42,6 @@ import javax.jcr.Session;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 @Model(adaptables = SlingHttpServletRequest.class,
        adapters = { ChildRedirect.class, ComponentExporter.class },
@@ -73,16 +64,6 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
 
     @ScriptVariable
     protected com.day.cq.wcm.api.Page currentPage;
-
-    @ScriptVariable
-    @JsonIgnore
-    protected ResourceResolver resolver;
-
-    @Inject
-    private ModelFactory modelFactory;
-
-    @Inject
-    private SlingModelFilter slingModelFilter;
 
     @Self
     private SlingHttpServletRequest request;
