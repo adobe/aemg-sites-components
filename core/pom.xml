@@ -95,6 +95,12 @@ Import-Package: javax.annotation;version=0.0.0,*
             <groupId>uk.org.lidalia</groupId>
             <artifactId>slf4j-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Testing -->
@@ -130,7 +136,12 @@ Import-Package: javax.annotation;version=0.0.0,*
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-simple</artifactId>
                 </exclusion>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
             </exclusions>
+
             <scope>test</scope>
         </dependency>
         <!-- Required to be able to support injection with @Self and @Via -->
