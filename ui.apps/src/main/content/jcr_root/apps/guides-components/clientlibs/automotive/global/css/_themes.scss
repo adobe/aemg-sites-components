@@ -1,0 +1,128 @@
+@use "../../../utils/css/palette-generator" as *;
+
+@mixin light-theme {
+  --color-accent: #821616;
+  --color-primary: #001E3A;
+  --color-primary-70: #001e3ab3;
+  --color-secondary: #ffffff;
+  --color-neutral: #D8D8D8;
+  --color-bg: #FFFFFF;
+  --color-border-light: #D8D8D8;
+  --color-on-accent: #FFFFFF;
+  --color-border-light: #D8D8D8;
+  --color-light-grey: #2C343B;
+  --color-content-bg: #E8F1FF;
+  --color-bg2: #0D0D0D;
+  --color-content-bg2: #F2B28C;
+  --color-content-bg3: #D84040;
+  --color-related-link:#4D6275;
+  
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f185";
+  //     content: url("/content/dam/aemguidesDALP/fsi/images/moon-light.png");
+  //   }
+  // }
+}
+
+@mixin dark-theme {
+    --color-accent: #FFFFFF;  
+    --color-primary: #FFFFFF; 
+    --color-primary-70: #1E3A5FB3;
+    --color-secondary: #ffffff;
+    --color-neutral: #110000; 
+    --color-bg: #0D0D0D; 
+    --color-border-light: #333333; 
+    --color-on-accent: #FFFFFF; 
+    --color-light-grey: #B0B0B0; 
+    --color-bg2: #0D0D0D;
+    --color-content-bg: #191B1F;
+    --color-content-bg2: #F2B28C;
+    --color-content-bg3: #D84040;
+    --color-link:#FDA14A;
+    --color-related-link:#FFD700;
+    --color-accent-dark: #821616;
+    --color-bg-2:var(--color-primary);
+    --color-primary-2: var(--color-bg);
+  //   .theme-btn {
+  //   &::before {
+  //     content: "\f186";
+  //   }
+  // }
+}
+
+.light {
+  @include light-theme();
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f185";
+  //     content: url("/content/dam/aemguidesDALP/fsi/images/moon-light.png");
+  //   }
+  // }
+}
+
+.dark {
+  @include dark-theme();
+
+  .theme-btns .fa-moon{
+    color: var(--color-accent-dark);
+  }
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f186" !important;
+  //   }
+  // }
+}
+
+// OS Default.
+// :root:not(.light):not(.dark) {
+//   @media (prefers-color-scheme: light) {
+//     @include light-theme;
+//   }
+
+//   @media (prefers-color-scheme: dark) {
+//     @include dark-theme;
+//   }
+// }
+
+
+.theme-btns{
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  .checkbox-label {
+    background-color: var(--color-secondary);
+    width: 50px;
+    height: 24px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .checkbox-label .ball {
+    background-color: var(--color-bg2);
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+  }
+  .fa-moon {
+    color: var(--color-accent);
+  }
+
+  .fa-sun {
+    color: var(--color-accent);
+  }
+
+  .checkbox:checked + .checkbox-label .ball {
+    transform: translateX(25px);
+  }
+}

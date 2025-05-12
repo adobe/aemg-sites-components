@@ -1,0 +1,123 @@
+
+// toc-config
+:root {
+  --toc-indent: 16px;
+  --toc-level-0-indent: calc(var(--toc-indent) * 0);
+  --toc-level-1-indent: calc(var(--toc-indent) * 1);
+  --toc-level-2-indent: calc(var(--toc-indent) * 2);
+  --toc-level-3-indent: calc(var(--toc-indent) * 3);
+  --toc-level-4-indent: calc(var(--toc-indent) * 4);
+  --toc-level-5-indent: calc(var(--toc-indent) * 5);
+}
+
+// typography-config
+:root {
+  --text-4xs: 0.563rem;   /* 9px */
+  --text-4xs-lh: 0.75rem;  /* 12px */
+
+  --text-3xs: 0.625rem;   /* 10px */
+  --text-3xs-lh: 0.75rem;  /* 12px */
+
+  --text-2xs: 0.688rem;   /* 11px */
+  --text-2xs-lh: 0.875rem; /* 14px */
+
+  --text-xs: 0.75rem;     /* 12px */
+  --text-xs-lh: 1rem;     /* 16px */
+
+  --text-sm: 0.875rem;    /* 14px */
+  --text-sm-lh: 1.25rem;  /* 20px */
+
+  --text-base: 1rem;      /* 16px */
+  --text-base-lh: 1.5rem; /* 24px */
+
+  --text-lg: 1.125rem;    /* 18px */
+  --text-lg-lh: 1.5rem;   /* 24px */
+
+  --text-xl: 1.25rem;     /* 20px */
+  --text-xl-lh: 1.75rem;  /* 28px */
+
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-2xl-lh: 2rem;    /* 32px */
+
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-3xl-lh: 2.5rem;  /* 40px */
+
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-4xl-lh: 3rem;    /* 48px */
+
+  --text-5xl: 3rem;       /* 48px */
+  --text-5xl-lh: 3.875rem; /* 62px */
+
+  --text-6xl: 3.75rem;    /* 60px */
+  --text-6xl-lh: 4.75rem;  /* 76px */
+
+  --text-7xl: 4.5rem;     /* 72px */
+  --text-7xl-lh: 5.625rem; /* 90px */
+
+  --text-8xl: 6rem;       /* 96px */
+  --text-8xl-lh: 7.75rem;  /* 124px */
+
+  --text-9xl: 8rem;       /* 128px */
+  --text-9xl-lh: 9.625rem; /* 154px */
+}
+
+
+.note.danger {
+  --color-danger-light: #ffe2e2;
+  --color-danger-dark: #d9534fbd;
+  --color-note-light: var(--color-danger-light);
+  --color-note-dark: var(--color-danger-dark);
+}
+
+.note.tip {
+  --color-tip-light: #CAE4FD;
+  --color-tip-dark: #ddd;
+  --color-note-light: var(--color-tip-light);
+  --color-note-dark: var(--color-tip-dark);
+}
+
+.note.caution {
+  --color-caution-light: #ffc301ba;
+  --color-caution-dark: #FFC301;
+  --color-note-light: var(--color-caution-light);
+  --color-note-dark: var(--color-caution-dark);
+}
+
+.note.restriction {
+  --color-restriction-light: #D8D8D8;;
+  --color-restriction-dark: #ddd;
+  --color-note-light: var(--color-restriction-light);
+  --color-note-dark: var(--color-restriction-dark);
+}
+
+.note.warning {
+  --color-warning-light: #ffeddf;
+  --color-warning-dark: #F39C12;
+  --color-note-light: var(--color-warning-light);
+  --color-note-dark: var(--color-warning-dark);
+}
+
+.note.notice {
+  --color-notice-light: #B2E7F5;
+  --color-notice-dark: #5BC0DE;
+  --color-note-light: var(--color-notice-light);
+  --color-note-dark: var(--color-notice-dark);
+}
+
+
+// .hazardstatement.danger {
+//   --color-danger-light : #FFEBE7 ;
+//   --color-danger-dark :  #EA3829;
+// }
+// .hazardstatement.warning {
+//   --color-warning-light: #ffeddf;
+//   --color-warning-dark:  #ffb47b;
+// }
+// .hazardstatement.caution {
+//   --color-caution-light: #FFECCC ;
+//   --color-caution-dark : #F68511;
+// }
+// .hazardstatement.notice{
+//   --color-notice-light : #F8F8F8;
+//   --color-notice-dark :  #6D6D6D;
+// }

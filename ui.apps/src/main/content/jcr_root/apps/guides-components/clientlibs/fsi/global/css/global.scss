@@ -1,0 +1,93 @@
+@use "themes";
+@use "fonts" as *;
+@use "../../../utils/css/vars" as *;
+
+:root{
+  @include fonts;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+.hero-container {
+  .cover-img {
+    max-width: 940px;
+    max-height: 400px;
+
+    &> img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.feedback-container{
+  background-color: var(--color-primary-light);
+  .feedback-buttons{
+    .feedback-button{
+      background-color: var(--color-primary);
+      color: var(--color-accent);
+      // &:hover {  
+      //   color: var(--color-border-light);
+      // }
+    }
+  }
+}
+.dark .feedback-container{
+  background-color: var(--color-primary2);
+}
+.dark .feedback-container .feedback-buttons .feedback-button{
+  background-color: var(--color-bg-2);
+  color: var(--color-primary-2);
+  &:hover {  
+    background-color: var(--color-accent);
+  }
+} 
+.dark .feedback-container .feedback-buttons .feedback-button.selected{
+  background-color: var(--color-accent);
+}
+
+.pdf-download{
+  .pdf-note {
+    top: 30px;
+    left: 46%;
+  }
+}
+
+@media screen and (max-width: $screen-md) {
+
+  .right-container{
+    // padding-bottom: 64px;
+    &> .cmp-container{
+      padding-top: unset;
+    }
+  }
+  .guides-pager{
+    margin-bottom: 64px;  
+  }
+
+  .pdf-download{
+    .pdf-note {
+      top: 65px;
+      right: 1%;
+      left: unset;
+    }
+  }
+  
+  .download-manual-button.padding-bottom .cmp-container{
+    padding-bottom: 40px;
+  } 
+}
+
+.related-links .link{
+  &:hover{
+    color: var(--color-primary);
+  }
+}
+
+.dark .related-links .link{
+  &:hover{
+    color: var(--color-bg-2);
+  }
+}

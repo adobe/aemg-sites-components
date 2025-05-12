@@ -1,0 +1,100 @@
+.left-container {
+  .cmp-guides-navigation {
+    padding-top: 40px;
+  }
+}
+
+.cmp-guides-navigation {
+  .guides-navigation {
+    color: var(--color-primary);
+
+    ul.cmp-guidesnavigation__group {
+
+      .toc-list-item {
+        flex-direction: row-reverse;
+
+        span {
+          cursor: pointer;
+        }
+
+        a {
+          margin-right: auto;
+          text-transform: capitalize;
+        }
+      }
+
+      li.cmp-guidesnavigation__item--active.cmp-guidesnavigation__item-level-0>.toc-list-item {
+        color: var(--color-accent);
+        font-weight: 700;
+      }
+
+      li.cmp-nav-item-selected>.toc-list-item {
+        font-weight: 700;
+      }
+
+      .cmp-guidesnavigation__item-level-0 {
+        border-bottom: 1px solid var(--color-neutral);
+        padding-left: var(--toc-level-0-indent);
+        font-size: var(--text-base);
+        line-height: var(--text-base-lh);
+        padding-top: 24px;
+        padding-bottom: 8px;
+      }
+
+      .cmp-guidesnavigation__item-level-0:first-child {
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .cmp-guidesnavigation__item-level-1 {
+        padding-left: var(--toc-level-1-indent);
+        font-size: var(--text-sm);
+        line-height: var(--text-sm-lh);
+        color: var(--color-primary);
+        margin-block: 4px;
+        padding-block: 4px;
+
+        &:first-child {
+          margin-top: 8px;
+        }
+      }
+
+      .cmp-guidesnavigation__item-level {
+
+        &-2,
+        &-3,
+        &-4,
+        &-5 {
+          padding-left: var(--toc-level-2-indent);
+          font-size: var(--text-xs);
+          line-height: var(--text-xs-lh);
+          margin-top: 4px;
+          padding-block: 4px;
+          color: var(--color-primary-70);
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.dark .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-0 {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.dark .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .toc-list-item a {
+  color: var(--color-on-accent);
+}

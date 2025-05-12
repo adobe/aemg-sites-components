@@ -1,0 +1,345 @@
+/**** List Styles ****/
+ul,
+ol {
+  margin-top: 8px;
+  padding-bottom: 0;
+}
+
+li {
+  margin-bottom: 0.8em;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ul {
+  list-style-type: disc;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+ul ol,
+ol ol {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* step style */
+.step {
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.step .prefix-content {
+  color: var(--color-primary);
+}
+
+.step-unordered {
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.stepresult {
+  margin-bottom: 0.5rem;
+}
+
+.steps {}
+
+.stepsection {
+  display: block;
+  margin-left: -0.3rem;
+}
+
+.stepxmp {}
+
+.substep {
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.substeps {}
+
+.menucascade .uicontrol+.uicontrol:before {
+  content: "\00a0\203a\00a0";
+}
+
+.uicontrol {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+//* steps choice styles **/
+.choice {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.choices {}
+
+.chdesc {}
+
+.chdeschd {}
+
+.chhead {}
+
+.choicetable {}
+
+.choption {}
+
+.choptionhd {}
+
+.chrow {}
+
+.cmd {}
+
+.cmd .prefix-content {
+  font-weight: bold;
+}
+
+.cmdname {
+  font-weight: bold;
+}
+
+/* defination style */
+.dl {
+  width: unset;
+  margin-block: 2rem;
+  padding: 1rem 0;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+}
+/* Header style */
+.dlhead {
+  font-family: var(--font-fam-secondary);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition: all 0.3sease;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  background-color: var(--color-light-blue-bg);
+  color: var(--color-primary);
+  break-inside: avoid;
+}
+.dthd {
+  font-family: var(--font-fam-secondary);
+  font-weight: 400;
+  color: var(--color-primary, #2C3E50);
+  margin-bottom: 0.5rem;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-lh);
+}
+.ddhd {
+  margin-left: 1rem;
+  font-family: var(--font-fam-secondary);
+  color: var(--color-tertiary);
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+}
+.dthd::after {
+  content: " :";
+}
+/* Entry block styles */
+.dlentry {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  background-color: var(--color-light-blue-bg);
+  color: var(--color-primary);
+  break-inside: avoid;
+}
+/* Styling for the <dt> (definition term) */
+.dt {
+  font-family: var(--font-fam-secondary);
+  font-weight: 400;
+  color: var(--color-primary, #2C3E50);
+  margin-bottom: 0.5rem;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-lh);
+}
+.dt::after {
+  content: " :";
+}
+/* Styling for the <dd> (definition description) */
+.dd {
+  margin-left: 1rem;
+  font-family: var(--font-fam-secondary);
+  color: var(--color-tertiary);
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+}
+/* Container for steps */
+
+ol.steps {
+  /* Limit the width */
+  /* Center it */
+  /* Initialize the counter */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  max-width: 600px;
+  margin: 30px auto;
+  counter-reset: step-counter;
+}
+/* Each step */
+li.step {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
+  font-size: var(--text-base);
+  line-height: var( --text-base-lh);
+  font-weight: 400;
+  color: var(--color-primary);
+  margin-left: 0;
+  .info{
+    margin: 8px 0 63px !important;
+    font-size: var(--text-sm);
+    line-height: var(--text-sm-lh);
+  }
+  span{
+    font-weight: 500;
+  }
+}
+/* Vertical line connecting steps */
+ol.steps::before {
+  /* Position the line in the center */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25px;
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-bg-light, #e0e0e0);
+  z-index: 1;
+}
+/* Circle steps with numbers */
+li.step::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 11px;
+  top: 15px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 50%;
+  line-height: 24px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Active step */
+li.step.active::before {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+/* Completed step */
+li.step.completed::before {
+  background-color: var(--color-accent);
+  /* Green for completed step */
+  border-color: var(--color-accent);
+  /* Border color for completed */
+}
+
+.dark{
+  li.step::before{
+    background-color: var(--color-bg-2);
+    color: var(--color-primary-2);
+  }
+}
+
+
+
+
+.dl {
+  width: unset;
+  margin-block: 2rem;
+  padding: 1rem 0;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+}
+/* Header style */
+.dlhead {
+  font-family: var(--font-fam-secondary);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition: all 0.3sease;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  background-color: var(--color-light-blue-bg);
+  color: var(--color-primary);
+  break-inside: avoid;
+}
+.dthd {
+  font-family: var(--font-fam-secondary);
+  font-weight: 400;
+  color: var(--color-primary, #2C3E50);
+  margin-bottom: 0.5rem;
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-lh);
+}
+.ddhd {
+  margin-left: 1rem;
+  font-family: var(--font-fam-secondary);
+  color: var(--color-tertiary);
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+}
+.dthd::after {
+  content: " :";
+}
+/* Entry block styles */
+.dlentry {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  background-color: var(--color-light-blue-bg);
+  color: var(--color-primary);
+  break-inside: avoid;
+}
+/* Styling for the <dt> (definition term) */
+.dt {
+  font-family: var(--font-fam-secondary);
+  font-weight: 400;
+  color: var(--color-primary, #2C3E50);
+  margin-bottom: 0.5rem;
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+}
+.dt::after {
+  content: " :";
+}
+/* Styling for the <dd> (definition description) */
+.dd {
+  margin-left: 1rem;
+  font-family: var(--font-fam-secondary);
+  color: var(--color-tertiary);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+}
+
+
+
+

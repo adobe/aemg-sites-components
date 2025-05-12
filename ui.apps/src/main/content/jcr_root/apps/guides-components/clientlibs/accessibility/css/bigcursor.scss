@@ -1,0 +1,9 @@
+.big-cursor-active {
+  cursor: url(/content/dam/aemguidesDALP/common/bigcursor.svg), auto !important;
+
+  a, button {
+    cursor: url(/content/dam/aemguidesDALP/common/pointer.svg), pointer !important;
+  }
+
+  // cursor: url(https://cdn.userway.org/widgetapp/images/arrow_w.svg), auto !important;
+}

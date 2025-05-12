@@ -1,0 +1,33 @@
+@mixin fonts{
+    --font-fam-primary : 'Manrope' , 'sans-serrif';
+}
+
+body {
+    font-family: 'Manrope';
+}
+
+/* Define the font faces once */
+@font-face {
+    font-family: 'Manrope';
+    src: url('/content/dam/aemguidesDALP/fonts/manrope/Manrope-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Manrope';
+    src: url('/content/dam/aemguidesDALP/fonts/manrope/Manrope-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Manrope';
+    src: url('/content/dam/aemguidesDALP/fonts/manrope/Manrope-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Manrope';
+    src: url('/content/dam/aemguidesDALP/fonts/manrope/Manrope-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}

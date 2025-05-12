@@ -1,0 +1,146 @@
+@mixin light-theme {
+  --color-accent: #01EA57;
+  --color-primary: #0C1256;
+  --color-primary-white: #FFFFFF;
+  --color-secondry-white: #F2F2F2;
+  --color-natural-blue: #87A3FB;
+  --color-secondary: #E8F1FF;
+  --color-tertiary: #2C343B;
+  --color-neutral: #D8D8D8;
+  --color-link: #0F85EC;
+  --color-gray: #AEAEAE;
+  --color-gray-dark : #5F5F60;
+  --color-secondary-blue: #76A2EB;
+  --color-bg : #FFFFFF;
+  --color-border-light: #D8D8D8;
+  --color-content-bg:#E8F1FF; 
+  
+// codeblock 
+    --color-neutral-light: #EEEEEE;
+    --color-neutral-dark: #ddd;
+    // .theme-btn {
+    //   &::before {
+    //     content: "\f185";
+    //     content: url("/content/dam/aemguidesDALP/fsi/images/moon.png");
+    //   }
+    // }
+
+  --color-related-link:var(--color-gray-dark );
+}
+
+@mixin dark-theme {
+  --color-accent: #00FF99; // Lighter accent for visibility
+  --color-primary: #FFFFFF; // Darker primary background for better contrast
+  --color-primary-white: #000000;
+  --color-secondry-white: #F2F2F2;
+  --color-natural-blue: #87A3FB;
+  --color-secondary: #1F1F1F; // Slightly lighter than the primary background
+  --color-tertiary: #E0E0E0; // Lighter tertiary color for better readability
+  --color-neutral: #B0B0B0; // Lighter neutral for text
+  --color-link: #1E90FF; // Brighter blue for link visibility
+  --color-gray: #8C8C8C; // Lighter gray for subtle elements
+  --color-gray-dark: #F2F2F2;
+  --color-secondary-blue: #76A2EB;
+  --color-bg: #121212; // Dark background color
+  --color-border-light: #D8D8D8;
+  --color-content-bg: #8C8C8C;
+  --color-primary-dark:#0C1256;
+
+  // codeblock 
+  --color-neutral-light: #2A2A2A; // Darker light neutral for codeblocks
+  --color-neutral-dark: #3A3A3A; // Darker dark neutral for codeblocks
+  --color-related-link:var(--color-accent);
+  --color-on-accent:var(--color-primary);
+  --color-link: var(--color-accent);
+
+  --color-bg-2:var(--color-primary);
+  --color-primary-2: var(--color-bg);
+
+  .footer, .guides-footer{
+    background-color: var(--color-bg);
+  }
+  .footer_wrapper .footer_logo-container .footer_text {
+    color: var(--color-primary);
+  }
+  .footer_links-container .grid_item .footer_links-title{
+    color: var(--color-primary)!important;
+  }
+
+  
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f186"; // Keep the icon as it is
+  //   }
+  // }
+}
+
+.light {
+  @include light-theme();
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f185";
+  //     content: url("/content/dam/aemguidesDALP/fsi/images/moon.png");
+  //   }
+  // }
+}
+
+.dark {
+  @include dark-theme();
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f186" !important;
+  //   }
+  // }
+}
+
+// OS Default.
+// :root:not(.light):not(.dark) {
+//   @media (prefers-color-scheme: light) {
+//     @include light-theme;
+//   }
+
+//   @media (prefers-color-scheme: dark) {
+//     @include dark-theme;
+//   }
+// }
+
+.theme-btns{
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  .checkbox-label {
+    background-color: var( --color-primary);
+    width: 50px;
+    height: 24px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .checkbox-label .ball {
+    background-color: var(--color-bg);
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+  }
+  .fa-moon {
+    color: var(--color-accent);
+  }
+
+  .fa-sun {
+    color: var(--color-accent);
+  }
+
+  .checkbox:checked + .checkbox-label .ball {
+    transform: translateX(25px);
+  }
+}

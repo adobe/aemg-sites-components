@@ -1,0 +1,118 @@
+/*
+ *  Copyright 2022 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+ .cmp-guidesnavigation__group .cmp-guidesnavigation__item .toc-list-item {
+    display: flex;
+    height: fit-content;
+    /* min-height: 2rem; */
+    align-items: center;
+    /* margin: 0.5rem 0; */
+}
+
+
+.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active>.toc-list-item .item-child-toggle.hide-children,
+.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--inactive>.toc-list-item .item-child-toggle.hide-children {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_9111%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12%209C12%209.1309%2011.9742%209.26053%2011.924%209.38142C11.8738%209.50232%2011.8002%209.61212%2011.7075%209.7045L7.71596%2013.6945C7.62768%2013.7993%207.5188%2013.8848%207.39608%2013.9458C7.27336%2014.0068%207.13942%2014.0419%207.00258%2014.0489C6.86573%2014.0559%206.7289%2014.0348%206.60057%2013.9867C6.47224%2013.9387%206.35515%2013.8648%206.25658%2013.7696C6.158%2013.6744%206.08004%2013.56%206.02752%2013.4335C5.97501%2013.3069%205.94907%2013.1709%205.95131%2013.0339C5.95354%2012.8969%205.98392%2012.7618%206.04054%2012.637C6.09716%2012.5122%206.17882%2012.4004%206.28046%2012.3085L6.30496%2012.284L9.59046%209L6.30446%205.715C6.13453%205.52692%206.04237%205.28132%206.04662%205.02788C6.05086%204.77443%206.15119%204.53206%206.32732%204.34977C6.50345%204.16748%206.74223%204.05888%206.99538%204.04592C7.24853%204.03297%207.49715%204.11664%207.69096%204.28L7.71546%204.3045L11.707%208.2945C11.7999%208.38696%2011.8737%208.4969%2011.9239%208.61798C11.9742%208.73906%2012.0001%208.86889%2012%209Z%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_9111)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    display: inline-block;
+    margin-right: .25rem;
+    margin-left: .25rem;
+    flex-shrink: 0;
+}
+
+.cmp-guidesnavigation__group__group .cmp-guidesnavigation__group__item.cmp-guidesnavigation__group__item-no-children>.toc-list-item .item-child-toggle {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    display: inline-block;
+    margin-right: .25rem;
+    margin-left: .25rem;
+    display: none;
+}
+
+.dark .cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active > .toc-list-item .item-child-toggle.show-children,
+.dark .cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--inactive>.toc-list-item .item-child-toggle.show-children
+ {
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_2579%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12.2933%206.29299L9.00032%209.58592L5.70732%206.29299C5.51923%206.10828%205.26581%206.00532%205.0022%206.00651C4.73858%206.00771%204.4861%206.11296%204.2997%206.29936C4.11329%206.48577%204.00804%206.73825%204.00685%207.00186C4.00565%207.26548%204.10861%207.5189%204.29332%207.70699L8.29332%2011.707C8.48074%2011.8945%208.73497%2011.9999%209.00009%2012C9.26521%2012%209.5195%2011.8948%209.70701%2011.7074L13.7074%207.70699C13.8929%207.51907%2013.9966%207.26537%2013.9958%207.00127C13.995%206.73717%2013.8897%206.48413%2013.7029%206.29739C13.5162%206.11065%2013.2631%206.00538%2012.999%206.00455C12.7349%206.00373%2012.4812%206.10742%2012.2933%206.29299Z%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_2579)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+}
+
+.dark .cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active > .toc-list-item .item-child-toggle.hide-children,
+.dark .cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--inactive>.toc-list-item .item-child-toggle.hide-children
+{
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_9111%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12%209C12%209.1309%2011.9742%209.26053%2011.924%209.38142C11.8738%209.50232%2011.8002%209.61212%2011.7075%209.7045L7.71596%2013.6945C7.62768%2013.7993%207.5188%2013.8848%207.39608%2013.9458C7.27336%2014.0068%207.13942%2014.0419%207.00258%2014.0489C6.86573%2014.0559%206.7289%2014.0348%206.60057%2013.9867C6.47224%2013.9387%206.35515%2013.8648%206.25658%2013.7696C6.158%2013.6744%206.08004%2013.56%206.02752%2013.4335C5.97501%2013.3069%205.94907%2013.1709%205.95131%2013.0339C5.95354%2012.8969%205.98392%2012.7618%206.04054%2012.637C6.09716%2012.5122%206.17882%2012.4004%206.28046%2012.3085L6.30496%2012.284L9.59046%209L6.30446%205.715C6.13453%205.52692%206.04237%205.28132%206.04662%205.02788C6.05086%204.77443%206.15119%204.53206%206.32732%204.34977C6.50345%204.16748%206.74223%204.05888%206.99538%204.04592C7.24853%204.03297%207.49715%204.11664%207.69096%204.28L7.71546%204.3045L11.707%208.2945C11.7999%208.38696%2011.8737%208.4969%2011.9239%208.61798C11.9742%208.73906%2012.0001%208.86889%2012%209Z%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_9111)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+}
+
+
+.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--inactive>.toc-list-item .item-child-toggle.show-children, 
+.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active>.toc-list-item .item-child-toggle.show-children {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    
+    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_2579%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12.2933%206.29299L9.00032%209.58592L5.70732%206.29299C5.51923%206.10828%205.26581%206.00532%205.0022%206.00651C4.73858%206.00771%204.4861%206.11296%204.2997%206.29936C4.11329%206.48577%204.00804%206.73825%204.00685%207.00186C4.00565%207.26548%204.10861%207.5189%204.29332%207.70699L8.29332%2011.707C8.48074%2011.8945%208.73497%2011.9999%209.00009%2012C9.26521%2012%209.5195%2011.8948%209.70701%2011.7074L13.7074%207.70699C13.8929%207.51907%2013.9966%207.26537%2013.9958%207.00127C13.995%206.73717%2013.8897%206.48413%2013.7029%206.29739C13.5162%206.11065%2013.2631%206.00538%2012.999%206.00455C12.7349%206.00373%2012.4812%206.10742%2012.2933%206.29299Z%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_2579)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    display: inline-block;
+    margin-right: .25rem;
+    margin-left: .25rem;
+    flex-shrink: 0;
+}
+
+ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.show-children {
+    /* padding-left: 1.25rem; */
+}
+
+.cmp-guidesnavigation__item--level-0.cmp-guidesnavigation__item--active >ul.cmp-guidesnavigation__group, .cmp-guidesnavigation__item--level-1.cmp-guidesnavigation__item--active >ul.cmp-guidesnavigation__group, .cmp-guidesnavigation__item--level-2.cmp-guidesnavigation__item--active >ul.cmp-guidesnavigation__group {
+    display: block;
+}
+
+ul.cmp-guidesnavigation__group {
+    /* margin: 0 0 .75rem; */
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
+    display: none;
+    padding-left: 1rem;
+    /* padding-left: 1.25rem; */
+}
+
+.cmp-guidesnavigation__item.cmp-guidesnavigation__item-no-children a {
+    padding-left: .2rem;
+}
+
+ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
+    /* --tw-text-opacity: 1; */
+    /* color: rgba(31, 41, 55, var(--tw-text-opacity)); */
+    /* background-color: #0054b6; */
+    /* border-radius: .25rem; */
+    /* color: #fff; */
+}
+
+ul.cmp-guidesnavigation__group .toc-list-item a {
+    word-wrap: break-word;
+    overflow: auto;
+}

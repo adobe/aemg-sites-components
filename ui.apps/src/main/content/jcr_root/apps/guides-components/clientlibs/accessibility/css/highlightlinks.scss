@@ -1,0 +1,6 @@
+.accessibility-highlight {
+  a[href], a[href] > * {
+    background-color: black !important;
+    color: yellow !important;
+  }
+}

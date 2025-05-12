@@ -1,0 +1,408 @@
+@use "../../../utils/css/vars" as *;
+@use "../../global/css/themes" as *;
+
+.automotives-toc-banner {
+  max-width: 88%;
+  margin-left: auto;
+  margin-right: auto;
+
+  >.cmp-container {
+    display: flex;
+    padding: 60px 0px 0px 0px;
+
+    @media screen and (max-width: $screen-md) {
+      flex-direction: column;
+      gap: 16px;
+      padding: 37px 0px 28px 0px;
+
+    }
+    .text{
+      margin-right: auto;
+    }
+
+
+    .cmp-text {
+      h1 {
+        font-size: var(--text-5xl);
+        line-height: var(--text-5xl-lh);
+        font-family: var(--font-fam-primary);
+        font-weight: 400;
+        color: var(--color-primary);
+
+        @media screen and (max-width: $screen-md) {
+          font-size: var(--text-3xl);
+          line-height: var(--text-3xl-lh);
+          margin-bottom: 4px;
+        }
+      }
+
+      p {
+        font-size: var(--text-xs);
+        line-height: var(--text-xs-lh);
+        letter-spacing: 2px;
+        font-family: var(--font-fam-secondary);
+        font-weight: 350;
+        color: var(--color-primary);
+
+
+        b {
+          font-size: var(--text-xs);
+          line-height: var(--text-xs-lh);
+          letter-spacing: 2px;
+          font-weight: 700;
+          font-family: var(--font-fam-secondary);
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    .cover-img {
+      width: 76%;
+      padding-left: 20px;
+
+      @media screen and (max-width: $screen-md) {
+        width: unset;
+        padding-left: unset;
+      }
+      .cmp-image__image {
+        width: 100%;
+        @media screen and (max-width: $screen-md) {
+          // max-width: 327px;
+          max-height: 217px;
+        }
+      }
+    }
+  }
+}
+
+.download-manual-button {
+    padding-block: 16px;
+    border-top: 1px solid var(--color-neutral);
+    border-bottom: 1px solid var(--color-neutral);
+
+  >.cmp-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .pdf-download {
+      margin-right: auto;
+      // display: flex;
+      align-items: center;
+      // gap: 20px;
+      button {
+        padding: 11px 16px;
+        background-color: var(--color-accent);
+        border: none;
+        cursor: pointer;
+      }
+
+      .cmp-button__text {
+        font-size: var(--text-sm);
+        line-height: var(--text-sm-lh);
+        font-weight: 700;
+        margin-left: 8px;
+        font-family: var(--font-fam-secondary); 
+        color: var(--color-on-accent);
+      }
+    }
+    .pdf-download {
+      button::before {
+        color: var(--color-on-accent);
+      }
+    }
+    .bookmark {
+      button::before {
+        color: var(--color-accent);
+      }
+    }
+    .share {
+      button::before {
+        color: var(--color-accent);
+      }
+    }
+  }
+}
+
+.dark{
+  .download-manual-button {
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+    .pdf-download .cmp-button__text{
+      color: var(--color-accent-dark);
+    }
+    .pdf-download{
+      .cmp-button::before{
+        color: var(--color-accent-dark);
+      }
+    }
+    @media screen and (max-width: $screen-md) {
+      .pdf-download,.bookmark,.share{
+        .cmp-button::before{
+          color: var(--color-accent-dark);
+        }
+      }
+    }  
+  }
+}
+
+.release-date.text p{
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.text{
+  p{
+    font-size: var(--text-xs);
+    line-height: var(--text-xs-lh);
+    // letter-spacing: 2px;
+    font-family: var(--font-fam-secondary);
+    font-weight: 400;
+    color: var(--color-primary);
+    // text-transform: uppercase;
+    margin-bottom: 8px;
+
+    b{
+      font-weight: 700;
+    }
+  }
+  
+}
+#topic-title {
+  .cmp-title__text{
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl-lh);
+    font-family: var(--font-fam-primary);
+    font-weight: 400;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+}
+
+.topic-body{
+  margin-top: 25px;
+
+  >.cmp-container{
+    .cmp-text h2 {
+      font-size: var(--text-lg);
+      line-height: var(--text-lg-lh);
+      color: var(--color-primary);
+      font-family: var(--font-fam-secondary);
+      font-weight: 400;
+      margin-bottom: 16px;
+      margin-top: 25px;
+    }
+
+    .cmp-text .p{
+      font-size: var(--text-sm);
+      line-height: var(--text-sm-lh);
+      color: var(--color-primary);
+      font-family: var(--font-fam-secondary);
+      font-weight: 400;
+      margin-bottom: 16px;
+
+      b{
+        font-weight: 700;
+      }
+    }
+    .text{
+      .shortdesc{
+        font-size: var(--text-base);
+        line-height: var(--text-base-lh);
+        color: var(--color-primary);
+        font-family: var(--font-fam-secondary);
+        font-weight: 400;
+        margin-top: 16px;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--color-primary);
+      }
+    }
+  }
+}
+
+.mini-toc-main{
+
+  .minitoc-title{
+    font-size: var(--text-lg);
+    line-height: var(--text-lg-lh);
+    color: var(--color-primary);
+    font-family: var(--font-fam-secondary);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .minitoc-list{
+    .minitoc-level-2{
+      font-size: var(--text-sm);
+      line-height: var(--text-sm-lh);
+      color: var(--color-primary);
+      font-family: var(--font-fam-secondary);
+      font-weight: 400;
+      margin-bottom: 16px;
+
+    }
+  }
+}
+
+.breadcrumb{
+  ol{
+    margin-top: 30px;
+    margin-bottom: 0;
+
+    li{
+      a{
+        font-family: var(--font-fam-secondary);
+        font-size: var(--text-sm);
+        line-height: var(--text-sm-lh);
+        font-weight: 400;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+.breadcrumb ol li.cmp-breadcrumb__item--active{
+      font-family: var(--font-fam-secondary);
+      color: var(--color-accent);
+      font-size: var(--text-sm);
+      line-height: var(--text-sm-lh);
+      // font-weight: 400;
+      text-transform: capitalize;
+
+}
+.dark .breadcrumb ol li.cmp-breadcrumb__item--active{
+}
+
+.left-container .toc-search .cmp-form-text__text{
+    border-radius: 35px;
+    font-family: var(--font-fam-secondary);
+    font-weight: 400;
+    font-size: var(--text-sm);
+    line-height: var(--text-sm-lh);
+    color: var(--color-light-grey);
+
+}
+.left-container #toc-search-results {
+    border-radius: 35px;
+    font-family: var(--font-fam-secondary);
+    font-weight: 400;
+    font-size: var(--text-sm);
+    line-height: var(--text-sm-lh);
+    color: var(--color-light-grey);
+}
+.left-container .toc-search .cmp-form-text::before{
+  color: var(--color-accent);
+}
+
+.text{
+  .related-links{
+    .linkpool {
+      margin-top: 8px;
+      a{
+        // color: var(--color-accent);
+      }
+    }
+  }
+}
+.topic-container > .cmp-container{
+  padding-bottom: 218px;
+
+  @media screen and (max-width: $screen-md) {
+    padding-bottom: unset;
+  }
+}
+
+.left-container {
+  border-right: unset;
+  &>.cmp-container {
+    @media screen and (max-width: $screen-md) {
+      padding-top: unset;
+      padding-bottom: 28px;
+    }
+  }
+}
+.right-container{
+  border-left: unset;
+}
+
+.cmp-pager__next .next{
+  font-family: var(--font-fam-secondary);
+}
+.cmp-pager__prev .prev{
+  font-family: var(--font-fam-secondary);
+}
+.text .related-links .linkpool a{
+  margin-right: 8px;
+}
+
+.sharePopup-container{
+  >.cmp-container{
+    position: relative;
+  }
+  .popup.show{
+    top: 210px;
+  }
+}
+
+
+@media screen and (max-width: $screen-md) {
+  .download-manual-button.padding-bottom {
+    padding-bottom: 40px;
+  }
+  .download-manual-button > .cmp-container{
+    .pdf-download{
+      margin-right: unset;
+      .cmp-button{
+        order: 1;
+        .cmp-button__text{
+          display: none;
+        }
+      }
+    } 
+    .bookmark {
+      order: 2;
+    }
+    .share{
+      order: 3;
+    }
+    .time-to-read{
+      order: 4;
+      margin-left: auto;
+    }
+    .pdf-download,.bookmark,.share{
+      button {
+        width: 40px;
+        height: 40px;
+        padding: 11px 16px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background-color: var(--color-accent);
+        border: none;
+        cursor: pointer;
+        color: var(--color-on-accent);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &::before {
+          color: var(--color-on-accent);
+        }
+      }
+    }
+  }
+  .download-manual-button > .cmp-container .share {
+    margin-left: 8px;
+  }
+} 
+
+.left-container .toc-search .cmp-form-text__text{
+  &::placeholder{
+    opacity: 60%;
+  }
+}
+
+.dark .left-container .toc-search .cmp-form-text__text{
+  color: var(--color-on-accent);
+}
+
+
+
+

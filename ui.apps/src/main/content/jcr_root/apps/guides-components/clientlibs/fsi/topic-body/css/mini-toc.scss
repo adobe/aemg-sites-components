@@ -1,0 +1,36 @@
+.right-container{
+    &>.cmp-container{
+        font-size: var(--text-sm);
+        line-height: var(--text-sm-lh);
+        color: var(--color-primary);
+        font-family: var(--font-fam-primary);
+    }
+    .cmp-mini-toc{
+        padding-top: 10px;
+        .minitoc-title{
+            font-weight: 500;
+            line-height: var(--text-sm-lh);
+        }
+        .minitoc-list{
+            margin: unset;
+            .minitoc-level.selected::before{
+                display: none;
+            }
+            .minitoc-level.selected a{
+                font-weight: 500;
+            }
+            .minitoc-level:not(.selected) a{
+                opacity: 0.7;
+            }
+            .minitoc-level{
+                margin: unset;
+                padding-top: 16px;
+                a{
+                    text-decoration: none;
+                    font-size: var(--text-xs);
+                    line-height: var(--text-xs-lh);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,156 @@
+
+
+.restriction,
+.note.caution,
+.tip,
+.note.danger {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 8px 0px;
+  border-width: 2px;
+  // border-top: 1px solid #D8D8D8;
+  // border-bottom: 1px solid #D8D8D8;
+  border-left: unset;
+  background-color: unset;
+  margin: 45px 0px;
+  font-size: 12px;
+  font-family: var(--font-fam-secondary);
+}
+
+.note.danger {
+  margin: 20px 0px;
+}
+.note{
+  .prefix-content {
+    font-weight: bold;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-family: var(--font-fam-secondary);
+    border-top: 2px solid var(--color-note-dark);
+    // border-bottom: 2px solid var(--color-note-dark);
+    padding: 8px 0;
+  }
+}
+
+
+.note .prefix-content::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  display: block;
+  background-color: var(--color-note-light);
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.note.restriction .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/restriction.png");
+  background-size: 17px 17px;
+}
+
+.note.caution .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/caution.png");
+  background-size: 17px 17px;
+}
+
+.note.tip .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/tip.png");
+  background-size: 17px 17px;
+}
+
+.hazardstatement.warning,
+.hazardstatement.danger,
+.hazardstatement.notice {
+  // background-color: #FFFFFF;
+  border: none;
+  margin: 20px 0px;
+}
+
+.restriction.note.hazardstatement {
+  display: block;
+  border: none;
+  background: none;
+}
+
+.danger.note.hazardstatement,
+.caution.note.hazardstatement {
+  display: block;
+  border: unset;
+}
+
+.hazardstatement .prefix-content {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 8px 0px 8px 0px;
+  border-width: 2px;
+
+  &::before{
+    width: 40px;
+    height: 40px;
+  }
+  // border-top: 1px solid #D8D8D8;
+  // border-bottom: 1px solid #D8D8D8;
+}
+
+.note.danger .prefix-content::before,
+.hazardstatement.note.danger .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/danger.png");
+  background-size: 17px 17px;
+}
+
+.notice.hazardstatement .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/notice.png");
+  background-size: 17px 17px;
+  // background-repeat: no-repeat;
+  // border-radius: 10px;
+}
+
+.warning.hazardstatement .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/warning.png");
+  background-size: 17px 17px;
+  // background-repeat: no-repeat;
+}
+
+.caution.hazardstatement .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/caution.png");
+  background-size: 17px 17px;
+}
+
+.notice .prefix-content::before {
+  background-image: url("/content/dam/aemguidesDALP/common/notice.png");
+  background-size: 17px 17px;
+  width: 40px;
+  height: 40px;
+  // border-radius: 60%;
+}
+
+
+.hazardstatement .messagepanel {
+  list-style-type: disc;
+  margin-top: 16px;
+  padding-inline-start: 38px;
+  border-bottom: 2px solid var(--color-note-dark);
+  
+  .li {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+}
+
+.note:not(.hazardstatement){
+  border-top: 2px solid var(--color-note-dark);
+  border-bottom: 2px solid var(--color-note-dark);
+
+  .prefix-content {
+    border: unset;
+  }
+}

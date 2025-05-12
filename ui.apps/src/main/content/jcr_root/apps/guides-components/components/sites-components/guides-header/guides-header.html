@@ -1,0 +1,62 @@
+<header>
+
+        <div class="fsi-header-wrapper">
+
+            <div class="header-logo banner-img">
+                <img src="${properties.fileReference}" alt="logo">
+                <!-- <p>Logo</p> -->
+            </div>
+
+            <div class="navigation-menus">
+                <nav class="nav-items">
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Cards</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Insurance</a></li>
+                        <li><a href="#">Rewards & Benefits</a></li>
+                        <li><a href="#">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="navigation-right-menus">
+                <!-- <img src="images/fsi-search-icon.svg" alt="search-icon">
+                <img src="images/theme-icon.svg" alt="theme-change-icon"> -->    
+                <button class="global-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div class="search-container display-none">
+                    <div data-sly-resource="${'searchbar' @ resourceType='aemguidesDALP/components/sites-components/searchbar'}"></div>
+                </div>
+
+                <!-- <button class="theme-btn"></button> -->
+
+                <div class="theme-btns">
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <label for="checkbox" class="checkbox-label">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <span class="ball"></span>
+                    </label>
+                </div>
+
+                <div class="language-selector">
+                    <select>
+                        <option value="en" selected>EN</option>
+                        <option value="es">ES</option>
+                        <option value="fr">FR</option>
+                        <option value="de">DE</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="login_wrapper">
+                <!-- <button class="login-btn">Login</button> -->
+                <a class="hamburger_icon"><i class="fa fa-bars"></i></a>
+            </div>
+
+        </div>
+
+
+    </header>

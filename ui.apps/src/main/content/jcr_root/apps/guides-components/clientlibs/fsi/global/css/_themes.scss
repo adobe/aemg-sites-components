@@ -1,0 +1,160 @@
+@use "../../../utils/css/palette-generator" as *;
+
+@mixin light-theme {
+  --color-accent: #FDA14A;
+  --color-primary: #013220;
+  --color-on-primary: #FDA14A;
+  --color-primary-light: #E2F8F0;
+  --color-primary-faded: #4D7063;
+  --color-border: #ACACAC;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #2C343B;
+  --color-bg: #FFFFFF;
+  --color-related-link:var( --color-primary-faded);
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f185";
+  //     content: url("/content/dam/aemguidesDALP/fsi/images/moon.png");
+  //   }
+  // }
+
+  .dark\:bg-img-monochrome {
+    position: relative;
+    &>.cmp-container {
+      &::before {
+        display : none;
+      }
+    }
+  }
+}
+
+@mixin dark-theme {
+  --color-bg: #1a1b26;
+  --color-primary: #AFB8E1;
+  --color-primary-faded: #AFB8E1;
+  --color-accent: #FDA14A;
+  --color-on-primary: #1a1b26;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #AFB8E1;
+  --color-primary-light: #1a1b26;
+  --color-border: #ACACAC;
+  --color-primary2 :#292e42;
+  --color-on-accent:#FDA14A;
+  --color-link:#FDA14A;
+  --color-related-link:var(--color-accent);
+  --color-bg-2:#FFFFFF;
+  --color-primary-2:#013220;
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f186";
+  //   }
+  // }
+
+  .dark\:bg-img-monochrome {
+    position: relative;
+    &>.cmp-container {
+      &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        filter: grayscale(100%);
+        backdrop-filter: invert(1);
+      }
+    }
+  }
+  .fsi-banner-wrapper > .cmp-container h1.cmp-title__text,.fsi-banner-wrapper > .cmp-container .text{
+    backdrop-filter: blur(1px);
+  }
+}
+
+.light {
+  @include light-theme();
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f185";
+  //     content: url("/content/dam/aemguidesDALP/fsi/images/moon.png");
+  //   }
+  // }
+
+
+ .dark\:bg-img-monochrome > .cmp-container::before{
+  display: none !important;
+ }
+
+}
+
+.dark {
+  @include dark-theme();
+
+  // .theme-btn {
+  //   &::before {
+  //     content: "\f186";
+
+  //   }
+  // }
+  .dark\:bg-img-monochrome > .cmp-container::before{
+    display: block !important;
+  }
+  .theme-btns .fa-moon {
+    color: var(--color-bg);
+  }
+}
+
+// OS Default.
+// :root:not(.light):not(.dark) {
+//   @media (prefers-color-scheme: light) {
+//     @include light-theme;
+//   }
+
+//   @media (prefers-color-scheme: dark) {
+//     @include dark-theme;
+//   }
+// }
+
+
+.theme-btns{
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+  .checkbox-label {
+    background-color: var( --color-primary);
+    width: 50px;
+    height: 24px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .checkbox-label .ball {
+    background-color: var(--color-bg);
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+  }
+  .fa-moon {
+    color: var(--color-accent);
+  }
+
+  .fa-sun {
+    color: var(--color-accent);
+  }
+
+  .checkbox:checked + .checkbox-label .ball {
+    transform: translateX(25px);
+  }
+}

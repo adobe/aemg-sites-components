@@ -1,0 +1,170 @@
+@use "../../../utils/css/vars" as *;
+// Description and title styles
+.card-upper-discription-cont {
+  .cmp-text {
+    color: var(--color-primary);
+    p:first-child {
+      font-family: Manrope;
+      font-weight: 400;
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl-lh);
+      letter-spacing: 0px;
+      margin-bottom: 8px;
+      margin-top: 64px;
+    }
+
+    p:last-child {
+      font-family: Manrope;
+      font-weight: 400;
+      font-size: var(--text-sm);
+      line-height: var(--text-sm-lh);
+      letter-spacing: 0px;
+      margin-bottom: 32px;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .card-upper-discription-cont {
+    padding: 0px 24px;
+    .cmp-text {
+      p:first-child {
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: var(--text-2xl);
+        line-height: var(--text-2xl-lh);
+        letter-spacing: 0px;
+        margin-bottom: 8px;
+        margin-top: 18px;
+      }
+    }
+  }
+}
+.leveloneprops.\.toc-list-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 5pc;
+
+  .guide-item {
+    a {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: var(--color-primary);
+      width: 400px;
+      max-height: 26pc;
+      padding: 40px 44px 40px 40px;
+      box-sizing: border-box;
+      height: 100%;
+      img {
+        margin-bottom: 48px;
+        width: 40px;
+        height: 40px;
+      }
+      h3 {
+        margin-bottom: 16px;
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: var(--text-2xl);
+        line-height: var(--text-2xl-lh);
+        letter-spacing: 0px;
+        color: #ffffff;
+        margin-top: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 70px;
+      }
+      p {
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: var(--text-xs);
+        line-height: var(--text-xs-lh);
+        letter-spacing: 0px;
+        color: #ffffff;
+        flex-grow: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 40px;
+      }
+      button {
+        padding-top: 10px;
+        padding-right: 24px;
+        padding-bottom: 10px;
+        padding-left: 24px;
+        border-radius: 76px;
+        background: #ffffff;
+        color: #013220;
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: var(--text-sm);
+        line-height: var(--text-sm-lh);
+        letter-spacing: 0px;
+        text-align: center;
+        text-decoration: none;
+        width: fit-content;
+        border: none;
+        // margin-top: 48px;
+        margin-top: auto;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.accessibility-line-height .leveloneprops.\.toc-list-meta .guide-item a h3 {
+  -webkit-line-clamp: 1;
+}
+
+@media screen and (max-width: $screen-md) {
+  .leveloneprops.\.toc-list-meta {
+    margin: 0px 24px 64px 24px;
+    row-gap: 32px;
+    justify-content: center;
+
+    .guide-item {
+      max-width: 327px;
+      width: 100%;
+      a {
+        max-width: 327px;
+        max-height: 373px;
+        padding: 33px 24px;
+        width: 100%;
+        height: 100%;
+        h3 {
+          font-size: var(--text-xl);
+          line-height: var(--text-xl-lh);
+          // overflow: hidden;
+          // height: 55px;
+        }
+        p {
+          font-size: var(--text-sm);
+          line-height: var(--text-sm-lh);
+          // flex-grow: unset;
+          overflow: hidden;
+          // height: 100px;
+          margin-bottom: 30px;
+        }
+        img {
+          margin-bottom: 24px;
+          width: 28px;
+          height: 36px;
+        }
+        button {
+          margin-top: 24px;
+        }
+      }
+    }
+  }
+}
+
+// Media query for screens with a max width of 768px
+
+.dark .leveloneprops.\.toc-list-meta .guide-item a{
+  background: var(--color-primary2);
+}
