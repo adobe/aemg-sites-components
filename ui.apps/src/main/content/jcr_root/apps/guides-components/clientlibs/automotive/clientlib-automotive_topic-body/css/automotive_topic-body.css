@@ -1,0 +1,65 @@
+#topic-title > .cmp-title__text {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-lh);
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+.topic-body > .cmp-container {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  color: var(--color-primary);
+}
+
+table {
+  margin: 30px 0;
+}
+table caption.title {
+  padding-bottom: 20px;
+  font-weight: 700;
+}
+table thead {
+  background-color: var(--color-content-bg3);
+  text-align: left;
+}
+table thead tr {
+  border: 1px solid var(--color-bg2);
+}
+table thead tr th {
+  padding: 12px;
+  border: 1px solid var(--color-bg2);
+  color: var(--color-bg);
+}
+table tbody tr {
+  border: 1px solid var(--color-bg2);
+}
+table tbody tr td {
+  padding: 15px;
+  border: 1px solid var(--color-bg2);
+}
+
+.dark thead tr,
+.dark thead tr th,
+.dark tbody tr,
+.dark tbody tr td {
+  border: 1px solid var(--color-on-accent);
+}
+
+.dark thead tr th {
+  color: var(--color-on-accent);
+}
+
+.dark .topic-body a.xref {
+  color: var(--color-link);
+}
+
+.topic-body .table {
+  overflow: auto;
+}
+.topic-body .table::-webkit-scrollbar {
+  display: none;
+}
+
+.time-to-read .cmp-text p {
+  margin-bottom: unset;
+}

@@ -1,0 +1,154 @@
+.fsi-banner-wrapper > .cmp-container {
+  height: 491px;
+  border-top: 1px solid var(--color-primary);
+}
+@media screen and (max-width: 769px) {
+  .fsi-banner-wrapper > .cmp-container {
+    height: 239px;
+    background-size: 100% 100% !important;
+    border-top: unset;
+  }
+}
+.fsi-banner-wrapper > .cmp-container h1.cmp-title__text {
+  font-size: var(--text-5xl);
+  line-height: var(--text-5xl-lh);
+  font-weight: 400;
+  font-family: "Manrope";
+  color: var(--color-primary);
+  width: 292px;
+  margin-bottom: 8px;
+}
+@media screen and (max-width: 769px) {
+  .fsi-banner-wrapper > .cmp-container h1.cmp-title__text {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl-lh);
+    width: 250px;
+  }
+}
+.fsi-banner-wrapper > .cmp-container .cmp-text p {
+  font-size: var(--text-2x);
+  line-height: var(--text-2xl-lh);
+  font-weight: 400;
+  font-family: "Manrope";
+  color: var(--color-primary);
+}
+@media screen and (max-width: 769px) {
+  .fsi-banner-wrapper > .cmp-container .cmp-text p {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl-lh);
+  }
+}
+.fsi-banner-wrapper > .cmp-container .title {
+  padding-top: 107px;
+  padding-left: 88px;
+}
+@media screen and (max-width: 769px) {
+  .fsi-banner-wrapper > .cmp-container .title {
+    padding-left: 24px;
+    padding-top: 42px;
+  }
+}
+.fsi-banner-wrapper > .cmp-container .text {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-lh);
+  letter-spacing: 0px;
+  color: var(--color-primary);
+  padding-left: 88px;
+}
+@media screen and (max-width: 769px) {
+  .fsi-banner-wrapper > .cmp-container .text {
+    padding-left: 24px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .box-container {
+    padding-inline: unset !important;
+  }
+}
+
+.objectives-text-wrapper {
+  padding: 48px 0px 48px 0px;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper {
+    padding: 46px 24px 46px 24px;
+  }
+}
+.objectives-text-wrapper > .cmp-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 140px;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper > .cmp-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 40px;
+  }
+}
+.objectives-text-wrapper > .cmp-container .objective-text-left {
+  width: 50%;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper > .cmp-container .objective-text-left {
+    width: 100%;
+  }
+}
+.objectives-text-wrapper > .cmp-container .objective-text-left .cmp-text p {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-lh);
+  font-weight: 400;
+  font-family: "Manrope";
+  color: var(--color-primary);
+}
+.objectives-text-wrapper > .cmp-container .objective-text-left .cmp-text p > a {
+  font-family: Manrope;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  line-height: var(--text-lg-lh);
+  letter-spacing: 0%;
+  text-decoration: underline;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper > .cmp-container .objective-text-left .cmp-text p > a {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl-lh);
+  }
+}
+.objectives-text-wrapper > .cmp-container .objective-text-right {
+  width: 50%;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper > .cmp-container .objective-text-right {
+    width: 100%;
+  }
+}
+.objectives-text-wrapper > .cmp-container .objective-text-right .cmp-text h3 {
+  font-size: var(--text-xl);
+  line-height: var(--text-xl-lh);
+  font-weight: 700;
+  font-family: "Manrope";
+  color: var(--color-primary);
+  margin-bottom: 24px;
+}
+@media screen and (max-width: 769px) {
+  .objectives-text-wrapper > .cmp-container .objective-text-right .cmp-text h3 {
+    font-size: var(--text-base);
+    line-height: var(--text-base-lh);
+    margin-bottom: 12px;
+  }
+}
+.objectives-text-wrapper > .cmp-container .objective-text-right .cmp-text ul li {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  font-weight: 400;
+  font-family: "Manrope";
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
