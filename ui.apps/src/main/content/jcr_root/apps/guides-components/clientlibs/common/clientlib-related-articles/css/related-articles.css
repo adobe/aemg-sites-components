@@ -1,0 +1,28 @@
+.relatedarticles {
+  color: var(--color-primary);
+  margin-bottom: 40px;
+}
+.relatedarticles .cmp-related-articles__title {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg-lh);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.relatedarticles .cmp-related-articles__list {
+  list-style: none;
+}
+.relatedarticles .cmp-related-articles__list .cmp-related-articles__item {
+  margin-bottom: 16px;
+  margin-left: 0;
+}
+.relatedarticles .cmp-related-articles__list .cmp-related-articles__item:last-child {
+  margin-bottom: 0;
+}
+.relatedarticles .cmp-related-articles__list .cmp-related-articles__item .cmp-related-articles__link {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  font-weight: 400;
+  text-decoration: underline;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+}

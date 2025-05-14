@@ -1,0 +1,167 @@
+.card-upper-discription-cont .cmp-text {
+  color: var(--color-primary);
+}
+.card-upper-discription-cont .cmp-text p:first-child {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-3xl);
+  line-height: var(--text-3xl-lh);
+  letter-spacing: 0px;
+  margin-bottom: 8px;
+  margin-top: 64px;
+}
+.card-upper-discription-cont .cmp-text p:last-child {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  letter-spacing: 0px;
+  margin-bottom: 32px;
+}
+
+@media screen and (max-width: 768px) {
+  .card-upper-discription-cont {
+    padding: 0px 24px;
+  }
+  .card-upper-discription-cont .cmp-text p:first-child {
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl-lh);
+    letter-spacing: 0px;
+    margin-bottom: 8px;
+    margin-top: 18px;
+  }
+}
+.leveloneprops.\.toc-list-meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 5pc;
+}
+.leveloneprops.\.toc-list-meta .guide-item a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-decoration: none;
+  background: var(--color-primary);
+  width: 400px;
+  max-height: 26pc;
+  padding: 40px 44px 40px 40px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 100%;
+}
+.leveloneprops.\.toc-list-meta .guide-item a img {
+  margin-bottom: 48px;
+  width: 40px;
+  height: 40px;
+}
+.leveloneprops.\.toc-list-meta .guide-item a h3 {
+  margin-bottom: 16px;
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-lh);
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin-top: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 70px;
+}
+.leveloneprops.\.toc-list-meta .guide-item a p {
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-xs);
+  line-height: var(--text-xs-lh);
+  letter-spacing: 0px;
+  color: #ffffff;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 40px;
+}
+.leveloneprops.\.toc-list-meta .guide-item a button {
+  padding-top: 10px;
+  padding-right: 24px;
+  padding-bottom: 10px;
+  padding-left: 24px;
+  border-radius: 76px;
+  background: #ffffff;
+  color: #013220;
+  font-family: Manrope;
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  letter-spacing: 0px;
+  text-align: center;
+  text-decoration: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: none;
+  margin-top: auto;
+  cursor: pointer;
+}
+
+.accessibility-line-height .leveloneprops.\.toc-list-meta .guide-item a h3 {
+  -webkit-line-clamp: 1;
+}
+
+@media screen and (max-width: 769px) {
+  .leveloneprops.\.toc-list-meta {
+    margin: 0px 24px 64px 24px;
+    row-gap: 32px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .leveloneprops.\.toc-list-meta .guide-item {
+    max-width: 327px;
+    width: 100%;
+  }
+  .leveloneprops.\.toc-list-meta .guide-item a {
+    max-width: 327px;
+    max-height: 373px;
+    padding: 33px 24px;
+    width: 100%;
+    height: 100%;
+  }
+  .leveloneprops.\.toc-list-meta .guide-item a h3 {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl-lh);
+  }
+  .leveloneprops.\.toc-list-meta .guide-item a p {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm-lh);
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  .leveloneprops.\.toc-list-meta .guide-item a img {
+    margin-bottom: 24px;
+    width: 28px;
+    height: 36px;
+  }
+  .leveloneprops.\.toc-list-meta .guide-item a button {
+    margin-top: 24px;
+  }
+}
+.dark .leveloneprops.\.toc-list-meta .guide-item a {
+  background: var(--color-primary2);
+}

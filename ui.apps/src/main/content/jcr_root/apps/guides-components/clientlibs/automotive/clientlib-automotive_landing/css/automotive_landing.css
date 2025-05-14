@@ -1,0 +1,196 @@
+.hero_banner .cmp-container {
+  min-height: 560px;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat;
+}
+
+.hero_text .cmp-container {
+  padding-top: 170px;
+  padding-left: 88px;
+  width: 33%;
+  background-image: unset;
+}
+.hero_text .cmp-container .cmp-title h1 {
+  margin: 0;
+  font-size: var(--text-5xl);
+  line-height: var(--text-5xl-lh);
+  font-weight: 400;
+  color: var(--color-bg);
+  font-family: var(--font-fam-primary);
+}
+.hero_text .cmp-container .cmp-text p {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--text-lg-lh);
+  font-weight: 400;
+  font-family: var(--font-fam-secondary);
+  color: var(--color-bg);
+  padding-top: 4px;
+}
+
+@media screen and (min-width: 360px) and (max-width: 992px) {
+  .hero_text .cmp-container {
+    padding-top: 19px;
+    padding-left: 36px;
+    width: 75%;
+    background-image: unset;
+  }
+  .hero_text .cmp-container .cmp-title h1 {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl-lh);
+  }
+  .hero_text .cmp-container .cmp-text p {
+    font-size: var(--text-sm);
+    line-height: var(--text-sm-lh);
+  }
+}
+@media screen and (max-width: 769px) {
+  .hero_banner .cmp-container {
+    min-height: 285px;
+    background-size: 210% 115% !important;
+    background-position-x: -180px;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 769px) {
+  .hero_banner .cmp-container {
+    background-size: 164% 115% !important;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .hero_banner .cmp-container {
+    min-height: 350px;
+    background-size: 100% 100% !important;
+  }
+  .hero_text .cmp-container {
+    padding-top: 55px;
+    width: 45%;
+  }
+}
+.dark .hero_text .cmp-container .cmp-title h1,
+.dark .hero_text .cmp-container .cmp-text p {
+  color: var(--color-primary);
+}
+.content_container {
+  padding: 70px 0 180px;
+  max-width: 88%;
+  margin: 0 auto;
+}
+
+.vehicles_text_wrapper .cmp-text h2 {
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl-lh);
+  font-weight: 400;
+  color: var(--color-primary);
+  font-family: var(--font-fam-primary);
+}
+.vehicles_text_wrapper .cmp-text p {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  font-weight: 400;
+  color: #2C343B;
+  margin-top: 4px;
+  font-family: var(--font-fam-secondary);
+}
+
+.vehicles_list .cmp-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-column-gap: 32px;
+     -moz-column-gap: 32px;
+          column-gap: 32px;
+  row-gap: 48px;
+  list-style: none;
+}
+.vehicles_list .cmp-div .guide-item {
+  margin: 0;
+  padding: 49px 16px;
+  border: 1px solid #D8D8D8;
+  border-radius: 4px;
+  max-width: 292px;
+  width: 100%;
+  position: relative;
+}
+.vehicles_list .cmp-div .guide-item a {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+}
+.vehicles_list .cmp-div .guide-item a .cmp-teaser__title {
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+  font-weight: 400;
+  font-family: var(--font-fam-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+  word-break: break-word;
+}
+.vehicles_list .cmp-div .guide-item a .vehicle-type-label {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: var(--text-3xs);
+  line-height: var(--text-3xs-lh);
+  padding: 6px 16px 4px;
+  color: white;
+  background-color: #2C343B;
+  border-radius: 64px;
+}
+@media screen and (max-width: 769px) {
+  .vehicles_list .cmp-div .guide-item a .vehicle-type-label {
+    top: 8px;
+    right: 6px;
+  }
+}
+.vehicles_list .cmp-div .guide-item a .cmp-teaser__image {
+  width: 252px;
+  height: 112px;
+}
+.vehicles_list .cmp-div .guide-item a .cmp-teaser__image img {
+  width: 100%;
+  height: 112px;
+}
+
+@media screen and (max-width: 768px) {
+  .content_container {
+    padding: 55px 0 138px;
+  }
+  .vehicles_list .cmp-div {
+    -webkit-column-gap: 16px;
+       -moz-column-gap: 16px;
+            column-gap: 16px;
+    row-gap: 24px;
+  }
+  .vehicles_list .cmp-div .guide-item {
+    max-width: 46%;
+    padding: 47px 16px 17px 15px;
+  }
+  .vehicles_list .cmp-div .guide-item a {
+    gap: 24px;
+  }
+  .vehicles_list .cmp-div .guide-item a .cmp-teaser__title {
+    font-size: var(--text-base);
+    line-height: var(--text-base-lh);
+  }
+  .vehicles_list .cmp-div .guide-item a .cmp-teaser__image {
+    width: 125px;
+    height: 52px;
+  }
+  .vehicles_list .cmp-div .guide-item a .cmp-teaser__image img {
+    height: 52px;
+  }
+}
+.dark .vehicles_text_wrapper .cmp-text p {
+  color: var(--color-primary);
+}
