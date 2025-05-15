@@ -30,7 +30,7 @@ import java.util.*;
         extensions = {"json"}
 )
 public class LevelOnePagePropsImpl extends AbstractComponentImpl implements LevelOnePageProps {
-    protected static final String RESOURCE_V1 = "aemguidesDALP/components/sites-components/leveloneprops";
+    protected static final String RESOURCE_V1 = "guides-components/components/sites-components/leveloneprops";
     private static final Logger logger = LoggerFactory.getLogger(LevelOnePagePropsImpl.class);
 
     @Self
