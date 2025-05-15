@@ -2,5 +2,5 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Component"
     jcr:title="Vehicle Product Category"
-    sling:resourceSuperType="aemguidesDALP/components/sites-components/singleproplist"
+    sling:resourceSuperType="guides-components/components/sites-components/singleproplist"
     componentGroup="AEM Guides DALP - Content"/>
