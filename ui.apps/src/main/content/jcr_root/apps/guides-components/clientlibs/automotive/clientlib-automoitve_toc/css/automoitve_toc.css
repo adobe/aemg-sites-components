@@ -1,0 +1,77 @@
+.left-container .cmp-guides-navigation {
+  padding-top: 40px;
+}
+
+.cmp-guides-navigation .guides-navigation {
+  color: var(--color-primary);
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .toc-list-item {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .toc-list-item span {
+  cursor: pointer;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .toc-list-item a {
+  margin-right: auto;
+  text-transform: capitalize;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group li.cmp-guidesnavigation__item--active.cmp-guidesnavigation__item-level-0 > .toc-list-item {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group li.cmp-nav-item-selected > .toc-list-item {
+  font-weight: 700;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-0 {
+  border-bottom: 1px solid var(--color-neutral);
+  padding-left: var(--toc-level-0-indent);
+  font-size: var(--text-base);
+  line-height: var(--text-base-lh);
+  padding-top: 24px;
+  padding-bottom: 8px;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-0:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-1 {
+  padding-left: var(--toc-level-1-indent);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm-lh);
+  color: var(--color-primary);
+  margin-block: 4px;
+  padding-block: 4px;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-1:first-child {
+  margin-top: 8px;
+}
+.cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-2, .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-3, .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-4, .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-5 {
+  padding-left: var(--toc-level-2-indent);
+  font-size: var(--text-xs);
+  line-height: var(--text-xs-lh);
+  margin-top: 4px;
+  padding-block: 4px;
+  color: var(--color-primary-70);
+}
+.cmp-guides-navigation .guides-navigation ul {
+  list-style: none;
+  padding: 0;
+}
+.cmp-guides-navigation .guides-navigation li {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+.cmp-guides-navigation .guides-navigation a {
+  text-decoration: none;
+}
+
+.dark .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .cmp-guidesnavigation__item-level-0 {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.dark .cmp-guides-navigation .guides-navigation ul.cmp-guidesnavigation__group .toc-list-item a {
+  color: var(--color-on-accent);
+}
