@@ -65,10 +65,10 @@ public class LevelOnePagePropsImpl extends AbstractComponentImpl implements Leve
 
             while (childNodes.hasNext()) {
                 Node childNode = childNodes.nextNode();
-                if(childNode.getProperty("jcr:primaryType").getString().equals("cq:Page")) {
+                if (childNode.getProperty("jcr:primaryType").getString().equals("cq:Page")) {
 
                     Map<String, String> propMap = new HashMap<>();
-                    for(String prop: requiredProps) {
+                    for (String prop : requiredProps) {
                         String propValue = childNode.getNode("jcr:content").hasProperty(prop) ? childNode.getNode("jcr:content").getProperty(prop).getString() : "";
                         propMap.put(prop, propValue);
                     }
@@ -82,7 +82,11 @@ public class LevelOnePagePropsImpl extends AbstractComponentImpl implements Leve
 
             levelOnePagePropsList.add(propsJson);
 
-            return  levelOnePagePropsList;
+            return levelOnePagePropsList;
+        } catch (PathNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ValueFormatException e) {
+            throw new RuntimeException(e);
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
         }

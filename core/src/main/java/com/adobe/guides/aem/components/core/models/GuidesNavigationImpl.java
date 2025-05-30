@@ -19,6 +19,7 @@ package com.adobe.guides.aem.components.core.models;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 import javax.jcr.Binary;
@@ -95,38 +96,42 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             if (request != null) {
                 i18n = new I18n(request);
             }
-            Session session = request.getResourceResolver().adaptTo(Session.class);
-            String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
-            logger.info("AEMSITE: sitePath: {}", sitePath);
-            Node node = session.getNode(sitePath + "/jcr:content");
-            System.out.println(node.getPath());
-            logger.info("AEMSITE: nodePath: {}", node.getPath());
+            if(Objects.nonNull(request))
+            {
+                Session session = request.getResourceResolver().adaptTo(Session.class);
+                String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+                logger.info("AEMSITE: sitePath: {}", sitePath);
+                Node node = session.getNode(sitePath + "/jcr:content");
+                System.out.println(node.getPath());
+                logger.info("AEMSITE: nodePath: {}", node.getPath());
 
-            Binary tocBinary = node.getProperty("guides-navigation").getBinary();
-            Binary tocIndexBinary = node.getProperty("guides-navigation-index").getBinary();
-            String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
-            String tocIndexBinaryString = IOUtils.toString(tocIndexBinary.getStream(), CharEncoding.UTF_8);
-            limit = properties.get(LIMIT, LIMIT_DEFAULT_VALUE);
-            loadMoreText = translate(properties.get(LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
-            logger.info("AEMSITE: tocBinaryString: {}", tocBinaryString);
-            logger.info("AEMSITE: tocIndexBinaryString: {}", tocIndexBinaryString);
-            logger.info("AEMSITE: toc rendering limit: {}", limit);
-            logger.info("AEMSITE: toc load more text: {}", loadMoreText);
+                Binary tocBinary = node.getProperty("guides-navigation").getBinary();
+                Binary tocIndexBinary = node.getProperty("guides-navigation-index").getBinary();
+                String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
+                String tocIndexBinaryString = IOUtils.toString(tocIndexBinary.getStream(), CharEncoding.UTF_8);
+                limit = properties.get(LIMIT, LIMIT_DEFAULT_VALUE);
+                loadMoreText = translate(properties.get(LOAD_MORE_TEXT, LOAD_MORE_TEXT_DEFAULT_VALUE));
+                logger.info("AEMSITE: tocBinaryString: {}", tocBinaryString);
+                logger.info("AEMSITE: tocIndexBinaryString: {}", tocIndexBinaryString);
+                logger.info("AEMSITE: toc rendering limit: {}", limit);
+                logger.info("AEMSITE: toc load more text: {}", loadMoreText);
 
-            guidesAllowedPages = Utils.getPagesAsJson(session, this.getCategoryPath());
-            logger.info("AEMSITE: guidesAllowedPages: {}", guidesAllowedPages);
-            guidesNavigationIndex = tocIndexBinaryString;
-            try {
-                String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
-                String relativePathUnixPath = FilenameUtils.separatorsToUnix(relativePath);
-                currentPageRelativeUrl = relativePathUnixPath;
-            } catch (Exception e) {
-                logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
+                guidesAllowedPages = Utils.getPagesAsJson(session, this.getCategoryPath());
+                logger.info("AEMSITE: guidesAllowedPages: {}", guidesAllowedPages);
+                guidesNavigationIndex = tocIndexBinaryString;
+                try {
+                    String relativePath = Paths.get(this.getCategoryPath()).relativize(Paths.get(currentPage.getPath())).toString();
+                    String relativePathUnixPath = FilenameUtils.separatorsToUnix(relativePath);
+                    currentPageRelativeUrl = relativePathUnixPath;
+                } catch (Exception e) {
+                    logger.warn("AEMSITE: warning: didnt find {} in tocIndexJson", currentPage.getPath());
+                }
+                guidesNavigation = new ArrayList<>();
+                JSONObject toc = new JSONObject(tocBinaryString);
+                Utils.updateVisibility(toc, new JSONObject(guidesAllowedPages), this.getCategoryPath());
+                guidesNavigation.add(toc.toString());
             }
-            guidesNavigation = new ArrayList<>();
-            JSONObject toc = new JSONObject(tocBinaryString);
-            Utils.updateVisibility(toc, new JSONObject(guidesAllowedPages), this.getCategoryPath());
-            guidesNavigation.add(toc.toString());
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             logger.error("AEMSITE: Error: {}", e.getMessage());

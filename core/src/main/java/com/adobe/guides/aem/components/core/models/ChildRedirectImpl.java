@@ -42,6 +42,7 @@ import javax.jcr.Session;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Model(adaptables = SlingHttpServletRequest.class,
        adapters = { ChildRedirect.class, ComponentExporter.class },
@@ -105,13 +106,13 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         LOGGER.info("Pager: flatten toc {}", flat);
         redirectUrl = flat.get(0).getUrl();
         if (redirectUrl != null) {
-            LOGGER.info("Redirecting ({}) to {}", 301, redirectUrl);
+            LOGGER.info("Redirecting ({}) to {}", Optional.of(301), redirectUrl);
             response.sendRedirect(categoryPath + redirectUrl);
         }
     }
 
     public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
-        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(true));
+        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(Optional.of(true)));
         boolean hasDisplayName =  toc.has("displayName");
         if (toc.has("outputPath") && isVisible && hasDisplayName) {
             String outputPath = toc.getString("outputPath");
