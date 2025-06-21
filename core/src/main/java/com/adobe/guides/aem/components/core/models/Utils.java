@@ -349,15 +349,16 @@ public class Utils {
     }
 
     public static String getCategoryPathFromPage(Page page) {
-        boolean isCategoryPage = false;
-        while(page != null && !isCategoryPage) {
-            if (page.getContentResource().getValueMap().containsKey("id") && page.getContentResource().getValueMap().get("id", String.class).equals(CATEGORY_PAGE_ID)) {
+        while (page != null) {
+            if (page.getContentResource().getValueMap().containsKey("id") &&
+                    CATEGORY_PAGE_ID.equals(page.getContentResource().getValueMap().get("id", String.class))) {
+                // Found the category page
                 break;
             } else {
                 page = page.getParent();
             }
         }
-        if(page == null) {
+        if (page == null) {
             logger.warn("AEMSITE: Cannot find a page with id : category-page");
             return CONTENT_ROOT_PATH;
         }
@@ -367,6 +368,7 @@ public class Utils {
         }
         return categoryPath;
     }
+
 
     public static void updateVisibility(JSONObject mainJson, JSONObject AclJson, String basePath) throws JSONException {
         if (mainJson.has("outputPath")) {

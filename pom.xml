@@ -45,7 +45,7 @@
         <bnd.version>5.1.2</bnd.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aem.sdk.api>2021.5.5343.20210524T070738Z-210527</aem.sdk.api>
+       <aem.sdk.api>2021.10.5940.20211013T233531Z-210900</aem.sdk.api>
         <componentGroupName>Guides Components</componentGroupName>
         <core.wcm.components.version>2.16.4</core.wcm.components.version>
         <uber.jar.version>6.4.4</uber.jar.version>

@@ -1,0 +1,224 @@
+<div class="magnifier" id="magnifier">
+  <span id="magnifiedText"></span>
+</div>
+<div class="overlay-main" id="overlay-off"></div>
+<div class="main-body-container" id="content-to-pdf">
+   
+<!-- Accessibility Icon-->
+<img
+  src="/content/dam/aemguidesDALP/common/accessability.png"
+  alt="Accessibility Menu"
+  id="accessibility-icon"
+  class="accessibility-icon"
+/>
+
+<!-- Accessibility Menu -->
+<div class="accessibility-menu hidden " id="accessibility-menu">
+  <div class="menu-header">
+    <h3>Accessibility Menu</h3>
+    <button id="accessibility-reset">
+      <i class="fa-solid fa-arrow-rotate-left"></i>
+    </button>
+    <button class="close-btn">&times;</button>
+  </div>
+  <div class="menu-content">
+    <div class="menu-content-wrapper">
+      <div class="menu-option-container" id="generate-pdf-btn" style="display: none;">
+        <h4>Download As Pdf</h4>
+      </div>
+      <div class="menu-option-container" id="generate-qr-btn" style="display: none;">
+        <h4>Download QR Code</h4>
+        <!-- <div id="qrCodeContainer"></div> -->
+      </div>
+      <div class="menu-option-container" id="log-shortened-url-btn" style="display: none;">
+        <h4>Get Shortened URL</h4>
+      </div>
+      <div class="menu-option-container" id="highlight-links-btn">
+        <h4>Highlight Links</h4>
+      </div>
+      <div class="menu-option-container" id="letter-spacing-btn">
+        <h4>Text Spacing</h4>
+      </div>
+      <div class="menu-option-container" id="line-height-btn">
+        <h4>Line Height</h4>
+      </div>
+      <div class="menu-option-container" id="fetch-info-btn" style="display: none;">
+        <h4>Page Information</h4>
+      </div>
+      <div class="menu-option-container" id="print-btn" style="display: none;">
+        <h4>Print As Pdf</h4>
+      </div>
+      <div class="menu-option-container" id="bigcursor-btn" >
+        <h4>Big Cursor</h4>
+      </div>
+      <div class="menu-option-container" id="text-magnifier" style="display: none;">
+        <h4>Text Magnifier</h4>
+      </div>
+      <div class="menu-option-container" id="saturation">
+        <label for="saturation-slider">Adjust Saturation</label>
+        <input type="range" id="saturation-slider" min="0" max="1000" value="100" />
+      </div>
+      <div class="menu-option-container-fs font-size-wrap" id="font-size-wrap">
+        <h4>Font size</h4>
+        <button class="decrease-fs">-</button>
+          <p class="default-fs"></p>
+        <button class="increase-fs">+</button>
+
+      </div>
+      <div class="accordion-container menu-option-container" style="display: none;">
+        <div class="accordion-header">Appearance</div>
+        <div class="accordion-content" id="accordionContent">
+          <!-- Text Size Options -->
+          <div class="option-group theme-light-text">
+            <label class="apperance-opt theme-light-text">Text Size:</label>
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="textSize"
+                value="small"
+                class="radio-option"
+              />
+              Small</label
+            >
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="textSize"
+                value="standard"
+                class="radio-option"
+              />
+              Standard</label
+            >
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="textSize"
+                value="large"
+                class="radio-option"
+              />
+              Large</label
+            >
+          </div>
+
+          <!-- Width Options -->
+          <!-- <div class="option-group">
+            <label class="apperance-opt theme-light-text">Width:</label>
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="width"
+                value="standard"
+                class="radio-option"
+              />
+              Standard</label
+            >
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="width"
+                value="wide"
+                class="radio-option"
+              />
+              Wide</label
+            >
+          </div> -->
+
+          <!-- Color Theme Options -->
+          <div class="option-group">
+            <label class="apperance-opt theme-light-text">Color Theme:</label>
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="color-theme"
+                value="light"
+                class="radio-option"
+                checked
+              />
+              Light</label
+            >
+            <label class="apperance-opt theme-light-text"
+              ><input
+                type="radio"
+                name="color-theme"
+                value="dark"
+                class="radio-option"
+              />
+              Dark</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Shortened URL -->
+<div class="hidden" id="main-short-url-div">
+  <div class="modal hidden" id="short-url-modal">
+    <div class="modal-content">
+      <h3>Shortened URL</h3>
+      <div class="input-copy-div">
+        <input type="text" id="shortened-url-input" readonly />
+        <button id="copy-url-btn">Copy</button>
+      </div>
+      <button id="close-modal-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Page Information -->
+<div class="page-info-main">
+  <div id="page-info" class="page-info hidden-page-info">
+    <div style="position: relative; display: flex; width: 100%">
+      <h2 class="section-title">Basic Information</h2>
+      <button class="close-btn-page" id="close-page-info-btn">×</button>
+    </div>
+    <!-- Close Button -->
+    <table class="info-table">
+      <tr>
+        <th class="info-header">Display title</th>
+        <td class="info-data" id="display-title"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Page length (in bytes)</th>
+        <td class="info-data" id="page-length"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Page content language</th>
+        <td class="info-data" id="content-language"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Number of redirects</th>
+        <td class="info-data" id="redirects"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Wikidata item ID</th>
+        <td class="info-data" id="wikidata-id"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Meta description</th>
+        <td class="info-data" id="meta-description"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Meta keywords</th>
+        <td class="info-data" id="meta-keywords"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Links</th>
+        <td class="info-data" id="links"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Images</th>
+        <td class="info-data" id="images"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Scripts</th>
+        <td class="info-data" id="scripts"></td>
+      </tr>
+      <tr>
+        <th class="info-header">Word count</th>
+        <td class="info-data" id="word-count"></td>
+      </tr>
+    </table>
+  </div>
+</div>

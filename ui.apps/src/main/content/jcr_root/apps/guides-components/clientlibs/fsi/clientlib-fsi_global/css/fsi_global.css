@@ -1,0 +1,350 @@
+body {
+  font-family: "Manrope";
+}
+
+/* Define the font faces once */
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+.light {
+  --color-accent: #FDA14A;
+  --color-primary: #013220;
+  --color-on-primary: #FDA14A;
+  --color-primary-light: #E2F8F0;
+  --color-primary-faded: #4D7063;
+  --color-border: #ACACAC;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #2C343B;
+  --color-bg: #FFFFFF;
+  --color-related-link:var( --color-primary-faded);
+}
+.light .dark\:bg-img-monochrome {
+  position: relative;
+}
+.light .dark\:bg-img-monochrome > .cmp-container::before {
+  display: none;
+}
+.light .dark\:bg-img-monochrome > .cmp-container::before {
+  display: none !important;
+}
+
+.dark {
+  --color-bg: #1a1b26;
+  --color-primary: #AFB8E1;
+  --color-primary-faded: #AFB8E1;
+  --color-accent: #FDA14A;
+  --color-on-primary: #1a1b26;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #AFB8E1;
+  --color-primary-light: #1a1b26;
+  --color-border: #ACACAC;
+  --color-primary2:#292e42;
+  --color-on-accent:#FDA14A;
+  --color-link:#FDA14A;
+  --color-related-link:var(--color-accent);
+  --color-bg-2:#FFFFFF;
+  --color-primary-2:#013220;
+}
+.dark .dark\:bg-img-monochrome {
+  position: relative;
+}
+.dark .dark\:bg-img-monochrome > .cmp-container::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  -webkit-backdrop-filter: invert(1);
+          backdrop-filter: invert(1);
+}
+.dark .fsi-banner-wrapper > .cmp-container h1.cmp-title__text, .dark .fsi-banner-wrapper > .cmp-container .text {
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+}
+.dark .dark\:bg-img-monochrome > .cmp-container::before {
+  display: block !important;
+}
+.dark .theme-btns .fa-moon {
+  color: var(--color-bg);
+}
+
+.theme-btns .checkbox {
+  opacity: 0;
+  position: absolute;
+}
+.theme-btns .checkbox-label {
+  background-color: var(--color-primary);
+  width: 50px;
+  height: 24px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.theme-btns .checkbox-label .ball {
+  background-color: var(--color-bg);
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
+}
+.theme-btns .fa-moon {
+  color: var(--color-accent);
+}
+.theme-btns .fa-sun {
+  color: var(--color-accent);
+}
+.theme-btns .checkbox:checked + .checkbox-label .ball {
+  -webkit-transform: translateX(25px);
+          transform: translateX(25px);
+}
+.light {
+  --color-accent: #FDA14A;
+  --color-primary: #013220;
+  --color-on-primary: #FDA14A;
+  --color-primary-light: #E2F8F0;
+  --color-primary-faded: #4D7063;
+  --color-border: #ACACAC;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #2C343B;
+  --color-bg: #FFFFFF;
+  --color-related-link:var( --color-primary-faded);
+}
+.light .dark\:bg-img-monochrome {
+  position: relative;
+}
+.light .dark\:bg-img-monochrome > .cmp-container::before {
+  display: none;
+}
+.light .dark\:bg-img-monochrome > .cmp-container::before {
+  display: none !important;
+}
+
+.dark {
+  --color-bg: #1a1b26;
+  --color-primary: #AFB8E1;
+  --color-primary-faded: #AFB8E1;
+  --color-accent: #FDA14A;
+  --color-on-primary: #1a1b26;
+  --color-border-light: #D8D8D8;
+  --color-gray-light: #AFB8E1;
+  --color-primary-light: #1a1b26;
+  --color-border: #ACACAC;
+  --color-primary2:#292e42;
+  --color-on-accent:#FDA14A;
+  --color-link:#FDA14A;
+  --color-related-link:var(--color-accent);
+  --color-bg-2:#FFFFFF;
+  --color-primary-2:#013220;
+}
+.dark .dark\:bg-img-monochrome {
+  position: relative;
+}
+.dark .dark\:bg-img-monochrome > .cmp-container::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  -webkit-backdrop-filter: invert(1);
+          backdrop-filter: invert(1);
+}
+.dark .fsi-banner-wrapper > .cmp-container h1.cmp-title__text, .dark .fsi-banner-wrapper > .cmp-container .text {
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+}
+.dark .dark\:bg-img-monochrome > .cmp-container::before {
+  display: block !important;
+}
+.dark .theme-btns .fa-moon {
+  color: var(--color-bg);
+}
+
+.theme-btns .checkbox {
+  opacity: 0;
+  position: absolute;
+}
+.theme-btns .checkbox-label {
+  background-color: var(--color-primary);
+  width: 50px;
+  height: 24px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.theme-btns .checkbox-label .ball {
+  background-color: var(--color-bg);
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.2s linear;
+  transition: -webkit-transform 0.2s linear;
+  transition: transform 0.2s linear;
+  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
+}
+.theme-btns .fa-moon {
+  color: var(--color-accent);
+}
+.theme-btns .fa-sun {
+  color: var(--color-accent);
+}
+.theme-btns .checkbox:checked + .checkbox-label .ball {
+  -webkit-transform: translateX(25px);
+          transform: translateX(25px);
+}
+
+body {
+  font-family: "Manrope";
+}
+
+/* Define the font faces once */
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/content/dam/aemguidesDALP/fonts/manrope/Manrope-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+:root {
+  --font-fam-primary: "Manrope" , "sans-serrif";
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+.hero-container .cover-img {
+  max-width: 940px;
+  max-height: 400px;
+}
+.hero-container .cover-img > img {
+  width: 100%;
+  height: 100%;
+}
+
+.feedback-container {
+  background-color: var(--color-primary-light);
+}
+.feedback-container .feedback-buttons .feedback-button {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+}
+
+.dark .feedback-container {
+  background-color: var(--color-primary2);
+}
+
+.dark .feedback-container .feedback-buttons .feedback-button {
+  background-color: var(--color-bg-2);
+  color: var(--color-primary-2);
+}
+.dark .feedback-container .feedback-buttons .feedback-button:hover {
+  background-color: var(--color-accent);
+}
+
+.dark .feedback-container .feedback-buttons .feedback-button.selected {
+  background-color: var(--color-accent);
+}
+
+.pdf-download .pdf-note {
+  top: 30px;
+  left: 46%;
+}
+
+@media screen and (max-width: 769px) {
+  .right-container > .cmp-container {
+    padding-top: unset;
+  }
+  .guides-pager {
+    margin-bottom: 64px;
+  }
+  .pdf-download .pdf-note {
+    top: 65px;
+    right: 1%;
+    left: unset;
+  }
+  .download-manual-button.padding-bottom .cmp-container {
+    padding-bottom: 40px;
+  }
+}
+.related-links .link:hover {
+  color: var(--color-primary);
+}
+
+.dark .related-links .link:hover {
+  color: var(--color-bg-2);
+}
