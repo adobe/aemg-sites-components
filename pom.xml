@@ -45,10 +45,10 @@
         <bnd.version>5.1.2</bnd.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aem.sdk.api>2021.5.5343.20210524T070738Z-210527</aem.sdk.api>
+        <aem.sdk.api>2024.11.18598.20241113T125352Z-241100</aem.sdk.api>
         <componentGroupName>Guides Components</componentGroupName>
-        <core.wcm.components.version>2.16.4</core.wcm.components.version>
-        <uber.jar.version>6.4.4</uber.jar.version>
+        <core.wcm.components.version>2.18.6</core.wcm.components.version>
+        <uber.jar.version>6.5.4</uber.jar.version>
     </properties>
 
     <build>
@@ -653,7 +653,7 @@ Bundle-DocURL:
             <dependency>
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>uber-jar</artifactId>
-                <version>6.5.0</version>
+                <version>${uber.jar.version}</version>
                 <classifier>apis</classifier>
                 <scope>provided</scope>
             </dependency>
