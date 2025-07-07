@@ -1,0 +1,124 @@
+.toccontainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+
+  .tocitem {
+    border: 1px solid var(--grey-border-hp);
+    width: 360px;
+    margin: 0 1em 2em 1em;
+    padding: 0.625rem 1.25rem 0.938rem;
+    background-color: var(--white-color);
+    height: 100%;
+    border-left: 2px solid var(--blue-border-hp);
+
+    .mainentry {
+      font-size: var(--heading-fs-hp);
+      font-weight: 300;
+      line-height: 1.2em;
+    }
+
+    .subentry {
+      font-size: var(--sub-heading-fs-hp);
+      font-weight: 400;
+
+      &:nth-child(2) {
+        margin-top: 0.5em;
+      }
+
+      a {
+        display: block;
+        padding: 0.25rem;
+
+        &:hover {
+          color: var(--bluish-border-hp);
+        }
+      }
+    }
+  }
+
+  .tocitemcolor1 {
+    border-left-color: var(--bluish-border-hp);
+  }
+  .tocitemcolor2 {
+    border-left-color: var(--turquoise-border-hp);
+  }
+  .tocitemcolor3 {
+    border-left-color: var(--pink-border-hp);
+  }
+  .tocitemcolor4 {
+    border-left-color: var(--green-border-hp);
+  }
+  .tocitemcolor5 {
+    border-left-color: var(--grenish-border-hp);
+  }
+  .tocitemcolor6 {
+    border-left-color: var(--yellow-border-hp);
+  }
+  .tocitemcolor7 {
+    border-left-color: var(--purple-border-hp);
+  }
+  .tocitemcolor8 {
+    border-left-color: var(--pinkish-border-hp);
+  }
+  .tocitemcolor9 {
+    border-left-color: var(--lightblue-border-hp);
+  }
+}
+
+.mainentry a {
+  color: var(--brown-bg-hp);
+  font-size: var(--fs-h4);
+  &:hover {
+    color: var(--blue-border-hp);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 800px) {
+  main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .toccontainer {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0.063rem 0.313rem 0.313rem 0.313rem;
+    box-sizing: border-box;
+    border: 0;
+
+    .tocitem {
+      padding: 0.625rem 1.25rem;
+      margin: 0.313rem 0;
+      width: 100%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .mainentry {
+        font-size: var(--title-fs-hp);
+        line-height: 1em;
+      }
+    }
+  }
+
+  .mainentry a {
+    font-size: var(--sub-title-fs-hp);
+  }
+
+  .tocitem .subentry {
+    font-size: var(--body-font-size);
+    &:nth-child(2) {
+      margin-top: 0.5em;
+    }
+  }
+
+  .subentry a {
+    padding: 0.25rem 0;
+  }
+}

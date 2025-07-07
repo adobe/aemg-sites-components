@@ -1,0 +1,21 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.versionSelector="com.adobe.guides.aem.components.core.models.VersionSelector"/>
+<div class="dropdown">
+    <div class="dropdown__container">
+        <span class="dropdown__value">${versionSelector.currentVersion}</span>
+        <button class="dropdown__button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path
+            d="M14.7194 7.27931C14.5417 7.10041 14.3012 7 14.0506 7C13.8 7 13.5596 7.10041 13.3818 7.27931L9.97628 10.6796L6.61816 7.27931C6.44042 7.10041 6.19999 7 5.94938 7C5.69877 7 5.45834 7.10041 5.2806 7.27931C5.19169 7.36861 5.12112 7.47484 5.07296 7.59189C5.0248 7.70894 5 7.83448 5 7.96129C5 8.08809 5.0248 8.21363 5.07296 8.33068C5.12112 8.44773 5.19169 8.55396 5.2806 8.64326L9.30276 12.7159C9.39095 12.8059 9.49587 12.8774 9.61147 12.9261C9.72706 12.9749 9.85105 13 9.97628 13C10.1015 13 10.2255 12.9749 10.3411 12.9261C10.4567 12.8774 10.5616 12.8059 10.6498 12.7159L14.7194 8.64326C14.8083 8.55396 14.8789 8.44773 14.927 8.33068C14.9752 8.21363 15 8.08809 15 7.96129C15 7.83448 14.9752 7.70894 14.927 7.59189C14.8789 7.47484 14.8083 7.36861 14.7194 7.27931Z"
+            />
+    </svg>
+        </button>
+    </div>
+    <ul class="dropdown__list hidden" data-sly-list.versionList="${versionSelector.versionSelectorBeans}">
+        <li class="dropdown__item"><a href="${versionList.pagePath}">${versionList.title}</a></li>
+    </ul>
+</div>

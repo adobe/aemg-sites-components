@@ -1,0 +1,98 @@
+.version-selector {
+  .dropdown {
+    margin-bottom: 1rem;
+    width: max-content;
+    padding: 0.375rem 0.5rem 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--light-grey-border);
+    background: var(--common-bg);
+
+    &:hover {
+      border: 1px solid var(--primary-dark);
+    }
+
+    &__container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      gap: 0.25rem;
+
+      span {
+        color: var(--version-unselected-color);
+        font-size: var(--body-font-size);
+        font-weight: 600;
+        line-height: var(--body-font-line-height);
+
+        &:hover {
+          color: var(--version-selected-color);
+        }
+      }
+    }
+
+    &__button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    &__list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0.25rem 0 0;
+      padding: 0;
+      list-style: none;
+      z-index: var(--z-index-2);
+      border-radius: 0.25rem;
+      border: 1px solid var(--light-grey-border);
+      background: var(--white-color);
+      box-shadow: 0 4px 16px 0 var(--box-shadow-color);
+      width: 64px;
+    }
+
+    &__item {
+      padding: 0.5rem 0.75rem 0.25rem 0.688rem;
+
+      &:hover {
+        background: var(--accent-light-blue);
+        padding: 0.25rem 0.688rem;
+      }
+
+      a {
+        color: var(--secondary-light);
+        font-size: var(--body-font-size);
+        font-weight: 600;
+        line-height: var(--body-font-line-height);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--blackish-color);
+        }
+      }
+    }
+  }
+
+  @media (min-width: 600px) {
+    .dropdown {
+      margin-top: 0;
+      margin-bottom: 0;
+      position: relative;
+      max-width: 66px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  html.adobeguides-text-spacing {
+    .version-selector {
+      .dropdown {
+        &__item {
+          padding: 0.5rem 0 0.5rem 0;
+        }
+      }
+    }
+  }
+}

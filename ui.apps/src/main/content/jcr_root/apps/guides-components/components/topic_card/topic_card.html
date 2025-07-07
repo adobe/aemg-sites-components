@@ -1,0 +1,30 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.topicCardModel="com.adobe.guides.aem.components.core.models.TopicCardModel" >
+</sly>
+
+<div class="gu-container">
+    <div class="gu-topic-card-container" data-sly-list.topic="${topicCardModel.topics}">
+        <!-- card 1 -->
+        <div class="gu-topic-card">
+            <details>
+                <summary>
+                    <a class="gu-topic-card--title" href="${topic.link}">
+                        <span>${topic.title}</span>                                     
+                    </a>
+                </summary>
+
+                <div class="gu-topic-card--subtopics">
+                    <ul data-sly-list.subtopic="${topic.subTopics}">
+                        <li>
+                            <a href="${subtopic.link}">${subtopic.title}</a>
+                        </li>
+                    </ul>    
+                </div>.
+            </details>            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Accessibility"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        granite:class="cmp-embed__editor"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <general
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="General"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <accessibilityIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select accessibility icon"
+                                                    fieldLabel="Accessibility Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./accessibilityIcon"
+                                                    rootPath="/content/dam"/>
+                                            <textSizeIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select text size icon"
+                                                    fieldLabel="Text Size Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./textSizeIcon"
+                                                    rootPath="/content/dam"/>
+                                            <textSpaceIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select text space icon"
+                                                    fieldLabel="Text Space Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./textSpaceIcon"
+                                                    rootPath="/content/dam"/>
+                                            <highContrastIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select high contrast icon"
+                                                    fieldLabel="High Contrast Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./highContrastIcon"
+                                                    rootPath="/content/dam"/>
+                                            <lowContrastIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select low contrast icon"
+                                                    fieldLabel="Low Contrast Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./lowContrastIcon"
+                                                    rootPath="/content/dam"/>
+                                            <resetIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select reset icon"
+                                                    fieldLabel="Reset Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./resetIcon"
+                                                    rootPath="/content/dam"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </general>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

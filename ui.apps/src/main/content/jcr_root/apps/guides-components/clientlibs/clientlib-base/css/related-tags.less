@@ -1,0 +1,40 @@
+.related-tags {
+  margin-top: auto;
+  margin-left: 1.25rem;
+
+  .tags {
+    &__heading {
+      color: var(--tags-heading-color);
+      font-size: var(--tags-fs);
+      font-weight: 600;
+      line-height: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    &__envelop {
+      display: flex;
+      white-space: nowrap;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    &__container {
+      margin-bottom: 0.75rem;
+    }
+
+    &__value {
+      border-radius: 0.25rem;
+      background: var(--tags-bg);
+      height: max-content;
+      padding: 0.25rem 0.5rem;
+
+      h3 {
+        color: var(--tags-color);
+        font-size: var(--body-font-size);
+        font-weight: 500;
+        line-height: var(--body-font-line-height);
+        margin-bottom: 0;
+      }
+    }
+  }
+}

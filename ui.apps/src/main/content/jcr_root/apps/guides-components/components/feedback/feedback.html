@@ -1,0 +1,36 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<div class="gu-feedback">
+  <button class="gu-feedback__cta">Give Feedback</button>
+  <div class="gu-feedback__container">
+    <button class="gu-feedback__close-btn">
+      <span class="gu-feedback__close-icon">X</span>
+    </button>
+    <div class="gu-feedback__wrapper">
+      <div class="gu-feedback__text" data-sly-test="${properties.title}">
+        ${properties.title @ i18n}
+      </div>
+      <div class="gu-feedback__button-container">
+        <button id="gu-likeButton" class="gu-feedback__button" type="button">
+          <img
+            class="gu-feedback__like-icon"
+            src="${properties.likeIcon ? properties.likeIcon : '/content/dam/aemguides/common-images/icons/thumbs-up-grey.svg'}"
+            alt="Like Icon"
+          />
+          <span class="gu-feedback__button-text">${'Yes' @ i18n}</span>
+        </button>
+        <button id="gu-dislikeButton" class="gu-feedback__button" type="button">
+          <img
+            class="gu-feedback__dislike-icon"
+            src="${properties.dislikeIcon ? properties.dislikeIcon : '/content/dam/aemguides/common-images/icons/thumbs-down-grey.svg'}"
+            alt="Dislike Icon"
+          />
+          <span class="gu-feedback__button-text">${'No' @ i18n}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

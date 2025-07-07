@@ -1,0 +1,39 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}
+    </div>
+</sly>
+<div class="gu-toolbar_wrapper toolbar-hitech" data-sly-test="${wcmmode.edit}">
+    <div class="toolbar main">
+        <div class="navigation" data-sly-test="${properties.embedNavigation}">
+            <sly data-sly-resource="${'navigation' @ resourceType='aemguides/components/guides-components/navigation'}"/>
+        </div>
+        <div class="version-selector" data-sly-test="${properties.embedVersionSelector}">
+            <sly data-sly-resource="${'version-selector' @ resourceType='aemguides/components/guides-components/version-selector'}"/>
+        </div>
+        <div class="copy-link-component" data-sly-test="${properties.embedCopyLinkComponent}">
+            <sly data-sly-resource="${'copy-link-component' @ resourceType='aemguides/components/guides-components/copy-link-component'}"/>
+        </div>
+        <div class="social-share" data-sly-test="${properties.embedSocialShare}">
+            <sly data-sly-resource="${'social-share' @ resourceType='aemguides/components/guides-components/social-share'}"/>
+        </div>
+        <div class="theme-selector" data-sly-test="${properties.embedThemeSelector}">
+            <sly data-sly-resource="${'theme-selector' @ resourceType='aemguides/components/guides-components/theme-selector'}"/>
+        </div>
+        <div class="pdf-export" data-sly-test="${properties.embedPdfExport}">
+            <sly data-sly-resource="${'pdf-export' @ resourceType='aemguides/components/guides-components/pdf-export'}"/>
+        </div>
+        <div class="language-navigation" data-sly-test="${properties.embedLanguageNavigation}">
+            <sly data-sly-resource="${'language-navigation' @ resourceType='aemguides/components/guides-components/languagenavigation'}"/>
+        </div>
+        <div class="accessibility" data-sly-test="${properties.embedAccessibility}">
+            <sly data-sly-resource="${'accessibility' @ resourceType='aemguides/components/guides-components/accessibility'}"/>
+        </div>
+        <div class="feedback-component" data-sly-test="${properties.embedFeedbackComponent}">
+            <sly data-sly-resource="${'feedback-component' @ resourceType='aemguides/components/guides-components/feedback-component'}"/>
+        </div>
+        <div class="backToTop" data-sly-test="${properties.embedBackToTop}">
+            <sly data-sly-resource="${'backToTop' @ resourceType='aemguides/components/guides-components/back-to-top-button'}"/>
+        </div>
+    </div>
+</div>

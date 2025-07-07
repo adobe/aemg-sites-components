@@ -1,0 +1,458 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* Basic Variables */
+:root {
+  /* Template Color Variables */
+  --primary-color: #0065ff;
+  --primary-dark: #0052cc;
+  --breadcrumb-primary-color: #bebebe;
+  --secondary-color: #0f1922;
+  --secondary-light: #787878;
+  --accent-light-blue: #e0eeff;
+  --blackish-color: #03111e;
+  --dark-grey: #898989;
+  --grey-bg: #fbfbfb;
+  --greyish-border: #e2e2e2;
+  --white-color: #ffffff;
+  --text-color: #000;
+  --grey-border: #e8e8e8;
+  --light-grey-border: #dfdfdf;
+  --blue-border: #0d0d0e;
+  --placeholder-color: #757575;
+  --version-selected-color: #03111e;
+  --version-unselected-color: #787878;
+  /* Homepage colors */
+  --grey-border-hp: #e1e1e1;
+  --blue-border-hp: #0065ff;
+  --brown-bg-hp: #333;
+  --bluish-border-hp: #b2d7ff;
+  --turquoise-border-hp: #22befa;
+  --pink-border-hp: #ff64b3;
+  --green-border-hp: #50e3c2;
+  --grenish-border-hp: #b8e9e6;
+  --yellow-border-hp: #f5c823;
+  --purple-border-hp: #c0a9e6;
+  --pinkish-border-hp: #f2b4d3;
+  --lightblue-border-hp: #b2d7ff;
+
+  /* Contributors Variables Background */
+  --contributors-yellow-bg: #f8f2dd;
+  --contributors-purple-bg: #ebddf8;
+  --contributors-blue-bg: #ddecf8;
+  --contributors-red-bg: #f8dddd;
+  --contributors-lg-blue-bg: #dde8f8;
+
+  /* Contributors Variables Text Color */
+  --contributors-text-yellow: #7c681a;
+  --contributors-text-purple: #4f2b7d;
+  --contributors-text-blue: #2b3d7d;
+  --contributors-text-red: #7d2b2b;
+  --contributors-text-green: #2b6b7d;
+
+  /* Box Shadow Variables */
+  --box-shadow-color: rgba(0, 0, 0, 0.08);
+  --box-shadow-bar: rgba(0, 0, 0, 0.24);
+  --box-shadow-dialog: rgba(0, 0, 0, 0.16);
+  --box-shadow-nav: rgba(0, 0, 0, 0.12);
+  --backdrop-bg: rgba(0, 0, 0, 0.25);
+  --box-shadow-search: rgba(0, 0, 0, 0.04);
+  --box-shadow-results: rgba(0, 0, 0, 0.2);
+
+  /* Link Color Variables */
+  --link-color: var(--primary-color);
+  --rem: 16;
+
+  /* Body Font Sizes Variables */
+  --body-font-size: 0.875rem;
+  --body-font-weight: normal;
+  --body-font-family: Inter, sans-serif;
+  --body-font-line-height: 1.25rem;
+
+  /*  Background Variables */
+  --body-bg: var(--grey-bg);
+  --humberger-bg: var(--grey-bg);
+  --header-bg: var(--white-color);
+  --footer-bg: var(--white-color);
+  --tags-bg: var(--accent-light-blue);
+  --pre-next-bg: var(--white-color);
+  --nav-bg: var(--white-color);
+  --back-to-top-bg: var(--accent-light-blue);
+  --common-bg: var(--white-color);
+  --desc-bg: var(--greyish-white);
+  --border-common: var(--grey-border);
+  --bottom-border: var(--light-grey-border);
+  --search-results-bg: #f5f5f8;
+  /*Font Sizes Variables */
+  --fs-h1: 3.5rem;
+  --fs-h2: 3rem;
+  --fs-h3: 2.375rem;
+  --fs-h4: 1.625rem;
+  --fw-h4: 600;
+  --lh-h4: 2rem;
+  --fs-h5: 1.625rem;
+  --fw-h5: 400;
+  --lh-h5: 2rem;
+  --fs-h6: 1.375rem;
+  --fw-h6: 500;
+  --lh-h6: 1.625rem;
+  --body-1-fs: 0.875rem;
+  --body-1-fw: 400;
+  --body-1-lh: 1.25rem;
+  --label-fs: 0.813rem;
+  --label-fw: 400;
+  --label-lh: 1.125rem;
+
+  /*Font Sizes Variable Homepage */
+  --heading-fs-hp: 2rem;
+  --title-fs-hp: 1.5rem;
+  --sub-title-fs-hp: 1.125rem;
+  --sub-heading-fs-hp: 1rem;
+
+  /* Header Variables */
+  --header-links-fs: 1rem;
+  --header-links-color: var(--secondary-color);
+
+  /* Search Variables */
+  --search-bg: var(--grey-border);
+  --search-text-color: var(--dark-grey);
+  --search-text-active: var(--blackish-color);
+
+  --pre-next-fs: 1rem;
+  --pre-next-lh: 1.5rem;
+
+  --toc-heading-fs: 1rem;
+  --toc-heading-lh: 1.5rem;
+  --toc-color: var(--secondary-color);
+  --toc-active: var(--primary-color);
+  --toc-links-fs: 0.875rem;
+
+  --toolbar-text-color: var(--secondary-light);
+
+  /* Breadcrumb Variables */
+  --breadcrumb-bg: var(--grey-bg);
+  --breadcrumb-fs: 0.875rem;
+  --breadcrumb-color-active: var(--secondary-color);
+  --breadcrumb-item-color: var(--breadcrumb-primary-color);
+
+  /* Footer Variables */
+  --footer-label-color: var(--secondary-light);
+  --footer-links-color: var(--secondary-light);
+  --footer-link-fs: 0.813rem;
+  --footer-heading-fs: 1rem;
+  --footer-heading-color: var(--secondary-color);
+
+  /* Tags Variables */
+  --tags-color: var(--primary-color);
+  --tags-heading-color: var(--secondary-color);
+  --tags-fs: var(--header-links-fs);
+  --nav-fs: var(--fs-h6);
+  --nav-lh: 1.75rem;
+  --footer-lh: 1.5rem;
+
+  --color-text: var(--secondary-color);
+  --icon-button-color: var(--primary-color);
+
+  /* Button Variables */
+  --primary-btn-color: var(--primary-color);
+  --primary-btn-color-hover: var(--primary-dark);
+  --btn-disabled-bg: var(--light-grey-border);
+  --text-btn-color: var(--white-color);
+  --disabled-btn-color: var(--dark-grey);
+  --secondary-btn-color: var(--white-color);
+  --secondary-btn-color-hover: var(--accent-light-blue);
+  --secondary-btn-color-disabled: var(--light-grey-border);
+
+  /* Icon Variables*/
+  --primary-icon-bg: var(--grey-border);
+  --primary-icon-text: var(--secondary-light);
+  --secondary-icon-bg: var(--accent-light-blue);
+  --secondary-icon-text: var(--primary-color);
+
+  /* Z-index Variables*/
+  --z-index-1: 1;
+  --z-index-2: 2;
+  --z-index-3: 3;
+  --z-index-4: 4;
+  --z-index-5: 5;
+  --z-index-6: 6;
+  --z-index-7: 7;
+  --z-index-8: 8;
+  --z-index-9: 9;
+  --z-index-10: 10;
+  --z-index-11: 11;
+  --z-index-12: 12;
+  --z-index-13: 13;
+  --z-index-14: 14;
+
+  /* Topic Styles*/
+
+  /* Topic Color Variables */
+  --primary-color: #0065ff;
+  --primary-dark: #0052cc;
+  --secondary-color: #0f1922;
+  --secondary-light: #787878;
+  --greyish-white: #ffeadd;
+  --grey-border: #e8e8e8;
+  --light-white: #e4e4e4;
+  --blackish-color: #03111e;
+  --white-color: #ffffff;
+  --blue-note: #e6f5ff;
+  --note-text: #0c609b;
+  --note-border: #0f89e1;
+  --light-grey-border: #dfdfdf;
+  --table-bg: #f9f9f9;
+
+  /* Topic Font Sizes Variables */
+  --fs-subheading-1: 1.625rem;
+  --fw-subheading-1: 600;
+  --lh-subheading-1: 2rem;
+
+  --fs-subheading-2: 1.375rem;
+  --fw-subheading-2: 600;
+  --lh-subheading-2: 1.75rem;
+
+  --topic-1-fs: 1rem;
+  --topic-1-fw: 600;
+  --topic-1-lh: 1.5rem;
+
+  --topic-2-fs: 0.875rem;
+  --topic-2-fw: 400;
+  --topic-2-lh: 1.25rem;
+
+  --topic-fs: 0.813rem;
+  --topic-fw: 500;
+  --topic-lh: 1.125rem;
+
+  --topic-eyebrow-fs: 0.625rem;
+  --topic-eyebrow-fw: 400;
+  --topic-eyebrow-lh: 0.75rem;
+
+  --note-text-color: var(--note-text);
+  --note-border-color: var(--note-border);
+  --note-bg: var(--blue-note);
+}
+
+/* Media Query for screens wider than 600px */
+@media (min-width: 600px) {
+  :root {
+    --body-font-size: 0.875rem;
+    --body-1-fs: 1rem;
+    --body-1-fw: 400;
+    --body-1-lh: 1.5rem;
+
+    /* Header */
+    --header-links-fs: 1rem;
+
+    /* Footer */
+    --footer-link-fs: 0.875rem;
+  }
+}
+
+Template Variables body.hi-tech {
+  --primary-color: #0065ff;
+  --secondary-color: #0f1922;
+}
+
+body.fsi {
+  --primary-color: #0065ff;
+  --secondary-color: #0f1922;
+}
+
+body.fsi-guides-topic-page {
+  --tag-bg-yellow: #fff0b3;
+  --tag-text-gold: #caa100;
+  --tags-color: var(--tag-text-gold);
+  --tags-bg: var(--tag-bg-yellow);
+  --body-bg: var(--white-color);
+  --breadcrumb-bg: var(--white-color);
+  --search-bg: var(--white-color);
+}
+
+body.manufacturing-guides-topic-page,
+body.manufacturing-guides-search-page {
+  --primary-color: #5f4b00;
+  --secondary-color: #0f1922;
+  --toc-active: #fcc700;
+  --tags-bg: #fff6d5;
+  --topic-grey-dot: #c0c0c0;
+  --topic-yellow-dot: #ffcd11;
+  --dropdown-bg: #fff2c0;
+  --dropdown-border-color: #f8dd78;
+  --dark-shadow: #00000008;
+  --box-shadow-feedback: rgba(0, 0, 0, 0.1);
+  --toolbar-text-color: var(--secondary-light);
+  --footer-links-color: var(--secondary-light);
+  --secondary-btn-color-hover: #ccb280;
+  --accent-light-blue: #ccb280;
+  --note-border-color: #ffb47b;
+  --footer-color: #0065ff;
+  --back-to-top-bg: var(--primary-color);
+}
+
+/* Theme Variables for Hi-Tech Template */
+body.dark {
+  --primary-color: #0065ff;
+  --primary-bg: #0e1117;
+  --black-bg: #131316;
+  --text-color: #e8e8e8;
+  --link-color: #fff;
+  --border-black-color: #21262b;
+  --border-grey: #43464a;
+  --footer-bg: var(--black-bg);
+  --greyish-bg: #0b244c;
+  --bluish-color: #3d8bff;
+  --input-bg: #171c21;
+  --backTop-bg: #29313f;
+  --toolbar-bg: #262626;
+  --toolbar-box-shadow: rgba(0, 0, 0, 0.32);
+  --expanded-bg: #26272b;
+  --note-color: #df990d;
+  --white-color: #ffffff;
+  --color-text: var(--grey-border);
+  --humberger-bg: var(--black-bg);
+
+  /* Header styles in dark theme */
+  --body-bg: var(--primary-bg);
+  --header-bg: var(--primary-bg);
+  --header-links-color: var(--white-color);
+
+  /* Search Variables */
+  --search-text-color: var(--breadcrumb-primary-color);
+  --search-bg: var(--border-black-color);
+  --search-text-active: var(--link-color);
+
+  --toolbar-text-color: var(--breadcrumb-primary-color);
+  --toc-color: var(--white-color);
+
+  /* Breadcrumb Variables */
+  --breadcrumb-bg: var(--primary-bg);
+  --breadcrumb-color-active: var(--light-grey-border);
+  --breadcrumb-item-color: var(--dark-grey);
+
+  /* Footer Variables */
+  --footer-links-color: var(--dark-grey);
+  --footer-heading-color: var(--white-color);
+
+  --nav-text-active: var(--light-grey-border);
+
+  /* Tags Variables */
+  --tags-color: var(--bluish-color);
+  --tags-heading-color: var(--white-color);
+
+  /* Background Variables */
+  --nav-bg: var(--input-bg);
+  --tags-bg: var(--greyish-bg);
+  --pre-next-bg: var(--input-bg);
+  --back-to-top-bg: var(--backTop-bg);
+  --desc-bg: var(--backTop-bg);
+  --common-bg: var(--input-bg);
+
+  /* Border Variables */
+  --border-common: var(--border-grey);
+  --bottom-border: var(--secondary-light);
+
+  /* Topics */
+
+  --note-text-color: var(--white-color);
+  --note-border-color: var(--note-color);
+  --note-bg: var(--border-black-color);
+
+  --secondary-btn-color: var(--expanded-bg);
+  --secondary-icon-bg: var(--primary-color);
+  --secondary-btn-color-hover: var(--primary-color);
+  --secondary-icon-text: var(--white-color);
+
+  --version-selected-color: #BEBEBE;
+}
+
+/* Theme Variables for Manufacture Template */
+body.manufacturing-guides-topic-page.dark,
+body.manufacturing-guides-search-page.dark {
+  --text-color: #fff;
+  --primary-color: #cc8400;
+  --link-color: #fff;
+  --secondary-color: #765507;
+  --secondary-btn-color: #555;
+  --secondary-btn-color-hover: #666;
+  --header-bg: #222;
+  --footer-bg: #111;
+  --nav-bg: #333;
+  --primary-dark: #fff;
+  --top-bg-color: transparent;
+  --search-results-bg: rgb(33, 38, 43);
+  --footer-links-color: #c5c5c5;
+  --footer-label-color: #c5c5c5;
+  --secondary-light: var(--black-bg);
+  --tags-bg: var(--accent-light-blue);
+}
+
+body.manufacturing-guides-topic-page.light {
+  --text-color: #000;
+  --primary-color: #5f4b00;
+  --secondary-color: #0f1922;
+  --primary-dark: #454545;
+  --top-bg-color: #fff6d580;
+  --secondary-icon-bg: #cc8400;
+  --secondary-icon-text: #fff;
+}
+
+html#adobeguides-dark-contrast body {
+  /* Accessibility Contrast Color Variables*/
+  --green-color: rgb(80, 208, 160);
+  --yellow-color: rgb(252, 255, 60);
+  --text-color: #000;
+  --white-color: #fff;
+  --accent-light-blue: #e0eeff;
+  /*fsi*/
+  --input-bg: #171c21;
+  --body-bg: var(--text-color);
+  --common-bg: var(--text-color);
+  --header-bg: var(--text-color);
+  --breadcrumb-bg: var(--text-color);
+  --footer-bg: var(--text-color);
+  --header-links-color: var(--yellow-color);
+  --breadcrumb-color-active: var(--white-color);
+  --breadcrumb-item-color: var(--yellow-color);
+  --footer-heading-color: var(--white-color);
+  --footer-links-color: var(--yellow-color);
+  --footer-label-color: var(--yellow-color);
+  --tags-heading-color: var(--white-color);
+  --secondary-icon-bg: var(--accent-light-blue);
+  --color-text: var(--white-color);
+  --note-text-color: var(--green-color);
+  --note-border-color: var(--white-color);
+  --humberger-bg: var(--text-color);
+  --search-bg: var(--text-color);
+  --search-text-active: var(--white-color);
+  /*fsi*/
+  --pre-next-bg: var(--input-bg);
+  --toc-color: var(--white-color);
+  --toc-active: var(--accent-light-blue);
+  --secondary-btn-color: var(--text-color);
+
+  --top-bg-color: transparent;
+  --dropdown-bg: var(var(--common-bg));
+}
+
+html.adobeguides-light-contrast body {
+  --bluish-color: #999999;
+  --blue-link-color: #999999;
+  --text-color: #898989;
+  --white-color: #fff;
+  --header-links-color: var(--blue-link-color);
+  --breadcrumb-color-active: var(--text-color);
+  --breadcrumb-item-color: var(--blue-link-color);
+  --footer-links-color: var(--blue-link-color);
+  --footer-label-color: var(--blue-link-color);
+  --note-text-color: var(--text-color);
+  --note-border-color: var(--text-color);
+  --note-bg: var(--white-color);
+  --toc-color: var(--blue-link-color);
+  --tags-heading-color: var(--blue-link-color);
+}
+html#adobeguides-dark-contrast body.manufacturing-guides-topic-page {
+  --secondary-btn-color-hover: #fff2c0;
+  --accent-light-blue: #fff2c0;
+  --tags-bg: #000000;
+  --primary-color: var(--yellow-color);
+}

@@ -1,0 +1,42 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+<div class="gu-custom-container">
+  <sly data-sly-test="${properties.colLayout=='twoColumn'}">
+    <div class="col-3grid">
+      <div
+        class="outer-container"
+        id="gu-nav"
+        data-sly-resource="${@path='gu11', resourceType='wcm/foundation/components/parsys'}"
+      ></div>
+    </div>
+    <div class="col-9grid">
+      <div class="col-9grid-container">
+        <div
+          class="col-9grid-components"
+          data-sly-resource="${@path='gu22', resourceType='wcm/foundation/components/parsys'}"
+        ></div>
+      </div>
+    </div>
+  </sly>
+  <sly data-sly-test="${properties.colLayout=='threeColumn'}">
+    <div class="col-3grid col-3grid--left">
+      <div class="outer-container" id="gu-nav">
+        <sly
+          data-sly-resource="${@path='gu1', resourceType='wcm/foundation/components/parsys'}"
+        ></sly>
+      </div>
+    </div>
+    <div class="col-6grid">
+      <sly
+        data-sly-resource="${@path='gu2', resourceType='wcm/foundation/components/parsys'}"
+      ></sly>
+    </div>
+    <div class="col-3grid col-3grid--right" id="toc-content">
+      <sly
+        data-sly-resource="${@path='gu3', resourceType='wcm/foundation/components/parsys'}"
+      ></sly>
+    </div>
+  </sly>
+</div>

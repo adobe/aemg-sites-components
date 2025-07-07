@@ -1,0 +1,61 @@
+#section-topic {
+  .contributors {
+    display: inline-block;
+    margin: 0;
+
+    >ul.wrapper {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      gap: 0.3rem;
+      margin-top: 0;
+
+      >li.contributor {
+        margin: 0;
+        padding: 0;
+
+        .circle {
+          border-radius: 1rem;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.375rem 0.25rem;
+
+          p {
+            font-size: var(--body-font-size);
+            font-style: normal;
+            font-weight: 600;
+            line-height: var(--body-font-line-height);
+          }
+        }
+      }
+    }
+  }
+}
+
+.contributors li.contributor:nth-child(1) .circle {
+  background: var(--contributors-yellow-bg);
+  color: var(--contributors-text-yellow);
+}
+
+.contributors li.contributor:nth-child(2) .circle {
+  background: var(--contributors-purple-bg);
+  color: var(--contributors-text-purple);
+}
+
+.contributors li.contributor:nth-child(3) .circle {
+  background: var(--contributors-blue-bg);
+  color: var(--contributors-text-blue);
+}
+
+.contributors li.contributor:nth-child(4) .circle {
+  background: var(--contributors-red-bg);
+  color: var(--contributors-text-red);
+}
+
+.contributors li.contributor:nth-child(5) .circle {
+  background: var(--contributors-lg-blue-bg);
+  color: var(--contributors-text-green);
+}

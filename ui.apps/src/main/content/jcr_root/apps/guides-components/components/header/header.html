@@ -1,0 +1,61 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.headerModel="com.adobe.guides.aem.components.core.models.HeaderModel" />
+
+<div class="gu-header_wrapper">
+  <div class="gu-header_logo-container">
+    <a href="${headerModel.logoLink}">
+      <!-- <img class="gu-header_logo" src="${headerModel.logo}" alt="Company logo"> -->
+      <img
+        class="gu-header_logo"
+        data-src-dark="${headerModel.darkLogo}"
+        data-src-light="${headerModel.lightLogo}"
+        alt="Company logo"
+        src="${headerModel.lightLogo}"
+      />
+    </a>
+  </div>
+  <div
+    class="gu-header_nav-links-container"
+    data-sly-list.navList="${headerModel.ctaBeanList}"
+  >
+    <a class="gu-header_nav-link" href="${navList.ctaLink}"
+      >${navList.ctaLabel}</a
+    >
+  </div>
+  <div class="gu-header_search-container">
+    <sly
+      data-sly-resource="${'search' @resourceType='aemguides/components/guides-components/search'}"
+    ></sly>
+    <div class="gu-header__toolbar-container"></div>
+  </div>
+  <!-- <div class="gu-header__humberger">
+        <img class="gu-header_icon" src="/content/dam/aemguides/common-images/uil_bars.png" alt="Humberger logo">
+    </div> -->
+  <!-- <div class="gu-header__hamburger-section">
+        <div class="gu-header_nav-links-section" data-sly-list.navList="${headerModel.ctaBeanList}">
+            <a class="gu-header_nav-link" href="${navList.ctaLink}">${navList.ctaLabel}</a>
+        </div>
+    </div> -->
+  <div class="gu-header_toolbarheader toolbar-header-container"></div>
+  <div class="gu-header__humberger hamburger-menu">
+    <div class="menu-tigger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="hamburger-dropdown gu-header__hamburger-section">
+      <div
+        class="gu-header_nav-links-section"
+        data-sly-list.navList="${headerModel.ctaBeanList}"
+      >
+        <a class="gu-header_nav-link" href="${navList.ctaLink}"
+          >${navList.ctaLabel}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

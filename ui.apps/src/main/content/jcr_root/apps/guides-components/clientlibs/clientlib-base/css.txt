@@ -1,5 +1,5 @@
 ###############################################################################
-# Copyright 2022 Adobe Systems Incorporated
+# Copyright 2017 Adobe Systems Incorporated
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,3 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ###############################################################################
+
+#base=css
+variables.css
+styles.less
+back-to-top.less
+breadcrumb.less
+custom-container.less
+footer.less
+header.less
+languagenavigation2.less
+navigation2.less
+pdf-export.less
+related-tags.less
+search2.less
+social-share.less
+theme-selector.less
+version-selector.less
+toc.less
+topic/layout.less
+topic/content.less
+accessibility.less
+contributors.less
+accessibility-features.less
+dark.less
+topic-card.less

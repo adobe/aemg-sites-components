@@ -1,0 +1,256 @@
+.navigation {
+  margin: 0 1.25rem;
+  .cmp-navigation__col-icon {
+    display: none;
+  }
+  .cmp-navigation-filter__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .cmp-navigation-filter-container {
+    width: 100%;
+
+    .cmp-navigation-filter__section {
+      display: flex;
+      padding: 0.625rem 0.438rem 0.625rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-common);
+      background: var(--nav-bg);
+      box-shadow: 0 0 24px -9px var(--box-shadow-nav);
+      position: relative;
+      width: 100%;
+
+      &:active {
+        border: 1px solid var(--primary-color);
+      }
+
+      .cmp-navigation-filter__icon {
+        display: block;
+        position: absolute;
+        background-image: url("/content/dam/aemguides/common-images/icons/search.svg");
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+        left: 12px;
+        top: 10px;
+        margin-right: 0.5rem;
+      }
+
+      input {
+        width: 100%;
+        border: none;
+        margin-left: 0.5rem;
+        margin-top: 0.188rem;
+        background: transparent;
+
+        &:focus {
+          outline: unset;
+        }
+      }
+
+      .cmp-navigation-filter__closeicon {
+        display: none;
+        position: absolute;
+        background-image: url("/content/dam/aemguides/common-images/icons/cross.svg");
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        right: 12px;
+        top: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.filtered {
+    ul.cmp-navigation__group {
+      li.cmp-navigation__item {
+        &:has(.matched) {
+          display: block !important;
+        }
+        &:not(.matched) {
+          display: none;
+        }
+
+        &.expanded.matched {
+          display: block;
+          ul.tree {
+            li {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  nav > ul.cmp-navigation__group {
+    list-style: none;
+
+    &.expanded {
+      color: var(--primary-color);
+    }
+
+    li {
+      a {
+        color: var(--secondary-color);
+        font-weight: 400;
+      }
+
+      &.expanded {
+        ul li a {
+          color: var(--secondary-color);
+          font-weight: 400;
+        }
+
+        ul li.expanded a {
+          color: var(--primary-color);
+        }
+
+        ul li.expanded ul li a {
+          color: var(--secondary-color);
+          font-weight: 400;
+        }
+
+        ul li.expanded ul li.expanded a {
+          color: var(--primary-color);
+          font-weight: 500;
+        }
+
+        ul li.expanded ul li.expanded ul li a {
+          color: var(--secondary-color);
+          font-weight: 400;
+        }
+
+        a {
+          color: var(--primary-color);
+        }
+      }
+
+      &.cmp-navigation__item {
+        &:hover ul {
+          background: unset;
+        }
+
+        &:has(ul) {
+          display: block;
+
+          a {
+            display: contents;
+            pointer-events: auto;
+          }
+
+          // &::before {
+          //   cursor: pointer;
+          //   pointer-events: auto;
+          //   margin-right: 0.25rem;
+          //   content: "";
+          //   display: inline-block;
+          //   background-image: url("/content/dam/aemguides/common-images/icons/ch-right-arrow.svg");
+          //   background-size: contain;
+          //   background-repeat: no-repeat;
+          //   width: 20px;
+          //   height: 20px;
+          //   cursor: pointer;
+          //   pointer-events: auto;
+          //   vertical-align: middle;
+          // }
+
+          // &.expanded:has(ul)::before {
+          //   background-image: url("/content/dam/aemguides/common-images/icons/ch-down-arrow.svg");
+          //   vertical-align: middle;
+          // }
+
+          // &.expanded ul li.expanded::before {
+          //   color: var(--primary-color);
+          //   content: "";
+          //   display: inline-block;
+          //   background-image: url("/content/dam/aemguides/common-images/icons/ch-down-arrow.svg");
+          //   background-size: contain;
+          //   background-repeat: no-repeat;
+          //   width: 20px;
+          //   height: 20px;
+          //   cursor: pointer;
+          //   pointer-events: auto;
+          //   vertical-align: middle;
+          // }
+        }
+
+        ul {
+          padding-left: 1.188rem;
+          margin-left: 0.563rem;
+
+          &:hover {
+            background: unset;
+          }
+        }
+
+        > ul {
+          border-left: 1px solid var(--light-grey-border);
+          display: none;
+        }
+
+        > li {
+          display: none;
+        }
+
+        &.expanded {
+          > ul,
+          > li {
+            display: block;
+          }
+
+          ::before {
+            background-image: url("/content/dam/aemguides/common-images/icons/ch-right-arrow.svg");
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+  .cmp-navigation__item > .cmp-navigation__item-arrow-icon {
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .cmp-navigation__item.expanded > .cmp-navigation__item-arrow-icon {
+    transform: rotate(90deg); // or 180deg depending on original orientation
+    transition: transform 0.3s ease;
+  }
+
+  input::placeholder {
+    color: var(--search-text-color);
+    font-size: var(--body-font-size);
+    font-weight: 500;
+    line-height: var(--body-font-line-height);
+    text-indent: 0;
+
+    &:active,
+    &:hover {
+      color: var(--search-text-active);
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .navigation {
+    .cmp-navigation__col-icon {
+      display: block;
+      height: 24px;
+      width: 24px;
+      cursor: pointer;
+      transform: rotate(180deg);
+    }
+
+    .cmp-navigation-filter-container {
+      .cmp-navigation-filter__section {
+        width: 100%;
+      }
+    }
+  }
+}

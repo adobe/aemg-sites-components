@@ -1,0 +1,60 @@
+.backToTop {
+  position: fixed;
+  bottom: 12%;
+  right: 4%;
+  z-index: var(--z-index-3);
+
+  .gu-backToTop_wrapper {
+    z-index: var(--z-index-3);
+    margin-top: 1.25rem;
+
+    .gu-backToTop_icon-container {
+      border: none;
+      padding: 1.25rem;
+      border-radius: 2rem;
+      background: var(--back-to-top-bg);
+      cursor: pointer;
+      width: 64px;
+      height: 64px;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .backToTop {
+    bottom: 8%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .backToTop {
+    bottom: 2%;
+    right: 1.4%;
+    .gu-backToTop_wrapper {
+      .gu-backToTop_icon-container {
+        &:hover {
+          background: var(--primary-dark);
+
+          .gu-backToTop_icon {
+            filter: brightness(0) invert(1);
+          }
+        }
+        // &:hover {
+        //   background: var(--primary-dark);
+        // }
+
+        // img {
+        //   fill: var(--primary-color);
+
+        //   &:hover {
+        //     fill: var(--accent-light-blue);
+        //   }
+        // }
+
+        // &:hover img {
+        //   content: url("/content/dam/aemguides/common-images/icons/backtotophover.svg");
+        // }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@media (min-width: 1024px) {
+  .custom-container {
+    .gu-custom-container {
+      &.left-collapsed {
+        .col-3grid {
+          flex: 0 0 5%;
+        }
+
+        .col-9grid {
+          flex: 0 0 95%;
+          max-width: 95%;
+
+          .col-9grid-container {
+            gap: 0;
+
+            .col-9grid-components {
+              width: 92.9%;
+            }
+
+            .gu-toolbar_wrapper.toolbar-hitech {
+              flex-grow: 1;
+            }
+          }
+        }
+        .col-6grid {
+          flex: 0 0 70.9%;
+          max-width: 71%;
+        }
+        .col-6grid.collapsed {
+          flex: 0 0 89.9%;
+          max-width: 90%;
+        }
+
+        .cmp-navigation {
+          display: none;
+        }
+
+        .cmp-navigation-filter-container {
+          display: none;
+        }
+
+        .cmp-navigation__col-icon {
+          margin-top: 0.5rem;
+          transform: rotate(0deg);
+        }
+
+        .related-tags {
+          display: none;
+        }
+      }
+    }
+  }
+}

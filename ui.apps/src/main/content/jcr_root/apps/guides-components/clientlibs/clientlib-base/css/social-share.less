@@ -1,0 +1,100 @@
+.social-share-container {
+  position: relative;
+  display: inline-block;
+
+  .share-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem;
+    width: 48px;
+    height: 48px;
+
+    &:hover {
+      background-color: var(--secondary-btn-color-hover);
+      border-radius: 50%;
+    }
+  }
+
+  .social-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 145%;
+    left: -200%;
+    width: max-content;
+    z-index: var(--z-index-9);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--secondary-btn-color);
+    box-shadow: 0 4px 16px 0 var(--box-shadow-color);
+
+    &.hidden {
+      display: none;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      color: var(--secondary-light);
+      transition: background 0.3s ease-in-out;
+
+      a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--toolbar-text-color);
+        font-size: var(--body-font-size);
+        font-weight: 600;
+        line-height: var(--body-font-line-height);
+        width: 100%;
+        transition: color 0.3s ease-in-out;
+
+        img {
+          width: 20px;
+          height: 20px;
+          transition: filter 0.3s ease-in-out;
+        }
+
+        &:hover img,
+        &:active img {
+          filter: invert(29%) sepia(97%) saturate(3883%) hue-rotate(213deg) brightness(100%) contrast(105%);
+        }
+
+        &:active {
+          color: var(--link-color);
+        }
+
+        &:hover {
+          color: var(--link-color);
+        }
+      }
+
+      &:active,
+      &:hover {
+        border-radius: 0.25rem;
+        background: var(--secondary-btn-color-hover);
+        color: var(--link-color);
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .social-share-container {
+    .social-links {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: auto;
+      right: 0;
+      width: 218px;
+      height: max-content;
+      border-radius: 0.75rem;
+    }
+  }
+}

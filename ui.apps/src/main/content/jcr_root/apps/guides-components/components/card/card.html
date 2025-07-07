@@ -1,0 +1,34 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.cardObj="com.adobe.guides.aem.components.core.models.CardModel" />
+
+<div class="gu-container">
+  <div class="gu-card">
+    <div class="gu-card__heading">${cardObj.heading}</div>
+    <div class="gu-card__container" data-sly-list.cardDetails="${cardObj.cardBeanList}">
+      <div class="gu-card__item">
+        <img
+          class="gu-card__image"
+          src="${cardDetails.cardImage}"
+          alt="Customer Image"
+        />
+        <div class="gu-card__content">
+          <div class="gu-card__title">
+            ${cardDetails.title}
+          </div>
+          <div class="gu-card__description">
+            ${cardDetails.description}
+          </div>
+          <a href="${cardDetails.ctaLink}" class="gu-card__link">${cardDetails.ctaLabel}
+            <svg class="gu-card__arrow">
+              <use xlink:href="/content/dam/aemguides/common-images/icons/sprite.svg#right-arrow"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

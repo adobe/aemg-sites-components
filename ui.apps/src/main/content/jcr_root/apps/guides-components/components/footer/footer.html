@@ -1,0 +1,60 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.footerModel="com.adobe.guides.aem.components.core.models.FooterModel" />
+
+<div class="gu-footer_wrapper">
+    <div class="gu-footer_left-container">
+        <div class="gu-footer_logo-container">
+            <a href="${footerModel.logoLink}">
+                <!-- <img class="gu-footer_logo" src="${footerModel.logo}" alt="Company logo"> -->
+                  <img class="gu-footer_logo" data-src-dark="${footerModel.darkLogo}" data-src-light="${footerModel.lightLogo}"  alt="Company logo">
+            </a>
+        </div>
+        <div class="gu-footer_legal-container" data-sly-list.legalObj="${footerModel.legalList}">
+            <a class="gu-footer_legal-link" href="${legalObj.ctaLink}">${legalObj.ctaLabel}</a>
+        </div>
+    </div>
+    <div class="gu-footer_right-container">
+        <div>
+            <h6 class="gu-footer_topic-heading">${footerModel.pageLinksTitle}</h6>
+        </div>
+        <div class="gu-footer_pages-container" data-sly-list.pagesObj="${footerModel.pagesList}">
+            <div class="gu-footer_page-link_container" data-sly-list.pageListObj="${pagesObj.pageList}">
+                <a class="gu-footer_page-link" href="${pageListObj.ctaLink}">${pageListObj.ctaLabel}</a>
+            </div>
+        </div>
+    </div>
+    <div class="gu-footer_company-container">
+        <h6 class="gu-footer_topic-heading">${footerModel.companyLinksTitle}</h6>
+        <div class="gu-footer_company-wrapper">
+            <sly data-sly-repeat.companyObj="${footerModel.companyList}">
+                <a class="gu-footer_company-link" href="${companyObj.ctaLink}">${companyObj.ctaLabel}</a>
+            </sly>
+        </div>
+    </div>
+    <div class="gu-footer_end-container">
+        <h6 class="gu-footer_topic-heading">${footerModel.contactLinksTitle}</h6>
+        <div class="gu-footer_contact-wrapper">
+            <div class="gu-footer_contact-container" data-sly-repeat.contactObj="${footerModel.contactList}">
+                <img class="gu-footer_contact-icon" src="${contactObj.ctaIcon}" alt="Contact Icon">
+                <a class="gu-footer_contact-link" href="${contactObj.ctaLink}">
+                    <p class="gu-footer_contact-text">${contactObj.ctaLabel}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h6 class="gu-footer_topic-heading">${footerModel.socialLinksTitle}</h6>
+        </div>
+        <div class="gu-footer_social-container" data-sly-list.socialObj="${footerModel.socialList}">
+            <a class="gu-footer_social-link" href="${socialObj.ctaLink}">
+                <img class="gu-footer_social-icon" src="${socialObj.ctaIcon}" alt="Social Icon">
+            </a>
+        </div>
+    </div>
+</div>
