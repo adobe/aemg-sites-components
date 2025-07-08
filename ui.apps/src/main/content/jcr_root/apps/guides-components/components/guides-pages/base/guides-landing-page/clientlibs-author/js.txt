@@ -1,0 +1,3 @@
+#base=js
+xf-focusout.js
+page-dialog-submit.js
