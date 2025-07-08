@@ -47,8 +47,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <aem.sdk.api>2024.11.18598.20241113T125352Z-241100</aem.sdk.api>
         <componentGroupName>Guides Components</componentGroupName>
-        <core.wcm.components.version>2.18.6</core.wcm.components.version>
-        <uber.jar.version>6.5.4</uber.jar.version>
+        <core.wcm.components.version>2.22.8</core.wcm.components.version>
+        <uber.jar.version>6.5.21</uber.jar.version>
     </properties>
 
     <build>
@@ -654,7 +654,7 @@ Bundle-DocURL:
                 <groupId>com.adobe.aem</groupId>
                 <artifactId>uber-jar</artifactId>
                 <version>${uber.jar.version}</version>
-                <classifier>apis</classifier>
+                <!--<classifier>apis</classifier>-->
                 <scope>provided</scope>
             </dependency>
              <!-- AEM Core Components -->
@@ -725,6 +725,12 @@ Bundle-DocURL:
                 <artifactId>slf4j-test</artifactId>
                 <version>1.0.1</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>1.10.0</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
