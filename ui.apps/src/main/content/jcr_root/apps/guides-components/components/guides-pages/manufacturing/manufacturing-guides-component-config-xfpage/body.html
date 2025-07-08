@@ -1,0 +1,270 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright 2016 Adobe Systems Incorporated
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<sly
+  data-sly-use.body="body.js"
+  data-sly-use.templatedContainer="com.day.cq.wcm.foundation.TemplatedContainer"
+/>
+<sly
+  data-sly-test="${!templatedContainer.hasStructureSupport}"
+  data-sly-resource="${body.resourcePath @ resourceType='wcm/foundation/components/parsys'}"
+/>
+<div class="container">
+  <sly
+    data-sly-resource="${'toolbar' @ resourceType='aem-guides-components/components/guides-components/toolbar-component'}"
+  />
+  <sly
+    data-sly-use.toolbarModel="com.adobe.guides.aem.components.core.models.ComponentConfigModel"
+  />
+  <div
+    class="gu-toolbar_wrapper toolbar-manufacturing"
+    data-sly-test="${!wcmmode.edit}"
+    data-sly-set.toolbarConfig="${toolbarModel.toolbarConfig}"
+  >
+    <div class="toolbar toolbar-header desktop">
+      <div class="toolsection horizontal">
+        <div
+          class="navigation"
+          data-sly-test="${toolbarConfig.embedNavigation}"
+        >
+          <sly
+            data-sly-resource="${'toolbar/navigation' @ resourceType='aem-guides-components/components/guides-components/navigation'}"
+          />
+        </div>
+        <div class="gu-search__container">
+          <button class="gu-search__toggle" aria-label="Search">
+            <img
+              class="gu-search__icon"
+              src="/content/dam/guides/fsi-assets/search-icon.png"
+              alt="Search Icon"
+            />
+          </button>
+        </div>
+        <div
+          class="language-navigation"
+          data-sly-test="${toolbarConfig.embedLanguageNavigation}"
+        >
+          <sly
+            data-sly-resource="${'toolbar/language-navigation' @ resourceType='aem-guides-components/components/guides-components/languagenavigation'}"
+          />
+        </div>
+        <div
+          class="theme-selector"
+          data-sly-test="${toolbarConfig.embedThemeSelector}"
+        >
+          <sly
+            data-sly-resource="${'toolbar/theme-selector' @ resourceType='aem-guides-components/components/guides-components/theme-selector'}"
+          />
+        </div>
+        <div
+          class="accessibility"
+          data-sly-test="${toolbarConfig.embedAccessibility}"
+        >
+          <sly
+            data-sly-resource="${'toolbar/accessibility' @ resourceType='aem-guides-components/components/guides-components/accessibility'}"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="toolbar toolbar-topic desktop">
+      <div class="toolsection">
+        <div class="toolsection__left">
+          <div
+            class="copy-link-component"
+            data-sly-test="${toolbarConfig.embedCopyLinkComponent}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/copy-link-component' @ resourceType='aem-guides-components/components/guides-components/copy-link-component'}"
+            />
+          </div>
+          <div
+            class="social-share"
+            data-sly-test="${toolbarConfig.embedSocialShare}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/social-share' @ resourceType='aem-guides-components/components/guides-components/social-share'}"
+            />
+          </div>
+          <div
+            class="pdf-export"
+            data-sly-test="${toolbarConfig.embedPdfExport}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/pdf-export' @ resourceType='aem-guides-components/components/guides-components/pdf-export'}"
+            />
+          </div>
+        </div>
+        <div class="toolsection__right">
+          <div
+            class="version-selector"
+            data-sly-test="${toolbarConfig.embedVersionSelector}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/version-selector' @ resourceType='aem-guides-components/components/guides-components/version-selector'}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar toolbar-bottom desktop">
+      <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
+        <sly
+          data-sly-resource="${'toolbar/backToTop' @ resourceType='aem-guides-components/components/guides-components/back-to-top-button'}"
+        />
+      </div>
+    </div>
+    <div class="toolbar above-title mobile hidden">
+      <div class="toolbar-wrapper">
+        <div class="left-section">
+          <button class="layout-button">
+            <img
+              src="/content/dam/guides/common-images/icons/manufacturinng-navigation-icon.svg"
+              alt="Layout button"
+            />
+          </button>
+          <button class="toc-button">
+            <img
+              src="/content/dam/guides/common-images/icons/manufacturinng-toc-icon.svg"
+              alt="Toc button"
+            />
+          </button>
+        </div>
+        <div class="right-section">
+          <button class="lat-button">
+            <img
+              src="/content/dam/guides/common-images/icons/manufacturing-kebab.svg"
+              alt="Lat button"
+            />
+          </button>
+        </div>
+      </div>
+      <div class="overlay hidden"></div>
+      <div class="lat-section hidden">
+        <div class="lat-closewarpper">
+          <button class="lat-closebutton">
+            <img
+              src="/content/dam/guides/common-images/icons/cross.svg"
+              alt="Lat close icon"
+            />
+          </button>
+        </div>
+        <div
+          class="gu-language-navigation-toolbar"
+          data-sly-test="${toolbarConfig.embedLanguageNavigation}"
+        >
+          <div class="gu-language-navigation__title-container">
+            <img
+              class="gu-language-navigation_icon"
+              src="/content/dam/guides/common-images/icons/language.svg"
+              alt="Language Navigation Icon"
+            />
+            <span>Language</span>
+          </div>
+          <sly
+            data-sly-resource="${'toolbar/language-navigation' @ resourceType='aem-guides-components/components/guides-components/languagenavigation'}"
+          />
+        </div>
+        <div
+          class="gu-accessibility-toolbar"
+          data-sly-test="${toolbarConfig.embedAccessibility}"
+        >
+          <div class="gu-accessibility__title-container">
+            <img
+              class="gu-accessibility_icon"
+              src="/content/dam/guides/common-images/icons/accessibility.svg"
+              alt="Accessibility Icon"
+            />
+            <span>Accessibility</span>
+          </div>
+          <sly
+            data-sly-resource="${'toolbar/accessibility' @ resourceType='aem-guides-components/components/guides-components/accessibility'}"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="toolbar below-title mobile hidden">
+      <div class="gu-search__container">
+        <button class="gu-search__toggle" aria-label="Search">
+          <img
+            class="gu-search__icon"
+            src="/content/dam/guides/common-images/icons/searchheader.svg"
+            alt="Search Icon"
+          />
+        </button>
+      </div>
+      <div
+        class="theme-selector"
+        data-sly-test="${toolbarConfig.embedThemeSelector}"
+      >
+        <sly
+          data-sly-resource="${'toolbar/theme-selector' @ resourceType='aem-guides-components/components/guides-components/theme-selector'}"
+        />
+      </div>
+    </div>
+    <div class="toolbar below-updated mobile hidden">
+      <div class="toolsection mobile-horizon">
+        <div class="toolsection__left">
+          <div
+            class="copy-link-component"
+            data-sly-test="${toolbarConfig.embedCopyLinkComponent}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/copy-link-component' @ resourceType='aem-guides-components/components/guides-components/copy-link-component'}"
+            />
+          </div>
+          <div
+            class="social-share"
+            data-sly-test="${toolbarConfig.embedSocialShare}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/social-share' @ resourceType='aem-guides-components/components/guides-components/social-share'}"
+            />
+          </div>
+          <div
+            class="pdf-export"
+            data-sly-test="${toolbarConfig.embedPdfExport}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/pdf-export' @ resourceType='aem-guides-components/components/guides-components/pdf-export'}"
+            />
+          </div>
+        </div>
+        <div class="toolsection__right">
+          <div
+            class="version-selector"
+            data-sly-test="${toolbarConfig.embedVersionSelector}"
+          >
+            <sly
+              data-sly-resource="${'toolbar/version-selector' @ resourceType='aem-guides-components/components/guides-components/version-selector'}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar bottom mobile hidden">
+      <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
+        <sly
+          data-sly-resource="${'toolbar/backToTop' @ resourceType='aem-guides-components/components/guides-components/back-to-top-button'}"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  data-sly-resource="${'cloudservices' @ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}"
+  data-sly-unwrap
+></div>
+<sly data-sly-include="footerlibs.html" />
