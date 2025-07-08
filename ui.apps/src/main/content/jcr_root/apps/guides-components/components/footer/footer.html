@@ -31,7 +31,7 @@
         <h6 class="gu-footer_topic-heading">${footerModel.companyLinksTitle}</h6>
         <div class="gu-footer_company-wrapper">
             <sly data-sly-repeat.companyObj="${footerModel.companyList}">
-                <a class="gu-footer_company-link" href="${companyObj.ctaLink}">${companyObj.ctaLabel}</a>
+                <a class="gu-footer_company-link" href="${companyObj.ctaLink}">${companyObj.ctaLabel @ i18n}</a>
             </sly>
         </div>
     </div>
@@ -41,7 +41,7 @@
             <div class="gu-footer_contact-container" data-sly-repeat.contactObj="${footerModel.contactList}">
                 <img class="gu-footer_contact-icon" src="${contactObj.ctaIcon}" alt="Contact Icon">
                 <a class="gu-footer_contact-link" href="${contactObj.ctaLink}">
-                    <p class="gu-footer_contact-text">${contactObj.ctaLabel}</p>
+                    <p class="gu-footer_contact-text">${contactObj.ctaLabel @ i18n}</p>
                 </a>
             </div>
         </div>
