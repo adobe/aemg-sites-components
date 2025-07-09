@@ -1,0 +1,82 @@
+html.adobeguides-text-size {
+  .manufacturing-guides-topic-page .breadcrumb {
+    padding: 0.75rem !important;
+  }
+  .cmp-languagenavigation__item a {
+    font-size: var(--body-1-fs) !important;
+  }
+  @media (min-width: 767px) {
+    .header .gu-header_toolbarheader .below-title .gu-theme__icon-container {
+      display: inline;
+    }
+    .toolbar.below-title.mobile img {
+      filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
+        brightness(105%) contrast(105%);
+    }
+  }
+}
+
+html#adobeguides-dark-contrast {
+  .base-topic-page-section {
+    div.topic {
+      .version-selector {
+        .dropdown {
+          background-color: transparent !important;
+          border-color: var(--white-color) !important;
+        }
+      }
+    }
+  }
+  .lat-section {
+    border: 1px solid var(--white-color);
+    margin: 0.625rem;
+    width: 94%;
+    .cmp-languagenavigation__group li,
+    .cmp-languagenavigation__group,
+    .cmp-languagenavigation {
+      border-color: transparent !important;
+      border: none;
+      background-color: transparent !important;
+    }
+  }
+}
+html.adobeguides-light-contrast {
+  .base-topic-page-section {
+    div.topic {
+      .version-selector {
+        .dropdown {
+          background-color: transparent !important;
+          border-color: var(--bluish-color) !important;
+        }
+      }
+    }
+  }
+  .lat-section {
+    .cmp-languagenavigation__group li,
+    .cmp-languagenavigation__group,
+    .cmp-languagenavigation {
+      border-color: transparent !important;
+      border: none;
+    }
+  }
+}
+html.adobeguides-text-spacing {
+  .lat-section
+    .gu-accessibility-toolbar
+    .gu-accessibility__title-container
+    span {
+    letter-spacing: normal !important;
+  }
+  .lat-section
+    .gu-language-navigation-toolbar
+    .gu-language-navigation__title-container
+    span {
+    letter-spacing: normal !important;
+  }
+  .gu-accessibility_menu.show a,
+  .cmp-languagenavigation__group li,
+  .cmp-languagenavigation__group,
+  .cmp-languagenavigation {
+    letter-spacing: normal !important;
+  }
+}

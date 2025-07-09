@@ -1,0 +1,98 @@
+.gu-accessibility_wrapper {
+  .gu-accessibility_menu {
+    background: var(--header-bg);
+    box-shadow: 0 4px 16px 0 var(--box-shadow-color);
+
+    li {
+      &:hover {
+        background: var(--tags-bg);
+
+      img {
+        filter: invert(29%) sepia(97%) saturate(3883%) hue-rotate(213deg)
+          brightness(100%) contrast(105%);
+      }
+      }
+
+      span {
+        color: var(--toolbar-text-color);
+        font-size: var(--body-font-size);
+        line-height: var(--body-font-line-height);
+
+        &:hover,
+        &:active {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+.toolbar.above-title.mobile {
+  .gu-accessibility {
+    &-toolbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      align-self: stretch;
+      margin: 0.75rem 0;
+    }
+
+    &__title-container {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      color: var(--color-text);
+      font-family: var(--body-font-family);
+      font-size: var(--header-links-fs);
+      font-weight: var(--fw-h4);
+      line-height: var(--topic-1-lh);
+      gap: 0.5rem;
+    }
+
+    &_icon {
+      width: 24px;
+      height: 24px;
+
+      &-container {
+        display: none;
+      }
+    }
+  }
+
+  .gu-accessibility_icon-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .gu-accessibility_menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    left: 0;
+    border: none;
+    box-shadow: none;
+
+    li {
+      display: flex;
+      padding: 0.5rem 0;
+      align-items: center;
+      gap: 0.5rem;
+      align-self: stretch;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      margin: 0;
+      font-weight: var(--fw-h4);
+      line-height: var(--body-font-line-height);
+    }
+  }
+}
+
+.gu-accessibility_wrapper .gu-accessibility_menu li:hover {
+  img {
+    filter: invert(25%) sepia(80%) saturate(600%) hue-rotate(10deg)
+      brightness(70%) contrast(120%);
+  }
+}

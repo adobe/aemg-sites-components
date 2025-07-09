@@ -1,0 +1,84 @@
+.navigation {
+  padding-bottom: 1rem;
+  nav > ul.cmp-navigation__group {
+    padding: 0;
+    li {
+      &.cmp-navigation__item {
+        &:has(ul) {
+          &::before {
+            filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
+              brightness(105%) contrast(105%);
+          }
+
+          &.expanded:has(ul)::before {
+            filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
+              brightness(105%) contrast(105%);
+          }
+
+          &.expanded ul li.expanded::before {
+            filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
+              brightness(105%) contrast(105%);
+          }
+        }
+        &.expanded {
+          ::before {
+            filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
+              brightness(105%) contrast(105%);
+          }
+        }
+      }
+    }
+  }
+  .cmp-navigation-filter-container {
+    .cmp-navigation-filter__section {
+      .cmp-navigation-filter__closeicon {
+        display: none;
+        position: absolute;
+        background-image: url("/content/dam/aemguides/common-images/icons/cross-or.svg");
+        background-size: contain;
+        width: 10px;
+        height: 10px;
+        right: 10px;
+        top: 13px;
+        cursor: pointer;
+      }
+    }
+  }
+  @media (min-width: 1024px) {
+    .navigation {
+      .cmp-navigation__col-icon {
+        display: none;
+      }
+
+      .cmp-navigation-filter-container {
+        .cmp-navigation-filter__section {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+body.manufacturing-guides-topic-page.dark{
+  .navigation {
+    .cmp-navigation-filter-container {
+      .cmp-navigation-filter__section {
+        .cmp-navigation-filter__closeicon {
+          background-image: url("/content/dam/aemguides/common-images/icons/cross-light.svg");
+        }
+      }
+    }
+  }
+}
+
+html.adobeguides-text-size {
+  .navigation {
+    .cmp-navigation-filter-container {
+      .cmp-navigation-filter__section {
+        .cmp-navigation-filter__closeicon {
+          top: 17px;
+        }
+      }
+    }
+  }
+}

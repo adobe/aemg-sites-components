@@ -1,0 +1,60 @@
+.header {
+  .gu-header {
+    &_wrapper {
+      position: relative;
+    }
+    .header .gu-header__humberger .res-menu {
+      z-index: 99;
+    }
+    &_toolbarheader {
+      .below-title {
+        position: absolute;
+        right: 13%;
+        top: 14%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.25rem;
+        .gu-search__toggle {
+          border: none;
+          background: none;
+          cursor: pointer;
+          width: auto;
+          height: auto;
+          padding: 0;
+        }
+        .gu-theme__icon-container {
+          width: auto;
+          height: auto;
+          padding: 0;
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 360px) {
+  .header .gu-header_toolbarheader .below-title {
+    right: 14%;
+  }
+}
+
+@media (min-width: 600px) {
+  .header {
+    .gu-header_search-container {
+      display: flex;
+      align-items: center;
+    }
+    .gu-header_toolbarheader .below-title {
+      right: 6%;
+    }
+  }
+}
+
+@media (min-width: 767px) {
+  .header .gu-header_toolbarheader .below-title {
+    right: 5%;
+  }
+}

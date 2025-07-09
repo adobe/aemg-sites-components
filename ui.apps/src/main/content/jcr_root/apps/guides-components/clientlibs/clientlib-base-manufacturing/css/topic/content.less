@@ -1,0 +1,242 @@
+// High Contrast
+html#adobeguides-dark-contrast {
+  .topic__container {
+    border-left: 1px solid var(--grey-border);
+    border-right: 1px solid var(--grey-border);
+  }
+  .toolbar-scenario-mobile {
+    border-left: 1px solid var(--grey-border);
+    border-right: 1px solid var(--grey-border);
+    border-top: 1px solid var(--grey-border);
+  }
+  .topic__updated {
+    border-left: 1px solid var(--grey-border);
+    border-right: 1px solid var(--grey-border);
+    border-bottom: 1px solid var(--grey-border);
+  }
+}
+
+html.adobeguides-light-contrast {
+  .base-topic-page-section div.topic .section :last-child {
+    color: var(--blue-link-color) !important;
+  }
+}
+html.adobeguides-light-contrast
+  .base-topic-page-section
+  div.topic
+  .section
+  .copy-link {
+  color: var(--white-color) !important;
+}
+.manufacturing-guides-topic-page {
+  .base-topic-page-section {
+    div.topic {
+      .copy-link {
+        color: var(--white-color);
+      }
+      .p div a {
+        word-wrap: break-word;
+      }
+      .toolbar-container {
+        padding-bottom: 1rem;
+        border-bottom: none;
+        margin-bottom: 1rem;
+      }
+      .toolbar-scenario-mobile,
+      .topic__container,
+      .topic__updated {
+        background: var(--top-bg-color);
+      }
+      .topic__container {
+        padding: 0 0.5rem 0 0.5rem;
+      }
+      .toolbar-scenario-mobile {
+        padding: 0.5rem 0.5rem 0 0.5rem;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+      .topic__updated {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        margin-top: 0;
+      }
+      .toolsection {
+        padding: 0 0.5rem 0.5rem 0.5rem;
+      }
+
+      .topic__updated .updated__container {
+        display: block;
+        .updated__section {
+          font-size: var(--topic-fs-sm);
+          flex-direction: row;
+          align-items: center;
+          flex-wrap: wrap;
+          width: 100%;
+          justify-content: start;
+          padding-bottom: 10px;
+          .published,
+          .updated {
+            color: var(--primary-color);
+            width: auto;
+            margin: 0 !important;
+          }
+          .updated {
+            white-space: nowrap;
+          }
+        }
+        .updated__section span:nth-child(2) {
+          display: none;
+        }
+        .updated:after {
+          content: " • ";
+          font-size: 1rem;
+          margin: 0 5px;
+          color: var(--topic-grey-dot);
+          font-weight: var(--fw-h4);
+        }
+        .contributors {
+          margin-top: 1rem !important;
+        }
+      }
+
+      .version-selector {
+        padding-bottom: 0.5rem;
+        padding-right: 0.5rem;
+
+        .dropdown {
+          background-color: var(--dropdown-bg);
+          border: 1px solid var(--dropdown-border-color);
+        }
+        .dropdown__item {
+          padding: 0.5rem 0.75rem !important;
+          margin: 0;
+        }
+        .dropdown__list {
+          background-color: var(--dropdown-bg);
+          border: 1px solid var(--dropdown-border-color);
+          width: 60px;
+          right: 1.1rem;
+          position: absolute;
+          top: 2rem;
+          left: auto;
+        }
+      }
+
+      .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+        top: 120%;
+        height: max-content;
+        left: -120px;
+        .gu-pdf-export__options li {
+          margin: 0;
+          padding-left: 0.75rem !important;
+        }
+      }
+      .social-links {
+        margin-top: 0;
+        top: 120%;
+        height: max-content;
+        width: max-content;
+
+        li {
+          margin: 0;
+          padding-left: 0.75rem !important;
+          &:hover {
+            background-color: var(--tags-bg);
+          }
+          a:hover {
+            text-decoration: none;
+            color: var(--primary-color);
+            img {
+              filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
+                saturate(4907%) hue-rotate(33deg) brightness(94%) contrast(91%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .manufacturing-guides-topic-page {
+    .base-topic-page-section {
+      div.topic {
+        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+          left: -30px;
+        }
+        .social-links {
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .manufacturing-guides-topic-page {
+    .base-topic-page-section {
+      div.topic {
+        .topic__updated {
+          .updated__container {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 75%;
+            gap: 0.5rem;
+            .updated__section {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              width: auto;
+              padding-bottom: 0;
+            }
+            .contributors {
+              margin-top: 0 !important;
+            }
+            .published,
+            .updated {
+              display: inline-block;
+              white-space: nowrap;
+            }
+            /* Add dots after the "Updated and published" span */
+            .updated:after,
+            .published:after {
+              content: " • ";
+              font-size: 1rem;
+              margin: 0 0.5rem;
+              color: var(--topic-yellow-dot);
+              font-weight: var(--fw-h4);
+              white-space: nowrap;
+            }
+          }
+        }
+        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+          left: -8rem;
+        }
+        .social-links {
+          left: -6rem;
+        }
+
+        .version-selector {
+          padding: 0;
+          .dropdown__list {
+            right: auto;
+            position: absolute;
+            left: 0;
+          }
+        }
+        .topic__container {
+          padding: 0 1.5rem 0 1.5rem;
+        }
+        .toolbar-scenario-mobile {
+          padding: 1.5rem 1.5rem 0 1.5rem;
+        }
+        .topic__updated {
+          padding: 1rem 1.5rem 1.5rem 1.5rem;
+        }
+      }
+    }
+  }
+}

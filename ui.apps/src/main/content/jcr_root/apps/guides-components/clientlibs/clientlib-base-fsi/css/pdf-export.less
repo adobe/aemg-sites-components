@@ -1,0 +1,28 @@
+.gu-pdf-export__wrapper {
+  .gu-pdf-export__button {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+  }
+  .gu-pdf-export__button:hover,
+  .gu-pdf-export__button:active {
+    background-color: var(--secondary-btn-color-hover);
+    border-radius: 50%;
+  }
+  .gu-pdf-export__options li {
+    margin: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .gu-pdf-export__wrapper {
+    .gu-pdf-export__button {
+      padding: 0.5rem;
+    }
+    .gu-pdf-export__dropdown {
+      .gu-pdf-export__options li {
+        margin: 0;
+      }
+    }
+  }
+}

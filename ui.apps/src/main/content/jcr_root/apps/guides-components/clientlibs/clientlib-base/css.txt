@@ -38,3 +38,7 @@ contributors.less
 accessibility-features.less
 dark.less
 topic-card.less
+banner-component.less
+card.less
+global.less
+product-card.less
