@@ -99,10 +99,10 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
         String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
         JSONObject toc = new JSONObject(tocBinaryString);
-        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
+        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath );
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
+        Utils.flattenToc(toc, categoryPath, flat);
         LOGGER.info("Pager: flatten toc {}", flat);
         int curr = findItem(flat, currentPage);
         prev = findPrev(flat, curr);
@@ -116,25 +116,6 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         
         LOGGER.info("nextTitle: {}, nextUrl: {}", nextTitle, nextUrl);
         LOGGER.info("prevTitle: {}, prevUrl: {}", prevTitle, prevUrl);
-    }
-
-    public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
-        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(true));
-        boolean hasDisplayName =  toc.has("displayName");
-        if (toc.has("outputPath") && isVisible && hasDisplayName) {
-            String outputPath = toc.getString("outputPath");
-            String fullPath = Paths.get(categoryPath, outputPath).normalize().toString();
-            PagerItem item = new PagerItem()
-                    .setTitle(toc.get("displayName").toString())
-                    .setUrl(fullPath);
-            collector.add(item);
-        }
-        if (toc.has("children") && isVisible) {
-            JSONArray children = toc.getJSONArray("children");
-            for (int i = 0; i < children.length(); i++) {
-                flattenToc(children.getJSONObject(i), categoryPath, collector);
-            }
-        }
     }
 
     protected PagerItem findNext(ArrayList<PagerItem> flatToc, int index) {

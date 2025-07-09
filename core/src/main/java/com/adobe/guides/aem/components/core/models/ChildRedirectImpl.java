@@ -84,7 +84,7 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
+        Utils.flattenToc(toc, categoryPath, flat);
         LOGGER.info("Pager: flatten toc {}", flat);
         redirectUrl = flat.get(0).getUrl();
     }
@@ -102,7 +102,7 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
+        Utils.flattenToc(toc, categoryPath, flat);
         LOGGER.info("Pager: flatten toc {}", flat);
         redirectUrl = flat.get(0).getUrl();
         if (redirectUrl != null) {
@@ -111,24 +111,7 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         }
     }
 
-    public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
-        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(Optional.of(true)));
-        boolean hasDisplayName =  toc.has("displayName");
-        if (toc.has("outputPath") && isVisible && hasDisplayName) {
-            String outputPath = toc.getString("outputPath");
-            String fullPath = Paths.get(categoryPath, outputPath).normalize().toString();
-            PagerItem item = new PagerItem()
-                    .setTitle(toc.get("displayName").toString())
-                    .setUrl(outputPath);
-            collector.add(item);
-        }
-        if (toc.has("children") && isVisible) {
-            JSONArray children = toc.getJSONArray("children");
-            for (int i = 0; i < children.length(); i++) {
-                flattenToc(children.getJSONObject(i), categoryPath, collector);
-            }
-        }
-    }
+    
 
     @NotNull
     @Override
