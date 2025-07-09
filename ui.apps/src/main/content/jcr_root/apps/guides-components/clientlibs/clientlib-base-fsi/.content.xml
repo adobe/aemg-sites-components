@@ -4,4 +4,4 @@
     allowProxy="{Boolean}true"
     categories="[guides-components.base.fsi]"
     jsProcessor="[default:none,min:gcc;languageIn=ECMASCRIPT6]"
-    embed="[guides-components.base,core.wcm.components.accordion.v1,core.wcm.components.tabs.v1,core.wcm.components.carousel.v1,core.wcm.components.image.v3,core.wcm.components.breadcrumb.v2,core.wcm.components.search.v2,core.wcm.components.form.text.v2,core.wcm.components.pdfviewer.v1,core.wcm.components.form.container.v2,core.wcm.components.text.v2,core.wcm.components.embed.v1,aemguides.grid,fmdita.template.default.topicpage]"/>
+    embed="[guides-components.base,core.wcm.components.accordion.v1,core.wcm.components.tabs.v1,core.wcm.components.carousel.v1,core.wcm.components.image.v3,core.wcm.components.breadcrumb.v2,core.wcm.components.search.v2,core.wcm.components.form.text.v2,core.wcm.components.pdfviewer.v1,core.wcm.components.form.container.v2,core.wcm.components.text.v2,core.wcm.components.embed.v1,guides-components.grid,fmdita.template.default.topicpage]"/>

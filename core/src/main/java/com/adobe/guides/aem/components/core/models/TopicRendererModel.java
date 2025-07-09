@@ -43,7 +43,7 @@ public class TopicRendererModel {
 
                     // Check if node has the correct resourceType
                     if (containerNode.hasProperty("sling:resourceType") &&
-                            "aemguides/components/container".equals(containerNode.getProperty("sling:resourceType").getString())) {
+                            "guides-components/components/container".equals(containerNode.getProperty("sling:resourceType").getString())) {
 
                         // Check if "injected-container" exists inside this container
                         if (containerNode.hasNode("injected-container")) {

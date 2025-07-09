@@ -17,43 +17,43 @@
 <sly data-sly-use.body="body.js" data-sly-use.templatedContainer="com.day.cq.wcm.foundation.TemplatedContainer"/>
 <sly data-sly-test="${!templatedContainer.hasStructureSupport}" data-sly-resource="${body.resourcePath @ resourceType='wcm/foundation/components/parsys'}"/>
 <div class="container">
-  <sly data-sly-resource="${'toolbar' @ resourceType='aem-guides-components/components/guides-components/toolbar-component'}"/>
+  <sly data-sly-resource="${'toolbar' @ resourceType='guides-components/components/toolbar'}"/>
   <sly data-sly-use.toolbarModel="com.adobe.guides.aem.components.core.models.ComponentConfigModel"/>
   <div class="gu-toolbar_wrapper toolbar-hitech" data-sly-test="${!wcmmode.edit}" data-sly-set.toolbarConfig="${toolbarModel.toolbarConfig}">
     <div class="toolbar desktop">
       <div class="toolsection">
         <div class="navigation" data-sly-test="${toolbarConfig.embedNavigation}">
-          <sly data-sly-resource="${'toolbar/navigation' @ resourceType='aem-guides-components/components/guides-components/navigation'}"/>
+          <sly data-sly-resource="${'toolbar/navigation' @ resourceType='guides-components/components/navigation'}"/>
         </div>
         <div class="version-selector" data-sly-test="${toolbarConfig.embedVersionSelector}">
-          <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='aem-guides-components/components/guides-components/version-selector'}"/>
+          <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='guides-components/components/version-selector'}"/>
         </div>
         <div class="social-share" data-sly-test="${toolbarConfig.embedSocialShare}">
-          <sly data-sly-resource="${'toolbar/social-share' @ resourceType='aem-guides-components/components/guides-components/social-share'}"/>
+          <sly data-sly-resource="${'toolbar/social-share' @ resourceType='guides-components/components/social-share'}"/>
         </div>
         <div class="theme-selector" data-sly-test="${toolbarConfig.embedThemeSelector}">
-          <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='aem-guides-components/components/guides-components/theme-selector'}"/>
+          <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='guides-components/components/theme-selector'}"/>
         </div>
         <div class="pdf-export" data-sly-test="${toolbarConfig.embedPdfExport}">
-          <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='aem-guides-components/components/guides-components/pdf-export'}"/>
+          <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='guides-components/components/pdf-export'}"/>
         </div>
         <div class="language-navigation" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
-          <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='aem-guides-components/components/guides-components/languagenavigation'}"/>
+          <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='guides-components/components/languagenavigation'}"/>
         </div>
         <div class="accessibility" data-sly-test="${toolbarConfig.embedAccessibility}">
-          <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='aem-guides-components/components/guides-components/accessibility'}"/>
+          <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='guides-components/components/accessibility'}"/>
         </div>
       </div>
       <div class="bottom-section">
         <div class="feedback-component" data-sly-test="${toolbarConfig.embedFeedbackComponent}">
-          <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='aem-guides-components/components/guides-components/feedback-component'}"/>
+          <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='guides-components/components/feedback-component'}"/>
         </div>
         <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
-          <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='aem-guides-components/components/guides-components/back-to-top-button'}"/>
+          <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='guides-components/components/back-to-top-button'}"/>
         </div>
       </div>
       <div class="copy-link-component" data-sly-test="${toolbarConfig.embedCopyLinkComponent}">
-        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='aem-guides-components/components/guides-components/copy-link-component'}"/>
+        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='guides-components/components/copy-link-component'}"/>
       </div>
     </div>
     <div class="toolbar toolbar-header mobile hidden">
@@ -63,15 +63,15 @@
         </button>
       </div>
       <div class="accessibility" data-sly-test="${toolbarConfig.embedAccessibility}">
-        <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='aem-guides-components/components/guides-components/accessibility'}"/>
+        <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='guides-components/components/accessibility'}"/>
       </div>
     </div>
     <div class="toolbar top mobile hidden">
       <div class="version-selector" data-sly-test="${toolbarConfig.embedVersionSelector}">
-        <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='aem-guides-components/components/guides-components/version-selector'}"/>
+        <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='guides-components/components/version-selector'}"/>
       </div>
       <div class="copy-link-component" data-sly-test="${toolbarConfig.embedCopyLinkComponent}">
-        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='aem-guides-components/components/guides-components/copy-link-component'}"/>
+        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='guides-components/components/copy-link-component'}"/>
       </div>
     </div>
     <div class="toolbar sticky-middle mobile hidden">
@@ -79,24 +79,24 @@
         <img src="${toolbarConfig.mobNavIcon}" alt="Layout button"/>
       </button>
       <div class="pdf-export" data-sly-test="${toolbarConfig.embedPdfExport}">
-        <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='aem-guides-components/components/guides-components/pdf-export'}"/>
+        <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='guides-components/components/pdf-export'}"/>
       </div>
       <div class="language-navigation" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
-        <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='aem-guides-components/components/guides-components/languagenavigation'}"/>
+        <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='guides-components/components/languagenavigation'}"/>
       </div>
       <div class="theme-selector" data-sly-test="${toolbarConfig.embedThemeSelector}">
-        <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='aem-guides-components/components/guides-components/theme-selector'}"/>
+        <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='guides-components/components/theme-selector'}"/>
       </div>
       <div class="social-share" data-sly-test="${toolbarConfig.embedSocialShare}">
-        <sly data-sly-resource="${'toolbar/social-share' @ resourceType='aem-guides-components/components/guides-components/social-share'}"/>
+        <sly data-sly-resource="${'toolbar/social-share' @ resourceType='guides-components/components/social-share'}"/>
       </div>
     </div>
     <div class="toolbar bottom mobile hidden">
       <div class="feedback-component" data-sly-test="${toolbarConfig.embedFeedbackComponent}">
-        <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='aem-guides-components/components/guides-components/feedback-component'}"/>
+        <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='guides-components/components/feedback-component'}"/>
       </div>
       <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
-        <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='aem-guides-components/components/guides-components/back-to-top-button'}"/>
+        <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='guides-components/components/back-to-top-button'}"/>
       </div>
     </div>
   </div>
