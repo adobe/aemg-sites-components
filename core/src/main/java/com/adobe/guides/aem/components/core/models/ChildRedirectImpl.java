@@ -86,7 +86,7 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         redirectUrl = flat.get(0).getUrl();
         if (redirectUrl != null) {
             LOGGER.info("Redirecting ({}) to {}", Optional.of(301), redirectUrl);
-            response.sendRedirect( redirectUrl);
+            response.sendRedirect(redirectUrl);
         }
     }
 

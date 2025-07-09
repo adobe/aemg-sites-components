@@ -99,7 +99,7 @@ public class PagerImpl extends AbstractComponentImpl implements Pager {
         String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
         String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
         JSONObject toc = new JSONObject(tocBinaryString);
-        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath );
+        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
         Utils.flattenToc(toc, categoryPath, flat);
