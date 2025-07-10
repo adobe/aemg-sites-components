@@ -35,11 +35,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Model(adaptables = SlingHttpServletRequest.class,
-        adapters = Navigation.class, resourceType = NavigationModel.NAVIGATION_COMPONENT_RESOURCE_TYPE,
+        adapters = Navigation.class, resourceType = Navigation2Model.NAVIGATION_COMPONENT_RESOURCE_TYPE,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class Navigation2Model implements Navigation {
 
-    private static final Logger logger = LoggerFactory.getLogger(NavigationModel.class);
+    private static final Logger logger = LoggerFactory.getLogger(Navigation2Model.class);
 
     public static final String NAVIGATION_COMPONENT_RESOURCE_TYPE = "guides-components/components/navigation2";
 
