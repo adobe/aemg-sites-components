@@ -1,0 +1,48 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2022 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+<section
+	data-sly-use.search="com.adobe.guides.aem.components.core.models.Search"
+	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
+	data-sly-use.facetTemplate="facet.html"
+	data-sly-use.sortTemplate="sort.html" class="search__field--results">
+
+	<sly data-sly-test="${search.facetEnabled}" data-sly-call="${facetTemplate.facet @ search=search}"></sly>
+	<sly data-sly-test="${search.sortEnabled}" data-sly-call="${sortTemplate.sort @ search=search}"></sly>
+</section>
+
+<section data-cmp-rootPath="${properties.searchRoot}" 
+data-cmp-results-size="${search.resultsSize}"
+	data-cmp-relative-path="${search.relativePath}"
+	class="search__field--view" id="js-display-diff-view">
+	<div class = "search-result-header">
+		<div class="cmp-search__total-records"></div>
+		<button class="go-back-btn" type="button" onclick="history.back()">
+			Go Back From Where You Came!
+		</button>
+		<div class="sort-btn">
+			<p>Sort</p>
+			<button class = "sort-btn-option">Relevance</button>
+		</div>
+	</div>
+	<ul class="cmp-search-list__item-group">
+	</ul>
+	<div classs="is--hidden" id="js-searchResults-endData"><p>${search.noResultText}</p></div>
+	<section class="search__results--footer">
+		<button>${search.loadMoreText}</button>
+	</section>
+</section>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty = !(search.results)}"></sly>

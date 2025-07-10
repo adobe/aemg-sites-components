@@ -89,13 +89,13 @@ public class AdvanceSearchResultServlet extends SlingSafeMethodsServlet {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdvanceSearchResultServlet.class);
 
 	@Reference
-	private QueryBuilder queryBuilder;
+	transient private QueryBuilder queryBuilder;
 
 	@Reference
-	private LanguageManager languageManager;
+	transient private LanguageManager languageManager;
 
 	@Reference
-	private LiveRelationshipManager relationshipManager;
+	transient private LiveRelationshipManager relationshipManager;
 
 	@Override
 	protected void doGet(@NotNull SlingHttpServletRequest request, @NotNull SlingHttpServletResponse response)

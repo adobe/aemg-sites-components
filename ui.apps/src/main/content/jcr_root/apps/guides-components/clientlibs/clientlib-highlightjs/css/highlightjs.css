@@ -1,0 +1,102 @@
+/*!
+  Theme: Atom Dark
+  Description: Atom Dark color scheme for syntax highlighting
+  Author: Custom
+  Maintainer: @highlightjs/core-team
+  Website: https://highlightjs.org/
+  License: see project LICENSE
+  Touched: 2025
+*/
+
+
+code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+
+
+.hljs {
+  background: #282c34; /* Dark background, typical of Atom Dark */
+  color: #abb2bf; /* Light grey text color */
+}
+
+.hljs-comment {
+  color: #5c6370; /* Muted gray for comments */
+}
+
+.hljs-punctuation,
+.hljs-tag {
+  color: #56b6c2; /* Cyan for punctuation and tags */
+}
+
+.hljs-tag .hljs-attr,
+.hljs-tag .hljs-name {
+  color: #e06c75; /* Soft red for tag names and attributes */
+}
+
+.hljs-attribute,
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-name,
+.hljs-selector-tag {
+  font-weight: 700;
+  color: #c678dd; /* Purple for attributes, keywords, and names */
+}
+
+.hljs-deletion,
+.hljs-number,
+.hljs-quote,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-string,
+.hljs-template-tag,
+.hljs-type {
+  color: #98c379; /* Green for strings, numbers, and types */
+}
+
+.hljs-section,
+.hljs-title {
+  color: #61afef; /* Light blue for section and titles */
+  font-weight: 700;
+}
+
+.hljs-link,
+.hljs-operator,
+.hljs-regexp,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-symbol,
+.hljs-template-variable,
+.hljs-variable {
+  color: #56b6c2; /* Cyan for links, operators, and other symbols */
+}
+
+.hljs-literal {
+  color: #e5c07b; /* Soft yellow for literals */
+}
+
+.hljs-addition,
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code {
+  color: #50fa7b; /* Light green for additions and built-in functions */
+}
+
+.hljs-meta {
+  color: #e06c75; /* Soft red for meta */
+}
+
+.hljs-meta .hljs-string {
+  color: #98c379; /* Green for meta strings */
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}

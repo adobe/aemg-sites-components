@@ -105,7 +105,7 @@ public abstract class AbstractComponentImpl implements Component {
     public ComponentData getData() {
         if (componentData == null) {
             if (this.dataLayerEnabled == null) {
-                this.dataLayerEnabled = ComponentUtils.isDataLayerEnabled(this.resource);
+                this.dataLayerEnabled = (Boolean) ComponentUtils.isDataLayerEnabled(this.resource);
             }
             if (this.dataLayerEnabled) {
                 componentData = getComponentData();

@@ -15,10 +15,7 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 package com.adobe.guides.aem.components.core.models;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -252,13 +249,20 @@ public class NavigationImpl extends AbstractComponentImpl implements Navigation 
      * @return the list of collected navigation trees
      */
     private List<NavigationItem> getItems(@NotNull final Page subtreeRoot) {
-        if (this.structureDepth < 0 || subtreeRoot.getDepth() - this.getNavigationRoot().getDepth() < this.structureDepth) {
-            Iterator<Page> childIterator = subtreeRoot.listChildren(new PageFilter());
-            return StreamSupport.stream(((Iterable<Page>) () -> childIterator).spliterator(), false)
-                .map(item -> this.createNavigationItem(item, getItems(item)))
-                .collect(Collectors.toList());
+        if(Objects.isNull(this.getNavigationRoot()))
+        {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+        else {
+            if (this.structureDepth < 0 || subtreeRoot.getDepth() - this.getNavigationRoot().getDepth() < this.structureDepth) {
+                Iterator<Page> childIterator = subtreeRoot.listChildren(new PageFilter());
+                return StreamSupport.stream(((Iterable<Page>) () -> childIterator).spliterator(), false)
+                        .map(item -> this.createNavigationItem(item, getItems(item)))
+                        .collect(Collectors.toList());
+            }
+            return Collections.emptyList();
+        }
+
     }
 
     /**
@@ -285,9 +289,15 @@ public class NavigationImpl extends AbstractComponentImpl implements Navigation 
      * @return The newly created navigation item.
      */
     private NavigationItemImpl createNavigationItem(@NotNull final Page page, @NotNull final List<NavigationItem> children) {
-        int level = page.getDepth() - (this.getNavigationRoot().getDepth() + structureStart);
-        boolean selected = checkSelected(page);
-        return new NavigationItemImpl(page, selected, request, level, children, getId(), isShadowingDisabled, component, isCurPage(page));
+        int level=0;
+        boolean selected = false;
+        if(Objects.nonNull(this.getNavigationRoot()))
+        {
+             level = page.getDepth() - (this.getNavigationRoot().getDepth() + structureStart);
+             selected = checkSelected(page);
+            return new NavigationItemImpl(page, selected, request, level, children, getId(), isShadowingDisabled, component, isCurPage(page));
+        }
+       return new NavigationItemImpl(page, selected, request, level, children, getId(), isShadowingDisabled, component, isCurPage(page));
     }
 
     /**

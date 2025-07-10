@@ -1,0 +1,23 @@
+<div class="popup">
+  <header>
+    <span>Share - <span id="page-title"></span></span> <!-- Page title dynamically added here -->
+    <div class="close"><i class="fa-solid fa-xmark"></i></div>
+  </header>
+
+  <div class="content">
+    <p>Share this link via</p>
+    <ul class="icons">
+      <a href="#" onclick="shareTo('facebook')"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" onclick="shareTo('twitter')"><i class="fab fa-twitter"></i></a>
+      <!-- <a href="#" onclick="shareTo('instagram')"><i class="fab fa-instagram"></i></a> -->
+      <a href="#" onclick="shareTo('whatsapp')"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" onclick="shareTo('telegram')"><i class="fab fa-telegram-plane"></i></a>
+    </ul>
+    <p>Or copy link</p>
+    <div class="field">
+      <i class="url-icon uil uil-link"></i>
+      <input type="text" readonly id="page-link" value=""> <!-- Dynamic URL inserted here -->
+      <button onclick="copyLink()">Copy</button>
+    </div>
+  </div>
+</div>
