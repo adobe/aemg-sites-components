@@ -34,7 +34,7 @@ import java.util.Collection;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class BreadcrumbModel extends AbstractComponentImpl implements Breadcrumb {
 
-    protected static final String RESOURCE_TYPE = "aemguides/components/guides-components/breadcrumb";
+    protected static final String RESOURCE_TYPE = "guides-components/components/breadcrumb2";
     private static final Logger logger = LoggerFactory.getLogger(BreadcrumbModel.class);
 
     @Self
