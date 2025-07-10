@@ -37,11 +37,11 @@ import org.slf4j.LoggerFactory;
 @Model(adaptables = SlingHttpServletRequest.class,
         adapters = Navigation.class, resourceType = NavigationModel.NAVIGATION_COMPONENT_RESOURCE_TYPE,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class NavigationModel implements Navigation {
+public class Navigation2Model implements Navigation {
 
     private static final Logger logger = LoggerFactory.getLogger(NavigationModel.class);
 
-    public static final String NAVIGATION_COMPONENT_RESOURCE_TYPE = "aemguides/components/guides-components/navigation";
+    public static final String NAVIGATION_COMPONENT_RESOURCE_TYPE = "guides-components/components/navigation2";
 
     private static final String BASEPATH_ATTRIBUTE_NAME = "sitePath";
 
