@@ -1,22 +1,22 @@
 {
   "linkedin": {
     "title": "On LinkedIn",
-    "icon": "/apps/aemguides/clientlibs/clientlib-common/resources/images/linkedin0.svg",
+    "icon": "/apps/guides-components/clientlibs/clientlib-base/resources/images/linkedin0.svg",
     "url": "https://www.linkedin.com/shareArticle?mini=true&url="
   },
   "twitter": {
     "title": "On X",
-    "icon": "/apps/aemguides/clientlibs/clientlib-common/resources/images/twitter.svg",
+    "icon": "/apps/guides-components/clientlibs/clientlib-base/resources/images/twitter.svg",
     "url": "https://twitter.com/intent/tweet?url="
   },
   "facebook": {
     "title": "On Facebook",
-    "icon": "/apps/aemguides/clientlibs/clientlib-common/resources/images/facebook.svg",
+    "icon": "/apps/guides-components/clientlibs/clientlib-base/resources/images/facebook.svg",
     "url": "https://www.facebook.com/share_channel/?type=empty&source_surface=external_share&url="
   },
   "email": {
     "title": "On Email",
-    "icon": "/apps/aemguides/clientlibs/clientlib-common/resources/images/email.svg",
+    "icon": "/apps/guides-components/clientlibs/clientlib-base/resources/images/email.svg",
     "url": "mailto:?"
   }
 }
