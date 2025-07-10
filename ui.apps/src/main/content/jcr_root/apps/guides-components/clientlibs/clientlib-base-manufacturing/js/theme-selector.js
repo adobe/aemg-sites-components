@@ -12,11 +12,11 @@ window.onload = function () {
 
     // Select the dark theme icon and update its src
     $darkIcon.src =
-      "/content/dam/aemguides/common-images/icons/manufacturing-dark-theme.svg";
+      "/content/dam/guides/common-images/icons/manufacturing-dark-theme.svg";
 
     // Select the light theme icon and update its src
     $lightIcon.src =
-      "/content/dam/aemguides/common-images/icons/manufacturing-light-theme.svg";
+      "/content/dam/guides/common-images/icons/manufacturing-light-theme.svg";
 
     if (theme === "dark") {
       document.body.classList.add("dark");
