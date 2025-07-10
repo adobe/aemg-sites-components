@@ -11,7 +11,7 @@ $(document).ready(function () {
         if (!isTextOverflowing(shortdesc)) {
             shortdesc.style.backgroundImage = "none"; // Hide arrow
         } else {
-            shortdesc.style.backgroundImage = "url('/content/dam/aemguides/common-images/icons/Chevron-orange.svg')"; // Show arrow
+            shortdesc.style.backgroundImage = "url('/content/dam/guides/common-images/icons/Chevron-orange.svg')"; // Show arrow
         }
     }
 
