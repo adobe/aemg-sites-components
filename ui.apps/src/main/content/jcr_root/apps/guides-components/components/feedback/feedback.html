@@ -1,3 +1,4 @@
+<sly data-sly-use.feedback="com.adobe.guides.aem.components.core.models.FeedbackModel"/>
 <sly data-sly-test="${wcmmode.edit}">
   <sly data-sly-test.componentName="${component.title}"></sly>
   <div class="no_content" align="center">EDIT: ${componentName}</div>
@@ -10,8 +11,8 @@
       <span class="gu-feedback__close-icon">X</span>
     </button>
     <div class="gu-feedback__wrapper">
-      <div class="gu-feedback__text" data-sly-test="${properties.title}">
-        ${properties.title @ i18n}
+      <div class="gu-feedback__text" data-sly-test="${feedback.title}">
+        ${feedback.title @ i18n}
       </div>
       <div class="gu-feedback__button-container">
         <button id="gu-likeButton" class="gu-feedback__button" type="button">

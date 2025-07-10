@@ -18,12 +18,20 @@ import javax.inject.Inject;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import com.adobe.cq.export.json.ComponentExporter;
+import com.adobe.cq.export.json.ExporterConstants;
+import org.apache.sling.models.annotations.Exporter;
 
 @Model(
         adaptables = { Resource.class, SlingHttpServletRequest.class },
+        adapters = { BannerModel.class, ComponentExporter.class },
+        resourceType = BannerModel.RESOURCE_TYPE,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
-public class BannerModel {
+@Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
+public class BannerModel implements ComponentExporter {
+
+    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/banner";
 
     private static final Logger logger = LoggerFactory.getLogger(BannerModel.class);
     
@@ -104,5 +112,10 @@ public class BannerModel {
 
     public String getCtaLink() {
         return ctaLink;
+    }
+
+    @Override
+    public String getExportedType() {
+        return RESOURCE_TYPE;
     }
 }
