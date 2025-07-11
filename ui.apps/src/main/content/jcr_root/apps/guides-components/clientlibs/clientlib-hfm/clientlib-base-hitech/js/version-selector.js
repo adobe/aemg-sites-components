@@ -54,6 +54,15 @@ function updateDropdownIcon(dropdownList, dropdownIcon) {
   $(".version-selector .dropdown__container span").css({
     color: "var(--version-selected-color)",
   });
+  $("html#adobeguides-dark-contrast .version-selector .dropdown__value").css({
+    color: "var(--primary-color)",
+  });
+  $("html#adobeguides-dark-contrast .version-selector .dropdown__button").css({
+    color: "var(--primary-color)",
+  });
+  $(".version-selector .dropdown__button").css({
+    color: "var(--primary-color)",
+  });
   $(".version-selector .dropdown").attr(
     "style",
     "border: 1px solid var(--primary-color) !important"
@@ -64,10 +73,11 @@ function updateDropdownIcon(dropdownList, dropdownIcon) {
     : "M14.7194 12.7207C14.5416 12.8996 14.3012 13 14.0506 13C13.8 13 13.5595 12.8996 13.3818 12.7207L9.97625 9.32043L6.61813 12.7207C6.44039 12.8996 6.19996 13 5.94935 13C5.69874 13 5.45831 12.8996 5.28057 12.7207C5.19166 12.6314 5.12109 12.5252 5.07292 12.4081C5.02476 12.2911 4.99997 12.1655 4.99997 12.0387C4.99997 11.9119 5.02476 11.7864 5.07292 11.6693C5.12109 11.5523 5.19166 11.446 5.28057 11.3567L9.30273 7.28412C9.39092 7.19409 9.49584 7.12264 9.61143 7.07387C9.72703 7.02511 9.85102 7 9.97625 7C10.1015 7 10.2255 7.02511 10.3411 7.07387C10.4567 7.12264 10.5616 7.19409 10.6498 7.28412L14.7194 11.3567C14.8083 11.446 14.8789 11.5523 14.927 11.6693C14.9752 11.7864 15 11.9119 15 12.0387C15 12.1655 14.9752 12.2911 14.927 12.4081C14.8789 12.5252 14.8083 12.6314 14.7194 12.7207Z";
 
   dropdownIcon.attr("d", iconPath);
+  dropdownIcon.attr("fill", "var(--primary-color)");
 
-  if (isHidden) {
-    dropdownIcon.attr("fill", "var(--version-selected-color)");
-  } else {
-    dropdownIcon.attr("fill", "var(--primary-color)");
-  }
+  // if (isHidden) {
+  //   dropdownIcon.attr("fill", "var(--unselected-color)");
+  // } else {
+  //   dropdownIcon.attr("fill", "var(--primary-color)");
+  // }
 }
