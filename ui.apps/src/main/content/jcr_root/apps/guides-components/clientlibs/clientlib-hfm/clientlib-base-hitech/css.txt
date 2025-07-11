@@ -27,3 +27,4 @@ topic/content.less
 accessibility-features.less
 topic-pdf.less
 style.less
+social-share.less
