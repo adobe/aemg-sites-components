@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  $("#gu-pdf_topic-download").on("click", function (event) {
+  $(".gu-pdf_topic-download").on("click", function (event) {
     let topicTitle = $("#section-topic .topic h1.title").text();
     if (topicTitle) {
       topicTitle = topicTitle.trim().toLowerCase().replaceAll(" ", "-") + ".pdf";
