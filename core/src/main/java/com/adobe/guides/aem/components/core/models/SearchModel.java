@@ -49,7 +49,7 @@ public class SearchModel extends AbstractComponentImpl implements Search {
      */
     public static final int PROP_RESULTS_SIZE_DEFAULT = 10;
     public static final int PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT = 3;
-    protected static final String RESOURCE_TYPE = "aemguides/components/guides-components/search";
+    protected static final String RESOURCE_TYPE = "guides-components/components/search2";
 
     @Self
     @Via(type = ResourceSuperType.class)
