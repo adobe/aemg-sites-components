@@ -18,7 +18,7 @@
         <button id="gu-likeButton" class="gu-feedback__button" type="button">
           <img
             class="gu-feedback__like-icon"
-            src="${properties.likeIcon ? properties.likeIcon : '/content/dam/guides/common-images/icons/thumbs-up-grey.svg'}"
+            src="${feedback.likeIcon ? feedback.likeIcon : '/content/dam/guides/common-images/icons/thumbs-up-grey.svg'}"
             alt="Like Icon"
           />
           <span class="gu-feedback__button-text">${'Yes' @ i18n}</span>
@@ -26,7 +26,7 @@
         <button id="gu-dislikeButton" class="gu-feedback__button" type="button">
           <img
             class="gu-feedback__dislike-icon"
-            src="${properties.dislikeIcon ? properties.dislikeIcon : '/content/dam/guides/common-images/icons/thumbs-down-grey.svg'}"
+            src="${feedback.dislikeIcon ? feedback.dislikeIcon : '/content/dam/guides/common-images/icons/thumbs-down-grey.svg'}"
             alt="Dislike Icon"
           />
           <span class="gu-feedback__button-text">${'No' @ i18n}</span>
