@@ -31,7 +31,7 @@ import org.apache.sling.models.annotations.Exporter;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class BannerModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/banner";
+    public static final String RESOURCE_TYPE = "guides-components/components/banner";
 
     private static final Logger logger = LoggerFactory.getLogger(BannerModel.class);
     

@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class PdfExportModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/pdf-export";
+    public static final String RESOURCE_TYPE = "guides-components/components/pdf-export";
 
     @ValueMapValue
     private String downloadIconPath;

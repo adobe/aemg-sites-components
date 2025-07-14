@@ -27,7 +27,7 @@ import java.util.Objects;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class FooterModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/footer";
+    public static final String RESOURCE_TYPE = "guides-components/components/footer";
 
     private static final Logger logger = LoggerFactory.getLogger(FooterModel.class);
 

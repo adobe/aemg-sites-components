@@ -25,7 +25,7 @@ import java.util.List;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class CardModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/card";
+    public static final String RESOURCE_TYPE = "guides-components/components/card";
 
     private static final Logger logger = LoggerFactory.getLogger(CardModel.class);
 

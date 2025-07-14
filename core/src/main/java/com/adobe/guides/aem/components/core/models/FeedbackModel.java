@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class FeedbackModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/feedback";
+    public static final String RESOURCE_TYPE = "guides-components/components/feedback";
 
     @ValueMapValue
     private String likeIcon;

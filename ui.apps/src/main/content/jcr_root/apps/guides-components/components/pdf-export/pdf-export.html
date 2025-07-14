@@ -8,7 +8,7 @@
   <button class="gu-pdf-export__button">
     <img
       class="gu-pdf-export__icon"
-      src="${pdfExport.downloadIconPath ? pdfExport.downloadIconPath : '/content/dam/aemguides/common-images/icons/pdf.svg'}"
+      src="${pdfExport.downloadIconPath ? pdfExport.downloadIconPath : '/content/dam/guides/common-images/icons/pdf.svg'}"
       alt="Download PDF Icon"
     />
   </button>
@@ -18,11 +18,7 @@
         <a id="gu-pdf_topic-download" target="_blank" download>{'This Topic' @ i18n}</a>
       </li>
       <li>
-<<<<<<< HEAD
-        <a href="${properties.pdfPath}" target="_blank" download>{'Entire Document' @ i18n}</a>
-=======
-        <a href="${pdfExport.pdfPath}" target="_blank" download>Entire Document</a>
->>>>>>> 0e1dce3 (Add models to components that don't use it, and add model exporter)
+        <a href="${pdfExport.pdfPath}" target="_blank" download>{'Entire Document' @ i18n}</a>
       </li>
     </ul>
   </div>

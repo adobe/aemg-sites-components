@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class AccessibilityModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/accessibility";
+    public static final String RESOURCE_TYPE = "guides-components/components/accessibility";
 
     @ValueMapValue
     private String accessibilityIcon;

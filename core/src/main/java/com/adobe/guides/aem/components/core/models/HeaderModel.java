@@ -28,7 +28,7 @@ import java.util.List;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class HeaderModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/header";
+    public static final String RESOURCE_TYPE = "guides-components/components/header";
 
     private static final Logger logger = LoggerFactory.getLogger(HeaderModel.class);
 

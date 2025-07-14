@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class CopyLinkComponentModel implements ComponentExporter {
 
-    public static final String RESOURCE_TYPE = "aemguides/components/guides-components/copy-link-component";
+    public static final String RESOURCE_TYPE = "guides-components/components/copy-link-component";
 
     @ValueMapValue
     private String copyLinkIcon;
