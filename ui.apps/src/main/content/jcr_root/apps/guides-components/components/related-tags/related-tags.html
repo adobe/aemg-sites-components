@@ -1,0 +1,16 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+<sly data-sly-use.relatedTagsObj="com.adobe.guides.aem.components.core.models.RelatedTags" />
+    <h2 class="tags__heading" data-sly-test="${relatedTagsObj.relatedTags}">${properties.headline}</h2>
+<div class="tags__envelop">
+    <sly data-sly-list.relatedTag="${relatedTagsObj.relatedTags}">
+
+        <div class="tags__container">
+            <div class="tags__value">
+                <h3>${relatedTag}</h3>
+            </div>
+        </div>
+    </sly>
+</div>

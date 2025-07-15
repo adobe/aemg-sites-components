@@ -1,0 +1,8 @@
+<sly data-sly-use.metadata="com.adobe.guides.aem.components.core.models.MetaDataModel"/>
+<ul class="wrapper" data-sly-list.contributor="${metadata.contributors.entrySet}">
+    <li class="contributor" title="${contributor.value}">
+        <div class="circle">
+            <p>${contributor.key}</p>
+        </div>
+    </li>
+</ul>

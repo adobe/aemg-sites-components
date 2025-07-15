@@ -1,0 +1,123 @@
+.toolsection.horizontal {
+  display: none;
+}
+.above-title {
+  display: flex;
+  flex-direction: column;
+
+  .toolbar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .lat-button {
+    float: right;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-index-13);
+    background: var(--box-shadow-dialog);
+  }
+  .lat-section {
+    width: 100%;
+    padding: 1.5rem 1rem 1.25rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    top: 6rem;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: var(--common-bg);
+    box-shadow: 0 4px 24px -4px var(--box-shadow-dialog);
+    position: fixed;
+    left: 0;
+    z-index: var(--z-index-14);
+    right: 0;
+
+    .lat-closewarpper {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 0;
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+    .display-flex {
+      display: flex;
+    }
+  }
+}
+
+.toolsection {
+  display: flex;
+  margin-top: -2.5rem;
+}
+
+.toolbar-container {
+  .toolbar-topic.desktop .toolsection,
+  .below-updated.mobile .toolsection {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+
+    &__left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .gu-toolbar_wrapper {
+    .toolbar-bottom {
+      position: fixed;
+      bottom: 23%;
+      right: 7%;
+      z-index: var(--z-index-1);
+    }
+  }
+
+  .above-title {
+    display: none;
+  }
+
+  .toolsection.horizontal {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    .gu-accessibility_wrapper .gu-accessibility_icon-container {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .toolbar-container {
+    .toolbar-topic.desktop .toolsection {
+      justify-content: space-between;
+      margin-top: 0;
+    }
+  }
+}

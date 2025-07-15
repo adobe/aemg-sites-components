@@ -1,0 +1,63 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<div class="gu-accessibility_wrapper">
+  <button
+    id="gu_accessibility-icon"
+    class="gu-accessibility_icon-container"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <img
+      class="gu-accessibility_icon"
+      src="${properties.accessibilityIcon ? properties.accessibilityIcon : '/content/dam/guides/common-images/icons/accessibility.svg'}"
+      alt="Accessibility Icon"
+    />
+  </button>
+  <ul id="gu_accessibility-menu" class="gu-accessibility_menu" role="menu">
+    <li tabindex="0" class="text-size">
+      <img
+        src="${properties.textSizeIcon}"
+        alt="text-icon"
+      />
+      <span>Increase Text Size</span>
+    </li>
+    <!-- <li tabindex="0" class="line-height">
+      <img
+        src="/content/dam/guides/common-images/icons/Line%20Spacing.svg"
+        alt="lh-icon"
+      />
+      <span>Increase Line Height</span>
+    </li> -->
+    <li tabindex="0" class="text-space">
+      <img
+        src="${properties.textSpaceIcon}"
+        alt="space-icon"
+      />
+      <span>Increase Text Space</span>
+    </li>
+    <li tabindex="0" class="high-contrast">
+      <img
+        src="${properties.highContrastIcon}"
+        alt="highcontrast-icon"
+      />
+      <span>High Contrast</span>
+    </li>
+    <li tabindex="0" class="low-contrast">
+      <img
+        src="${properties.lowContrastIcon}"
+        alt="lowcontrast-icon"
+      />
+      <span>Low Contrast</span>
+    </li>
+    <li tabindex="0" class="reset-all">
+      <img
+        src="${properties.resetIcon}"
+        alt="lowcontrast-icon"
+      />
+      <span>Reset All</span>
+    </li>
+  </ul>
+</div>

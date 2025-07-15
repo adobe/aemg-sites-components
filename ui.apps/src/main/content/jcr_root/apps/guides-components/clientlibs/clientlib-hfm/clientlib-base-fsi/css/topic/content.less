@@ -1,0 +1,108 @@
+.fsi-guides-topic-page {
+  .base-topic-page-section {
+    div.topic {
+      .p div a {
+        word-wrap: break-word;
+      }
+      .topic__updated .updated__container {
+        display: block;
+        .updated__section {
+          display: flex;
+          width: 100%;
+          justify-content: flex-start;
+          .published,
+          .updated {
+            width: max-content;
+            border-radius: 0.25rem;
+            background: var(--border-common);
+            padding: 0.25rem 0.5rem;
+          }
+        }
+        .contributors {
+          margin-top: 1.875rem !important;
+        }
+      }
+      .version-selector {
+        .dropdown__item {
+          padding: 0.5rem 0.75rem !important;
+          margin-left: 0 !important;
+          margin-bottom: 0 !important;
+        }
+        .dropdown__list {
+          width: 60px;
+          right: 0;
+          position: absolute;
+          left: auto;
+        }
+      }
+      .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+        top: 120%;
+        height: max-content;
+        left: -120px;
+        .gu-pdf-export__options li {
+          margin: 0;
+          padding-left: 0.75rem !important;
+        }
+      }
+      .social-links {
+        margin-top: 0;
+        top: 120%;
+        height: max-content;
+        width: max-content;
+
+        li {
+          margin: 0;
+          padding-left: 0.75rem !important;
+          a:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  .base-topic-page-section div.topic .topic__updated .updated__container .updated__section .separator {
+      display: none;
+    }
+}
+
+@media (min-width: 600px) {
+  .fsi-guides-topic-page {
+    .base-topic-page-section {
+      div.topic {
+        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+          left: -30px;
+        }
+        .social-links {
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .fsi-guides-topic-page {
+    .base-topic-page-section {
+      div.topic {
+        .topic__updated .updated__container {
+          display: flex;
+          .contributors {
+            margin-top: 0 !important;
+          }
+        }
+        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+          left: 0;
+        }
+        .social-links {
+          left: 0;
+        }
+
+        .version-selector .dropdown__list {
+          right: auto;
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<div class="gu-theme__wrapper">
+    <button id="gu_theme-icon" class="gu-theme__icon-container">
+        <img class="gu-theme_icon dark"
+            src="${properties.darkTheme ? properties.darkTheme : '/content/dam/guides/common-images/icons/dark-theme.svg'}"
+            alt="Dark Theme Icon">
+        <img class="gu-theme_icon light"
+             src="${properties.lightTheme ? properties.lightTheme : '/content/dam/guides/common-images/icons/light-theme.svg'}"
+             alt="Light Theme Icon">
+    </button>
+</div>

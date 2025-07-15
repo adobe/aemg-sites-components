@@ -1,0 +1,14 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.bannerObj="com.adobe.guides.aem.components.core.models.BannerModel" />
+
+<section class="gu-banner">
+    <div class="gu-container gu-banner__container">
+        <p class="gu-banner__title">${bannerObj.title}</p>
+        <p class="gu-banner__description">${bannerObj.description}</p>
+        <a href="${bannerObj.ctaLink}" class="gu-banner__cta">${bannerObj.ctaLabel}</a>
+    </div>
+</section>

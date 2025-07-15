@@ -205,7 +205,7 @@ Import-Package: javax.annotation;version=0.0.0,*
                     <groupId>com.adobe.aem</groupId>
                     <artifactId>uber-jar</artifactId>
                     <version>${uber.jar.version}</version>
-                    <classifier>apis</classifier>
+                    <!--<classifier>apis</classifier>-->
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
@@ -339,6 +339,11 @@ Import-Package: javax.annotation;version=0.0.0,*
                     <artifactId>cq-wcm-taglib</artifactId>
                     <version>5.7.4</version>
                     <scope>provided</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-text</artifactId>
                 </dependency>
             </dependencies>
         </profile>

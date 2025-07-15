@@ -1,0 +1,105 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright 2016 Adobe Systems Incorporated
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<sly data-sly-use.body="body.js" data-sly-use.templatedContainer="com.day.cq.wcm.foundation.TemplatedContainer"/>
+<sly data-sly-test="${!templatedContainer.hasStructureSupport}" data-sly-resource="${body.resourcePath @ resourceType='wcm/foundation/components/parsys'}"/>
+<div class="container">
+  <sly data-sly-resource="${'toolbar' @ resourceType='guides-components/components/toolbar'}"/>
+  <sly data-sly-use.toolbarModel="com.adobe.guides.aem.components.core.models.ComponentConfigModel"/>
+  <div class="gu-toolbar_wrapper toolbar-hitech" data-sly-test="${!wcmmode.edit}" data-sly-set.toolbarConfig="${toolbarModel.toolbarConfig}">
+    <div class="toolbar desktop">
+      <div class="toolsection">
+        <div class="navigation" data-sly-test="${toolbarConfig.embedNavigation}">
+          <sly data-sly-resource="${'toolbar/navigation' @ resourceType='guides-components/components/navigation2'}"/>
+        </div>
+        <div class="version-selector" data-sly-test="${toolbarConfig.embedVersionSelector}">
+          <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='guides-components/components/version-selector'}"/>
+        </div>
+        <div class="social-share" data-sly-test="${toolbarConfig.embedSocialShare}">
+          <sly data-sly-resource="${'toolbar/social-share' @ resourceType='guides-components/components/social-share'}"/>
+        </div>
+        <div class="theme-selector" data-sly-test="${toolbarConfig.embedThemeSelector}">
+          <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='guides-components/components/theme-selector'}"/>
+        </div>
+        <div class="pdf-export" data-sly-test="${toolbarConfig.embedPdfExport}">
+          <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='guides-components/components/pdf-export'}"/>
+        </div>
+        <div class="language-navigation" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
+          <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='guides-components/components/languagenavigation2'}"/>
+        </div>
+        <div class="accessibility" data-sly-test="${toolbarConfig.embedAccessibility}">
+          <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='guides-components/components/accessibility'}"/>
+        </div>
+      </div>
+      <div class="bottom-section">
+        <div class="feedback-component" data-sly-test="${toolbarConfig.embedFeedbackComponent}">
+          <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='guides-components/components/feedback'}"/>
+        </div>
+        <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
+          <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='guides-components/components/back-to-top-button'}"/>
+        </div>
+      </div>
+      <div class="copy-link-component" data-sly-test="${toolbarConfig.embedCopyLinkComponent}">
+        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='guides-components/components/copy-link'}"/>
+      </div>
+    </div>
+    <div class="toolbar toolbar-header mobile hidden">
+      <div class="gu-search__container">
+        <button class="gu-search__toggle" aria-label="Search">
+          <img class="gu-search__icon" src="${toolbarConfig.searchIcon}" alt="Search Icon"/>
+        </button>
+      </div>
+      <div class="accessibility" data-sly-test="${toolbarConfig.embedAccessibility}">
+        <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='guides-components/components/accessibility'}"/>
+      </div>
+    </div>
+    <div class="toolbar top mobile hidden">
+      <div class="version-selector" data-sly-test="${toolbarConfig.embedVersionSelector}">
+        <sly data-sly-resource="${'toolbar/version-selector' @ resourceType='guides-components/components/version-selector'}"/>
+      </div>
+      <div class="copy-link-component" data-sly-test="${toolbarConfig.embedCopyLinkComponent}">
+        <sly data-sly-resource="${'toolbar/copy-link-component' @ resourceType='guides-components/components/copy-link'}"/>
+      </div>
+    </div>
+    <div class="toolbar sticky-middle mobile hidden">
+      <button class="layout-button">
+        <img src="${toolbarConfig.mobNavIcon}" alt="Layout button"/>
+      </button>
+      <div class="pdf-export" data-sly-test="${toolbarConfig.embedPdfExport}">
+        <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='guides-components/components/pdf-export'}"/>
+      </div>
+      <div class="language-navigation" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
+        <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='guides-components/components/languagenavigation2'}"/>
+      </div>
+      <div class="theme-selector" data-sly-test="${toolbarConfig.embedThemeSelector}">
+        <sly data-sly-resource="${'toolbar/theme-selector' @ resourceType='guides-components/components/theme-selector'}"/>
+      </div>
+      <div class="social-share" data-sly-test="${toolbarConfig.embedSocialShare}">
+        <sly data-sly-resource="${'toolbar/social-share' @ resourceType='guides-components/components/social-share'}"/>
+      </div>
+    </div>
+    <div class="toolbar bottom mobile hidden">
+      <div class="feedback-component" data-sly-test="${toolbarConfig.embedFeedbackComponent}">
+        <sly data-sly-resource="${'toolbar/feedback-component' @ resourceType='guides-components/components/feedback'}"/>
+      </div>
+      <div class="backToTop" data-sly-test="${toolbarConfig.embedBackToTop}">
+        <sly data-sly-resource="${'toolbar/backToTop' @ resourceType='guides-components/components/back-to-top-button'}"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div data-sly-resource="${'cloudservices' @ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}" data-sly-unwrap></div>
+<sly data-sly-include="footerlibs.html" />

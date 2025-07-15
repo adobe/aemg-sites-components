@@ -1,0 +1,87 @@
+.custom-container {
+  padding: 0.75rem 1rem;
+
+  .gu-custom-container {
+    display: flex;
+    margin-bottom: 4rem;
+
+    .col-3grid {
+      .outer-container {
+        display: none;
+      }
+    }
+
+    .col-6grid {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 50%;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    .col-9grid {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: relative;
+
+      .col-9grid-container {
+        margin-top: 3.125rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .custom-container {
+    padding: 0;
+
+    .gu-custom-container {
+      display: flex;
+
+      .col-3grid {
+        display: flex;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+
+        .outer-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-top: 4.438rem;
+          position: fixed;
+          top: 70px;
+          width: 25%;
+          max-height: 100vh;
+        }
+      }
+
+      .col-9grid {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 75%;
+        -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+        max-width: 75%;
+        position: relative;
+
+        .col-9grid-container {
+          display: flex;
+          margin-top: 4.438rem;
+
+          .col-9grid-components {
+            width: 91%;
+          }
+
+          .gu-toolbar_wrapper.toolbar-hitech {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+  }
+}

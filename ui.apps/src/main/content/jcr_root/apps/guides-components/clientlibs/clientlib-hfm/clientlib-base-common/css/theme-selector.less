@@ -1,0 +1,84 @@
+.theme-selector {
+  .gu-theme {
+    &__wrapper {
+      position: relative;
+    }
+
+    &__icon-container {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0.75rem;
+      width: 48px;
+      height: 48px;
+
+      &:hover {
+        background-color: var(--secondary-btn-color-hover);
+        border-radius: 50%;
+      }
+    }
+
+    &__overlay-container {
+      position: absolute;
+      padding: 1rem 0.75rem;
+      position: absolute;
+      bottom: 145%;
+      left: 0;
+      width: max-content;
+      border-radius: 0.5rem;
+      background: var(--secondary-btn-color);
+      box-shadow: 0 4px 16px 0 var(--box-shadow-color);
+      z-index: var(--z-index-9);
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    &__overlay-content {
+      display: flex;
+      flex-direction: column;
+
+      .dropdown-item {
+        border: none;
+        padding: 0.625rem 0.75rem;
+        color: var(--toolbar-text-color);
+        font-size: var(--body-font-size);
+        font-style: normal;
+        font-weight: 600;
+        line-height: var(--body-font-line-height);
+        cursor: pointer;
+        background: transparent;
+
+        &.active,
+        &:hover {
+          border-radius: 0.25rem;
+          background: var(--secondary-btn-color-hover);
+          color: var(--link-color);
+        }
+      }
+    }
+  }
+
+  .gu-them-icon {
+    &:hover {
+      background-color: var(--secondary-btn-color-hover);
+      border-radius: 50%;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .theme-selector {
+    .gu-theme {
+      &__overlay-container {
+        width: 218px;
+        height: max-content;
+        left: auto;
+        top: calc(100% + 8px);
+        right: 0;
+        z-index: var(--z-index-3);
+      }
+    }
+  }
+}

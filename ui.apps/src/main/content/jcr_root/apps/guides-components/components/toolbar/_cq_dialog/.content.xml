@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Toolbar Component"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        granite:class="cmp-embed__editor"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <general
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="General"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <embedVersionSelector
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include version selector in the toolbar"
+                                                    name="./embedVersionSelector"
+                                                    text="Version selector"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedCopyLinkComponent
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include copy link component in the toolbar"
+                                                    name="./embedCopyLinkComponent"
+                                                    text="Copy link component"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedSocialShare
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include social sharing options in the toolbar"
+                                                    name="./embedSocialShare"
+                                                    text="Social sharing"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedPdfExport
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include PDF export functionality in the toolbar"
+                                                    name="./embedPdfExport"
+                                                    text="PDF export"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedThemeSelector
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include theme selection in the toolbar"
+                                                    name="./embedThemeSelector"
+                                                    text="Theme selector"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedNavigation
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include navigation controls in the toolbar"
+                                                    name="./embedNavigation"
+                                                    text="Navigation"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedLanguageNavigation
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include language selection in the toolbar"
+                                                    name="./embedLanguageNavigation"
+                                                    text="Language navigation"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedFeedbackComponent
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include a feedback option in the toolbar"
+                                                    name="./embedFeedbackComponent"
+                                                    text="Feedback component"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedAccessibility
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include accessibility options in the toolbar"
+                                                    name="./embedAccessibility"
+                                                    text="Accessibility features"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <embedBackToTop
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                                                    fieldDescription="Include a 'Back to Top' button in the toolbar"
+                                                    name="./embedBackToTop"
+                                                    text="'Back to Top' button"
+                                                    uncheckedValue="false"
+                                                    value="true"/>
+                                            <searchIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select the search icon"
+                                                    fieldLabel="Search Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./searchIcon"
+                                                    rootPath="/content/dam"/>
+                                            <mobNavIcon
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select the mobile navigation icon"
+                                                    fieldLabel="Mobile Navigation Icon"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./mobNavIcon"
+                                                    rootPath="/content/dam"/>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </general>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

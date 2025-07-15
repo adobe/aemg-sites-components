@@ -1,0 +1,29 @@
+<sly data-sly-test="${wcmmode.edit}">
+  <sly data-sly-test.componentName="${component.title}"></sly>
+  <div class="no_content" align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-use.productCardObj="com.adobe.guides.aem.components.core.models.ProductCardModel" >
+</sly>
+
+<div class="gu-container">
+  <div class="gu-product-card-container" data-sly-list.productDetails="${productCardObj.productCardBeanList}">
+    <!-- card 1 -->
+    <div class="gu-product-card">
+      <div class="gu-product-card--icon-container">
+        <img
+          src="${productDetails.productIconPath || '/content/dam/guides/common-images/icons/product-icon.svg'}"
+          alt="Product Icon"
+        />
+      </div>
+      <a class="gu-product-card--title" href="${productDetails.productLink}">${productDetails.productTitle}
+        <svg class="gu-product-card--arrow-icon">
+          <use xlink:href="/content/dam/guides/common-images/icons/sprite.svg#right-arrow"></use>
+        </svg>
+      </a>
+      <div class="gu-product-card--description">
+        ${productDetails.productDescription}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<section data-sly-use.search="com.adobe.cq.wcm.core.components.models.Search"
+         id="${search.id}"
+         class="cmp-search"
+         role="search"
+         data-cmp-is="search"
+         data-cmp-min-length="${search.searchTermMinimumLength}"
+         data-cmp-results-size="${search.resultsSize}">
+    <div class="cmp_search__info" aria-live="polite" role="status"></div>
+    <input id="search_page-path" value="${search.searchRootPagePath}/search.html" type="hidden">
+    <form class="cmp-search__form" data-cmp-hook-search="form"
+          method="get"
+          action="${currentPage.path @ addSelectors=['searchresults'], extension='json', suffix = search.relativePath}"
+          autocomplete="off">
+        <div class="cmp-search__field">
+            <img class="cmp-search__icon" src="${properties.searchIcon}" alt="Search Icon" />
+            <!--<i class="cmp-search__icon" data-cmp-hook-search="icon"></i>-->
+            <span class="cmp-search__loading-indicator" data-cmp-hook-search="loadingIndicator"></span>
+            <input class="cmp-search__input" data-cmp-hook-search="input" type="text" name="fulltext"
+                   placeholder="${'Search documentation' @ i18n}"
+                   role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-invalid="false"
+                   aria-expanded="false">
+            <button class="cmp-search__clear" data-cmp-hook-search="clear" aria-label="${'Clear' @ i18n}">
+                <i class="cmp-search__clear-icon"></i>
+            </button>
+        </div>
+    </form>
+    <div class="cmp-search__results" aria-label="${'Search results' @ i18n}" data-cmp-hook-search="results"
+         role="listbox" aria-multiselectable="false"></div>
+    <sly data-sly-include="itemTemplate.html"/>
+    <div id="search-container"></div>
+</section>
+

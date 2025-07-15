@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Footer"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        granite:class="cmp-embed__editor"
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <general
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="General"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <lightLogo
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select the light logo path"
+                                                    fieldLabel="Light Logo"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./lightLogo"
+                                                    rootPath="/content/dam"/>
+                                            <darkLogo
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Please select the dark logo path"
+                                                    fieldLabel="Dark Logo"
+                                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                    name="./darkLogo"
+                                                    rootPath="/content/dam"/>
+                                            <logolink
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                    fieldDescription="Select the logo link"
+                                                    fieldLabel="Logo Link"
+                                                    name="./logoLink"
+                                                    rootPath="/content/output/sites"/>
+                                            <well1
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/well">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <socialLinksTitle
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                            fieldDescription="Enter the social links title"
+                                                            fieldLabel="Social Links Title"
+                                                            name="./socialLinksTitle"/>
+                                                    <multifield
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                            composite="{Boolean}true"
+                                                            fieldLabel="Social Links">
+                                                        <field
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                                fieldLabel="Social List"
+                                                                name="./socialList">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <icon
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Please select social icon"
+                                                                        fieldLabel="Social Icon"
+                                                                        mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                                        name="./ctaIcon"
+                                                                        rootPath="/content/dam"/>
+                                                                <iconLink
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Select CTA button link"
+                                                                        fieldLabel="Social Icon Link"
+                                                                        name="./ctaLink"
+                                                                        rootPath="/content/output/sites"/>
+                                                            </items>
+                                                        </field>
+                                                    </multifield>
+                                                </items>
+                                            </well1>
+                                            <well2
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/well">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <contactLinksTitle
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                            fieldDescription="Enter the contact links title"
+                                                            fieldLabel="Contact Links Title"
+                                                            name="./contactLinksTitle"/>
+                                                    <multifield
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                            composite="{Boolean}true"
+                                                            fieldLabel="Contact Links">
+                                                        <field
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                                fieldLabel="Contact List"
+                                                                name="./contactList">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <contactIcon
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Please select contact icon"
+                                                                        fieldLabel="Contact Icon"
+                                                                        mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/tiff]"
+                                                                        name="./ctaIcon"
+                                                                        rootPath="/content/dam"/>
+                                                                <contactText
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                        fieldDescription="Enter the contact text"
+                                                                        fieldLabel="Contact Text"
+                                                                        name="./ctaLabel"/>
+                                                                <contactLink
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Select the contact link"
+                                                                        fieldLabel="Contact Link"
+                                                                        name="./ctaLink"
+                                                                        rootPath="/content/output/sites"/>
+                                                            </items>
+                                                        </field>
+                                                    </multifield>
+                                                </items>
+                                            </well2>
+                                            <well3
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/well">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <multifield
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                            composite="{Boolean}true"
+                                                            fieldLabel="Legal Links">
+                                                        <field
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                                fieldLabel="Legal List"
+                                                                name="./legalList">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <legalText
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                        fieldDescription="Enter CTA button label"
+                                                                        fieldLabel="Legal Text"
+                                                                        name="./ctaLabel"/>
+                                                                <legalLink
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Select CTA button link"
+                                                                        fieldLabel="Legal Link"
+                                                                        name="./ctaLink"
+                                                                        rootPath="/content/output/sites"/>
+                                                            </items>
+                                                        </field>
+                                                    </multifield>
+                                                </items>
+                                            </well3>
+                                            <well4
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/well">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <companyLinksTitle
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                            fieldDescription="Enter the company links title"
+                                                            fieldLabel="Company Links Title"
+                                                            name="./companyLinksTitle"/>
+                                                    <multifield
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                            composite="{Boolean}true"
+                                                            fieldLabel="Company Links">
+                                                        <field
+                                                                jcr:primaryType="nt:unstructured"
+                                                                sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                                fieldLabel="Company List"
+                                                                name="./companyList">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <companyText
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                        fieldDescription="Enter CTA button label"
+                                                                        fieldLabel="Company Link Text"
+                                                                        name="./ctaLabel"/>
+                                                                <companyLink
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                        fieldDescription="Select CTA button link"
+                                                                        fieldLabel="Company Page Link"
+                                                                        name="./ctaLink"
+                                                                        rootPath="/content/output/sites"/>
+                                                            </items>
+                                                        </field>
+                                                    </multifield>
+                                                </items>
+                                            </well4>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </general>
+                    <pagetab
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Pages"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <columns
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns"
+                                margin="{Boolean}true">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <column
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/container">
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <well
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/well">
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <pageLinksTitle
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                            fieldDescription="Enter the page links title"
+                                                            fieldLabel="Page Links Title"
+                                                            name="./pageLinksTitle"/>
+                                                    <multifield
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                        composite="{Boolean}true"
+                                                        fieldLabel="Categories">
+                                                        <field
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                            fieldLabel="CTA List"
+                                                            name="./pagesList">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <multifield
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                                                    composite="{Boolean}true"
+                                                                    fieldLabel="Category List">
+                                                                    <field
+                                                                        jcr:primaryType="nt:unstructured"
+                                                                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                                                                        fieldLabel="CTA List"
+                                                                        name="./pageList">
+                                                                        <items jcr:primaryType="nt:unstructured">
+                                                                            <ctaLabel
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                                                fieldDescription="Enter CTA button label"
+                                                                                fieldLabel="CTA Label"
+                                                                                name="./ctaLabel"/>
+                                                                            <ctaLink
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                                                fieldDescription="Select CTA button link"
+                                                                                fieldLabel="CTA Link"
+                                                                                name="./ctaLink"
+                                                                                rootPath="/content/output/sites"/>
+                                                                        </items>
+                                                                    </field>
+                                                                </multifield>
+                                                            </items>
+                                                        </field>
+                                                    </multifield>
+                                                </items>
+                                            </well>
+                                        </items>
+                                    </column>
+                                </items>
+                            </columns>
+                        </items>
+                    </pagetab>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

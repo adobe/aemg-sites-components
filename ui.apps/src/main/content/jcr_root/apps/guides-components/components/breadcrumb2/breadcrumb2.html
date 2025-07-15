@@ -1,0 +1,60 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<div class="gu-breadcrumb">
+    <nav data-sly-use.breadcrumb="com.adobe.cq.wcm.core.components.models.Breadcrumb"
+        data-sly-use.template="core/wcm/components/commons/v1/templates.html" id="${breadcrumb.id}"
+        class="cmp-breadcrumb" aria-label="${'Breadcrumb' @ i18n}" data-sly-test="${breadcrumb.items.size > 0}"
+        data-cmp-data-layer="${breadcrumb.data.json}" role="navigation">
+        <div class="cmp-breadcrumb__list" itemscope itemtype="http://schema.org/BreadcrumbList"
+            data-sly-list.navItem="${breadcrumb.items}">
+            <sly data-sly-set.lang="${navItem.page.properties.contentLang}" />
+            <div class="cmp-breadcrumb__item${navItem.active ? ' cmp-breadcrumb__item--active' : ''}"
+                aria-current="${navItem.active ? 'page' : false}" data-cmp-data-layer="${navItem.data.json}"
+                itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+
+                <!-- First Item: Home Icon -->
+                <sly data-sly-test="${navItemList.index == 0}">
+                    <a data-sly-attribute="${navItem.clickable ? navItem.link.htmlAttributes : ''}" class="cmp-breadcrumb__item-link"
+                        itemprop="item" lang="${lang}" hreflang="${lang}"
+                        data-cmp-clickable="${breadcrumb.data ? true : false}">
+                        <span class="cmp-breadcrumb__icon">
+                            <!-- <svg class="gu-breadcrumb_home-icon" aria-hidden="true">
+                            <use xlink:href="/content/dam/guides/common-images/sprite.svg#home-icon"></use>
+                        </svg> -->
+                            <img class="gu-breadcrumb_home-icon" src="${properties.homeIcon}">
+                        </span>
+                    </a>
+                </sly>
+
+                <!-- Other Items -->
+                <sly data-sly-test="${navItemList.index != 0}">
+                    <a data-sly-attribute="${navItem.clickable ? navItem.link.htmlAttributes : ''}" class="cmp-breadcrumb__item-link"
+                        itemprop="item" lang="${lang}" hreflang="${lang}"
+                        data-cmp-clickable="${breadcrumb.data ? true : false}"
+                        data-sly-unwrap="${navItem.active || !navItem.link.valid}">
+                        <span itemprop="name">${navItem.title}</span>
+                    </a>
+                </sly>
+
+                <meta itemprop="position" content="${navItemList.count}" />
+
+
+            </div>
+            <!-- Arrow Separator -->
+            <sly data-sly-test="${!navItemList.last}">
+                <span class="cmp-breadcrumb__separator">
+                    <!-- <svg class="gu-breadcrumb_arrow-icon" aria-hidden="true">
+                                    <use xlink:href="/content/dam/guides/common-images/sprite.svg#arrow-icon"></use>
+                                </svg> -->
+                    <img class="gu-breadcrumb_arrow-icon" src="${properties.arrowIcon}">
+                </span>
+            </sly>
+        </div>
+
+    </nav>
+    <sly data-sly-call="${template.placeholder @ isEmpty=breadcrumb.items.size == 0, classAppend='cmp-breadcrumb'}">
+    </sly>
+</div>

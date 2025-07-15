@@ -1,0 +1,24 @@
+<sly data-sly-test="${wcmmode.edit}">
+    <sly data-sly-test.componentName="${component.title}"></sly>
+    <div class=no_content align="center">EDIT: ${componentName}</div>
+</sly>
+
+<sly data-sly-test.scheme="${request.scheme}"/>
+<sly data-sly-test.servername="${request.serverName}"/>
+<sly data-sly-test.serverport="${request.serverPort}"/>
+<sly data-sly-test.val="${request.requestURI}"/>
+<sly data-sly-use.socialShare="com.adobe.guides.aem.components.core.models.SocialShareModel" />
+<div class="social-share-container">
+    <button class="share-icon">
+        <img src="${properties.shareIconPath ? properties.shareIconPath : '/content/dam/guides/common-images/icons/share.svg'}"
+            alt="Share" />
+    </button>
+    <ul class="social-links hidden" data-sly-list.socialShareMap="${socialShare.socialShareMap}">
+        <li>
+            <a href="${socialShareMap['url']}${scheme}://${servername}:${serverport}${val}.html" target="_blank">
+                <img src="${socialShareMap['icon']}" alt="${socialShareMap['title']} icon" />
+                ${socialShareMap['title']}
+            </a>
+        </li>
+    </ul>
+</div>

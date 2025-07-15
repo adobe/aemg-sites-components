@@ -1,0 +1,9 @@
+<template data-sly-template.itemContent="${@ item='The language navigation item', langList}">
+    <span data-sly-test.hasChildren="${item.children.size > 0 || !item.link.valid}"
+          class="cmp-languagenavigation__item-title" lang="${item.language}">${langList[item.title]}</span>
+    <a data-sly-test="${!hasChildren}"
+       data-cmp-clickable="${item.data ? true : false}"
+       class="cmp-languagenavigation__item-link"
+       data-sly-attribute="${item.link.htmlAttributes}"
+       hreflang="${item.language}" lang="${item.language}" rel="alternate">${langList[item.title]}</a>
+</template>

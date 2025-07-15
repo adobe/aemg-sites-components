@@ -1,0 +1,40 @@
+.gu-pdf-export__wrapper {
+  .gu-pdf-export__button {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+  }
+  .gu-pdf-export__button:hover,
+  .gu-pdf-export__button:active {
+    background-color: var(--secondary-btn-color-hover);
+    border-radius: 50%;
+  }
+  .gu-pdf-export__options li {
+    margin: 0;
+  }
+
+  .gu-pdf-export__options li:hover,
+  .gu-pdf-export__options li.active {
+    color: var(--primary-color);
+    border-radius: 0.25rem;
+    background: var(--tags-bg);
+  }
+
+  .gu-pdf-export__options li:hover a,
+  .gu-pdf-export__options li.active a {
+    color: var(--primary-color);
+  }
+}
+
+@media (min-width: 600px) {
+  .gu-pdf-export__wrapper {
+    .gu-pdf-export__button {
+      padding: 0.5rem;
+    }
+    .gu-pdf-export__dropdown {
+      .gu-pdf-export__options li {
+        margin: 0;
+      }
+    }
+  }
+}

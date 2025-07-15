@@ -1,0 +1,7 @@
+<template data-sly-template.group="${@ items='The language navigation items for the current level'}" data-sly-use.itemTemplate="item.html">
+    <sly data-sly-use.langNav="com.adobe.guides.aem.components.core.models.CustomLanguageNavModel"/>
+    <sly data-sly-set.langList="${langNav.languages}"/>
+    <ul class="cmp-languagenavigation__group" data-sly-list.item="${items}">
+        <sly data-sly-call="${itemTemplate.item @ item = item, langList = langList}"></sly>
+    </ul>
+</template>

@@ -1,0 +1,44 @@
+.toolbar.above-title.mobile .theme-selector {
+  display: flex;
+  margin-top: 0.75rem;
+  border-bottom: 1px solid var(--light-grey-border);
+  padding-bottom: 0.75rem;
+  .gu-theme {
+    &__menu {
+      list-style: none;
+      margin: 0;
+      li {
+        display: flex;
+        padding: 0.5rem 0;
+        align-items: center;
+        gap: 0.5rem;
+        align-self: stretch;
+        border-radius: 0.25rem;
+        margin: 0;
+        color: var(--secondary-light);
+        cursor: pointer;
+        font-weight: 600;
+        line-height: var(--body-font-line-height);
+      }
+    }
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: self-start;
+      gap: 0.5rem;
+      align-self: stretch;
+    }
+    &__title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary-color);
+      font-size: var(--header-links-fs);
+      font-weight: 600;
+      line-height: var(--topic-1-lh);
+      gap: 0.5rem;
+    }
+  }
+}
+
+

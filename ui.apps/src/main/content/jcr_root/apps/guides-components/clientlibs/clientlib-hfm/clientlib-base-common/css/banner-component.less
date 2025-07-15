@@ -1,0 +1,113 @@
+.banner-component {
+  .gu-banner {
+    background: url("/apps/aemguides/clientlibs/clientlib-base-product-site/resources/images/banner-cover.svg")
+      no-repeat center center;
+    background-size: cover;
+    width: 100vw;
+    height: 576px;
+    position: relative;
+
+    /* Add overlay for better text visibility */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.5)
+      );
+      z-index: -1;
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: start;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    &__title {
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: 3.5rem;
+      line-height: 1;
+    }
+
+    &__description {
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
+      width: 712px;
+    }
+
+    &__cta {
+      background-color: var(--text-light);
+      color: var(--primary-color);
+      padding: 0.7rem 1.8rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      margin-bottom: 5rem;
+      text-decoration: none;
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .gu-banner {
+      height: 474px;
+
+      &__title {
+        font-size: 2.25rem;
+        line-height: 2.875rem;
+      }
+
+      &__description {
+        font-size: 0.875rem;
+        max-width: 80%;
+        line-height: 1.5rem;
+      }
+
+      &__cta {
+        padding: 0.6rem 1.8rem;
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gu-banner {
+      height: 474px;
+      padding: 2rem 0;
+
+      &__title {
+        font-size: 2.375rem;
+        line-height: 2.875rem;
+      }
+
+      &__description {
+        font-size: 0.875rem;
+        max-width: 100%;
+        line-height: 1.5rem;
+      }
+
+      &__cta {
+        padding: 0.5rem 1.5rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
