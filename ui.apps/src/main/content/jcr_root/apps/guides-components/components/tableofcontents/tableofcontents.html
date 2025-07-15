@@ -1,0 +1,26 @@
+<div class="gu-toc__header">
+  <button class="gu-toc__toggle" aria-label="Collapse TOC">
+    <img
+      class="gu-toc__col-icon"
+      src="${properties.collapseIcon}"
+      alt="Collapse Icon"
+    />
+  </button>
+  <div class="gu-toc__title">${'In This Article' @ i18n}</div>
+</div>
+<div
+  data-sly-use.toc="com.adobe.cq.wcm.core.components.models.TableOfContents"
+  data-sly-use.component="com.adobe.cq.wcm.core.components.models.Component"
+  class="cmp-toc__placeholder"
+  id="${component.id}"
+  data-cmp-toc-list-type="${toc.listType && toc.listType.value}"
+  data-cmp-toc-start-level="${toc.startLevel && toc.startLevel.value}"
+  data-cmp-toc-stop-level="${toc.stopLevel && toc.stopLevel.value}"
+  data-cmp-toc-include-classes="${toc.includeClasses}"
+  data-cmp-toc-ignore-classes="${toc.ignoreClasses}"
+></div>
+<sly
+  data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+  data-sly-test="${wcmmode.edit || wcmmode.preview}"
+  data-sly-call="${template.placeholder @ isEmpty = true, classAppend = 'cmp-toc__template-placeholder'}"
+/>
