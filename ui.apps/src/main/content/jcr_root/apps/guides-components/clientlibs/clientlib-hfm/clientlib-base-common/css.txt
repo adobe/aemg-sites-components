@@ -30,7 +30,7 @@ search2.less
 social-share.less
 theme-selector.less
 version-selector.less
-toc.less
+toc-component.less
 topic/layout.less
 topic/content.less
 accessibility.less
