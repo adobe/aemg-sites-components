@@ -1,11 +1,8 @@
-<sly data-sly-test="${wcmmode.edit}">
-    <sly data-sly-test.componentName="${component.title}"></sly>
-    <div class=no_content align="center">EDIT: ${componentName}</div>
-</sly>
+<sly data-sly-use.preNextModel="com.adobe.guides.aem.components.core.models.PreNextModel"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-test.hasContent="${preNextModel.previousTopicTitle || preNextModel.nextTopicTitle}"/>
 
-<sly data-sly-use.preNextModel="com.adobe.guides.aem.components.core.models.PreNextModel" />
-
-<div class="gu-pre-next-wrapper" data-sly-test="${preNextModel.previousTopicTitle || preNextModel.nextTopicTitle}">
+<div class="gu-pre-next-wrapper" data-sly-test="${hasContent}">
     <div class="gu-pre-topic_container-wrapper">
         <div class="gu-pre-topic_container" data-sly-test="${preNextModel.previousTopicTitle}">
             <a href="${preNextModel.previousTopicLink}" class="gu-pre-next-topic_arrow-container">
@@ -36,3 +33,4 @@
         </div>
     </div>
 </div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent, classAppend='gu-pre-next-wrapper'}"></sly>

@@ -1,6 +1,6 @@
-<sly data-sly-test="${wcmmode.edit}">EDIT TOPIC RENDERER COMPONENT</sly>
-
-<sly data-sly-use.model="com.adobe.guides.aem.components.core.models.TopicRendererModel"></sly>
+<sly data-sly-use.model="com.adobe.guides.aem.components.core.models.TopicRendererModel"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-test.hasContent="${model.topicnodepath}"></sly>
 <sly data-sly-use.metadata="com.adobe.guides.aem.components.core.models.MetaDataModel"></sly>
 
 <section id="section-topic" class="base-topic-page-section">
@@ -28,3 +28,4 @@
         </div>
     </div>
 </section>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent, classAppend='gu-custom-container'}"></sly>

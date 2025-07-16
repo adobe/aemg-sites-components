@@ -1,8 +1,6 @@
-<sly data-sly-test="${wcmmode.edit}">
-  <sly data-sly-test.componentName="${component.title}"></sly>
-  <div class="no_content" align="center">EDIT: ${componentName}</div>
-</sly>
-<div class="gu-custom-container">
+<sly data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-test.hasContent="${properties.colLayout}"></sly>
+<div class="gu-custom-container" data-sly-test="${hasContent}">
   <sly data-sly-test="${properties.colLayout=='twoColumn'}">
     <div class="col-3grid">
       <div
@@ -40,3 +38,4 @@
     </div>
   </sly>
 </div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent, classAppend='gu-custom-container'}"></sly>
