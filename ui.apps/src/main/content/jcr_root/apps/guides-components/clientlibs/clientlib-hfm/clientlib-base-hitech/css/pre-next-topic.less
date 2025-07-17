@@ -1,0 +1,128 @@
+.pre-next-component {
+  .gu-pre-next {
+    &-wrapper {
+      display: flex;
+      width: 100%;
+      gap: 0;
+      border: 1px solid var(--border-common);
+      border-radius: 0.5rem;
+      background-color: var(--common-bg);
+      padding: 0.75rem 0.25rem;
+      margin-top: 2rem;
+    }
+
+    &-topic_text {
+      font-size: var(--pre-next-fs);
+      font-weight: 600;
+      line-height: var(--pre-next-lh);
+      color: var(--secondary-light);
+      margin-bottom: 0;
+    }
+
+    &-topic_link {
+      display: none;
+    }
+  }
+
+  .gu-pre-topic_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    &-wrapper {
+      width: 50%;
+    }
+
+    &-img {
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .gu-next-topic_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-align: right;
+
+    &-wrapper {
+      width: 50%;
+    }
+
+    &-img {
+      margin-left: 0.25rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .gu-pre-topic_container:empty,
+  .gu-next-topic_container:empty {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pre-next-component {
+    .gu-pre-next {
+      &-wrapper {
+        width: 100%;
+        gap: 0.625rem;
+        border-radius: 0;
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin-top: 2.5rem;
+      }
+
+      &-topic_text {
+        font-size: var(--body-font-size);
+        font-weight: 500;
+        color: var(--secondary-light);
+        line-height: var(--body-font-line-height);
+        margin-bottom: 0.5rem;
+      }
+
+      &-topic_link {
+        display: block;
+        font-size: var(--body-1-fs);
+        font-weight: 600;
+        line-height: var(--body-1-lh);
+        text-decoration: none;
+        color: var(--primary-color);
+      }
+    }
+
+    .gu-pre-topic_container {
+      background-color: var(--common-bg);
+      padding: 0.75rem 0.25rem;
+      border: 1px solid var(--border-common);
+      border-radius: 0.5rem;
+
+      &-img {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .gu-next-topic_container {
+      background-color: var(--common-bg);
+      padding: 0.75rem 0.25rem;
+      text-align: right;
+      border: 1px solid var(--border-common);
+      border-radius: 0.5rem;
+
+      &-img {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
