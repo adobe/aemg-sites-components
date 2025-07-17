@@ -1,27 +1,23 @@
 package com.adobe.guides.aem.components.core.models;
 
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
 import java.util.Iterator;
 
 @Model(
-        adaptables = {Resource.class, SlingHttpServletRequest.class},
+        adaptables = { SlingHttpServletRequest.class },
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class TocComponentModel {
-    private static final Logger logger = LoggerFactory.getLogger(TocComponentModel.class);
+    private static final String TOPIC_TEMPLATE_FRAGMENT = "guides-topic-page";
 
     @Self
     private SlingHttpServletRequest request;
@@ -29,81 +25,62 @@ public class TocComponentModel {
     @ScriptVariable
     private Page currentPage;
 
-    private Resource tocResource;
+    private String tocHtml;
 
     @PostConstruct
     protected void init() {
-        Resource contentResource = currentPage.getContentResource();
-        tocResource = contentResource.getChild("toc");
-
-        if (tocResource == null) {
-            tocResource = findLatestTocFromChildPages(currentPage);
-        }
-    }
-
-    public String renderTOCContent() {
-        if (tocResource != null) {
-            return renderTOC(tocResource.getChildren(), "");
-        }
-        return StringUtils.EMPTY;
-    }
-
-    private Resource findLatestTocFromChildPages(Page parentPage) {
-        Page latestPage = null;
-        Date latestDate = null;
-
-        Iterator<Page> childPages = parentPage.listChildren();
-        while (childPages.hasNext()) {
-            Page child = childPages.next();
-            Resource childContentResource = child.getContentResource();
-            Resource childToc = childContentResource.getChild("toc");
-
-            if (childToc != null) {
-                ValueMap properties = childContentResource.getValueMap();
-                Date createdDate = properties.get("jcr:created", Date.class);
-
-                if (createdDate != null && (latestDate == null || createdDate.after(latestDate))) {
-                    latestPage = child;
-                    latestDate = createdDate;
-                }
-            }
-        }
-
-        return latestPage != null ? latestPage.getContentResource().getChild("toc") : null;
-    }
-
-    private String renderTOC(Iterable<Resource> topChildren, String parentKey) {
         StringBuilder html = new StringBuilder();
-        int childCount = 0;
-        for (Resource topChild : topChildren) {
-            ValueMap props = topChild.getValueMap();
-            String topLink = props.get("link", "");
-            String topTitle = props.get("title", topLink);
-            final String childKey = String.format("%s%d", parentKey.isEmpty() ? "" : parentKey + ".", childCount++);
+        PageManager pm = request.getResourceResolver().adaptTo(PageManager.class);
 
-            if (StringUtils.isBlank(topLink)) continue;
-
-            topLink = topLink + "?toc=" + childKey;
-            if ("no".equalsIgnoreCase(props.get("toc", ""))) {
-                renderTOC(topChild.getChildren(), childKey);
-                continue;
+        // 1) iterate your topic pages (same filter you had)
+        Iterator<Page> topics = currentPage.listChildren();
+        while (topics.hasNext()) {
+            Page topic = topics.next();
+            if (topic.getTemplate() != null
+                    && topic.getTemplate().getPath().contains(TOPIC_TEMPLATE_FRAGMENT)) {
+                // 2) render each topic + its sub-pages
+                renderTopic(topic, html);
             }
-
-            html.append("<div class='tocitem'>");
-            html.append("<div class='mainentry'>");
-            html.append("<a href='" + topLink + "'>" + topTitle + "</a></div>");
-
-            for (Resource subChild : topChild.getChildren()) {
-                String subLink = subChild.getValueMap().get("link", "");
-                String subTitle = subChild.getValueMap().get("title", subLink);
-                final String subchildKey = String.format("%s.%d", childKey, childCount++);
-
-                if (StringUtils.isBlank(subLink)) continue;
-                subLink = subLink + "?toc=" + subchildKey;
-                html.append("<div class='subentry'><a href='" + subLink + "'>" + subTitle + "</a></div>");
-            }
-            html.append("</div>");
         }
-        return html.toString();
+
+        tocHtml = html.toString();
+    }
+
+    /**
+     * Renders one topic and its immediate sub-pages into the given StringBuilder.
+     */
+    private void renderTopic(Page topic, StringBuilder html) {
+        String topicPath = topic.getPath() + ".html";
+        String title     = StringUtils.defaultIfBlank(topic.getTitle(), topic.getName());
+
+        html.append("<div class='tocitem'>")
+                .append("<div class='mainentry'>")
+                .append("<a href='").append(topicPath).append("'>")
+                .append(title)
+                .append("</a>")
+                .append("</div>");
+
+        // now render any child pages as subentries
+        Iterator<Page> subs = topic.listChildren();
+        while (subs.hasNext()) {
+            Page sub = subs.next();
+            String subPath = sub.getPath() + ".html";
+            String subTitle = StringUtils.defaultIfBlank(sub.getTitle(), sub.getName());
+
+            html.append("<div class='subentry'>")
+                    .append("<a href='").append(subPath).append("'>")
+                    .append(subTitle)
+                    .append("</a>")
+                    .append("</div>");
+        }
+
+        html.append("</div>"); // close tocitem
+    }
+
+    /**
+     * Call this from HTL to inject the fully-rendered TOC
+     */
+    public String getTocHtml() {
+        return tocHtml;
     }
 }
