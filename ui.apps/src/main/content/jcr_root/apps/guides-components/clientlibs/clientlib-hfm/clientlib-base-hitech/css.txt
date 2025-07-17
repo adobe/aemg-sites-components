@@ -18,7 +18,7 @@
 custom-container.less
 feedback.less
 header.less
-pre-next-topic.less
+prev-next-topic.less
 search.less
 toolbar.less
 version-selector.less

@@ -24,7 +24,7 @@ header.less
 languagenavigation.less
 navigation.less
 pdf-export.less
-pre-next-topic.less
+prev-next-topic.less
 related-tags.less
 search.less
 social-share.less
