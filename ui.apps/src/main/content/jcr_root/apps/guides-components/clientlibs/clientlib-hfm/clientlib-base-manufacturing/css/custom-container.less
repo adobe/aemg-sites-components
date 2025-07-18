@@ -20,6 +20,12 @@
       margin-top: 4.375rem;
       display: flex;
 
+      &.EDITMODE {
+        .col-3grid.col-3grid--left {
+          top: 0;
+        }
+      }
+
       // 3-column grid styles
       .col-3grid {
         display: flex;
@@ -52,17 +58,17 @@
           &::-webkit-scrollbar {
             width: 6px;
           }
-         
+
           &::-webkit-scrollbar-track {
             background: var(--nav-bg);
             border-radius: 0.39rem;
           }
-         
+
           &::-webkit-scrollbar-thumb {
             background: var(--border-common);
             border-radius: 0.39rem;
           }
-         
+
           &::-webkit-scrollbar-thumb:hover {
             background: var(--light-grey-border);
           }

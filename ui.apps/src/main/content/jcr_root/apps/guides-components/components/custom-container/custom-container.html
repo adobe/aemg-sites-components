@@ -1,21 +1,19 @@
-<sly data-sly-test="${wcmmode.edit}">
-  <sly data-sly-test.componentName="${component.title}"></sly>
-  <div class="no_content" align="center">EDIT: ${componentName}</div>
-</sly>
-<div class="gu-custom-container">
+<sly data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-test.hasContent="${properties.colLayout}"></sly>
+<div class="gu-custom-container ${wcmmode.edit ? 'EDITMODE' : 'PREVIEW'}" data-sly-test="${hasContent}">
   <sly data-sly-test="${properties.colLayout=='twoColumn'}">
     <div class="col-3grid">
       <div
         class="outer-container"
         id="gu-nav"
-        data-sly-resource="${@path='gu11', resourceType='wcm/foundation/components/parsys'}"
+        data-sly-resource="${@path='gu11', resourceType='wcm/foundation/components/responsivegrid'}"
       ></div>
     </div>
     <div class="col-9grid">
       <div class="col-9grid-container">
         <div
           class="col-9grid-components"
-          data-sly-resource="${@path='gu22', resourceType='wcm/foundation/components/parsys'}"
+          data-sly-resource="${@path='gu22', resourceType='wcm/foundation/components/responsivegrid'}"
         ></div>
       </div>
     </div>
@@ -24,19 +22,20 @@
     <div class="col-3grid col-3grid--left">
       <div class="outer-container" id="gu-nav">
         <sly
-          data-sly-resource="${@path='gu1', resourceType='wcm/foundation/components/parsys'}"
+          data-sly-resource="${@path='gu1', resourceType='wcm/foundation/components/responsivegrid'}"
         ></sly>
       </div>
     </div>
     <div class="col-6grid">
       <sly
-        data-sly-resource="${@path='gu2', resourceType='wcm/foundation/components/parsys'}"
+        data-sly-resource="${@path='gu2', resourceType='wcm/foundation/components/responsivegrid'}"
       ></sly>
     </div>
     <div class="col-3grid col-3grid--right" id="toc-content">
       <sly
-        data-sly-resource="${@path='gu3', resourceType='wcm/foundation/components/parsys'}"
+        data-sly-resource="${@path='gu3', resourceType='wcm/foundation/components/responsivegrid'}"
       ></sly>
     </div>
   </sly>
 </div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent, classAppend='gu-custom-container'}"></sly>

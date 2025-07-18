@@ -81,7 +81,7 @@ public class BannerModel {
     private Resource getBannerResource(Page page) {
         Resource parentContentResource = page.getContentResource();
         if(parentContentResource == null) {return null;}
-        Resource bannerResource = parentContentResource.getChild("root/container/banner_component");
+        Resource bannerResource = parentContentResource.getChild("root/container/banner");
         if(bannerResource == null) {return null;}
         return bannerResource;
     }

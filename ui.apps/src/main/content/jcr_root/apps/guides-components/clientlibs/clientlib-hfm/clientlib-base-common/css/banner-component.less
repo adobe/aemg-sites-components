@@ -1,6 +1,6 @@
-.banner-component {
+.banner {
   .gu-banner {
-    background: url("/apps/aemguides/clientlibs/clientlib-base-product-site/resources/images/banner-cover.svg")
+    background: url("/content/dam/guides/common-images/images/banner-cover.svg")
       no-repeat center center;
     background-size: cover;
     width: 100vw;
@@ -33,14 +33,14 @@
     }
 
     &__title {
-      color: var(--text-light);
+      color: var(--white-color);
       font-weight: 600;
       font-size: 3.5rem;
       line-height: 1;
     }
 
     &__description {
-      color: var(--text-light);
+      color: var(--white-color);
       font-weight: 500;
       font-size: 1rem;
       line-height: 1.5;
@@ -48,7 +48,7 @@
     }
 
     &__cta {
-      background-color: var(--text-light);
+      background-color: var(--white-color);
       color: var(--primary-color);
       padding: 0.7rem 1.8rem;
       border: none;
@@ -56,13 +56,13 @@
       font-size: 16px;
       font-weight: 500;
       cursor: pointer;
-      transition: background-color var(--transition-speed);
+      transition: background-color 0.3s;
       margin-bottom: 5rem;
       text-decoration: none;
 
       &:hover {
         background-color: var(--primary-color);
-        color: var(--text-light);
+        color: var(--white-color);
       }
     }
   }
