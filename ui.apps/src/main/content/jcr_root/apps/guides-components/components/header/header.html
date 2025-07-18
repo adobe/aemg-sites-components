@@ -23,7 +23,7 @@
     data-sly-list.navList="${headerModel.ctaBeanList}"
   >
     <a class="gu-header_nav-link" href="${navList.ctaLink}"
-      >${navList.ctaLabel}</a
+      >${navList.ctaLabel @ i18n}</a
     >
   </div>
   <div class="gu-header_search-container">
@@ -53,7 +53,7 @@
         data-sly-list.navList="${headerModel.ctaBeanList}"
       >
         <a class="gu-header_nav-link" href="${navList.ctaLink}"
-          >${navList.ctaLabel}</a
+          >${navList.ctaLabel @ i18n}</a
         >
       </div>
     </div>
