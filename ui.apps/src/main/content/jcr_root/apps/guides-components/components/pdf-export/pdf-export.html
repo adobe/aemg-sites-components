@@ -1,3 +1,4 @@
+<sly data-sly-use.pdfExport="com.adobe.guides.aem.components.core.models.PdfExportModel"/>
 <sly data-sly-test="${wcmmode.edit}">
   <sly data-sly-test.componentName="${component.title}"></sly>
   <div class="no_content" align="center">EDIT: ${componentName}</div>
@@ -7,17 +8,17 @@
   <button class="gu-pdf-export__button">
     <img
       class="gu-pdf-export__icon"
-      src="${properties.downloadIconPath ? properties.downloadIconPath : '/content/dam/guides/common-images/icons/pdf.svg'}"
+      src="${pdfExport.downloadIconPath ? pdfExport.downloadIconPath : '/content/dam/guides/common-images/icons/pdf.svg'}"
       alt="Download PDF Icon"
     />
   </button>
   <div class="gu-pdf-export__dropdown">
     <ul class="gu-pdf-export__options">
       <li>
-        <a id="gu-pdf_topic-download" target="_blank" download>{'This Topic' @ i18n}</a>
+        <a id="gu-pdf_topic-download" target="_blank" download>${'This Topic' @ i18n}</a>
       </li>
       <li>
-        <a href="${properties.pdfPath}" target="_blank" download>{'Entire Document' @ i18n}</a>
+        <a href="${pdfExport.pdfPath}" target="_blank" download>${'Entire Document' @ i18n}</a>
       </li>
     </ul>
   </div>

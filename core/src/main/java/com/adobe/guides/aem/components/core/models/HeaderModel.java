@@ -2,10 +2,13 @@ package com.adobe.guides.aem.components.core.models;
 
 import com.adobe.guides.aem.components.core.beans.CTABean;
 import com.adobe.guides.aem.components.core.utils.LinkUtils;
+import com.adobe.cq.export.json.ComponentExporter;
+import com.adobe.cq.export.json.ExporterConstants;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
@@ -18,9 +21,14 @@ import java.util.List;
 
 @Model(
         adaptables = { Resource.class, SlingHttpServletRequest.class },
+        adapters = { HeaderModel.class, ComponentExporter.class },
+        resourceType = HeaderModel.RESOURCE_TYPE,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
-public class HeaderModel {
+@Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
+public class HeaderModel implements ComponentExporter {
+
+    public static final String RESOURCE_TYPE = "guides-components/components/header";
 
     private static final Logger logger = LoggerFactory.getLogger(HeaderModel.class);
 
@@ -85,5 +93,10 @@ public class HeaderModel {
 
     public List<CTABean> getCtaBeanList() {
         return ctaBeanList;
+    }
+
+    @Override
+    public String getExportedType() {
+        return RESOURCE_TYPE;
     }
 }

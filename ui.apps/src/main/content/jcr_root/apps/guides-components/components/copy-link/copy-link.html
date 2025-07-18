@@ -1,3 +1,4 @@
+<sly data-sly-use.copyLink="com.adobe.guides.aem.components.core.models.CopyLinkComponentModel"/>
 <sly data-sly-test="${wcmmode.edit}">
     <sly data-sly-test.componentName="${component.title}"></sly>
     <div class=no_content align="center">EDIT: ${componentName}</div>
@@ -5,7 +6,7 @@
 
 <div class="copy-link-button">
     <button class="gu-copy-link">
-        <img src="${properties.copyLinkIcon}" class="gu-copy-icon" alt="Copy Link Icon"/>
+        <img src="${copyLink.copyLinkIcon}" class="gu-copy-icon" alt="Copy Link Icon"/>
     </button>
 </div>
 <div class="gu-copy-link__text">Link Copied</div>
