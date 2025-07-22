@@ -1,9 +1,12 @@
 package com.adobe.guides.aem.components.core.models;
 
 import com.adobe.guides.aem.components.core.utils.LinkUtils;
+import com.adobe.cq.export.json.ComponentExporter;
+import com.adobe.cq.export.json.ExporterConstants;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
@@ -17,9 +20,14 @@ import java.util.Objects;
 
 @Model(
         adaptables = { Resource.class, SlingHttpServletRequest.class },
+        adapters = { FooterModel.class, ComponentExporter.class },
+        resourceType = FooterModel.RESOURCE_TYPE,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
-public class FooterModel {
+@Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
+public class FooterModel implements ComponentExporter {
+
+    public static final String RESOURCE_TYPE = "guides-components/components/footer";
 
     private static final Logger logger = LoggerFactory.getLogger(FooterModel.class);
 
@@ -127,5 +135,10 @@ public class FooterModel {
 
     public List<PageModel> getPagesList() {
         return pagesList;
+    }
+
+    @Override
+    public String getExportedType() {
+        return RESOURCE_TYPE;
     }
 }
