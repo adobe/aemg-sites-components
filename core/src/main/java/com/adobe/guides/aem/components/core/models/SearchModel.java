@@ -81,6 +81,30 @@ public class SearchModel extends AbstractComponentImpl implements Search {
             if (currentPage != null && currentPage.getContentResource() != null) {
                 ValueMap valueMap = currentPage.getContentResource().getValueMap();
                 this.searchRootPagePath = valueMap.get("sitePath", String.class);
+                Resource siteRootResource = this.request.getResource().getResourceResolver().getResource(searchRootPagePath);
+                if(siteRootResource != null){
+                    Page siteRootPage = siteRootResource.adaptTo(Page.class);   //the root page of current version of a product documentation
+                    if(siteRootPage != null) {
+                        Page searchPage = null;
+                        java.util.Iterator<Page> matcher = siteRootPage.listChildren(new SearchPageFilter());
+                        if(matcher.hasNext()) {
+                            searchPage = matcher.next();
+                        } else {
+                            matcher = siteRootPage.getParent().listChildren(new SearchPageFilter());    //find if the search page is at parent level (usually language or locale) folder
+                            if(matcher.hasNext()) {
+                                searchPage = matcher.next();
+                            } else {
+                                matcher = siteRootPage.getParent().getParent().listChildren(new SearchPageFilter());    //find if the search page is at parent level (usually language or locale) folder
+                                if(matcher.hasNext()) {
+                                    searchPage = matcher.next();
+                                }
+                            }
+                        }
+                        if(searchPage != null) {
+                            this.searchRootPagePath = searchPage.getPath();
+                        }
+                    }                  
+                }
             }
         }
         return this.searchRootPagePath;
@@ -103,5 +127,13 @@ public class SearchModel extends AbstractComponentImpl implements Search {
         return this.request.getResource().getResourceType();
     }
 
+    private static class SearchPageFilter implements com.day.cq.commons.Filter<Page> {
+        public boolean includes(Page page) {
+            String pageTemplate = page.getProperties().get("cq:template", String.class);
+            if(pageTemplate == null) {return false;}
+            if(!pageTemplate.contains("-search-")) {return false;}
+            return true;
+        }
+    }
 
 }

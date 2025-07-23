@@ -226,6 +226,13 @@
       font-weight: 500;
       line-height: var(--topic-lh);
       margin-top: 1rem;
+		&.warning {
+			color: #ff8222;
+			&::before {
+				content: "\26A0" !important;
+				display: inline-block;
+			}
+		}
     }
 
     .note::before {
