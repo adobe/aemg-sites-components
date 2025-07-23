@@ -226,11 +226,63 @@
       font-weight: 500;
       line-height: var(--topic-lh);
       margin-top: 1rem;
-		&.warning {
-			color: #ff8222;
+	  
+		span.prefix-content {
+			display: block;
+			font-weight: 600;
+		}
+		&::before {
+			display: inline-block;
+			padding:0.5rem;
+		}
+		&.notice, &.info {
+			&::before {
+				content: "\2139" !important;
+			}
+		}
+         &.attention {
+			&::before {
+				content: "\329F" !important;
+			}
+		}
+        &.important {
+			&::before {
+				content: "\2757" !important;
+			}
+		}
+        &.warning {
 			&::before {
 				content: "\26A0" !important;
-				display: inline-block;
+			}
+		}
+        &.caution {
+			&::before {
+				content: "\2621" !important;
+			}
+		}
+        &.error {
+			&::before {
+				content: "\274C" !important;
+			}
+		}
+        &.dangerous {
+			&::before {
+				content: "\26A1" !important;
+			}
+		}
+        &.hazardous {
+			&::before {
+				content: "\2620" !important;
+			}
+		}
+        &.success {
+			&::before {
+				content: "\2705" !important;
+			}
+		}
+        &.tip, &.idea {
+			&::before {
+				content: "\1F4A1" !important;
 			}
 		}
     }
