@@ -9,7 +9,8 @@ window.onload = function () {
 
     const $lightIcon = $themIcon.querySelector(".gu-theme_icon.light");
     const $darkIcon = $themIcon.querySelector(".gu-theme_icon.dark");
-
+	
+	/*
     // Select the dark theme icon and update its src
     $darkIcon.src =
       "/content/dam/guides/common-images/icons/manufacturing-dark-theme.svg";
@@ -17,7 +18,8 @@ window.onload = function () {
     // Select the light theme icon and update its src
     $lightIcon.src =
       "/content/dam/guides/common-images/icons/manufacturing-light-theme.svg";
-
+	*/
+	
     if (theme === "dark") {
       document.body.classList.add("dark");
       document.body.classList.remove("light");
