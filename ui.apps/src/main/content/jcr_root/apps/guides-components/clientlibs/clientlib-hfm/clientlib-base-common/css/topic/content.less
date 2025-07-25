@@ -226,6 +226,8 @@
       font-weight: 500;
       line-height: var(--topic-lh);
       margin-top: 1rem;
+	  position: relative;
+	  padding-left: 60px;
 	  
 		span.prefix-content {
 			display: block;
@@ -234,55 +236,65 @@
 		&::before {
 			display: inline-block;
 			padding:0.5rem;
+			position: absolute;
+			left: 0.5rem;
+			top: 0.5rem;
+			width: 50px;
+			height: 50px;
 		}
-		&.notice, &.info {
+		&.notice {
 			&::before {
-				content: "\2139" !important;
+				background-image : url("../../resources/icons/notice.png");
 			}
 		}
          &.attention {
 			&::before {
-				content: "\329F" !important;
+				background-image : url("../../resources/icons/attention.png");
 			}
 		}
         &.important {
 			&::before {
-				content: "\2757" !important;
+				background-image : url("../../resources/icons/important.png");
 			}
 		}
         &.warning {
 			&::before {
-				content: "\26A0" !important;
+				background-image : url("../../resources/icons/warning.png");
 			}
 		}
         &.caution {
 			&::before {
-				content: "\2621" !important;
+				background-image : url("../../resources/icons/caution.png");
 			}
 		}
-        &.error {
+		&.danger {
 			&::before {
-				content: "\274C" !important;
+				background-image : url("../../resources/icons/danger.png");
 			}
 		}
-        &.dangerous {
+        &.other {
 			&::before {
-				content: "\26A1" !important;
+				background-image : url("../../resources/icons/other.png");
+			}
+		}       
+        &.remember {
+			&::before {
+				background-image : url("../../resources/icons/remember.png");
 			}
 		}
-        &.hazardous {
+        &.restriction {
 			&::before {
-				content: "\2620" !important;
+				background-image : url("../../resources/icons/restriction.png");;
 			}
 		}
-        &.success {
+        &.tip {
 			&::before {
-				content: "\2705" !important;
+				background-image : url("../../resources/icons/tip.png");
 			}
 		}
-        &.tip, &.idea {
+		&.fastpath {
 			&::before {
-				content: "\1F4A1" !important;
+				background-image : url("../../resources/icons/fastpath.png");
 			}
 		}
     }
