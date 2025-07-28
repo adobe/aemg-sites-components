@@ -316,18 +316,38 @@
       margin-bottom: 0.25rem;
     }
 
-    .relatedlinks {
-      margin-top: 2.5rem;
-
+    .related-links {
+		margin: 2.5rem 0 1rem 0;
+      	padding:0.5rem;
+      	border: 2px solid var(--grey-border);
+		display:flex;
+        flex-direction:column;
+        gap:0.5rem;
+		background:var(--grey-bg);
+        span.prefix-content {
+        	font-size: var(--topic-1-fs);
+            font-weight:700;
+            border-bottom: 1px solid var(--grey-border);
+    		padding: 1rem 0;
+        }
+		.linkpool {
+            display: flex;
+            flex-direction: column;
+            margin:0;
+            padding:0;            
+            &:not(:last-child) {
+            	border-bottom: 1px dashed var(--grey-border);
+            }
+        }
       .link {
         margin-bottom: 0.25rem;
 
         span {
           font-size: var(--topic-2-fs);
-          font-weight: 600;
+          font-weight: 300;
           line-height: var(--topic-2-lh);
           padding: 0.125rem;
-          color: var(--primary-color);
+          color: var(--blackish-color);
           text-decoration: none;
 
           :hover {
@@ -341,7 +361,7 @@
       }
     }
 
-    .relatedlinks::before {
+    .related-links::before {
       display: block;
       padding-bottom: 0.25rem;
       margin-bottom: 0;
@@ -581,20 +601,43 @@
         line-height: var(--topic-2-lh);
       }
 
-      .relatedlinks {
-        margin-top: 2.75rem;
-
+    .related-links {
+        margin: 2.5rem 0 1rem 0;
+      	padding:0.5rem;
+      	border: 2px solid var(--grey-border);
+		display:flex;
+        flex-direction:column;
+        gap:0.5rem;
+		background:var(--grey-bg);
+        span.prefix-content {
+        	font-size: var(--topic-1-fs);
+            font-weight:700;
+            border-bottom: 1px solid var(--grey-border);
+    		padding: 1rem 0;
+        }
+		.linkpool {
+            display: flex;
+            flex-direction: column;
+            margin:0;
+            padding:0;            
+            &:not(:last-child) {
+            	border-bottom: 1px dashed var(--grey-border);
+            }
+        }
         .link {
           span {
             font-size: var(--topic-1-fs);
+			font-weight:300;
             line-height: var(--topic-1-lh);
+			color : var(--blackish-color);
             padding: 0.25rem;
             margin-bottom: 0.25rem;
           }
         }
-      }
+	}
 
-      .relatedlinks::before {
+
+      .related-links::before {
         padding-bottom: 0.5rem;
         font-size: var(--fs-subheading-2);
         line-height: var(--lh-subheading-2);
@@ -633,12 +676,6 @@
   }
 }
 
-.related-links {
-  .linkpool {
-    display: flex;
-    flex-direction: column;
-  }
-}
 html.adobeguides-text-spacing,
 html.adobeguides-text-size {
   .related-links {
