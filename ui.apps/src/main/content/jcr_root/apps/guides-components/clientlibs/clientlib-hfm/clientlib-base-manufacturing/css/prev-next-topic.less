@@ -9,7 +9,7 @@
   .gu-next-topic_container {
     display: flex;
     align-items: center;
-    width: 22.75rem;
+    max-width: 22.75rem;
     border: 1px solid var(--grey-border);
     border-radius: 0.75rem;
     padding: 1rem 0.5rem;
@@ -53,13 +53,13 @@
       brightness(105%) contrast(105%);
   }
 
+  @media (max-width: 1023px) {
+    .gu-pre-next-wrapper {
+      margin: 0.75rem 1rem;
+    }
+  }
+
   @media (max-width: 1024px) {
-    // .gu-pre-next-wrapper {
-    //   flex-direction: column;
-    //   align-items: center;
-    //   margin: 1rem 0;
-    //   gap: 0.5rem;
-    // }
     .gu-pre-topic_container,
     .gu-next-topic_container {
       width: auto;
