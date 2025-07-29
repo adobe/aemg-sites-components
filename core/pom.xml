@@ -43,7 +43,6 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-							Sling-Initial-Content: SLING-INF/content;path:=/apps/guides-components/config;overwrite:=true
 							Import-Package: javax.annotation;version=0.0.0,*
                                 ]]></bnd>
                         </configuration>
