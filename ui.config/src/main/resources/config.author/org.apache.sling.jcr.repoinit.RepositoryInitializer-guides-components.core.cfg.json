@@ -1,0 +1,6 @@
+{
+	"scripts": [
+		"create service user guides-writer-service with forced path system/cq:services/guides",
+		"set principal ACL for guides-writer-service \nallow jcr:write on /content/ \nend"
+	]
+}
