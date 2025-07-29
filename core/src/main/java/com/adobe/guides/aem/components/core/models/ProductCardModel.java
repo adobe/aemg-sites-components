@@ -120,7 +120,13 @@ public class ProductCardModel {
             ValueMap attributes = productPage.getContentResource().getValueMap();
         
             String productTitle = Optional.ofNullable(attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_TITLE, String.class)).orElse("Untitled Product");
-            String productDescription = Optional.ofNullable(attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_DESCRIPTION, String.class)).orElse("No description available");
+            String productDescription = attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_DESCRIPTION, String.class);
+            if (productDescription == null || productDescription.isEmpty()) {
+                productDescription = getFallbackDescription(productPage.getContentResource());
+            }
+            if (productDescription == null || productDescription.isEmpty()) {
+                productDescription = "No description available";
+            }
             String productThumbnail = Optional.ofNullable(attributes.get("thumbnail", String.class)).orElse("");
             String productLink = productPage.getPath();
             if(linkManager != null) {
@@ -175,5 +181,28 @@ public class ProductCardModel {
             }            
         }        
         return children;
+    }
+
+    private String getFallbackDescription(Resource contentResource) {
+        // Adjust the path as needed, or make it more generic if the container name changes
+        Resource textResource = contentResource.getChild("root/container_1161378199/injected-container/text-1");
+        if (textResource != null) {
+            ValueMap textProps = textResource.getValueMap();
+            String html = textProps.get("text", String.class);
+            if (html != null && !html.isEmpty()) {
+                // Strip HTML tags to get plain text
+                return stripHtmlTags(html);
+            }
+        }
+        return "No description available";
+    }
+    
+    private String stripHtmlTags(String html) {
+        if (html == null || html.isEmpty()) {
+            return html;
+        }
+        // Remove HTML tags and decode common HTML entities
+        String text = html.replaceAll("<[^>]*>", "").trim();
+        return text;
     }
 }
