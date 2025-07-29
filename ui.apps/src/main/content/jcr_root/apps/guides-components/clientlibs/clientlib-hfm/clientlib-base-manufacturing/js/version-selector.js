@@ -5,23 +5,6 @@ $(document).ready(function () {
         $(".toolbar:not(.hidden) .version-selector .dropdown__list").addClass("hidden");
     });
 
-    const width = window.innerWidth;
-    var maxChars;
-
-    if (width < 768) {
-        maxChars = 10; 
-    } else if (width < 1024) {
-        maxChars = 3; 
-    } else {
-        maxChars = 3; 
-    }
-
-    $('.dropdown__value').each(function () {
-        const fullText = $(this).text().trim();
-        if (fullText.length > maxChars) {
-        $(this).text(fullText.slice(0, maxChars) + '…');
-        }
-    });
 });
 
 function attachDropdownEvents() {
