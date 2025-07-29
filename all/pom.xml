@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.adobe.guides.aem.components</groupId>
         <artifactId>guides-components</artifactId>
-        <version>1.5.0-SNAPSHOT</version>
+        <version>1.5.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -60,6 +60,12 @@
                         <embedded>
                             <groupId>com.adobe.guides.aem.components</groupId>
                             <artifactId>guides-components.ui.apps</artifactId>
+                            <type>zip</type>
+                            <target>/apps/guides-components-packages/application/install</target>
+                        </embedded>
+						<embedded>
+                            <groupId>com.adobe.guides.aem.components</groupId>
+                            <artifactId>guides-components.ui.config</artifactId>
                             <type>zip</type>
                             <target>/apps/guides-components-packages/application/install</target>
                         </embedded>
@@ -177,6 +183,11 @@
                                     <artifactId>guides-components.core</artifactId>
                                     <target>/apps/guides-components-packages/application/install</target>
                                 </embedded>
+								<embedded>
+                                    <groupId>com.adobe.guides.aem.components</groupId>
+                                    <artifactId>guides-components.config</artifactId>
+                                    <target>/apps/guides-components-packages/application/install</target>
+                                </embedded>
                                 <embedded>
                                     <groupId>com.adobe.cq</groupId>
                                     <artifactId>core.wcm.components.content</artifactId>
@@ -212,7 +223,12 @@
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
-
+		<dependency>
+            <groupId>com.adobe.guides.aem.components</groupId>
+            <artifactId>guides-components.ui.config</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
          <!-- Core Component Dependency (6.x only)-->
         <dependency>
             <groupId>com.adobe.cq</groupId>
