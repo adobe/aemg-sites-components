@@ -34,6 +34,25 @@
           width: 100%;
           overflow: visible;
         }
+        &--left {
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: var(--nav-bg);
+            border-radius: 0.39rem;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: var(--border-common);
+            border-radius: 0.39rem;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: var(--light-grey-border);
+          }
+        }
       }
       .col-6grid {
         border: 1px solid var(--light-grey-border);
@@ -65,7 +84,6 @@
         height: auto;
         max-height: calc(100vh - 5rem);
         overflow: auto;
-        scrollbar-width: thin;
 
         &--right {
           position: sticky;
