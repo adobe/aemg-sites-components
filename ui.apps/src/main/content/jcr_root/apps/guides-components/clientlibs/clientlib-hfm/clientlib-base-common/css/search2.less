@@ -662,3 +662,42 @@ input::placeholder {
   text-decoration: none;
   color: var(--breadcrumb-item-color) !important;
 }
+
+#search-container {
+	.cmp-search-result {
+		a {
+			font-size: large;
+		}
+		.cmp-searchresult-tag {
+			display: inline;
+			margin: 0.2rem;
+			padding: 0.2rem;
+			background: whitesmoke;
+			border-radius: 5px;
+			text-align: center;
+			font-size: x-small;
+		}
+		.cmp-searchresult-date {
+			display: inline;
+			margin: 0.2rem;
+			padding: 0.2rem;
+			background: aliceblue;
+			border-radius: 5px;
+			text-align: center;
+			font-size: x-small;
+			float: right;
+		}
+		.cmp-searchresult-description {
+			margin: 0.5rem 0;
+		}
+		.cmp-seaarchresult-breadcrumbs {
+			display:flex;
+			margin-top: 0.5rem;
+			span.cmp-seaarchresult-breadcrumbs-step:not(:first-child):after {
+				margin: 0.3rem;
+				content: "\279c";
+				font-weight: 700;
+			}
+		}
+	}
+}

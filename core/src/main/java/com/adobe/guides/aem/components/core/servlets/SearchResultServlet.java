@@ -101,7 +101,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         Page currentPage = getCurrentPage(request);
         if (currentPage != null) {
             Resource searchResource = getSearchContentResource(request, currentPage);
-            List<ListItem> results = getResults(request, searchResource, currentPage);
+            List<PageListItemImpl> results = getResults(request, searchResource, currentPage);
             writeJson(results, response);
         }
     }
@@ -117,7 +117,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         return currentPage;
     }
 
-    private void writeJson(List<ListItem> results, SlingHttpServletResponse response) {
+    private void writeJson(List<PageListItemImpl> results, SlingHttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         ObjectMapper mapper = new ObjectMapper();
