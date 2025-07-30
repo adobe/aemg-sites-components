@@ -5,15 +5,6 @@ $(document).ready(function () {
         $(".toolbar:not(.hidden) .version-selector .dropdown__list").addClass("hidden");
     });
 
-    const width = window.innerWidth;
-    if (width > 768) {
-        $('.dropdown__value').each(function () {
-        const fullText = $(this).text().trim();
-        if (fullText.length > 3) {
-        $(this).text(fullText.slice(0, 3) + '…');
-        }
-    });
-    } 
 });
 
 function attachDropdownEvents() {
