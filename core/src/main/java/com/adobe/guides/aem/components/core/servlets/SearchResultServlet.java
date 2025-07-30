@@ -155,7 +155,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
     }
 
 
-    private List<ListItem> getResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage) {
+    private List<PageListItemImpl> getResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage) {
         int searchTermMinimumLength = SearchImpl.PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT;
         int resultsSize = SearchImpl.PROP_RESULTS_SIZE_DEFAULT;
         String searchRootPagePath;
@@ -175,7 +175,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         if (StringUtils.isEmpty(searchRootPagePath)) {
             searchRootPagePath = currentPage.getPath();
         }
-        List<ListItem> results = new ArrayList<>();
+        List<PageListItemImpl> results = new ArrayList<>();
         String fulltext = request.getParameter(PARAM_FULLTEXT);
         if (fulltext == null || fulltext.length() < searchTermMinimumLength) {
             return results;
