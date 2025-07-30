@@ -101,7 +101,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         Page currentPage = getCurrentPage(request);
         if (currentPage != null) {
             Resource searchResource = getSearchContentResource(request, currentPage);
-            List<PageListItemImpl> results = getResults(request, searchResource, currentPage);
+            List<ListItem> results = getResults(request, searchResource, currentPage);
             writeJson(results, response);
         }
     }
@@ -117,7 +117,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         return currentPage;
     }
 
-    private void writeJson(List<PageListItemImpl> results, SlingHttpServletResponse response) {
+    private void writeJson(List<ListItem> results, SlingHttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +155,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
     }
 
 
-    private List<PageListItemImpl> getResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage) {
+    private List<ListItem> getResults(SlingHttpServletRequest request, Resource searchResource, Page currentPage) {
         int searchTermMinimumLength = SearchImpl.PROP_SEARCH_TERM_MINIMUM_LENGTH_DEFAULT;
         int resultsSize = SearchImpl.PROP_RESULTS_SIZE_DEFAULT;
         String searchRootPagePath;
@@ -175,7 +175,7 @@ public class SearchResultServlet extends SlingSafeMethodsServlet {
         if (StringUtils.isEmpty(searchRootPagePath)) {
             searchRootPagePath = currentPage.getPath();
         }
-        List<PageListItemImpl> results = new ArrayList<>();
+        List<ListItem> results = new ArrayList<>();
         String fulltext = request.getParameter(PARAM_FULLTEXT);
         if (fulltext == null || fulltext.length() < searchTermMinimumLength) {
             return results;
