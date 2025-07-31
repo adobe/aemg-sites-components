@@ -114,6 +114,7 @@ public class ProductCardModel {
             }          
         } 
         logger.debug("the parent page for product pages is : {}", parent.getPath());
+        logger.info("-------- reached here 9");
         
         List<Page> productPages = getProductPages(parent);
         for(Page productPage : productPages) {
@@ -166,16 +167,29 @@ public class ProductCardModel {
     }
     
     private List<Page> getProductPages(Page parent) {  
+        logger.info("-------- reached here 1");
         List<Page> children = new ArrayList<>();
         Iterator<Page> iterator = parent.listChildren();
+        logger.info("-------- reached here 2");
         while(iterator.hasNext()) {
             Page child = iterator.next();
             Resource childContentResource = child.getContentResource();
+            logger.info("-------- reached here 3");
             if (childContentResource == null) {
                 logger.debug("content-node missing for child page : {}", child.getPath());
                 continue;
             }
+            logger.info("-------- reached here 4");
+            ValueMap childProps = childContentResource.getValueMap();
+            Boolean hideInNav = childProps.get("hideInNav", Boolean.class);
+            logger.info("-------- reached here 5");
+            if (hideInNav != null && hideInNav) {
+                logger.debug("Skipping page {} as hideInNav is true", child.getPath());
+                continue;
+            }
+            logger.info("-------- reached here 6");
             String productPageTemplate = getProductPageTemplate(child);
+            logger.info("-------- reached here 7");
             if(productPageTemplate != null) {
                 children.add(child);
             }            
