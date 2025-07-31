@@ -25,13 +25,13 @@
     <description>Guides Components</description>
 
     <modules>
-        <module>all</module>
         <module>core</module>
         <module>ui.apps</module>
         <module>ui.apps.structure</module>
 		<module>ui.config</module>
         <module>it.tests</module>
         <module>ui.tests</module>
+		<module>all</module>        
     </modules>
 
     <properties>

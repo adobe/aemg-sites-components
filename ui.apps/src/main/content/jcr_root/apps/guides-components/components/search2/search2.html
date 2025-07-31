@@ -9,7 +9,7 @@
     <input id="search_page-path" value="${search.searchRootPagePath}.html" type="hidden">
     <form class="cmp-search__form" data-cmp-hook-search="form"
           method="get"
-          action="${currentPage.path @ addSelectors=['searchresults'], extension='json', suffix = search.relativePath}"
+          action="${currentPage.path @ addSelectors=['aemsitesearchresults'], extension='json', suffix = search.relativePath}"
           autocomplete="off">
         <div class="cmp-search__field">
             <img class="cmp-search__icon" src="${properties.searchIcon}" alt="Search Icon" />
