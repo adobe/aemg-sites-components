@@ -42,3 +42,4 @@ banner-component.less
 card.less
 global.less
 product-card.less
+connect.less

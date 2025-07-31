@@ -114,13 +114,20 @@ public class ProductCardModel {
             }          
         } 
         logger.debug("the parent page for product pages is : {}", parent.getPath());
+        logger.info("-------- reached here 9");
         
         List<Page> productPages = getProductPages(parent);
         for(Page productPage : productPages) {
             ValueMap attributes = productPage.getContentResource().getValueMap();
         
             String productTitle = Optional.ofNullable(attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_TITLE, String.class)).orElse("Untitled Product");
-            String productDescription = Optional.ofNullable(attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_DESCRIPTION, String.class)).orElse("No description available");
+            String productDescription = attributes.get(com.day.cq.commons.jcr.JcrConstants.JCR_DESCRIPTION, String.class);
+            if (productDescription == null || productDescription.isEmpty()) {
+                productDescription = getFallbackDescription(productPage.getContentResource());
+            }
+            if (productDescription == null || productDescription.isEmpty()) {
+                productDescription = "No description available";
+            }
             String productThumbnail = Optional.ofNullable(attributes.get("thumbnail", String.class)).orElse("");
             String productLink = productPage.getPath();
             if(linkManager != null) {
@@ -160,20 +167,56 @@ public class ProductCardModel {
     }
     
     private List<Page> getProductPages(Page parent) {  
+        logger.info("-------- reached here 1");
         List<Page> children = new ArrayList<>();
         Iterator<Page> iterator = parent.listChildren();
+        logger.info("-------- reached here 2");
         while(iterator.hasNext()) {
             Page child = iterator.next();
             Resource childContentResource = child.getContentResource();
+            logger.info("-------- reached here 3");
             if (childContentResource == null) {
                 logger.debug("content-node missing for child page : {}", child.getPath());
                 continue;
             }
+            logger.info("-------- reached here 4");
+            ValueMap childProps = childContentResource.getValueMap();
+            Boolean hideInNav = childProps.get("hideInNav", Boolean.class);
+            logger.info("-------- reached here 5");
+            if (hideInNav != null && hideInNav) {
+                logger.debug("Skipping page {} as hideInNav is true", child.getPath());
+                continue;
+            }
+            logger.info("-------- reached here 6");
             String productPageTemplate = getProductPageTemplate(child);
+            logger.info("-------- reached here 7");
             if(productPageTemplate != null) {
                 children.add(child);
             }            
         }        
         return children;
+    }
+
+    private String getFallbackDescription(Resource contentResource) {
+        // Adjust the path as needed, or make it more generic if the container name changes
+        Resource textResource = contentResource.getChild("root/container_1161378199/injected-container/text-1");
+        if (textResource != null) {
+            ValueMap textProps = textResource.getValueMap();
+            String html = textProps.get("text", String.class);
+            if (html != null && !html.isEmpty()) {
+                // Strip HTML tags to get plain text
+                return stripHtmlTags(html);
+            }
+        }
+        return "No description available";
+    }
+    
+    private String stripHtmlTags(String html) {
+        if (html == null || html.isEmpty()) {
+            return html;
+        }
+        // Remove HTML tags and decode common HTML entities
+        String text = html.replaceAll("<[^>]*>", "").trim();
+        return text;
     }
 }
