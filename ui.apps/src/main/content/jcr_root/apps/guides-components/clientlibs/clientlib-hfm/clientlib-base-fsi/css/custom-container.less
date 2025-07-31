@@ -32,26 +32,18 @@
         flex: 0 0 25%;
         .outer-container {
           width: 100%;
-          overflow: visible;
+          position: sticky;
+          top: 70px;
+          max-height: 100vh;
+          display: flex;
+          flex-direction: column;
         }
-        &--left {
-          &::-webkit-scrollbar {
-            width: 6px;
-          }
-
-          &::-webkit-scrollbar-track {
-            background: var(--nav-bg);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: var(--border-common);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background: var(--light-grey-border);
-          }
+        &.col-3grid--left {
+          overflow: visible;
+          max-height: unset;
+          margin-inline: 0;
+          max-width: 25%;
+          flex: 0 0 25%;
         }
       }
       .col-6grid {
@@ -68,18 +60,18 @@
           border: none;
         }
         &.collapsed {
-          max-width: 70%;
-          flex: 0 0 69.9%;
+          max-width: 68%;
+          flex: 0 0 68%;
         }
       }
       .col-3grid {
         display: flex;
         -webkit-box-flex: 0;
-        -webkit-flex: 0 0 23%;
-        -ms-flex: 0 0 23%;
-        flex: 0 0 23%;
-        max-width: 23%;
-        margin: 0 1rem;
+        -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+        margin: 0;
         min-height: 40rem;
         height: auto;
         max-height: calc(100vh - 5rem);
@@ -88,7 +80,7 @@
         &--right {
           position: sticky;
           top: 10%;
-          margin: 0 1rem;
+          margin: 0;
           padding: 0.5rem 1.25rem;
           flex-direction: column;
           justify-content: space-between;
@@ -105,13 +97,13 @@
           }
 
           &.collapsed {
-            width: fit-content !important;
+            flex: 0 0 7%;
+            max-width: 7%;
             box-shadow: none;
             border-radius: 0;
             margin: 0;
             background-color: transparent;
             height: auto;
-            flex: 0 0 fit-content !important;
 
             > div:not(.tableofcontents) {
               display: none;
@@ -119,7 +111,7 @@
 
             .tableofcontents {
               display: flex;
-              justify-content: flex-end;
+              justify-content: center;
             }
 
             .gu-toc__title {
@@ -147,13 +139,20 @@
       }
       &.left-collapsed {
         .col-3grid--left {
-          flex: 0 0 4.1%;
+          flex: 0 0 7%;
         }
         .col-6grid {
-          flex: 0 0 68.9%;
+          flex: 0 0 68%;
         }
         .col-3grid--right {
-          flex: 0 0 23%;
+          flex: 0 0 25%;
+        }
+        .col-6grid.collapsed {
+          flex: 0 0 86%;
+          max-width: 86%;
+        }
+        .cmp-navigation-filter__wrapper {
+          justify-content: center;
         }
       }
     }
