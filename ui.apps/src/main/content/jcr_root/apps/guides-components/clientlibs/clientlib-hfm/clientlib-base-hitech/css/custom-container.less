@@ -58,6 +58,24 @@
           top: 70px;
           width: 25%;
           max-height: 100vh;
+
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            //background: var(--nav-bg);
+            border-radius: 0.39rem;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: var(--border-common);
+            border-radius: 0.39rem;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: var(--light-grey-border);
+          }
         }
       }
 
