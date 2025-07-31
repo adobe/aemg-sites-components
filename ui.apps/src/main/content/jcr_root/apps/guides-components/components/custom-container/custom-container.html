@@ -1,6 +1,6 @@
 <sly data-sly-use.template="core/wcm/components/commons/v1/templates.html"
      data-sly-test.hasContent="${properties.colLayout}"></sly>
-<div class="gu-custom-container ${wcmmode.edit || wcmmode.preview ? 'EDITMODE' : ''}" data-sly-test="${hasContent}">
+<div class="gu-custom-container ${wcmmode.edit || wcmmode.preview ? 'EDITMODE' : 'DISABLEDMODE'}" data-sly-test="${hasContent}">
   <sly data-sly-test="${properties.colLayout=='twoColumn'}">
     <div class="col-3grid">
       <div

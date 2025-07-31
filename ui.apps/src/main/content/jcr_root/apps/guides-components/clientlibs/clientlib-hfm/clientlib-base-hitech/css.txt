@@ -28,3 +28,5 @@ accessibility-features.less
 topic-pdf.less
 style.less
 social-share.less
+navigation2.less
+related-tags.less
