@@ -52,30 +52,12 @@
         .outer-container {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2.5rem;
           margin-top: 4.438rem;
-          position: fixed;
           top: 70px;
-          width: 25%;
+          position: sticky;
+          width: 100%;
           max-height: 100vh;
-
-          &::-webkit-scrollbar {
-            width: 6px;
-          }
-
-          &::-webkit-scrollbar-track {
-            //background: var(--nav-bg);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: var(--border-common);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background: var(--light-grey-border);
-          }
         }
       }
 

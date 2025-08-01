@@ -93,6 +93,7 @@
 
   nav > ul.cmp-navigation__group {
     list-style: none;
+    margin-left: 20px;
 
     &.expanded {
       color: var(--primary-color);
@@ -147,46 +148,13 @@
             display: contents;
             pointer-events: auto;
           }
-
-          // &::before {
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   margin-right: 0.25rem;
-          //   content: "";
-          //   display: inline-block;
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-right-arrow.svg");
-          //   background-size: contain;
-          //   background-repeat: no-repeat;
-          //   width: 20px;
-          //   height: 20px;
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   vertical-align: middle;
-          // }
-
-          // &.expanded:has(ul)::before {
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-down-arrow.svg");
-          //   vertical-align: middle;
-          // }
-
-          // &.expanded ul li.expanded::before {
-          //   color: var(--primary-color);
-          //   content: "";
-          //   display: inline-block;
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-down-arrow.svg");
-          //   background-size: contain;
-          //   background-repeat: no-repeat;
-          //   width: 20px;
-          //   height: 20px;
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   vertical-align: middle;
-          // }
         }
 
         ul {
-          padding-left: 1.188rem;
+          padding-left: 33px;
           margin-left: 0.563rem;
+          position: relative;
+          left: -22.5px;
 
           &:hover {
             background: unset;
@@ -221,6 +189,10 @@
     width: 20px;
     vertical-align: middle;
     cursor: pointer;
+    margin-left: -23px;
+  }
+  .cmp-navigation__item.cmp-navigation__item--level-0 > .cmp-navigation__item-arrow-icon {
+    transform: rotate(-90deg);
   }
   .cmp-navigation__item.expanded > .cmp-navigation__item-arrow-icon {
     transform: rotate(90deg); // or 180deg depending on original orientation
