@@ -41,6 +41,9 @@
 
         .outer-container {
           width: 100%;
+          display: flex;
+          flex-direction: column;
+          max-height: 100vh;
         }
 
         &--left {
@@ -53,25 +56,8 @@
           margin: 0 1rem;
           min-height: 40rem;
           height: fit-content;
-          max-height: calc(100vh - 20rem);
-          overflow: auto;
-          &::-webkit-scrollbar {
-            width: 6px;
-          }
-
-          &::-webkit-scrollbar-track {
-            background: var(--nav-bg);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: var(--border-common);
-            border-radius: 0.39rem;
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background: var(--light-grey-border);
-          }
+          max-height: unset;
+          overflow: visible;
         }
 
         &--right {

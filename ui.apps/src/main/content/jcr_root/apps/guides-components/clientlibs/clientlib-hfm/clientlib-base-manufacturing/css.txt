@@ -24,7 +24,7 @@ feedback.less
 footer.less
 header.less
 languagenavigation.less
-navigation.less
+navigation2.less
 pdf-export.less
 prev-next-topic.less
 related-tags.less
