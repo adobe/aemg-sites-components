@@ -79,14 +79,15 @@ public class SearchModel extends AbstractComponentImpl implements Search {
     public String getSearchRootPagePath() {
         if (this.searchRootPagePath == null) {
             if (currentPage != null && currentPage.getContentResource() != null) {
+                Page searchPage = null;
+                java.util.Iterator<Page> matcher;
                 ValueMap valueMap = currentPage.getContentResource().getValueMap();
-                this.searchRootPagePath = valueMap.get("sitePath", String.class);
+                this.searchRootPagePath = valueMap.get("sitePath", String.class);               
                 Resource siteRootResource = this.request.getResource().getResourceResolver().getResource(searchRootPagePath);
                 if(siteRootResource != null){
                     Page siteRootPage = siteRootResource.adaptTo(Page.class);   //the root page of current version of a product documentation
                     if(siteRootPage != null) {
-                        Page searchPage = null;
-                        java.util.Iterator<Page> matcher = siteRootPage.listChildren(new SearchPageFilter());
+                        matcher = siteRootPage.listChildren(new SearchPageFilter());
                         if(matcher.hasNext()) {
                             searchPage = matcher.next();
                         } else {
@@ -99,16 +100,29 @@ public class SearchModel extends AbstractComponentImpl implements Search {
                                     searchPage = matcher.next();
                                 }
                             }
-                        }
-                        if(searchPage != null) {
-                            this.searchRootPagePath = searchPage.getPath();
-                        }
+                        }                        
                     }                  
+                } else {
+                    String pageTemplate = valueMap.get("cq:template", String.class); 
+                    if(pageTemplate != null && pageTemplate.contains("-search-")) {
+                        searchPage = currentPage;
+                    }
+                }
+                if(searchPage != null) {
+                    this.searchRootPagePath = searchPage.getPath();
                 }
             }
         }
         return this.searchRootPagePath;
 
+    }
+
+    public String getSearchRootPageLink() {
+        this.searchRootPagePath = getSearchRootPagePath();
+        if(this.searchRootPagePath != null) {
+            return this.searchRootPagePath + ".html";
+        }
+        return null;
     }
 
     public int getResultsSize() {
