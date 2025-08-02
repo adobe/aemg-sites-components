@@ -19,7 +19,7 @@ custom-container.less
 feedback.less
 header.less
 prev-next-topic.less
-search.less
+search2.less
 toolbar.less
 version-selector.less
 dark.less
