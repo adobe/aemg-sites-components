@@ -29,6 +29,48 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .header {
+    .cmp-search {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin-top: 2rem;
+      background: var(--common-bg);
+      border: 1px solid var(--border-common);
+      border-radius: 0 0 0.75rem 0.75rem;
+      padding: 0.75rem 1rem 1rem;
+
+      &__icon {
+        left: 0.5rem;
+        top: 0.5rem;
+      }
+
+      &__input {
+        position: relative;
+        margin-top: 0;
+        left: unset;
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+
+      &__clear-icon {
+        left: unset;
+        top: 8px;
+        right: 8px;
+      }
+
+      &__results {
+        position: relative;
+        left: auto;
+        width: auto;
+        margin-top: 0.25rem;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+
 @media (min-width: 1024px) {
   .header {
     .cmp-search {
