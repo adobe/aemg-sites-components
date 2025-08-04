@@ -46,7 +46,7 @@
       padding: 0.75rem 1rem 1rem;
 
       &__icon {
-        left: 0.5rem;
+        left: 0;
         top: 0.5rem;
       }
 
@@ -56,6 +56,14 @@
         left: unset;
         width: 100%;
         border-radius: 0.5rem;
+        padding-left: 2rem;
+        border: none;
+        outline: none;
+        box-shadow: none;
+
+        &:focus-visible {
+          outline: none;
+        }
       }
 
       &__clear-icon {
@@ -68,60 +76,36 @@
         position: relative;
         left: auto;
         width: auto;
-        margin-top: 0.25rem;
+        margin-top: 0;
+        padding-block: 0;
         border-radius: 0.5rem;
+        border: none;
+        box-shadow: none;
+        outline: none;
+      }
+
+      &__item {
+        padding-inline: 1rem;
       }
     }
   }
 }
 
 @media (min-width: 1024px) {
-  .header {
+  .gu-header_search-container {
     .cmp-search {
-      position: relative;
-      display: block;
-
-      &__field {
-        position: relative;
-        height: 2rem;
-      }
-
-      &__input {
-        height: 100%;
-        width: 338px;
-        padding: 0.375rem 0.5rem 0.375rem 2rem;
-        border-radius: 0.5rem;
-        background: var(--search-bg);
-        border: none;
-        color: var(--search-text-color);
-        font-size: var(--body-font-size);
-        font-weight: 500;
-        line-height: var(--body-font-line-height);
-        margin-top: 0;
-        display: block;
-        position: unset;
-        box-shadow: none;
-      }
+      display: none;
+      transition: transform 0.3s ease;
 
       &__icon {
         display: block;
-        background-image: url("/content/dam/guides/common-images/icons/search.svg");
         background-size: contain;
         width: 20px;
         height: 20px;
         pointer-events: none;
         left: 0.5rem;
         top: 0.375rem;
-        margin-right: 0.375rem;
-      }
-
-      &__results {
-        display: none;
-        border-radius: 0.5rem;
-        position: absolute;
-        left: 0;
-        min-width: 100%;
-        margin-top: 0.25rem;
+        margin-right: 0.5rem;
       }
 
       &__clear-icon {
@@ -133,10 +117,75 @@
         height: 1rem;
         left: auto;
       }
+
+      &__results {
+        position: absolute;
+        left: 0;
+        min-width: 100%;
+        margin-top: 0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+        box-shadow: 0 8px 12px 0 var(--box-shadow-results);
+        border-radius: 0 0 0.5rem 0.5rem;
+        outline: none;
+      }
+
+      &__item {
+        margin-bottom: 0;
+        padding-left: 2.125rem;
+      }
+    }
+
+    .cmp-search__input {
+      background: var(--search-bg);
+      box-shadow: 0 8px 12px 0 var(--box-shadow-search);
+      display: block;
+      height: 100%;
+      width: 338px;
+      color: var(--search-text-color);
+      font-size: var(--body-font-size);
+      font-weight: 500;
+      line-height: var(--body-font-line-height);
+      margin-top: 0;
+      position: unset;
+      padding: 0.25rem 0.5rem 0.25rem 2.125rem;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .gu-search__toggle {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0.75rem;
+      height: 48px;
+      width: 48px;
+    }
+
+    .gu-search__icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.search-visible {
+      .cmp-search {
+        display: block;
+      }
+
+      .gu-search__container {
+        display: none;
+      }
     }
   }
 }
 
 .custom-search-container {
   margin-bottom: 0.7rem;
+}
+
+.col-9grid-container {
+  padding: 0 16px;
 }

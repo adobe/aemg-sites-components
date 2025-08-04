@@ -26,7 +26,7 @@ navigation2.less
 pdf-export.less
 prev-next-topic.less
 related-tags.less
-search.less
+search2.less
 social-share.less
 theme-selector.less
 toolbar.less
