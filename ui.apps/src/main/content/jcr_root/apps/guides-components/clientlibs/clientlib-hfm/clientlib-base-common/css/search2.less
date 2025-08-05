@@ -214,12 +214,14 @@ input::placeholder {
 }
 
 // Search Results Header
-.search-results-header {
+h2.search-results-header {
   padding-bottom: 0.94rem;
   padding-left: 1.56rem;
-  font-size: 1.25rem;
+  font-size: xxx-large;
   color: var(--color-text);
   font-weight: normal;
+  margin-bottom: 5rem !important;
+  line-height:3rem; 
 }
 
 // Pagination Container Styling
@@ -385,7 +387,7 @@ input::placeholder {
   .search-results-header {
     padding-left: 1rem;
     padding-bottom: 0.75rem;
-    font-size: 1rem;
+    font-size: xx-large;
   }
 
   .no-results-message {
@@ -447,7 +449,7 @@ input::placeholder {
   .search-results-header {
     padding-left: 0.75rem;
     padding-bottom: 0.625rem;
-    font-size: 0.94rem;
+    font-size: x-large;
   }
 
   .pagination-container {
@@ -666,8 +668,9 @@ input::placeholder {
 #search-container {
 	.cmp-search-results {
 		.cmp-search-result {
+			
 			> a {
-				font-size: large;
+				font-size: xx-large;
 			}
             .cmp-searchresult-header {
                  margin: 0.5rem 0;
@@ -692,16 +695,21 @@ input::placeholder {
                 }
             }
 			.cmp-searchresult-description {
-				margin: 0.5rem 0;
+				margin: 1rem 0;
+				font-size:large;
 			}
 			.cmp-seaarchresult-breadcrumbs {
 				display:flex;
-				margin-top: 0.5rem;
+				margin-top: 1.5rem;
 				span.cmp-seaarchresult-breadcrumbs-step:not(:last-child):after {
 					margin: 0.3rem;
-					content: "\279c";
+					content: "\2B9C";
 					font-weight: 700;
 				}
+				a {
+                    font-size:large;
+					color:#436ff6 !important;
+                }
 			}
 		}
 	}
