@@ -4,7 +4,6 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.slf4j.Logger;
@@ -32,26 +31,16 @@ public class ConnectSectionModel {
 
     @PostConstruct
     public void init() {
-        log.info("-------------> reached here 1");
         if (sectionCardList != null) {
-        log.info("-------------> reached here 2");
-
             for (Resource cardResource : sectionCardList) {
-        log.info("-------------> reached here 3");
-
                 ValueMap properties = cardResource.getValueMap();
-        log.info("-------------> reached here 4");
-
                 String cardTitle = properties.get("cardTitle", String.class);
-        log.info("-------------> reached here 5");
-
                 String description = properties.get("description", String.class);
                 String ctaLabel = properties.get("ctaLabel", String.class);
                 String ctaLink = properties.get("ctaLink", String.class);
                 cards.add(new Card(cardTitle, description, ctaLabel, ctaLink));
             }
         }
-        log.info("-------------> reached here 6");
 
     }
 

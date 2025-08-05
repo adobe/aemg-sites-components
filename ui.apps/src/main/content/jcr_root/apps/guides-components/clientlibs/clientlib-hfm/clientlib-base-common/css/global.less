@@ -181,7 +181,17 @@
         }
         
         &__results {
-          max-height: 250px;
+          position: absolute;
+          top: 4rem;
+          left: -156px;
+          right: 2px;
+          background-color: var(--common-bg) !important;
+          border-radius: 0 0 0.25rem 0.25rem;
+          border: none;
+          z-index: var(--z-index-10);
+          max-height: 300px;
+          overflow-y: auto;
+          margin-top: 0.25rem;
         }
         &__clear {
           position: absolute;
