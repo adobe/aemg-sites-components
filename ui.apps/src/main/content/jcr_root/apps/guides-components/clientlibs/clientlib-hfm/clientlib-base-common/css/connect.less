@@ -1,153 +1,35 @@
-.cmp-connect-section {
-  background-color: var(--blackish-color);
-  color: var(--white-color);
-  padding: 5rem 1.6rem;
-}
-
-.cmp-connect-section__title {
-  font-size: 30px;
-  font-weight: 600;
-  margin-bottom: 32px;
-}
-
-.cmp-connect-section__card-content {
-  padding: 10px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 1.75rem;
-}
-
-.cmp-connect-section__card-title {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cmp-connect-section__card-description {
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 400;
-  margin-bottom: 12px;
-  color: var(--grayish-color, #ccc);
-}
-
-.cmp-connect-section__card-cta {
-  font-size: 1rem;
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.cmp-connect-section__hero {
-  background: url("/content/dam/guides/common-images/images/gradientbg.png")
-    no-repeat center center;
-  background-size: cover;
-  color: var(--white-color);
-  padding: 0 20px;
-  height: 472px;
-  width: 100%;
-  position: relative;
-}
-
-.cmp-connect-section__hero-title {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.cmp-connect-section__hero-description {
-  color: var(--white-color);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 200;
-  margin-top: 8px;
-  color: var(--grayish-color, #ccc);
-}
-
-.cmp-connect-section__hero-img {
-  position: absolute;
-  bottom: 0;
-  right: 30px;
-  width: 85%;
-  height: auto;
-}
-
-.cmp-connect-section__hero-cta {
-  display: inline-block;
-  background: var(--white-color, #fff);
-  color: var(--primary-color, #0077cc);
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.55rem 0.75rem;
-  border-radius: 10px;
-  border: none;
-  text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-}
-
-@media (min-width: 1024px) {
+.connect-section {
+  background-color: #f5f6f7;
   .cmp-connect-section {
     background-color: var(--blackish-color);
     color: var(--white-color);
-    padding: 5rem 0;
-  }
-
-  .cmp-connect-section__content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
+    padding: 5rem 1.6rem;
   }
 
   .cmp-connect-section__title {
-    font-size: 48px;
+    font-size: 30px;
     font-weight: 600;
     margin-bottom: 32px;
   }
 
-  .cmp-connect-section__cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: space-between;
-  }
-
-  .cmp-connect-section__card {
-    width: 260px;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-  }
-
-  .cmp-connect-section__card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  }
-
   .cmp-connect-section__card-content {
-    padding: 24px 0;
+    padding: 10px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 1.75rem;
   }
 
   .cmp-connect-section__card-title {
-    font-size: 1.75rem;
+    font-size: 16px;
     font-weight: 600;
-    margin: 12px 0;
   }
 
   .cmp-connect-section__card-description {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     color: var(--grayish-color, #ccc);
   }
 
@@ -163,24 +45,20 @@
     gap: 10px;
   }
 
-  .cmp-connect-section__card-cta:hover {
-    color: var(--primary-hover-color, #0077cc);
-  }
-
   .cmp-connect-section__hero {
     background: url("/content/dam/guides/common-images/images/gradientbg.png")
       no-repeat center center;
     background-size: cover;
     color: var(--white-color);
-    padding: 40px;
-    height: 412px;
+    padding: 0 20px;
+    height: 472px;
+    width: 100%;
     position: relative;
   }
 
   .cmp-connect-section__hero-title {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 400;
-    margin-top: 10rem;
   }
 
   .cmp-connect-section__hero-description {
@@ -188,7 +66,6 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 200;
-    width: 30rem;
     margin-top: 8px;
     color: var(--grayish-color, #ccc);
   }
@@ -196,8 +73,8 @@
   .cmp-connect-section__hero-img {
     position: absolute;
     bottom: 0;
-    right: 9rem;
-    width: 356px;
+    right: 30px;
+    width: 85%;
     height: auto;
   }
 
@@ -215,10 +92,187 @@
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     cursor: pointer;
   }
-  .cmp-connect-section__hero-cta:hover,
-  .cmp-connect-section__hero-cta:focus {
-    background: var(--primary-color, #0077cc);
-    color: var(--white-color, #fff);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+  @media (min-width: 468px) and (max-width: 1023px) {
+    .cmp-connect-section__hero {
+      background: url("/content/dam/guides/common-images/images/gradientbg.png")
+        no-repeat center center;
+      background-size: cover;
+      color: var(--white-color);
+      padding: 0 20px;
+      height: 472px;
+      width: 100%;
+      position: relative;
+    }
+
+    .cmp-connect-section__hero-title {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .cmp-connect-section__hero-description {
+      color: var(--white-color);
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 200;
+      margin-top: 8px;
+      color: var(--grayish-color, #ccc);
+    }
+
+    .cmp-connect-section__hero-img {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      width: 45%;
+      height: auto;
+    }
+
+    .cmp-connect-section__hero-cta {
+      display: inline-block;
+      background: var(--white-color, #fff);
+      color: var(--primary-color, #0077cc);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cmp-connect-section {
+      background-color: var(--blackish-color);
+      color: var(--white-color);
+      padding: 5rem 0;
+      margin-top: 7.5rem;
+    }
+
+    .cmp-connect-section__content {
+      margin: 0 4rem;
+      padding: 0 24px;
+    }
+
+    .cmp-connect-section__title {
+      font-size: 48px;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .cmp-connect-section__cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: space-between;
+    }
+
+    .cmp-connect-section__card {
+      width: 260px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .cmp-connect-section__card-content {
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cmp-connect-section__card-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 12px 0;
+    }
+
+    .cmp-connect-section__card-description {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: var(--grayish-color, #ccc);
+    }
+
+    .cmp-connect-section__card-cta {
+      font-size: 1rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .cmp-connect-section__card-cta:hover {
+      color: var(--primary-hover-color, #0077cc);
+    }
+
+    .cmp-connect-section__hero {
+      background: url("/content/dam/guides/common-images/images/gradientbg.png")
+        no-repeat center center;
+      background-size: cover;
+      color: var(--white-color);
+      padding: 40px;
+      height: 412px;
+      position: relative;
+    }
+
+    .cmp-connect-section__hero-title {
+      font-size: 22px;
+      font-weight: 400;
+      margin-top: 10rem;
+      line-height: 28px;
+    }
+
+    .cmp-connect-section__hero-description {
+      color: var(--white-color);
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 200;
+      width: 30rem;
+      margin-top: 8px;
+      color: var(--grayish-color, #ccc);
+    }
+
+    .cmp-connect-section__hero-img {
+      position: absolute;
+      bottom: 0;
+      right: 10rem;
+      width: 356px;
+      height: auto;
+    }
+
+    .cmp-connect-section__hero-cta {
+      display: inline-block;
+      background: var(--white-color, #fff);
+      color: var(--primary-color, #0077cc);
+      font-size: 1rem;
+      width: 9.62rem;
+      text-align: center;
+      font-weight: 500;
+      padding: 0.75rem 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .cmp-connect-section__hero-cta:hover,
+    .cmp-connect-section__hero-cta:focus {
+      background: var(--primary-color, #0077cc);
+      color: var(--white-color, #fff);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
   }
 }
