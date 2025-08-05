@@ -289,6 +289,7 @@ body.manufacturing-guides-search-page {
   --note-border-color: #ffb47b;
   --footer-color: #0065ff;
   --back-to-top-bg: var(--primary-color);
+  --search-results-bg-hover: var(--accent-light-blue);
 }
 
 /* Theme Variables for Hi-Tech Template */

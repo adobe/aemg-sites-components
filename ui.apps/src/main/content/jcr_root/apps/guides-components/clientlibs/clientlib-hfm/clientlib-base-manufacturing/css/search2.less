@@ -1,5 +1,14 @@
 .header {
   .cmp-search {
+    &__clear-icon {
+      top: 60px;
+      left: 150px;
+      background-image: url(/content/dam/guides/common-images/icons/cross-or.svg);
+      background-size: contain;
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
 
     &__input {
 
@@ -81,8 +90,8 @@
         left: auto;
         width: auto;
         margin-top: 0;
-        padding-block: 0;
-        border-radius: 0.5rem;
+        padding-block: 0.5rem;
+        border-radius: 0;
         border: none;
         box-shadow: none;
         outline: none;
@@ -100,7 +109,6 @@
     .cmp-search {
       display: none;
       transition: transform 0.3s ease;
-
       &__icon {
         display: block;
         background-size: contain;
@@ -115,10 +123,10 @@
       &__clear-icon {
         cursor: pointer;
         position: absolute;
-        top: 0.5rem;
+        top: 0.7rem;
         right: 0.5rem;
-        width: 1rem;
-        height: 1rem;
+        width: 0.7rem;
+        height: 0.7rem;
         left: auto;
       }
 
@@ -126,38 +134,33 @@
         position: absolute;
         left: 0;
         min-width: 100%;
-        margin-top: 0;
-        padding: 0;
+        margin-top: 0.25rem;
+        padding: 0.5rem 0;
         border: 0;
         width: 100%;
-        box-shadow: 0 8px 12px 0 var(--box-shadow-results);
-        border-radius: 0 0 0.5rem 0.5rem;
-        outline: none;
+        box-shadow: 0 0.75rem 1.25rem 0 var(--box-shadow-results);
+        border-radius: 0.5rem;
       }
 
       &__item {
         margin-bottom: 0;
-        padding-left: 2.125rem;
       }
     }
 
     .cmp-search__input {
-      background: var(--search-bg);
-      box-shadow: 0 8px 12px 0 var(--box-shadow-search);
       display: block;
       height: 100%;
-      width: 338px;
+      width: 18rem;
       color: var(--search-text-color);
       font-size: var(--body-font-size);
-      font-weight: 500;
+      font-weight: var(--fw-h6);
       line-height: var(--body-font-line-height);
       margin-top: 0;
+      display: block;
       position: unset;
-      padding: 0.25rem 0.5rem 0.25rem 2.125rem;
-
-      &:focus-visible {
-        outline: none;
-      }
+      box-shadow: none;
+      padding: 0.25rem 1.5rem 0.25rem 2.125rem;
+      border-radius: 0.5rem;
     }
 
     .gu-search__toggle {
@@ -174,22 +177,21 @@
       height: 24px;
     }
 
-    &.search-visible {
-      .cmp-search {
-        display: block;
-      }
+    .cmp-search {
+      display: block;
+    }
 
-      .gu-search__container {
-        display: none;
-      }
+    .gu-search__container {
+      display: none;
     }
   }
 }
 
-.custom-search-container {
-  margin-bottom: 0.7rem;
+.custom-search-container,
+.custom-search-suggestions {
+  padding: 0 18px;
 }
-
-.col-9grid-container {
-  padding: 0 16px;
+.custom-search-suggestions {
+  margin-left: 18px;
+  margin-right: 18px;
 }
