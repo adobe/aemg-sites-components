@@ -82,6 +82,7 @@
   --border-common: var(--grey-border);
   --bottom-border: var(--light-grey-border);
   --search-results-bg: #f5f5f8;
+  --search-results-bg-hover: var(--accent-light-blue);
   /*Font Sizes Variables */
   --fs-h1: 3.5rem;
   --fs-h2: 3rem;
@@ -114,6 +115,7 @@
 
   /* Search Variables */
   --search-bg: var(--grey-border);
+  --search-bg-active: var(--white-color);
   --search-text-color: var(--dark-grey);
   --search-text-active: var(--blackish-color);
 
