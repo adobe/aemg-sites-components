@@ -4,49 +4,16 @@
 </sly>
 <div class="cmp-connect-section" data-cmp-is="connect-section" data-sly-use.connectSectionModel="com.adobe.guides.aem.components.core.models.ConnectSectionModel">
     <div class="cmp-connect-section__content">
-        <h2 class="cmp-connect-section__title" data-sly-test="${properties.title}">${properties.title}</h2>
-        <div class="cmp-connect-section__cards">
+        <h2 class="cmp-connect-section__title" data-sly-test="${connectSectionModel.title}">${connectSectionModel.title}</h2>
+        <div class="cmp-connect-section__cards" data-sly-list.card="${connectSectionModel.cards}">
             <div class="cmp-connect-section__card" >
                 <div class="cmp-connect-section__card-content">
-                    <img class="cmp-connect-section__card-icon" src="/content/dam/guides/common-images/icons/navigation-section.svg" alt="Card Icon">
-                    <h3 class="cmp-connect-section__card-title">Community</h3>
-                    <p class="cmp-connect-section__card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, consectetur!</p>
-                    <a href="#" class="cmp-connect-section__card-cta">
-                        <span>View Community</span>
-                        <img class="cmp-connect-section__arrow-icon" src="/content/dam/guides/common-images/icons/ch-right-arrow.svg" alt="Arrow Icon">
-                    </a>
-                </div>
-            </div>
-            <div class="cmp-connect-section__card" >
-                <div class="cmp-connect-section__card-content">
-                    <img class="cmp-connect-section__card-icon" src="/content/dam/guides/common-images/icons/navigation-section.svg" alt="Card Icon">
-                    <h3 class="cmp-connect-section__card-title">Support</h3>
-                    <p class="cmp-connect-section__card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, exercitationem.</p>
-                    <a href="#" class="cmp-connect-section__card-cta">
-                        <span>View Community</span>
-                        <img class="cmp-connect-section__arrow-icon" src="/content/dam/guides/common-images/icons/ch-right-arrow.svg" alt="Arrow Icon">
-                    </a>
-                </div>
-            </div>
-            <div class="cmp-connect-section__card" >
-                <div class="cmp-connect-section__card-content">
-                    <img class="cmp-connect-section__card-icon" src="/content/dam/guides/common-images/icons/navigation-section.svg" alt="Card Icon">
-                    <h3 class="cmp-connect-section__card-title">Blogs</h3>
-                    <p class="cmp-connect-section__card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, exercitationem.</p>
-                    <a href="#" class="cmp-connect-section__card-cta">
-                        <span>Read our Blogs</span>
-                        <img class="cmp-connect-section__arrow-icon" src="/content/dam/guides/common-images/icons/ch-right-arrow.svg" alt="Arrow Icon">
-                    </a>
-                </div>
-            </div>
-            <div class="cmp-connect-section__card" >
-                <div class="cmp-connect-section__card-content">
-                    <img class="cmp-connect-section__card-icon" src="/content/dam/guides/common-images/icons/navigation-section.svg" alt="Card Icon">
-                    <h3 class="cmp-connect-section__card-title">Training</h3>
-                    <p class="cmp-connect-section__card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, exercitationem.</p>
-                    <a href="#" class="cmp-connect-section__card-cta">
-                        <span>Watch Tutorials</span>
-                        <img class="cmp-connect-section__arrow-icon" src="/content/dam/guides/common-images/icons/ch-right-arrow.svg" alt="Arrow Icon">
+                    <img class="cmp-connect-section__card-icon" src="${connectSectionModel.cardIcon ? connectSectionModel.cardIcon : '/content/dam/guides/common-images/icons/navigation-section.svg'}" alt="Card Icon">
+                    <h3 class="cmp-connect-section__card-title">${card.cardTitle}</h3>
+                    <p class="cmp-connect-section__card-description">${card.description}</p>
+                    <a href="${card.ctaLink}" class="cmp-connect-section__card-cta">
+                        <span>${card.ctaLabel}</span>
+                        <img class="cmp-connect-section__arrow-icon" src="${connectSectionModel.arrowIcon ? connectSectionModel.arrowIcon : '/content/dam/guides/common-images/icons/ch-right-arrow.svg' }" alt="Arrow Icon">
                     </a>
                 </div>
             </div>
