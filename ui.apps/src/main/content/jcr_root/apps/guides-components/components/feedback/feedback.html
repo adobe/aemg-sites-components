@@ -15,7 +15,7 @@
         ${feedback.title @ i18n}
       </div>
       <div class="gu-feedback__button-container">
-        <button id="gu-likeButton" class="gu-feedback__button" type="button">
+        <button class="gu-likeButton gu-feedback__button" type="button">
           <img
             class="gu-feedback__like-icon"
             src="${feedback.likeIcon ? feedback.likeIcon : '/content/dam/guides/common-images/icons/thumbs-up-grey.svg'}"
@@ -23,7 +23,7 @@
           />
           <span class="gu-feedback__button-text">${'Yes' @ i18n}</span>
         </button>
-        <button id="gu-dislikeButton" class="gu-feedback__button" type="button">
+        <button class="gu-dislikeButton gu-feedback__button" type="button">
           <img
             class="gu-feedback__dislike-icon"
             src="${feedback.dislikeIcon ? feedback.dislikeIcon : '/content/dam/guides/common-images/icons/thumbs-down-grey.svg'}"
