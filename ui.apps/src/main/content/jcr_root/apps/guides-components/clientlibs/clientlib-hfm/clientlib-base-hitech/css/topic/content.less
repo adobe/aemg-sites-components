@@ -65,3 +65,59 @@ html.adobeguides-text-spacing .hitech-guides-topic-page .base-topic-page-section
         }
     }
 }
+
+.base-topic-page-section div.topic .simpletable,  .base-topic-page-section div.topic .table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 0px;
+}
+.base-topic-page-section div.topic .simpletable tr td{
+  border-bottom: 1px solid var(--grey-border);
+}
+.base-topic-page-section div.topic .tgroup tr:last-child td.entry,
+.base-topic-page-section div.topic .simpletable tr:last-child td.stentry {
+  border-bottom: 1px solid var(--grey-border);
+}
+
+.base-topic-page-section div.topic .tgroup tr:last-child td.entry:first-child,
+.base-topic-page-section div.topic .simpletable tr:last-child td.stentry:first-child {
+  border-bottom-left-radius: 0.5rem;
+}
+
+.base-topic-page-section div.topic .tgroup tr:last-child td.entry:last-child,
+.base-topic-page-section div.topic .simpletable tr:last-child td.stentry:last-child {
+  border-bottom-right-radius: 0.5rem;
+}
+
+.base-topic-page-section div.topic .simpletable th.stentry{
+  border-left:1px solid var(--grey-border);
+  border-bottom: 1px solid var(--grey-border);
+}
+.base-topic-page-section div.topic .simpletable tr:nth-child(even) td.stentry,
+.base-topic-page-section div.topic .tgroup tr:nth-child(even) td.entry {
+  background-color: var(--table-bg);
+}
+
+.base-topic-page-section div.topic .simpletable tr:nth-child(odd) td.stentry,
+.base-topic-page-section div.topic .tgroup tr:nth-child(odd) td.entry {
+  background-color: var(--white-color);
+}
+
+div.topic table
+{
+  border: 1px solid var(--grey-border);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+
+}
+
+.base-topic-page-section div.topic .simpletable .sthead .stentry {
+  border-left: 1px solid var(--grey-border);
+}
+
+.base-topic-page-section div.topic .section :last-child{
+  margin-bottom: 0;
+  word-wrap: break-word;
+  border-spacing: 0;
+} 
