@@ -1,55 +1,67 @@
-.base-topic-page-section {
-  div.topic {
-    .topic__updated {
-      .updated__container {
-        .updated__section {
-          width: 100%;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-        }
-      }
-    }
-  }
+.hitech-guides-topic-page {
+	.base-topic-page-section {
+	  div.topic {
+		.topic__updated {
+		  .updated__container {
+			.updated__section {
+			  width: 100%;
+			  display: flex;
+			  justify-content: flex-start;
+			  align-items: center;
+			}
+		  }
+		}
+	  }
+	}
 }
 
-html.adobeguides-text-size .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
+html.adobeguides-text-size .hitech-guides-topic-page .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap : 1rem;
+  justify-content: flex-start;
   align-items: flex-start;
   .updated{
-    width: 100%;
+    margin-right: 0;
   }
-  .separator{
-    display: none;
-  }
+
   .published{
     margin-left: 0;
   }
 }
 
-html.adobeguides-text-spacing .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
+html.adobeguides-text-spacing .hitech-guides-topic-page .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap:1rem;
+  justify-content: flex-start;
   .updated{
-    width: 100%;
+    margin-right: 0;
   }
-  .separator{
-    display: none;
-  }
+
   .published{
     margin-left: 0;
-    width: 100%;
   }
 }
 
 
 @media (min-width: 1024px) {
-  .home-banner .base-topic-page-section div.topic .topic__container .copy-link-component {
+  .home-banner .hitech-guides-topic-page .base-topic-page-section div.topic .topic__container .copy-link-component {
     display: flex;
   }
+}
+
+@media (max-width: 767px) {
+  .hitech-guides-topic-page {
+        div.topic {
+            .topic__updated {
+                .updated__section {
+                    .updated, .published {
+    					display: flex;
+                        flex-direction:column;
+                    }
+                }
+            }
+        }
+    }
 }
