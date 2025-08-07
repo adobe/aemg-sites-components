@@ -2,4 +2,31 @@ body.dark {
   .toolbar-hitech .desktop {
     z-index: var(--z-index-10);
   }
+  .header {
+    .cmp-search {
+      &__item {
+        color: var(--primary-color);
+      }
+
+      &__item-mark {
+        background: none;
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .version-selector .dropdown__button svg {
+    fill: var(--version-unselected-color);
+  }
+
+  .version-selector .dropdown__item:hover {
+    background: var(--primary-color) !important;
+    color: var(--white-color) !important;
+    a {
+      color: var(--white-color);
+    }
+  }
+  .version-selector .dropdown__value {
+    color: var(--version-unselected-color) !important;
+  }
 }

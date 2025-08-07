@@ -36,7 +36,25 @@
     }
 
     &__item-mark {
-      background: var(--common-bg);
+      background: none;
+    }
+  }
+}
+
+html#adobeguides-dark-contrast {
+  .header {
+    .cmp-search {
+      &__item {
+        color: var(--yellow-color);
+        &:hover{
+          background: var(--dark-grey);
+        }
+      }
+
+      &__item-mark {
+        background: none;
+        color: var(--yellow-color);
+      }
     }
   }
 }
