@@ -10,7 +10,7 @@ $(document).ready(function () {
     const searchField = $(".cmp-search__field");
     const hamburgerMenu = $(".gu-header__humberger");
     
-    if (isMobile) {
+    if (isMobile && $("body").hasClass("guides-product-page")) {
       // Hide the existing search container on mobile
       searchField.hide();
       
@@ -23,11 +23,8 @@ $(document).ready(function () {
             <img src="/content/dam/guides/common-images/icons/search-icon.png" alt="Search Icon" />
           </button>
         `);
-        
-        // Insert the button before the hamburger menu
-        if ($("body").hasClass("guides-product-page")) {
+
           hamburgerMenu.before(mobileSearchBtn);
-        }
         
                   // Handle mobile search button click
           mobileSearchBtn.on("click", function() {
@@ -57,6 +54,26 @@ $(document).ready(function () {
       $(".mobile-search-btn").remove();
       $(".mobile-search-content").remove();
     }
+  }
+  function hideEmptySearchResults() {
+    const searchResults = $('.cmp-search__results');
+    if (searchResults.children().length === 0) {
+      searchResults.css('display', 'none');
+    } else {
+      searchResults.css('display', 'block');
+    }
+  }
+
+  hideEmptySearchResults();
+
+  const searchResultsObserver = new MutationObserver(hideEmptySearchResults);
+  
+  const searchResults = $('.cmp-search__results')[0];
+  if (searchResults) {
+    searchResultsObserver.observe(searchResults, {
+      childList: true, 
+      subtree: true    
+    });
   }
   
   // Initialize mobile search on page load

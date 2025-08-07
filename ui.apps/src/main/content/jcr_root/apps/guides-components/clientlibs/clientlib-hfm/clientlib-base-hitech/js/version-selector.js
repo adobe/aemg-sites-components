@@ -7,9 +7,10 @@ $(document).ready(function () {
   attachDropdownEvents();
 
   $(document).on("click", function () {
-    $(".toolbar:not(.hidden) .version-selector .dropdown__list").addClass(
-      "hidden"
-    );
+    const dropdownList = $(".toolbar:not(.hidden) .version-selector .dropdown__list");
+    const dropdownIcon = $(".toolbar:not(.hidden) .version-selector .dropdown__button svg path");
+    dropdownList.addClass("hidden");
+    updateDropdownIcon(dropdownList, dropdownIcon); // <-- Add this line
   });
 });
 
@@ -58,14 +59,14 @@ function updateDropdownIcon(dropdownList, dropdownIcon) {
     color: "var(--primary-color)",
   });
   $("html#adobeguides-dark-contrast .version-selector .dropdown__button").css({
-    color: "var(--primary-color)",
+    color: "var(--version-selected-color)",
   });
   $(".version-selector .dropdown__button").css({
-    color: "var(--primary-color)",
+    color: "var(--version-selected-color)",
   });
   $(".version-selector .dropdown").attr(
     "style",
-    "border: 1px solid var(--primary-color) !important"
+    "border: 1px solid var(--border-common) !important"
   );
   const isHidden = dropdownList.hasClass("hidden");
   const iconPath = isHidden
