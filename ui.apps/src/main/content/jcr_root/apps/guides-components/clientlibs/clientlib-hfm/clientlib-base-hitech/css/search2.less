@@ -6,7 +6,7 @@
       &:focus-visible {
         outline: 1px solid var(--border-common);
         background: var(--search-bg-active);
-        color: var(--search-text-active);
+        color: var(--search-text);
       }
     }
 
@@ -28,6 +28,10 @@
 
       &:hover {
         background: var(--search-results-bg-hover);
+        &__item-mark{
+          background: none;
+          color: var(--primary-color);
+        }
       }
     }
 
@@ -51,7 +55,7 @@
 
       &__icon {
         left: 0.5rem;
-        top: 0.5rem;
+        top: 0.38rem;
       }
 
       &__input {
@@ -60,11 +64,12 @@
         left: unset;
         width: 100%;
         border-radius: 0.5rem;
+        border: 1px solid var(--border-common);
       }
 
       &__clear-icon {
         left: unset;
-        top: 8px;
+        top: 6px;
         right: 8px;
       }
 
@@ -74,6 +79,12 @@
         width: auto;
         margin-top: 0.25rem;
         border-radius: 0.5rem;
+      }
+    }
+    .cmp-search__field{
+      border-radius: 0.5rem;
+      &:focus{
+        border: 1px solid var(--primary-dark);
       }
     }
   }
