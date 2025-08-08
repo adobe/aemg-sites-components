@@ -121,3 +121,61 @@ div.topic table
   word-wrap: break-word;
   border-spacing: 0;
 } 
+
+.theme-selector .gu-theme__icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.base-topic-page-section {
+    & div.topic {
+        .topic__updated {
+			@media (max-width: 768px) { 
+                margin-bottom: 1.25rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+  .prev-next-topic {
+    .gu-pre-topic_container.min-height-added,
+    .gu-next-topic_container.min-height-added {
+      min-height: 6.5625rem;
+    }
+  }
+}
+
+.language-backdrop, .backdrop {
+  z-index: var(--z-index-12);
+}
+
+.backdropAccessibility {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--backdrop-bg);
+    display: none;
+    z-index: var(--z-index-12);
+}
+
+@media (max-width: 767px) {
+  .backdropAccessibility {
+     z-index: 11;
+  }
+}
+
+.cmp-languagenavigation, .social-links, .gu-pdf-export__options{
+    z-index: 99!important;
+}
+
+.gu-pdf-export__wrapper .gu-pdf-export__dropdown{
+     z-index: 99!important;
+}
+
+.gu-accessibility_menu{
+     z-index: 9999!important;
+}

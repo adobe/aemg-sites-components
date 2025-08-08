@@ -1,25 +1,30 @@
 $(document).ready(function () {
+    const $toolbar = $('.toolbar-hitech .desktop');
+
     const getActiveToolbar = () =>
         document.querySelector(".toolbar:not(.hidden) .language-selector");
     const isMobileView = () => window.matchMedia("(max-width: 1023px)").matches;
 
     const createBackdrop = () => {
-        if (!isMobileView()) return; // Only add backdrop for mobile view
+        //if (!isMobileView()) return; // Only add backdrop for mobile view
         let backdrop = document.createElement("div");
+        $toolbar.css('position', 'static');
+
         if(backdrop) {
             backdrop.classList.add("language-backdrop");
             document.body.appendChild(backdrop);
+
         }
     };
 
     const removeBackdrop = () => {
         const backdrop = document.querySelector(".language-backdrop");
         if (backdrop) backdrop.remove();
-    };
+	};
 
 
     document.addEventListener("click", (event) => {
-        const activeToolbar = getActiveToolbar();
+		const activeToolbar = getActiveToolbar();
         if (!activeToolbar || activeToolbar.closest('.lat-section')) return;
 
 
@@ -30,11 +35,14 @@ $(document).ready(function () {
             event.stopPropagation(); // Prevent immediate closing due to document click listener
             const isVisible = menu.style.display === "block";
 
+
             if (isVisible) {
                 menu.style.display = "none";
+
                 removeBackdrop();
             } else {
                 menu.style.display = "block";
+
                 createBackdrop(); // Add backdrop only if in mobile view
             }
         } else if (event.target.closest(".cmp-languagenavigation__item-title")) {
@@ -67,6 +75,7 @@ $(document).ready(function () {
     // Hide menu and remove backdrop when clicking the backdrop
     document.body.addEventListener("click", (event) => {
         if (event.target.classList.contains("language-backdrop")) {
+    $toolbar.css('position', 'sticky');
             document.querySelectorAll(".cmp-languagenavigation").forEach((menu) => (menu.style.display = "none"));
             removeBackdrop();
         }

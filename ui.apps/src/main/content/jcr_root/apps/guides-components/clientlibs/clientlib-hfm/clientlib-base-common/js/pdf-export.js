@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const $toolbar = $('.toolbar-hitech .desktop');
 
   $(".gu-pdf_topic-download").on("click", function (event) {
     let topicTitle = $("#section-topic .topic h1.title").text();
@@ -31,18 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (button && button.contains(event.target)) {
       event.stopPropagation(); // Prevent immediate closing due to document click listener
       const isActive = activeToolbar.classList.toggle("active");
+         $toolbar.css('position', 'static');
 
-      if (isMobileView()) {
+      //if (isMobileView()) {
         backdrop.style.display = isActive ? "block" : "none";
         if (backdrop) {
           backdrop.style.display = isActive ? "block" : "none";
         }
-      }
+     // }
     } else {
       activeToolbar.classList.remove("active"); // Hide dropdown if clicking outside
       if (backdrop) {
         backdrop.style.display = "none"; // Hide backdrop when clicking outside
       }
+        // $toolbar.css('position', 'sticky');
     }
   });
 
@@ -97,6 +100,3 @@ function CreatePDFfromHTML(selector, pdfFileName) {
     html2pdf().set(options).from(html_source_element).save();
   }, 500); // Small delay to ensure all elements are loaded
 }
-
-
-

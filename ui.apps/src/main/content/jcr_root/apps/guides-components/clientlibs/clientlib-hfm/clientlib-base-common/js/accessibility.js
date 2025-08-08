@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+	const $toolbar = $('.toolbar-hitech .desktop');
+    let backdrop = document.createElement("div");
+    if (backdrop) {
+        backdrop.className = "backdropAccessibility hidden";
+        document.body.appendChild(backdrop);
+        backdrop.style.display = "none";
+    }
+
     $(".gu-accessibility_wrapper").each(function () {
         const $wrapper = $(this);
         const $accessibilityBtn = $wrapper.find("#gu_accessibility-icon");
@@ -9,13 +18,20 @@ $(document).ready(function () {
                 const isExpanded = $accessibilityBtn.attr("aria-expanded") === "true";
                 $accessibilityBtn.attr("aria-expanded", !isExpanded);
                 $accessibilityMenu.toggleClass("show");
-            });
+
+                if (backdrop) {
+					backdrop.style.display = "block";
+                    $toolbar.css('position', 'static');
+                }
+			});
 
             $(document).on("click", function (event) {
                 if (!$wrapper.is(event.target) && $wrapper.has(event.target).length === 0) {
                     $accessibilityMenu.removeClass("show");
                     $accessibilityBtn.attr("aria-expanded", "false");
+
                 }
+
             });
 
             const $menuItems = $accessibilityMenu.find("li");
@@ -45,4 +61,13 @@ $(document).ready(function () {
             });
         }
     });
+
+    if (backdrop) {
+        // Hide backdrop and dropdown when clicking on the backdrop
+        backdrop.addEventListener("click", () => {
+    		backdrop.style.display = "none";
+            $toolbar.css('position', 'sticky');
+        });
+      }
+
 });
