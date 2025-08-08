@@ -708,12 +708,14 @@ body.dark, html.adobeguides-light-contrast, html#adobeguides-dark-contrast {
 					border-bottom: 1px solid var(--bottom-border);
                 }
                 .linkpool {
-                    border-bottom: 1px dashed var(--bottom-border);
-                    .link {
+                    a.link {
                         span {
                             color: var(--color-text) !important;
                         }
                     }
+                }
+                .linkpool:not:(last-child) {
+                    border-bottom: 1px dashed var(--bottom-border);
                 }
             }
         }
