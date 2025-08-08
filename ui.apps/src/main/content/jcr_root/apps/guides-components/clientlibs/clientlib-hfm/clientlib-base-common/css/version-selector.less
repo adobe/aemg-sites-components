@@ -20,7 +20,7 @@
       justify-content: center;
 
       span {
-        color: var(--version-selected-color);
+        color: var(--version-unselected-color);
         font-size: var(--body-font-size);
         font-weight: 600;
         line-height: var(--body-font-line-height);
@@ -72,7 +72,12 @@
       text-overflow: ellipsis; 
       &:hover {
         background: var(--accent-light-blue);
+        cursor: pointer;
+        color: var(--version-selected-color);
         padding: 0.25rem 0.688rem;
+        a {
+          color: var(--version-selected-color);
+        }
       }
 
       a {
@@ -81,7 +86,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: var(--version-selected-color);
+        color: var(--version-unselected-color);
         font-size: var(--body-font-size);
         font-weight: 600;
         line-height: var(--body-font-line-height);
