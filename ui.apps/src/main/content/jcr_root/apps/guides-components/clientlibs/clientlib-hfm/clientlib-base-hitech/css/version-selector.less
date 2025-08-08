@@ -5,7 +5,7 @@
 }
 
 html#adobeguides-dark-contrast {
-  .version-selector .dropdown__button  {
+  .version-selector .dropdown__button {
     color: var(--white-color);
   }
   .version-selector .dropdown__button svg {
@@ -20,6 +20,30 @@ html#adobeguides-dark-contrast {
     color: var(--white-color) !important;
     a {
       color: var(--white-color);
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .version-selector {
+    .dropdown__item {
+      padding-top: 0.2rem;
+      padding-right: 0.75rem;
+      padding-bottom: 0.25rem;
+      padding-left: 0.688rem !important;
+      margin-left: 0 !important;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      &:hover {
+        background: var(--accent-light-blue);
+        cursor: pointer;
+        color: var(--version-selected-color);
+        padding: 0.25rem 0.688rem;
+        a {
+          color: var(--version-selected-color);
+        }
+      }
     }
   }
 }

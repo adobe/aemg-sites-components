@@ -5,12 +5,30 @@ body.dark {
   .header {
     .cmp-search {
       &__item {
-        color: var(--primary-color);
+        color: var(--text-color);
+        &:hover {
+          background: var(--secondary-light);
+        }
       }
 
       &__item-mark {
         background: none;
-        color: var(--primary-color);
+        color: var(--text-color);
+      }
+
+      &__input {
+        &:focus-visible {
+          outline: 1px solid var(--border-common);
+          background: var(--search-bg);
+          color: var(--text-color);
+        }
+      }
+
+      &__results {
+        padding: 0.5rem 0;
+        outline: 1px solid var(--border-common);
+        border: none;
+        background: var(--search-bg);
       }
     }
   }
@@ -28,5 +46,13 @@ body.dark {
   }
   .version-selector .dropdown__value {
     color: var(--version-unselected-color) !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  body.dark {
+    .base-topic-page-section div.topic .toolbar-container {
+      margin-top: 1rem;
+    }
   }
 }

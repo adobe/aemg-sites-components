@@ -55,6 +55,13 @@ html#adobeguides-dark-contrast {
         background: none;
         color: var(--yellow-color);
       }
+      &__input {
+        &:focus-visible {
+          outline: 1px solid var(--border-common);
+          background: var(--search-bg);
+          color: var(--search-text-active);
+        }
+      }
     }
   }
 }
