@@ -696,3 +696,26 @@ html.adobeguides-text-size {
     }
   }
 }
+
+body.dark, html.adobeguides-light-contrast, html#adobeguides-dark-contrast {
+    .base-topic-page-section {
+        div.topic {
+            .related-links {
+                background:var(--common-bg);
+                border: 1px solid var(--bottom-border);
+                color:var(--color-text);
+                span.prefix-content {
+					border-bottom: 1px solid var(--bottom-border);
+                }
+                .linkpool {
+                    border-bottom: 1px dashed var(--bottom-border);
+                    .link {
+                        span {
+                            color: var(--color-text) !important;
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
