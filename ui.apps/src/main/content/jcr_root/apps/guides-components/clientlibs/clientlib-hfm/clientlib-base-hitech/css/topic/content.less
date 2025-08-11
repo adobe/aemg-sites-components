@@ -1,78 +1,96 @@
 .hitech-guides-topic-page {
-	.base-topic-page-section {
-	  div.topic {
-		.topic__updated {
-		  .updated__container {
-			.updated__section {
-			  width: 100%;
-			  display: flex;
-			  justify-content: flex-start;
-			  align-items: center;
-			}
-		  }
-		}
-	  }
-	}
+  .base-topic-page-section {
+    div.topic {
+      .topic__updated {
+        .updated__container {
+          .updated__section {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
 }
 
-html.adobeguides-text-size .hitech-guides-topic-page .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
+html.adobeguides-text-size
+  .hitech-guides-topic-page
+  .base-topic-page-section
+  div.topic
+  .topic__updated
+  .updated__container
+  .updated__section {
   width: 100%;
   display: flex;
-  gap : 1rem;
+  gap: 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  .updated{
+  .updated {
     margin-right: 0;
   }
 
-  .published{
+  .published {
     margin-left: 0;
   }
 }
 
-html.adobeguides-text-spacing .hitech-guides-topic-page .base-topic-page-section div.topic .topic__updated .updated__container .updated__section {
+html.adobeguides-text-spacing
+  .hitech-guides-topic-page
+  .base-topic-page-section
+  div.topic
+  .topic__updated
+  .updated__container
+  .updated__section {
   width: 100%;
   display: flex;
-  gap:1rem;
+  gap: 1rem;
   justify-content: flex-start;
-  .updated{
+  .updated {
     margin-right: 0;
   }
 
-  .published{
+  .published {
     margin-left: 0;
   }
 }
 
-
 @media (min-width: 1024px) {
-  .home-banner .hitech-guides-topic-page .base-topic-page-section div.topic .topic__container .copy-link-component {
+  .home-banner
+    .hitech-guides-topic-page
+    .base-topic-page-section
+    div.topic
+    .topic__container
+    .copy-link-component {
     display: flex;
   }
 }
 
 @media (max-width: 767px) {
   .hitech-guides-topic-page {
-        div.topic {
-            .topic__updated {
-                .updated__section {
-                    .updated, .published {
-    					display: flex;
-                        flex-direction:column;
-                    }
-                }
-            }
+    div.topic {
+      .topic__updated {
+        .updated__section {
+          .updated,
+          .published {
+            display: flex;
+            flex-direction: column;
+          }
         }
+      }
     }
+  }
 }
 
-.base-topic-page-section div.topic .simpletable,  .base-topic-page-section div.topic .table {
+.base-topic-page-section div.topic .simpletable,
+.base-topic-page-section div.topic .table {
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
   border: 0px;
 }
-.base-topic-page-section div.topic .simpletable tr td{
+.base-topic-page-section div.topic .simpletable tr td {
   border-bottom: 1px solid var(--grey-border);
 }
 .base-topic-page-section div.topic .tgroup tr:last-child td.entry,
@@ -81,17 +99,25 @@ html.adobeguides-text-spacing .hitech-guides-topic-page .base-topic-page-section
 }
 
 .base-topic-page-section div.topic .tgroup tr:last-child td.entry:first-child,
-.base-topic-page-section div.topic .simpletable tr:last-child td.stentry:first-child {
+.base-topic-page-section
+  div.topic
+  .simpletable
+  tr:last-child
+  td.stentry:first-child {
   border-bottom-left-radius: 0.5rem;
 }
 
 .base-topic-page-section div.topic .tgroup tr:last-child td.entry:last-child,
-.base-topic-page-section div.topic .simpletable tr:last-child td.stentry:last-child {
+.base-topic-page-section
+  div.topic
+  .simpletable
+  tr:last-child
+  td.stentry:last-child {
   border-bottom-right-radius: 0.5rem;
 }
 
-.base-topic-page-section div.topic .simpletable th.stentry{
-  border-left:1px solid var(--grey-border);
+.base-topic-page-section div.topic .simpletable th.stentry {
+  border-left: 1px solid var(--grey-border);
   border-bottom: 1px solid var(--grey-border);
 }
 .base-topic-page-section div.topic .simpletable tr:nth-child(even) td.stentry,
@@ -104,23 +130,21 @@ html.adobeguides-text-spacing .hitech-guides-topic-page .base-topic-page-section
   background-color: var(--white-color);
 }
 
-div.topic table
-{
+div.topic table {
   border: 1px solid var(--grey-border);
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
-
 }
 
 .base-topic-page-section div.topic .simpletable .sthead .stentry {
   border-left: 1px solid var(--grey-border);
 }
 
-.base-topic-page-section div.topic .section :last-child{
+.base-topic-page-section div.topic .section :last-child {
   //margin-bottom: 0;
   word-wrap: break-word;
   border-spacing: 0;
-} 
+}
 
 .theme-selector .gu-theme__icon-container {
   display: flex;
@@ -129,13 +153,13 @@ div.topic table
 }
 
 .base-topic-page-section {
-    & div.topic {
-        .topic__updated {
-			@media (max-width: 768px) { 
-                margin-bottom: 1.25rem;
-            }
-        }
+  & div.topic {
+    .topic__updated {
+      @media (max-width: 768px) {
+        margin-bottom: 1.25rem;
+      }
     }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -147,50 +171,72 @@ div.topic table
   }
 }
 
-.language-backdrop, .backdrop {
+.language-backdrop,
+.backdrop {
   z-index: var(--z-index-12);
 }
 
 .backdropAccessibility {
-   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--backdrop-bg);
-    display: none;
-    z-index: var(--z-index-12);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--backdrop-bg);
+  display: none;
+  z-index: var(--z-index-12);
 }
 
 @media (max-width: 767px) {
   .backdropAccessibility {
-     z-index: 11;
+    z-index: 11;
   }
 }
 
-.cmp-languagenavigation, .social-links{
-    z-index: 15!important;
+.cmp-languagenavigation,
+.social-links {
+  z-index: 15 !important;
 }
 
-.gu-pdf-export__wrapper .gu-pdf-export__dropdown{
-     z-index: 15!important;
+.gu-pdf-export__wrapper .gu-pdf-export__dropdown {
+  z-index: 15 !important;
 }
 
-.gu-accessibility_menu{
-     z-index: 13!important;
+.gu-accessibility_menu {
+  z-index: 13 !important;
 }
 
-html#adobeguides-dark-contrast{
-  	.gu-toolbar_wrapper .sticky-middle{
-    	background-color: #262626;
-    	box-shadow: 0 0 36px 4px var(--toolbar-box-shadow);
-  	}
+html#adobeguides-dark-contrast {
+  .gu-toolbar_wrapper .sticky-middle {
+    background-color: #262626;
+    box-shadow: 0 0 36px 4px var(--toolbar-box-shadow);
+  }
 }
 
 body.dark #section-topic .topic .topic__updated .updated__container {
-    border-bottom: 1px solid var(--bottom-border);
+  border-bottom: 1px solid var(--bottom-border);
+}
+
+@media (max-width: 768px) {
+  body.dark #section-topic .topic .topic__updated .updated__container {
+    border-bottom: unset;
+  }
 }
 
 body.dark .footer {
-    border-top: 1px solid var(--border-black-color);
+  border-top: 1px solid var(--border-black-color);
+}
+
+body.dark #gu-nav.show .navigation .navigation-title h4 {
+  color: var(--white-color);
+}
+
+html#adobeguides-dark-contrast {
+  #gu-nav.show .navigation .navigation-title h4 {
+    color: var(--white-color);
+  }
+}
+
+.header .gu-header_toolbarheader .toolbar-header {
+  right: 14%;
 }
