@@ -32,6 +32,8 @@ public class CustomLanguageNavModel {
     void init() {
         Resource langRes = resourceResolver.getResource("wcm/core/resources/languages");
 
+        logger.debug("langRes -> {}", langRes);
+
         if (Objects.isNull(langRes) || ResourceUtil.isNonExistingResource(langRes)) {
             logger.warn("Language resource should not be null");
             return;
@@ -46,7 +48,7 @@ public class CustomLanguageNavModel {
             if (!"*".equals(country)) {
                 String[] localeParts = locale.split("_");
                 String countryDisplay = (localeParts.length > 1)
-                        ? StringUtils.capitalize(localeParts[1])
+                        ? localeParts[1].toUpperCase()
                         : country;
 
                 language += " (" + countryDisplay + ")";

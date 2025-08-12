@@ -214,15 +214,25 @@ input::placeholder {
 }
 
 // Search Results Header
-h2.search-results-header {
+.search-results-header {
   padding-bottom: 0.94rem;
-  padding-left: 1.56rem;
-  font-size: xxx-large;
-  color: var(--color-text);
-  font-weight: normal;
-  margin-bottom: 5rem !important;
-  line-height: 3rem;
+  padding-left: 1.56rem; 
+  color: var(--color-text); 
+  margin-bottom: 2rem !important;
+  
+	.search-results-header-title {
+		font-size: 32px;
+		font-weight: 600;
+		line-height: 32px;
+	}
+	.search_results_header_subtitle {
+		font-size:18px;
+		font-weight:400;
+		line-height:24px;
+		margin:1rem 0;
+	}
 }
+
 
 // Pagination Container Styling
 .pagination-container {
@@ -350,7 +360,17 @@ h2.search-results-header {
 
   .search-results-header {
     padding-left: 1.25rem;
-    font-size: 18px;
+	.search-results-header-title {
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 32px;
+	}
+	.search_results_header_subtitle {
+		font-size:18px;
+		font-weight:400;
+		line-height:20px;
+		margin:1rem 0;
+	}
   }
 
   .pagination-container {
@@ -387,8 +407,15 @@ h2.search-results-header {
   .search-results-header {
     padding-left: 1rem;
     padding-bottom: 0.75rem;
-    font-size: xx-large;
+	.search_results_header_title {
+		font-size: 24px;
+	}
+	.search_results_header_subtitle {
+		font-size:16px;
+		line-height:20px;
+	}
   }
+	
 
   .no-results-message {
     padding: 1.25rem 1.25rem 0.75rem;
@@ -448,10 +475,17 @@ h2.search-results-header {
 
   .search-results-header {
     padding-left: 0.75rem;
-    padding-bottom: 0.625rem;
-    font-size: x-large;
+    padding-bottom: 0.625rem;  
+	
+	.search_results_header_title {
+		font-size: 20px;
+	}
+	.search_results_header_subtitle {
+		font-size:14px;
+		line-height:28px;
+	}
   }
-
+	
   .pagination-container {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -525,8 +559,17 @@ h2.search-results-header {
   .search-results-header {
     padding-left: 0.5rem;
     padding-bottom: 0.5rem;
-    font-size: 0.88rem;
+	
+	.search_results_header_title {
+		font-size: 16px;
+	}
+	.search_results_header_subtitle {
+		font-size:14px;
+		line-height:24px;
+	}
+	
   }
+  
 
   .pagination-container {
     margin-top: 1rem;
@@ -702,15 +745,26 @@ h2.search-results-header {
   color: var(--breadcrumb-item-color) !important;
 }
 
-#search-container {
+.base-topic-page-section #search-container {
 	.cmp-search-results {
 		.cmp-search-result {
 			
 			> a {
-				font-size: xx-large;
+				font-size: 20px;
+				@media (max-width:767px) {
+					font-size : 18px;
+				}
+				@media (max-width:480px) {
+					font-size : 16px;
+				}
 			}
             .cmp-searchresult-header {
-                 margin: 0.5rem 0;
+                margin: 0.5rem 0;
+                display:flex;
+				.cmp-searchresult-tags {
+                	margin: 0.2rem;
+    				padding: 0.2rem;
+                }
                 .cmp-searchresult-tag {
                     display: inline;
                     margin: 0.2rem;
@@ -728,12 +782,18 @@ h2.search-results-header {
                     border-radius: 5px;
                     text-align: center;
                     font-size: small;
-                    float: right;
+                    margin-left: auto;
                 }
             }
 			.cmp-searchresult-description {
 				margin: 1rem 0;
-				font-size:large;
+				font-size:16px;
+				@media (max-width:767px) {
+					font-size : 16px;
+				}
+				@media (max-width:480px) {
+					font-size : 14px;
+				}
 			}
 			.cmp-seaarchresult-breadcrumbs {
 				display:flex;
@@ -744,10 +804,37 @@ h2.search-results-header {
 					font-weight: 700;
 				}
 				a {
-                    font-size:large;
+                    font-size:16px;
 					color:#436ff6 !important;
+					@media (max-width:767px) {
+						font-size : 14px;
+					}
+					@media (max-width:480px) {
+						font-size : 12px;
+					}
                 }
 			}
 		}
 	}
+}
+
+html#adobeguides-dark-contrast, html.adobeguides-light-contrast, body.dark {
+	.base-topic-page-section #search-container {
+        .cmp-search-results {
+            .cmp-search-result {			
+                > a {
+    				color: var(--color-text);
+                }
+                .cmp-searchresult-header {
+                    .cmp-searchresult-date {
+						background: var(--search-bg);
+                    }
+                }
+                .cmp-searchresult-description  {
+					color: var(--color-text);
+            	}
+            }
+
+        }
+    }
 }

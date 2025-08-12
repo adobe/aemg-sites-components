@@ -111,11 +111,12 @@ $(document).ready(function () {
     var searchQuery = $(".cmp-search__input").val();
 
     // Add results header
-    var resultsHeader = $('<h2 class="search-results-header"></h2>').text(
+    var resultsHeader = $('<div class="search-results-header"></div>');
+	let resultsHeaderTitle = $(`<h2 class="search-results-header-title"></h2>"`).text(
       (response.totalRecords || 0) + ' Results found for "' + searchQuery + '"'
-    );
+    );	
 
-    $searchContainer.append(resultsHeader);
+    resultsHeader.append(resultsHeaderTitle);
 
     // Check if there are results
     if (!response.data || response.data.length === 0) {
@@ -139,6 +140,11 @@ $(document).ready(function () {
       var endIndex = Math.min(startIndex + itemsPerPage, response.totalRecords);
       var currentPageItems = response.data; //data.slice(startIndex, endIndex);
 	
+		let resultsHeaderSubtitle = $(`<p class="search_results_header_subtitle">Showing ${startIndex} to ${endIndex} of ${response.totalRecords} results</p>`)
+		resultsHeader.append(resultsHeaderSubtitle);
+		
+		$searchContainer.append(resultsHeader);
+		
 		let searchFormAction = $("form.cmp-search__form").attr("action");
 		let searchRoot = searchFormAction.substring(0, searchFormAction.indexOf(".aemsitesearchresults.json"));
         searchRoot = searchRoot.substring(0, searchRoot.lastIndexOf("/"));
@@ -414,12 +420,12 @@ $(document).ready(function () {
 
       // Fetch search results
       $.getJSON(url)
-        .done(function (data) {
+        .done(function (response) {
           // Cache the results
-          searchResultsCache[searchTerm] = data || [];
+          searchResultsCache[searchTerm] = response.data || [];
 
           // Display suggestions
-          displaySuggestions(data, searchTerm);
+          displaySuggestions(response.data, searchTerm);
         })
         .fail(function () {
           $suggestionsContainer.empty().hide();
