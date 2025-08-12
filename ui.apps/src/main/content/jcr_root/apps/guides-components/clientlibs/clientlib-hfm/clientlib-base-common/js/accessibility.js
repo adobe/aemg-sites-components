@@ -14,14 +14,25 @@ $(document).ready(function () {
         const $accessibilityMenu = $wrapper.find("#gu_accessibility-menu");
 
         if ($accessibilityBtn.length && $accessibilityMenu.length) {
-            $accessibilityBtn.on("click", function () {
+            $accessibilityBtn.on("click", function (e) {
+
+                e.stopPropagation();
                 const isExpanded = $accessibilityBtn.attr("aria-expanded") === "true";
                 $accessibilityBtn.attr("aria-expanded", !isExpanded);
                 $accessibilityMenu.toggleClass("show");
 
+
                 if (backdrop) {
 					backdrop.style.display = "block";
                     $toolbar.css('position', 'static');
+                    $('.gu-toolbar_wrapper .sticky-middle.mobile').css('z-index', '11');
+                    if ($(window).width() <= 768) {
+                        $('.header').css({
+                            'background': 'transparent',
+                            'border-bottom': 'none'
+                        });
+                    }
+
                 }
 			});
 
@@ -67,6 +78,13 @@ $(document).ready(function () {
         backdrop.addEventListener("click", () => {
     		backdrop.style.display = "none";
             $toolbar.css('position', 'sticky');
+
+        	if ($(window).width() <= 768) {
+                $('.header').css({
+                    'background': '#ffffff',
+                    'border-bottom': '#e2e2e2'
+                });
+            }
         });
       }
 
