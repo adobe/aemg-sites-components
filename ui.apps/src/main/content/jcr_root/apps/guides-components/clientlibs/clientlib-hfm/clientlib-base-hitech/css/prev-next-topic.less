@@ -109,12 +109,13 @@
       padding: 0.75rem 0.25rem;
       border: 1px solid var(--border-common);
       border-radius: 0.5rem;
+      height: 4.75rem;
       min-height: 2.5rem !important;
-      .gu-pre-next-topic_text-container{
+      .gu-pre-next-topic_text-container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        .gu-pre-next-topic_link{
+        .gu-pre-next-topic_link {
           display: -webkit-box;
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
@@ -135,6 +136,7 @@
       text-align: right;
       border: 1px solid var(--border-common);
       border-radius: 0.5rem;
+      height: 4.75rem;
       min-height: 2.5rem !important;
       padding-left: 30%;
       .gu-pre-next-topic_text-container{
@@ -156,5 +158,10 @@
         margin-left: 0.5rem;
       }
     }
+  }
+}
+@media (max-width: 480px) {
+  .prev-next-topic .gu-pre-next-topic_text {
+    color: var(--primary-color);
   }
 }
