@@ -238,5 +238,22 @@ html#adobeguides-dark-contrast {
 }
 
 .header .gu-header_toolbarheader .toolbar-header {
-  right: 14%;
+  right: 16%;
+}
+
+html.adobeguides-text-spacing .updated__section span,
+html.adobeguides-text-size .updated__section span {
+  font-size: 13px !important;
+}
+
+@media (max-width: 768px) {
+  html.adobeguides-text-spacing
+    .hitech-guides-topic-page
+    .base-topic-page-section
+    div.topic
+    .topic__updated
+    .updated__container
+    .updated__section {
+    gap: 0.6rem;
+  }
 }
