@@ -56,8 +56,8 @@ html#adobeguides-dark-contrast {
         color: var(--yellow-color);
       }
       &__input {
+        outline: 1px solid var(--border-common);
         &:focus-visible {
-          outline: 1px solid var(--border-common);
           background: var(--search-bg);
           color: var(--search-text-active);
         }
@@ -165,12 +165,12 @@ html#adobeguides-dark-contrast {
       }
 
       &__clear-icon {
-        cursor: pointer;
+       cursor: pointer;
         position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        width: 1rem;
-        height: 1rem;
+        top: 7px;
+        right: 12px;
+        width: 20px;
+        height: 20px;
         left: auto;
       }
     }
@@ -179,6 +179,14 @@ html#adobeguides-dark-contrast {
 
 .custom-search-container {
   margin-bottom: 0.7rem;
+}
+@media (max-width: 1024px) {
+  .custom-search-container{
+    display: none;
+  }
+  .custom-container .gu-custom-container .col-9grid {
+    top: -3.4rem;
+  }
 }
 
 @media (max-width: 480px) {
