@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const $toolbar = $(".toolbar-hitech .desktop");
+  //const $toolbar = $(".toolbar-hitech .desktop");
   let backdrop = document.createElement("div");
   if (backdrop) {
     backdrop.className = "backdropAccessibility hidden";
@@ -35,7 +35,8 @@ $(document).ready(function () {
 
         if (backdrop) {
           backdrop.style.display = "block";
-          $toolbar.css("position", "static");
+          //$toolbar.css("position", "static");
+          setMenu();
           $(".gu-toolbar_wrapper .sticky-middle.mobile").css("z-index", "11");
         }
       });
@@ -52,7 +53,8 @@ $(document).ready(function () {
           // Hide backdrop
           if (backdrop) {
             backdrop.style.display = "none";
-            $toolbar.css("position", "sticky");
+            //$toolbar.css("position", "sticky");
+            resetMenu();
           }
 
           // Restore z-index and header styles
@@ -101,7 +103,8 @@ $(document).ready(function () {
     // Hide backdrop and dropdown when clicking on the backdrop
     backdrop.addEventListener("click", () => {
       backdrop.style.display = "none";
-      $toolbar.css("position", "sticky");
+      //$toolbar.css("position", "sticky");
+      resetMenu();
 
       if ($(window).width() <= 768) {
         $(".gu-search__container").css("z-index", "");
@@ -111,6 +114,35 @@ $(document).ready(function () {
           "border-bottom": "#e2e2e2",
         });
       }
+    });
+  }
+
+  function setMenu() {
+    $(".toolbar-hitech .desktop").css("z-index", "14");
+    $(".toolsection .share-icon").css("pointer-events", "none");
+    $(".toolsection #gu_theme-icon").css("pointer-events", "none");
+    $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
+    $(".toolsection .language-selector__toggle").css("pointer-events", "none");
+    $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
+    $(".toolsection .version-selector .dropdown").attr("style", "");
+    $(".toolsection .version-selector .dropdown").css({
+      background: "rgba(0, 0, 0, 0.01)",
+      "border-width": "0px",
+      "pointer-events": "none",
+    });
+  }
+
+  function resetMenu() {
+    $(".toolbar-hitech .desktop").css("z-index", "unset");
+    $(".toolsection .share-icon").css("pointer-events", "unset");
+    $(".toolsection #gu_theme-icon").css("pointer-events", "unset");
+    $(".toolsection .gu-pdf-export__button").css("pointer-events", "unset");
+    $(".toolsection .language-selector__toggle").css("pointer-events", "unset");
+    $(".toolsection #gu_accessibility-icon").css("pointer-events", "unset");
+    $(".toolsection .version-selector .dropdown").css({
+      background: "#ffffff",
+      "border-width": "0px",
+      "pointer-events": "unset",
     });
   }
 });

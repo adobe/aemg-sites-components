@@ -1,11 +1,8 @@
 $(document).ready(function () {
-   const $toolbar = $('.toolbar-hitech .desktop');
-
   const getActiveToolbar = () =>
     document.querySelector(".toolbar:not(.hidden) .social-share-container");
 
   const isMobileView = () => window.matchMedia("(max-width: 1023px)").matches;
-
 
   // Create backdrop element
   let backdrop = document.createElement("div");
@@ -29,7 +26,8 @@ $(document).ready(function () {
     if (clickedOnShareIcon) {
       event.stopPropagation(); // Prevent closing when clicking the button
       let shouldShowLinks = null;
-        $toolbar.css('position', 'static');
+      // $toolbar.css('position', 'static');
+      setMenu();
 
       if (socialLinks) {
         shouldShowLinks = socialLinks.classList.toggle("hidden");
@@ -37,8 +35,7 @@ $(document).ready(function () {
       if (isMobileView()) {
         backdrop.style.display = shouldShowLinks ? "none" : "block";
       }
-        if (backdrop) {
-
+      if (backdrop) {
         backdrop.style.display = "block";
       }
     } else if (!clickedOnBackdrop) {
@@ -47,7 +44,6 @@ $(document).ready(function () {
         socialLinks.classList.add("hidden");
       }
       if (backdrop) {
-
         backdrop.style.display = "none";
       }
     }
@@ -55,8 +51,9 @@ $(document).ready(function () {
 
   // Ensure dropdown resets when resizing
   window.addEventListener("resize", () => {
-    Array.from(document.querySelectorAll(".social-links"))
-      .forEach((link) => link.classList.add("hidden"));
+    Array.from(document.querySelectorAll(".social-links")).forEach((link) =>
+      link.classList.add("hidden")
+    );
     if (backdrop) {
       backdrop.style.display = "none";
     }
@@ -64,10 +61,42 @@ $(document).ready(function () {
   if (backdrop) {
     // Hide backdrop and dropdown when clicking on the backdrop
     backdrop.addEventListener("click", () => {
-      $toolbar.css('position', 'sticky');
-      Array.from(document.querySelectorAll(".social-links"))
-        .forEach((link) => link.classList.add("hidden"));
+      //sticky
+      resetMenu();
+
+      Array.from(document.querySelectorAll(".social-links")).forEach((link) =>
+        link.classList.add("hidden")
+      );
       backdrop.style.display = "none";
+    });
+  }
+
+  function setMenu() {
+    $(".toolbar-hitech .desktop").css("z-index", "14");
+    $(".toolsection .share-icon").css("pointer-events", "none");
+    $(".toolsection #gu_theme-icon").css("pointer-events", "none");
+    $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
+    $(".toolsection .language-selector__toggle").css("pointer-events", "none");
+    $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
+    $(".toolsection .version-selector .dropdown").attr("style", "");
+    $(".toolsection .version-selector .dropdown").css({
+      background: "rgba(0, 0, 0, 0.01)",
+      "border-width": "0px",
+      "pointer-events": "none",
+    });
+  }
+
+  function resetMenu() {
+    $(".toolbar-hitech .desktop").css("z-index", "unset");
+    $(".toolsection .share-icon").css("pointer-events", "unset");
+    $(".toolsection #gu_theme-icon").css("pointer-events", "unset");
+    $(".toolsection .gu-pdf-export__button").css("pointer-events", "unset");
+    $(".toolsection .language-selector__toggle").css("pointer-events", "unset");
+    $(".toolsection #gu_accessibility-icon").css("pointer-events", "unset");
+    $(".toolsection .version-selector .dropdown").css({
+      background: "#ffffff",
+      "border-width": "0px",
+      "pointer-events": "unset",
     });
   }
 });

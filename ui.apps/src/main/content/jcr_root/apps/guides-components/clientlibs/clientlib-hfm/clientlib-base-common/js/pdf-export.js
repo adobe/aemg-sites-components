@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const $toolbar = $('.toolbar-hitech .desktop');
+  //const $toolbar = $('.toolbar-hitech .desktop');
 
   $(".gu-pdf_topic-download").on("click", function (event) {
     let topicTitle = $("#section-topic .topic h1.title").text();
     if (topicTitle) {
-      topicTitle = topicTitle.trim().toLowerCase().replaceAll(" ", "-") + ".pdf";
+      topicTitle =
+        topicTitle.trim().toLowerCase().replaceAll(" ", "-") + ".pdf";
     }
     CreatePDFfromHTML("#section-topic", topicTitle);
   });
@@ -32,27 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (button && button.contains(event.target)) {
       event.stopPropagation(); // Prevent immediate closing due to document click listener
       const isActive = activeToolbar.classList.toggle("active");
-         $toolbar.css('position', 'static');
+      // $toolbar.css('position', 'static');
+
+      setMenu();
 
       //if (isMobileView()) {
+      backdrop.style.display = isActive ? "block" : "none";
+      if (backdrop) {
         backdrop.style.display = isActive ? "block" : "none";
-        if (backdrop) {
-          backdrop.style.display = isActive ? "block" : "none";
-        }
-     // }
+      }
+      // }
     } else {
       activeToolbar.classList.remove("active"); // Hide dropdown if clicking outside
       if (backdrop) {
         backdrop.style.display = "none"; // Hide backdrop when clicking outside
       }
-        // $toolbar.css('position', 'sticky');
+      // $toolbar.css('position', 'sticky');
     }
   });
 
   // Hide dropdown on resize
   window.addEventListener("resize", () => {
-    Array.from(document.querySelectorAll(".gu-pdf-export__wrapper"))
-      .forEach((wrapper) => wrapper.classList.remove("active"));
+    Array.from(document.querySelectorAll(".gu-pdf-export__wrapper")).forEach(
+      (wrapper) => wrapper.classList.remove("active")
+    );
     if (backdrop) {
       backdrop.style.display = "none";
     }
@@ -60,8 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close dropdown and remove backdrop when backdrop is clicked
   if (backdrop) {
     backdrop.addEventListener("click", () => {
-      Array.from(document.querySelectorAll(".gu-pdf-export__wrapper"))
-        .forEach((wrapper) => wrapper.classList.remove("active"));
+      Array.from(document.querySelectorAll(".gu-pdf-export__wrapper")).forEach(
+        (wrapper) => wrapper.classList.remove("active")
+      );
       backdrop.style.display = "none";
     });
   }
@@ -91,12 +96,46 @@ function CreatePDFfromHTML(selector, pdfFileName) {
     var options = {
       margin: 0.5,
       filename: pdfFileName,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, scrollY: 0, optimizeClipping: true },
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        scrollY: 0,
+        optimizeClipping: true,
+      },
       pagebreak: { mode: ["css", "legacy"] },
-      jsPDF: { unit: "in", format: "A4", orientation: "portrait" }
+      jsPDF: { unit: "in", format: "A4", orientation: "portrait" },
     };
 
     html2pdf().set(options).from(html_source_element).save();
   }, 500); // Small delay to ensure all elements are loaded
+}
+
+function setMenu() {
+  $(".toolbar-hitech .desktop").css("z-index", "14");
+  $(".toolsection .share-icon").css("pointer-events", "none");
+  $(".toolsection #gu_theme-icon").css("pointer-events", "none");
+  $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
+  $(".toolsection .language-selector__toggle").css("pointer-events", "none");
+  $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
+  $(".toolsection .version-selector .dropdown").attr("style", "");
+  $(".toolsection .version-selector .dropdown").css({
+    background: "rgba(0, 0, 0, 0.01)",
+    "border-width": "0px",
+    "pointer-events": "none",
+  });
+}
+
+function resetMenu() {
+  $(".toolbar-hitech .desktop").css("z-index", "unset");
+  $(".toolsection .share-icon").css("pointer-events", "unset");
+  $(".toolsection #gu_theme-icon").css("pointer-events", "unset");
+  $(".toolsection .gu-pdf-export__button").css("pointer-events", "unset");
+  $(".toolsection .language-selector__toggle").css("pointer-events", "unset");
+  $(".toolsection #gu_accessibility-icon").css("pointer-events", "unset");
+  $(".toolsection .version-selector .dropdown").css({
+    background: "#ffffff",
+    "border-width": "0px",
+    "pointer-events": "unset",
+  });
 }
