@@ -57,6 +57,11 @@
                     <!-- skip sub package validation for now as some vendor packages like CIF apps will not pass -->
                     <skipSubPackageValidation>true</skipSubPackageValidation>
                     <embeddeds>
+						<embedded>
+                            <groupId>com.adobe.guides.aem.components</groupId>
+                            <artifactId>guides-components.core</artifactId>
+                            <target>/apps/guides-components-packages/application/install</target>
+                        </embedded>
                         <embedded>
                             <groupId>com.adobe.guides.aem.components</groupId>
                             <artifactId>guides-components.ui.apps</artifactId>
@@ -68,12 +73,7 @@
                             <artifactId>guides-components.ui.config</artifactId>
                             <type>zip</type>
                             <target>/apps/guides-components-packages/application/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>com.adobe.guides.aem.components</groupId>
-                            <artifactId>guides-components.core</artifactId>
-                            <target>/apps/guides-components-packages/application/install</target>
-                        </embedded>
+                        </embedded>                       
                     </embeddeds>
                 </configuration>
             </plugin>
@@ -172,19 +172,19 @@
                         <configuration>
                             <group>com.adobe.guides.aem.components</group>
                             <embeddeds>
+								<embedded>
+									<groupId>com.adobe.guides.aem.components</groupId>
+									<artifactId>guides-components.core</artifactId>
+									<type>jar</type>
+									<target>/apps/guides-components-packages/application/install</target>
+								</embedded>
                                 <embedded>
-                                    <groupId>com.adobe.guides.aem.components</groupId>
+									<groupId>com.adobe.guides.aem.components</groupId>
                                     <artifactId>guides-components.ui.apps</artifactId>
                                     <type>zip</type>
                                     <target>/apps/guides-components-packages/application/install</target>
                                 </embedded>
                                 <embedded>
-                                    <groupId>com.adobe.guides.aem.components</groupId>
-                                    <artifactId>guides-components.core</artifactId>
-									<type>jar</type>
-                                    <target>/apps/guides-components-packages/application/install</target>
-                                </embedded>
-								<embedded>
                                     <groupId>com.adobe.guides.aem.components</groupId>
                                     <artifactId>guides-components.ui.config</artifactId>
                                     <target>/apps/guides-components-packages/application/install</target>
