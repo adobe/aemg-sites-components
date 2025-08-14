@@ -193,6 +193,7 @@ div.topic table {
   }
 }
 
+
 .cmp-languagenavigation,
 .social-links {
   z-index: 15 !important;
@@ -203,7 +204,22 @@ div.topic table {
 }
 
 .gu-accessibility_menu {
-  z-index: 13 !important;
+  z-index: 15 !important;
+}
+
+.backdrop {
+  z-index: 13;
+}
+
+body.hi-tech.dark{
+  .language-backdrop, .backdrop, .backdropAccessibility {
+    z-index: 9;
+  }
+}
+html#adobeguides-dark-contrast{
+  .language-backdrop, .backdrop, .backdropAccessibility {
+    z-index: 9;
+  }
 }
 
 html#adobeguides-dark-contrast {
@@ -256,4 +272,10 @@ html.adobeguides-text-size .updated__section span {
     .updated__section {
     gap: 0.6rem;
   }
+}
+
+html#adobeguides-dark-contrast .header,
+body.dark .header {
+  background: var(--footer-bg) !important;
+  border-bottom: 1px solid var(--border-black-color) !important;
 }
