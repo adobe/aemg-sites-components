@@ -31,6 +31,15 @@ body.dark {
         }
       }
     }
+    
+    /* FSI-specific dark theme header styles - box-shadow only for desktop, keep border for mobile */
+    background: var(--footer-bg);
+    /* Keep original border for mobile - no override needed */
+    
+    @media (min-width: 600px) {
+      border-bottom: none !important; /* Remove the border for desktop */
+      box-shadow: 0 2px 8px var(--box-shadow-bar); /* Add box-shadow for desktop */
+    }
   }
 
   .version-selector .dropdown__button svg {
