@@ -16,10 +16,35 @@ body.dark {
 
   .header {
     .cmp-search {
+      &__item:hover {
+          background: var(--dark-grey);
+      }
       &__item-mark {
         background: transparent;
         color: var(--search-text-active);
       }
+      &__input {
+        &:focus-visible {
+          outline: 1px solid var(--border-common);
+          background: var(--search-bg);
+          color: var(--text-color);
+        }
+      }
     }
+  }
+
+  .version-selector .dropdown__button svg {
+    fill: var(--version-unselected-color);
+  }
+
+  .version-selector .dropdown__item:hover {
+    background: var(--primary-color) !important;
+    color: var(--white-color) !important;
+    a {
+      color: var(--white-color);
+    }
+  }
+  .version-selector .dropdown__value {
+    color: var(--version-unselected-color) !important;
   }
 }
