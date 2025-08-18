@@ -24,9 +24,10 @@
       }
       .version-selector {
         .dropdown__item {
-          padding: 0.5rem 0.75rem !important;
+          padding: 0.5rem 0.75rem 0.5rem 0.6rem !important;
           margin-left: 0 !important;
           margin-bottom: 0 !important;
+          text-align: start;
         }
         .dropdown__list {
           width: 60px;
@@ -78,6 +79,40 @@
       }
     }
   }
+}
+
+@media (max-width: 1023px) {
+    .fsi-guides-topic-page .base-topic-page-section div.topic .version-selector {
+    .dropdown__item {
+      padding: 0.5rem 0.75rem 0.5rem 0.7rem !important;
+      margin-left: 0 !important;
+      margin-bottom: 0 !important;
+      text-align: start;
+    }
+    .dropdown__list {
+        width: 64px;
+        right: 0;
+        position: absolute;
+        left: auto;
+    }
+}
+}
+
+html.adobeguides-text-size{
+  .fsi-guides-topic-page .base-topic-page-section div.topic .version-selector {
+    .dropdown__item {
+      padding: 0.5rem 0.75rem 0.5rem 0.7rem !important;
+      margin-left: 0 !important;
+      margin-bottom: 0 !important;
+      text-align: start;
+    }
+    .dropdown__list {
+        width: 80px;
+        right: 0;
+        position: absolute;
+        left: auto;
+    }
+}
 }
 
 @media (min-width: 1024px) {
