@@ -73,11 +73,22 @@ $(document).ready(function () {
 
   function setMenu() {
     setTimeout(function () {
+        $(".toolbar-hitech .desktop").css("z-index", "14");
+
         $(".toolsection .share-icon").css("pointer-events", "none");
         $(".toolsection #gu_theme-icon").css("pointer-events", "none");
         $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
         $(".toolsection .language-selector__toggle").css("pointer-events", "none");
         $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
+
+        $(".feedback-component .gu-feedback__button").attr("style", "");
+        $(".feedback-component .gu-feedback__button").css({
+          "background": "rgba(0, 0, 0, 0.01)",
+          "pointer-events": "none",
+        });
+
+        $(".backToTop").hide();
+
         $(".toolsection .version-selector .dropdown").attr("style", "");
         $(".toolsection .version-selector .dropdown").css({
           "border-width": "0px",
@@ -87,11 +98,22 @@ $(document).ready(function () {
     }
 
   function resetMenu() {
+    $(".toolbar-hitech .desktop").css("z-index", "unset");
+
     $(".toolsection .share-icon").css("pointer-events", "unset");
     $(".toolsection #gu_theme-icon").css("pointer-events", "unset");
     $(".toolsection .gu-pdf-export__button").css("pointer-events", "unset");
     $(".toolsection .language-selector__toggle").css("pointer-events", "unset");
     $(".toolsection #gu_accessibility-icon").css("pointer-events", "unset");
+
+    $(".feedback-component .gu-feedback__button").attr("style", "");
+    $(".feedback-component .gu-feedback__button").css({
+      "background": "unset",
+      "pointer-events": "unset",
+    });
+
+    $(".backToTop").show();
+
     $(".toolsection .version-selector .dropdown").css({
       "border-width": "0px",
       "pointer-events": "unset",
