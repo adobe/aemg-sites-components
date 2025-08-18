@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.adobe.guides.aem.components</groupId>
         <artifactId>guides-components</artifactId>
-        <version>1.5.1</version>
+        <version>1.5.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -59,14 +59,15 @@
                     <embeddeds>
 						<embedded>
                             <groupId>com.adobe.guides.aem.components</groupId>
-                            <artifactId>guides-components.core</artifactId>
-                            <target>/apps/guides-components-packages/application/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>com.adobe.guides.aem.components</groupId>
                             <artifactId>guides-components.ui.apps</artifactId>
                             <type>zip</type>
                             <target>/apps/guides-components-packages/application/install</target>
+                        </embedded>
+						<embedded>
+                            <groupId>com.adobe.guides.aem.components</groupId>
+                            <artifactId>guides-components.core</artifactId>
+                            <target>/apps/guides-components-packages/application/install</target>
+							<type>jar</type>
                         </embedded>
 						<embedded>
                             <groupId>com.adobe.guides.aem.components</groupId>
@@ -174,16 +175,16 @@
                             <embeddeds>
 								<embedded>
 									<groupId>com.adobe.guides.aem.components</groupId>
-									<artifactId>guides-components.core</artifactId>
-									<type>jar</type>
-									<target>/apps/guides-components-packages/application/install</target>
-								</embedded>
-                                <embedded>
-									<groupId>com.adobe.guides.aem.components</groupId>
                                     <artifactId>guides-components.ui.apps</artifactId>
                                     <type>zip</type>
                                     <target>/apps/guides-components-packages/application/install</target>
                                 </embedded>
+								<embedded>
+									<groupId>com.adobe.guides.aem.components</groupId>
+									<artifactId>guides-components.core</artifactId>
+									<type>jar</type>
+									<target>/apps/guides-components-packages/application/install</target>
+								</embedded>
                                 <embedded>
                                     <groupId>com.adobe.guides.aem.components</groupId>
                                     <artifactId>guides-components.ui.config</artifactId>
@@ -218,24 +219,27 @@
     <!-- D E P E N D E N C I E S                                                -->
     <!-- ====================================================================== -->
     <dependencies>
+		
         <dependency>
             <groupId>com.adobe.guides.aem.components</groupId>
             <artifactId>guides-components.ui.apps</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
-        </dependency>
+        </dependency>		
 		<dependency>
             <groupId>com.adobe.guides.aem.components</groupId>
             <artifactId>guides-components.ui.config</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
+		<!--
 		<dependency>
             <groupId>com.adobe.guides.aem.components</groupId>
             <artifactId>guides-components.core</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
+		-->
          <!-- Core Component Dependency (6.x only)-->
         <dependency>
             <groupId>com.adobe.cq</groupId>
