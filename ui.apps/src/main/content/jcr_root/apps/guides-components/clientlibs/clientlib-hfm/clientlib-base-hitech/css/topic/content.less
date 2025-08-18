@@ -257,11 +257,6 @@ html#adobeguides-dark-contrast {
   right: 16%;
 }
 
-html.adobeguides-text-spacing .updated__section span,
-html.adobeguides-text-size .updated__section span {
-  font-size: 13px !important;
-}
-
 @media (max-width: 768px) {
   html.adobeguides-text-spacing
     .hitech-guides-topic-page
@@ -272,6 +267,9 @@ html.adobeguides-text-size .updated__section span {
     .updated__section {
     gap: 0.6rem;
   }
+  .hi-tech .header .cmp-search {
+    margin-top: 1.6rem;
+  }
 }
 
 html#adobeguides-dark-contrast .header,
@@ -281,13 +279,45 @@ body.dark .header {
 }
 
 .base-topic-page-section div.topic .topic__updated .updated__container .updated__section span{
-  font-size: 14px !important;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
-  html.adobeguides-text-spacing .updated__section span,
-  html.adobeguides-text-size .updated__section span,
-  .base-topic-page-section div.topic .topic__updated .updated__container .updated__section span {
-    font-size: 13px !important;
+  .base-topic-page-section div.topic .topic__updated .updated__container .updated__section span{
+    font-size: 0.8125rem;
+  }
+
+  html.adobeguides-text-spacing,
+  html.adobeguides-text-size {
+    .base-topic-page-section div.topic .topic__updated .updated__container .updated__section span {
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .hi-tech .custom-container .gu-custom-container .col-9grid .col-9grid-container .col-9grid-components{
+    width: 88%
+  }
+
+  .hi-tech .toolbar-hitech .desktop{
+    margin-right: 1rem;
+  }
+
+  .hi-tech .backToTop{
+    right: 2.6%;
+  }
+
+  html.adobeguides-text-spacing,
+  html.adobeguides-text-size {
+    .header .cmp-search__icon {
+      top: 0.3rem;
+    }
+    .header .cmp-search__clear-icon {
+      top: 0.3rem;
+    }
+    .header .cmp-search__input {
+      max-height: 32px;
+    }
   }
 }
