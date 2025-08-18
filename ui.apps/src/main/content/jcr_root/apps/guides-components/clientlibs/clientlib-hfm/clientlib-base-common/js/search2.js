@@ -140,7 +140,7 @@ $(document).ready(function () {
       var endIndex = Math.min(startIndex + itemsPerPage, response.totalRecords);
       var currentPageItems = response.data; //data.slice(startIndex, endIndex);
 	
-		let resultsHeaderSubtitle = $(`<p class="search_results_header_subtitle">Showing ${startIndex} to ${endIndex} of ${response.totalRecords} results</p>`)
+		let resultsHeaderSubtitle = $(`<p class="search_results_header_subtitle">Showing ${endIndex} out of ${response.totalRecords} results</p>`)
 		resultsHeader.append(resultsHeaderSubtitle);
 		
 		$searchContainer.append(resultsHeader);
