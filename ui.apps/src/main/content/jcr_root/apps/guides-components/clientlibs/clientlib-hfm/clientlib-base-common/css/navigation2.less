@@ -7,7 +7,7 @@
   .cmp-navigation {
   	padding-left:0;
     overflow: auto;
-    max-height:53vh;
+    max-height:50vh;
     scrollbar-width: thin;
   }
   .cmp-navigation__col-icon {
@@ -53,8 +53,9 @@
       input {
         width: 100%;
         border: none;
+        font-size: var(--body-font-size);
         margin-left: 0.5rem;
-        margin-top: 0.188rem;
+        //margin-top: 0.188rem;
         background: transparent;
 
         &:focus {
@@ -261,6 +262,13 @@ html.adobeguides-text-size {
     }
 }
 
+html.adobeguides-text-size {
+    .navigation {
+        .cmp-navigation {
+          max-height: 42vh;
 
+        }
+      }
+    }
 
 

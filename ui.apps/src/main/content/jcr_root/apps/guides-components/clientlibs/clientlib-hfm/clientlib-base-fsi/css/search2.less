@@ -36,6 +36,31 @@
     }
   }
 }
+html#adobeguides-dark-contrast {
+  .header {
+    .cmp-search {
+      &__item {
+        color: var(--yellow-color);
+        &:hover {
+          background: var(--dark-grey);
+        }
+      }
+
+      &__item-mark {
+        background: transparent;
+        color: var(--yellow-color);
+      }
+
+      &__input {
+        &:focus-visible {
+          outline: 1px solid var(--border-common);
+          background: var(--search-bg);
+          color: var(--search-text-active);
+        }
+      }
+    }
+  }
+}
 
 @media (max-width: 1023px) {
   .header {
@@ -192,4 +217,15 @@
 
 .col-9grid-container {
   padding: 0 16px;
+}
+@media (max-width: 480px) {
+  html.adobeguides-text-size{
+    .header .cmp-search__clear-icon {
+      top: 0.4rem;
+    }
+    .header .cmp-search__icon{
+      top: 0.4rem;
+      left: 0.5rem;
+    }
+  }
 }
