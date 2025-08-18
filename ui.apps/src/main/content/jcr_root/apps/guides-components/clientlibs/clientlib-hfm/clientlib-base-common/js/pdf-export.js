@@ -120,11 +120,7 @@ function setMenu() {
   $(".toolsection .language-selector__toggle").css("pointer-events", "none");
   $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
 
-  $(".feedback-component .gu-feedback__button").attr("style", "");
-  $(".feedback-component .gu-feedback__button").css({
-    "background": "rgba(0, 0, 0, 0.01)",
-    "pointer-events": "none",
-  });
+  $(".feedback-component").hide();
 
   $(".backToTop").hide();
 
@@ -144,11 +140,7 @@ function resetMenu() {
   $(".toolsection .language-selector__toggle").css("pointer-events", "unset");
   $(".toolsection #gu_accessibility-icon").css("pointer-events", "unset");
 
-  $(".feedback-component .gu-feedback__button").attr("style", "");
-  $(".feedback-component .gu-feedback__button").css({
-    "background": "unset",
-    "pointer-events": "unset",
-  });
+  $(".feedback-component").show();
 
   $(".backToTop").show();
 

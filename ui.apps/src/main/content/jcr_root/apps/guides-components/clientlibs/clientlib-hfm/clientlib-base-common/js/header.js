@@ -9,7 +9,7 @@ $(document).ready(function () {
     const isMobile = window.innerWidth <= 768;
     const searchField = $(".cmp-search__field");
     const hamburgerMenu = $(".gu-header__humberger");
-    
+
     if (isMobile && $("body").hasClass("guides-product-page")) {
       // Hide the existing search container on mobile
       searchField.hide();
@@ -84,3 +84,16 @@ $(document).ready(function () {
     initMobileSearch();
   });
 });
+
+$(document).ready(function () {
+  $('.gu-header__humberger').click(function () {
+    const toolbar = $('.gu-toolbar_wrapper')
+
+    if (toolbar.is(':visible')) {
+      toolbar.hide();
+    } else {
+      toolbar.show(); 
+    }
+  });
+});
+
