@@ -1,8 +1,6 @@
 .header {
   .cmp-search {
-
     &__input {
-
       &:focus-visible {
         outline: 1px solid var(--border-common);
         background: var(--search-bg-active);
@@ -124,6 +122,30 @@ html#adobeguides-dark-contrast {
 }
 
 @media (min-width: 1024px) {
+  html.adobeguides-text-size,
+  html.adobeguides-text-size.adobeguides-text-spacing {
+    .gu-header_search-container .cmp-search__icon {
+      top: 0.55rem;
+    }
+
+    .gu-header_search-container {
+      .gu-search__container {
+        position: relative;
+      }
+
+      .gu-search__toggle {
+        position: absolute;
+        right: 0;
+        top: -0.1rem;
+      }
+    }
+  }
+
+  html.adobeguides-text-size.adobeguides-text-spacing {
+    .gu-header_search-container .cmp-search__input {
+      width: 300px;
+    }
+  }
   .gu-header_search-container {
     .cmp-search {
       display: none;
@@ -143,10 +165,10 @@ html#adobeguides-dark-contrast {
       &__clear-icon {
         cursor: pointer;
         position: absolute;
-        top: 7px;
-        right: 12px;
-        width: 20px;
-        height: 20px;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 1rem;
+        height: 1rem;
         left: auto;
       }
 
@@ -171,7 +193,7 @@ html#adobeguides-dark-contrast {
 
     .cmp-search__input {
       background: var(--search-bg);
-      box-shadow: 0 8px 12px 0 var(--box-shadow-search);
+      box-shadow: none;
       display: block;
       height: 100%;
       width: 338px;
@@ -190,14 +212,20 @@ html#adobeguides-dark-contrast {
         border-radius: 0.5rem;
       }
     }
+    .gu-search__container {
+      position: relative;
+    }
 
     .gu-search__toggle {
       border: none;
       background: none;
       cursor: pointer;
-      padding: 8px;
+      padding: 0.75rem;
       height: 48px;
       width: 48px;
+      position: absolute;
+      right: 0;
+      top: 0.06rem;
     }
 
     .gu-search__icon {
@@ -224,22 +252,14 @@ html#adobeguides-dark-contrast {
 .col-9grid-container {
   padding: 0 16px;
 }
-@media (max-width: 767px) {
-  html.adobeguides-text-size{
+@media (max-width: 480px) {
+  html.adobeguides-text-size {
     .header .cmp-search__clear-icon {
       top: 0.4rem;
     }
-    .header .cmp-search__icon{
+    .header .cmp-search__icon {
       top: 0.4rem;
       left: 0.5rem;
-    }
-  }
-  
-  .fsi-guides-topic-page {
-    .header{
-      .cmp-search {
-        margin-top: 1.6rem; 
-      } 
     }
   }
 }
