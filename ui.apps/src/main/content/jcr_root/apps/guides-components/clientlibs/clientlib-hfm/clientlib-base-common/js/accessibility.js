@@ -24,10 +24,10 @@ $(document).ready(function () {
         if ($(window).width() <= 768) {
           $(".gu-search__container").css("z-index", "-1");
           $(".gu-header__humberger").css("z-index", "-1");
-          $(".header").attr(
+          $(".hi-tech .header").attr(
             "style",
-            "background-color: rgba(255, 255, 255, 0.1) !important;" +
-            "border-bottom: none !important;" +
+            "background-color: rgba(255, 255, 255, 0.1);" +
+            "border-bottom: unset;" +
             "backdrop-filter: blur(100px);"
           );
         }
@@ -64,9 +64,9 @@ $(document).ready(function () {
           if ($(window).width() <= 768) {
             $(".gu-search__container").css("z-index", "");
             $(".gu-header__humberger").css("z-index", "");
-            $(".header").css({
+            $(".hi-tech .header").css({
               background: "#ffffff",
-              "border-bottom": "#e2e2e2",
+              "border-bottom": "1px solid #e2e2e2",
               "backdrop-filter": "unset"
             });
           }
@@ -114,14 +114,14 @@ $(document).ready(function () {
       if ($(window).width() <= 768) {
         $(".gu-search__container").css("z-index", "");
         $(".gu-header__humberger").css("z-index", "");
-        $(".header").css({
+        $(".hi-tech .header").css({
           background: "#ffffff",
-          "border-bottom": "#e2e2e2",
+          "border-bottom": "1px solid #e2e2e2",
         });
       }
     });
   }
-
+  
   function setMenu() {
     $(".toolbar-hitech .desktop").css("z-index", "14");
 
@@ -140,6 +140,21 @@ $(document).ready(function () {
       "border-width": "0px",
       "pointer-events": "none",
     });
+
+    //fsi
+    $(".fsi-guides-topic-page .header").attr("style", "");
+    $(".fsi-guides-topic-page .header").css({
+      "background-color": "rgba(255, 255, 255, 0.1)",
+      "backdrop-filter": "blur(100px)",
+      "border-bottom": "unset",
+    });
+
+    $(".gu-header_search-container").removeClass("search-visible");
+    $(".cmp-search__form").css("display", "none");
+
+    $(".gu-search__container").css("pointer-events", "none");
+    $(".gu-header_nav-link").css("pointer-events", "none");
+    $(".gu-header_logo").css("pointer-events", "none");
   }
 
   function resetMenu() {
@@ -159,5 +174,20 @@ $(document).ready(function () {
       "border-width": "0px",
       "pointer-events": "unset",
     });
+
+    //fsi
+    $(".fsi-guides-topic-page .header").css({
+      "background-color": "var(--white-color)",
+      "backdrop-filter": "unset",
+      "border-bottom": "1px solid #e2e2e2",
+    });
+    
+    $(".gu-header_search-container").addClass("search-visible");
+    $(".cmp-search__form").css("display", "block");
+
+    $(".gu-search__container").css("pointer-events", "unset");
+    $(".gu-header_nav-link").css("pointer-events", "unset");
+    $(".gu-header_logo").css("pointer-events", "unset");
   }
 });
+
