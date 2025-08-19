@@ -66,6 +66,7 @@ html#adobeguides-dark-contrast {
   .header {
     .cmp-search {
       position: absolute;
+      top: 2rem;
       left: 0;
       right: 0;
       margin-top: 2rem;
@@ -76,7 +77,9 @@ html#adobeguides-dark-contrast {
 
       &__icon {
         left: 0;
-        top: 0.5rem;
+        top: 0.35rem;
+        width: 24px;
+        height: 24px;
       }
 
       &__input {
@@ -140,10 +143,10 @@ html#adobeguides-dark-contrast {
       &__clear-icon {
         cursor: pointer;
         position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        width: 1rem;
-        height: 1rem;
+        top: 7px;
+        right: 12px;
+        width: 20px;
+        height: 20px;
         left: auto;
       }
 
@@ -181,7 +184,10 @@ html#adobeguides-dark-contrast {
       padding: 0.25rem 0.5rem 0.25rem 2.125rem;
 
       &:focus-visible {
-        outline: none;
+        outline: 1px solid var(--border-common);
+        background: var(--search-bg-active);
+        color: var(--search-text-active);
+        border-radius: 0.5rem;
       }
     }
 
@@ -189,7 +195,7 @@ html#adobeguides-dark-contrast {
       border: none;
       background: none;
       cursor: pointer;
-      padding: 0.75rem;
+      padding: 8px;
       height: 48px;
       width: 48px;
     }
