@@ -32,13 +32,11 @@ body.dark {
       }
     }
     
-    /* FSI-specific dark theme header styles - box-shadow only for desktop, keep border for mobile */
     background: var(--footer-bg);
-    /* Keep original border for mobile - no override needed */
     
     @media (min-width: 600px) {
-      border-bottom: none !important; /* Remove the border for desktop */
-      box-shadow: 0 2px 8px var(--box-shadow-bar); /* Add box-shadow for desktop */
+      border-bottom: none !important; 
+      box-shadow: 0 2px 8px var(--box-shadow-bar); 
     }
   }
 
@@ -56,4 +54,26 @@ body.dark {
   .version-selector .dropdown__value {
     color: var(--version-unselected-color) !important;
   }
+
+  .custom-container {
+  .gu-custom-container {
+    .fsi-container {
+      border-top: 1px solid #43464A;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .custom-container {
+    .gu-custom-container {
+      border-top: 1px solid #43464A;
+      
+      .col-6grid {
+        border: 1px solid #43464A;
+      }
+      .fsi-container {
+        border-top: 1px solid #43464A;
+      }
+    }
+  }
+}
 }
