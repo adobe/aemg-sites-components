@@ -104,13 +104,13 @@ html {
 /* FSI-specific header styles - box-shadow only for desktop, keep border for mobile */
 .header {
   background-color: var(--header-bg);
-  padding: 0.875rem 1rem;
+  padding: 14px 16px;
   /* Keep original border for mobile - no override needed */
 }
 
 @media (min-width: 600px) {
   .header {
-    padding: 1rem 1.25rem;
+    padding: 16px 20px;
     border-bottom: none !important; /* Remove the border for desktop */
     box-shadow: 0 2px 8px var(--box-shadow-color); /* Add box-shadow for desktop */
   }

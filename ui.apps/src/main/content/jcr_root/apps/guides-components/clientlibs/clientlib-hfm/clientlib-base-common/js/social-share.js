@@ -73,23 +73,35 @@ $(document).ready(function () {
 
   function setMenu() {
     setTimeout(function () {
-        $(".toolbar-hitech .desktop").css("z-index", "14");
+      $(".toolbar-hitech .desktop").css("z-index", "14");
 
-        $(".toolsection .share-icon").css("pointer-events", "none");
-        $(".toolsection #gu_theme-icon").css("pointer-events", "none");
-        $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
-        $(".toolsection .language-selector__toggle").css("pointer-events", "none");
-        $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
+      $(".toolsection .share-icon").css("pointer-events", "none");
+      $(".toolsection #gu_theme-icon").css("pointer-events", "none");
+      $(".toolsection .gu-pdf-export__button").css("pointer-events", "none");
+      $(".toolsection .language-selector__toggle").css("pointer-events", "none");
+      $(".toolsection #gu_accessibility-icon").css("pointer-events", "none");
 
-        $(".feedback-component").hide();
+      $(".feedback-component").hide();
 
-        $(".backToTop").hide();
+      $(".backToTop").hide();
 
-        $(".toolsection .version-selector .dropdown").attr("style", "");
-        $(".toolsection .version-selector .dropdown").css({
-          "border-width": "0px",
-          "pointer-events": "none",
-        });
+      $(".toolsection .version-selector .dropdown").attr("style", "");
+      $(".toolsection .version-selector .dropdown").css({
+        "border-width": "0px",
+        "pointer-events": "none",
+      });
+
+      //fsi
+      $(".fsi-guides-topic-page .header").attr("style", "");
+      $(".fsi-guides-topic-page .header").css({
+        "background-color": "rgba(255, 255, 255, 0.1)",
+        "backdrop-filter": "blur(100px)",
+        "border-bottom": "unset",
+      });
+      $(".gu-search__container").css("pointer-events", "none");
+      $(".gu-header_nav-link").css("pointer-events", "none");
+      $(".gu-header_logo").css("pointer-events", "none");
+
       });
     }
 
@@ -110,5 +122,16 @@ $(document).ready(function () {
       "border-width": "0px",
       "pointer-events": "unset",
     });
+
+    //fsi
+    $(".fsi-guides-topic-page .header").css({
+      "background-color": "var(--white-color)",
+      "backdrop-filter": "unset",
+      "border-bottom": "1px solid #e2e2e2",
+    });
+    $(".gu-search__container").css("pointer-events", "unset");
+    $(".gu-header_nav-link").css("pointer-events", "unset");
+    $(".gu-header_logo").css("pointer-events", "unset");
+
   }
 });

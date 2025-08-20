@@ -1,8 +1,6 @@
 .header {
   .cmp-search {
-
     &__input {
-
       &:focus-visible {
         outline: 1px solid var(--border-common);
         background: var(--search-bg-active);
@@ -66,6 +64,7 @@ html#adobeguides-dark-contrast {
   .header {
     .cmp-search {
       position: absolute;
+      top: 2rem;
       left: 0;
       right: 0;
       margin-top: 2rem;
@@ -76,7 +75,9 @@ html#adobeguides-dark-contrast {
 
       &__icon {
         left: 0;
-        top: 0.5rem;
+        top: 0.35rem;
+        width: 24px;
+        height: 24px;
       }
 
       &__input {
@@ -121,6 +122,30 @@ html#adobeguides-dark-contrast {
 }
 
 @media (min-width: 1024px) {
+  html.adobeguides-text-size,
+  html.adobeguides-text-size.adobeguides-text-spacing {
+    .gu-header_search-container .cmp-search__icon {
+      top: 0.55rem;
+    }
+
+    .gu-header_search-container {
+      .gu-search__container {
+        position: relative;
+      }
+
+      .gu-search__toggle {
+        position: absolute;
+        right: 0;
+        top: -0.1rem;
+      }
+    }
+  }
+
+  html.adobeguides-text-size.adobeguides-text-spacing {
+    .gu-header_search-container .cmp-search__input {
+      width: 300px;
+    }
+  }
   .gu-header_search-container {
     .cmp-search {
       display: none;
@@ -168,7 +193,7 @@ html#adobeguides-dark-contrast {
 
     .cmp-search__input {
       background: var(--search-bg);
-      box-shadow: 0 8px 12px 0 var(--box-shadow-search);
+      box-shadow: none;
       display: block;
       height: 100%;
       width: 338px;
@@ -181,8 +206,14 @@ html#adobeguides-dark-contrast {
       padding: 0.25rem 0.5rem 0.25rem 2.125rem;
 
       &:focus-visible {
-        outline: none;
+        outline: 1px solid var(--border-common);
+        background: var(--search-bg-active);
+        color: var(--search-text-active);
+        border-radius: 0.5rem;
       }
+    }
+    .gu-search__container {
+      position: relative;
     }
 
     .gu-search__toggle {
@@ -192,6 +223,9 @@ html#adobeguides-dark-contrast {
       padding: 0.75rem;
       height: 48px;
       width: 48px;
+      position: absolute;
+      right: 0;
+      top: 0.06rem;
     }
 
     .gu-search__icon {
@@ -219,11 +253,11 @@ html#adobeguides-dark-contrast {
   padding: 0 16px;
 }
 @media (max-width: 480px) {
-  html.adobeguides-text-size{
+  html.adobeguides-text-size {
     .header .cmp-search__clear-icon {
       top: 0.4rem;
     }
-    .header .cmp-search__icon{
+    .header .cmp-search__icon {
       top: 0.4rem;
       left: 0.5rem;
     }

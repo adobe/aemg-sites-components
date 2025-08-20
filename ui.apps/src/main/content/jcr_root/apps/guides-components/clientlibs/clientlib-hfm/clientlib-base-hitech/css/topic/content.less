@@ -187,13 +187,11 @@ div.topic table {
   z-index: var(--z-index-12);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .backdropAccessibility {
     z-index: 11;
   }
 }
-
-
 .cmp-languagenavigation,
 .social-links {
   z-index: 15 !important;
@@ -204,7 +202,7 @@ div.topic table {
 }
 
 .gu-accessibility_menu {
-  z-index: 15 !important;
+  z-index: 15;
 }
 
 .backdrop {
@@ -301,8 +299,12 @@ html.adobeguides-text-size{
     }
   }
   
-  .hi-tech .header .cmp-search {
-    margin-top: 1.6rem;
+  .hi-tech {
+    .header{ 
+      .cmp-search{
+        margin-top: 1.6rem;
+      }
+    }
   }
   
   html#adobeguides-dark-contrast,

@@ -6,7 +6,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 8px;
 
     &:hover {
       background-color: var(--accent-light-blue);
@@ -86,8 +86,15 @@
   }
   .gu-accessibility_wrapper {
     .gu-accessibility_menu {
+      top: 100%;
       transform: translateY(-40px);
-     
+      right: 55px;
+    }
+  }
+  .fsi-guides-topic-page .gu-accessibility_wrapper {
+    .gu-accessibility_menu {
+      transform: translateY(-5px);
+      right: 0px;
     }
   }
 }

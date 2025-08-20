@@ -21,7 +21,7 @@
   .custom-container {
     padding: 0;
     .gu-custom-container {
-      margin-top: 4.375rem;
+      margin-top: 70px;
       display: flex;
       border-top: 1px solid #E8E8E8;
       .col-3grid {
@@ -60,8 +60,8 @@
           border: none;
         }
         &.collapsed {
-          max-width: 68%;
-          flex: 0 0 68%;
+          max-width: 70%;
+          flex: 0 0 70%;
         }
       }
       .col-3grid {
@@ -97,13 +97,14 @@
           }
 
           &.collapsed {
-            flex: 0 0 7%;
-            max-width: 7%;
+            flex: 0 0 5%;
+            max-width: 5%;
             box-shadow: none;
             border-radius: 0;
             margin: 0;
             background-color: transparent;
             height: auto;
+            padding: 0;
 
             > div:not(.tableofcontents) {
               display: none;
@@ -139,7 +140,8 @@
       }
       &.left-collapsed {
         .col-3grid--left {
-          flex: 0 0 7%;
+          flex: 0 0 5%;
+          max-width: 5%;
         }
         .col-6grid {
           flex: 0 0 68%;
@@ -149,8 +151,13 @@
           flex: 0 0 25%;
         }
         .col-6grid.collapsed {
-          flex: 0 0 86%;
-          max-width: 86%;
+          flex: 0 0 90%;
+          max-width: 90%;
+        }
+        .col-3grid--right.collapsed {
+          flex: 0 0 5%;
+          max-width: 5%;
+          padding: 0;
         }
         .cmp-navigation-filter__wrapper {
           justify-content: center;
