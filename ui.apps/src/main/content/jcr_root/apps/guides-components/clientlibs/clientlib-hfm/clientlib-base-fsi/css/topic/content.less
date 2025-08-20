@@ -158,8 +158,11 @@ html.adobeguides-text-size {
   }
 }
 
-body.dark .footer {
-  border-top: 1px solid var(--border-black-color);
+body.dark,
+#adobeguides-dark-contrast {
+  .footer {
+    border-top: 1px solid #21262b;
+  }
 }
 
 .backdropAccessibility {
@@ -245,6 +248,19 @@ body.dark .footer {
       }
     }
   }
+}
+html#adobeguides-dark-contrast {
+    .base-topic-page-section {
+        div.topic {
+            .related-links {
+                border: 1px solid #787878;
+                span.prefix-content {
+					border-bottom: 1px solid #787878;
+                }
+                
+            }
+        }
+	}
 }
 
 html#adobeguides-dark-contrast {
