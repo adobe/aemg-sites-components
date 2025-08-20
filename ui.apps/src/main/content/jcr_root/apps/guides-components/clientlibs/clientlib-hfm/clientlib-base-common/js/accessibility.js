@@ -16,6 +16,10 @@ $(document).ready(function () {
       $accessibilityBtn.on("click", function (e) {
         e.stopPropagation();
 
+        //force-close the search
+        $(".fsi-guides-topic-page .gu-header_search-container").removeClass("search-visible");
+        $(".fsi-guides-topic-page .gu-search-backdrop").remove();
+
         // If already open, don't toggle — let outside click close it
         if ($accessibilityMenu.hasClass("show")) {
           return;
@@ -148,10 +152,24 @@ $(document).ready(function () {
       "backdrop-filter": "blur(100px)",
       "border-bottom": "unset",
     });
-    
+
     $(".gu-search__container").css("pointer-events", "none");
     $(".gu-header_nav-link").css("pointer-events", "none");
     $(".gu-header_logo").css("pointer-events", "none");
+
+    // Manufacturing
+    $(".manufacturing-guides-topic-page .header").attr("style", "");
+    $(".manufacturing-guides-topic-page .header").css({
+      "background-color": "rgba(255, 255, 255, 0.1)",
+      "backdrop-filter": "blur(100px)",
+      "border-bottom": "unset",
+    });
+
+    $(".manufacturing-guides-topic-page .cmp-search__input").attr("style", "");
+    $(".manufacturing-guides-topic-page .cmp-search__input").css({
+      "background-color": "rgba(255, 255, 255, 0.1)",
+      "pointer-events": "none"
+    });
   }
 
   function resetMenu() {
@@ -176,12 +194,26 @@ $(document).ready(function () {
     $(".fsi-guides-topic-page .header").css({
       "background-color": "var(--white-color)",
       "backdrop-filter": "unset",
-      "border-bottom": "1px solid #e2e2e2",
+      "border-bottom": "1px solid var(--greyish-border)",
     });
   
     $(".gu-search__container").css("pointer-events", "unset");
     $(".gu-header_nav-link").css("pointer-events", "unset");
     $(".gu-header_logo").css("pointer-events", "unset");
+
+    //Manufacturing
+     $(".manufacturing-guides-topic-page .header").css({
+      "background-color": "var(--white-color)",
+      "backdrop-filter": "unset",
+      "border-bottom": "1px solid var(--greyish-border)",
+    });
+    
+    $(".manufacturing-guides-topic-page .cmp-search__input").attr("style", "");
+    $(".manufacturing-guides-topic-page .cmp-search__input").css({
+      "background-color": "unset",
+      "pointer-events": "unset"
+    });
+
   }
 });
 
