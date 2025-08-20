@@ -98,6 +98,7 @@ $(document).ready(function () {
         "backdrop-filter": "blur(100px)",
         "border-bottom": "unset",
       });
+
       $(".gu-search__container").css("pointer-events", "none");
       $(".gu-header_nav-link").css("pointer-events", "none");
       $(".gu-header_logo").css("pointer-events", "none");
@@ -129,6 +130,7 @@ $(document).ready(function () {
       "backdrop-filter": "unset",
       "border-bottom": "1px solid #e2e2e2",
     });
+
     $(".gu-search__container").css("pointer-events", "unset");
     $(".gu-header_nav-link").css("pointer-events", "unset");
     $(".gu-header_logo").css("pointer-events", "unset");

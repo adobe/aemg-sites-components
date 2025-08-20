@@ -61,9 +61,14 @@
       }
     }
   }
-  .base-topic-page-section div.topic .topic__updated .updated__container .updated__section .separator {
-      display: none;
-    }
+  .base-topic-page-section
+    div.topic
+    .topic__updated
+    .updated__container
+    .updated__section
+    .separator {
+    display: none;
+  }
 }
 
 @media (min-width: 600px) {
@@ -82,23 +87,6 @@
 }
 
 @media (max-width: 1023px) {
-    .fsi-guides-topic-page .base-topic-page-section div.topic .version-selector {
-    .dropdown__item {
-      padding: 0.5rem 0.75rem 0.5rem 0.7rem !important;
-      margin-left: 0 !important;
-      margin-bottom: 0 !important;
-      text-align: start;
-    }
-    .dropdown__list {
-        width: 64px;
-        right: 0;
-        position: absolute;
-        left: auto;
-    }
-}
-}
-
-html.adobeguides-text-size{
   .fsi-guides-topic-page .base-topic-page-section div.topic .version-selector {
     .dropdown__item {
       padding: 0.5rem 0.75rem 0.5rem 0.7rem !important;
@@ -107,15 +95,44 @@ html.adobeguides-text-size{
       text-align: start;
     }
     .dropdown__list {
-        width: 80px;
-        right: 0;
-        position: absolute;
-        left: auto;
+      width: 64px;
+      right: 0;
+      position: absolute;
+      left: auto;
     }
+  }
 }
+
+html.adobeguides-text-size {
+  .fsi-guides-topic-page .base-topic-page-section div.topic .version-selector {
+    .dropdown__item {
+      padding: 0.5rem 0.75rem 0.5rem 0.7rem !important;
+      margin-left: 0 !important;
+      margin-bottom: 0 !important;
+      text-align: start;
+    }
+    .dropdown__list {
+      width: 80px;
+      right: 0;
+      position: absolute;
+      left: auto;
+    }
+  }
 }
 
 @media (min-width: 1024px) {
+  body.fsi-guides-topic-page {
+    &.dark {
+      .custom-container {
+        .gu-custom-container {
+          .col-6grid {
+          border-top: unset
+          }
+        }
+      }
+    }
+  }
+
   .fsi-guides-topic-page {
     .base-topic-page-section {
       div.topic {
@@ -162,7 +179,27 @@ body.dark .footer {
 }
 
 @media (max-width: 768px) {
+  .fsi-guides-topic-page.dark,
+  html#adobeguides-dark-contrast {
+    .navigation {
+      .navigation-title {
+        display: block;
+        color: var(--white-color);
+      }
+    }
+  }
+
   .fsi-guides-topic-page {
+    .header .cmp-search {
+      margin-top: 1.6rem;
+    }
+
+    .navigation {
+      .navigation-title {
+        display: block;
+      }
+    }
+
     .above-title {
       .left-section {
         button {
@@ -208,8 +245,11 @@ body.dark .footer {
         }
       }
     }
-    
   }
 }
 
-
+html#adobeguides-dark-contrast {
+  .header {
+    background-color: var(--footer-bg)!important;
+  }
+}

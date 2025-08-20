@@ -117,9 +117,6 @@ $(document).ready(function () {
         "border-bottom": "unset",
       });
 
-      $(".gu-header_search-container").removeClass("search-visible");
-      $(".cmp-search__form").css("display", "none");
-
       $(".gu-search__container").css("pointer-events", "none");
       $(".gu-header_nav-link").css("pointer-events", "none");
       $(".gu-header_logo").css("pointer-events", "none");
@@ -151,9 +148,6 @@ $(document).ready(function () {
       "backdrop-filter": "unset",
       "border-bottom": "1px solid #e2e2e2",
     });
-
-    $(".gu-header_search-container").addClass("search-visible");
-    $(".cmp-search__form").css("display", "block");
 
     $(".gu-search__container").css("pointer-events", "unset");
     $(".gu-header_nav-link").css("pointer-events", "unset");
