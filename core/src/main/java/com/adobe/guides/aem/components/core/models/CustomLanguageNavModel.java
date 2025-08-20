@@ -32,8 +32,6 @@ public class CustomLanguageNavModel {
     void init() {
         Resource langRes = resourceResolver.getResource("wcm/core/resources/languages");
 
-        logger.debug("langRes -> {}", langRes);
-
         if (Objects.isNull(langRes) || ResourceUtil.isNonExistingResource(langRes)) {
             logger.warn("Language resource should not be null");
             return;
