@@ -13,7 +13,13 @@ $(document).ready(function () {
   });
 
   $(document).on("click", function (e) {
-    if (!$(e.target).closest(".gu-header_search-container, .gu-search__toggle").length) {
+    const $target = $(e.target);
+
+    // If clicked outside search
+    if (
+      !$target.closest(".gu-header_search-container, .gu-search__toggle").length ||
+      $target.closest("#gu_theme-icon, .language-selector__toggle, #gu_accessibility-icon").length
+    ) {
       $(".gu-header_search-container").removeClass("search-visible");
       $(".gu-search-backdrop").remove();
     }
