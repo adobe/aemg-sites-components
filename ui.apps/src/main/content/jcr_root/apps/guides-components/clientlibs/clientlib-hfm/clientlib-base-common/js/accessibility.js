@@ -153,9 +153,9 @@ $(document).ready(function () {
       "border-bottom": "unset",
     });
 
-    $(".gu-search__container").css("pointer-events", "none");
-    $(".gu-header_nav-link").css("pointer-events", "none");
-    $(".gu-header_logo").css("pointer-events", "none");
+    $(".fsi-guides-topic-page .gu-search__container").css("pointer-events", "none");
+    $(".fsi-guides-topic-page .gu-header_nav-link").css("pointer-events", "none");
+    $(".fsi-guides-topic-page .gu-header_logo-container").css("pointer-events", "none");
 
     // Manufacturing
     $(".manufacturing-guides-topic-page .header").attr("style", "");
@@ -170,6 +170,10 @@ $(document).ready(function () {
       "background-color": "rgba(255, 255, 255, 0.1)",
       "pointer-events": "none"
     });
+
+    $(".manufacturing-guides-topic-page .gu-search__container").css("pointer-events", "none");
+    $(".manufacturing-guides-topic-page .gu-header_nav-link").css("pointer-events", "none");
+    $(".manufacturing-guides-topic-page .gu-header_logo-container").css("pointer-events", "none");
   }
 
   function resetMenu() {
@@ -186,7 +190,7 @@ $(document).ready(function () {
     $(".backToTop").show();
 
     $(".toolsection .version-selector .dropdown").css({
-      "border-width": "0px",
+      "border-width": "1px",
       "pointer-events": "unset",
     });
 
@@ -197,9 +201,9 @@ $(document).ready(function () {
       "border-bottom": "1px solid var(--greyish-border)",
     });
   
-    $(".gu-search__container").css("pointer-events", "unset");
-    $(".gu-header_nav-link").css("pointer-events", "unset");
-    $(".gu-header_logo").css("pointer-events", "unset");
+    $(".fsi-guides-topic-page .gu-search__container").css("pointer-events", "unset");
+    $(".fsi-guides-topic-page .gu-header_nav-link").css("pointer-events", "unset");
+    $(".fsi-guides-topic-page .gu-header_logo-container").css("pointer-events", "unset");
 
     //Manufacturing
      $(".manufacturing-guides-topic-page .header").css({
@@ -213,6 +217,10 @@ $(document).ready(function () {
       "background-color": "unset",
       "pointer-events": "unset"
     });
+
+    $(".manufacturing-guides-topic-page .gu-search__container").css("pointer-events", "unset");
+    $(".manufacturing-guides-topic-page .gu-header_nav-link").css("pointer-events", "unset");
+    $(".manufacturing-guides-topic-page .gu-header_logo-container").css("pointer-events", "unset");
 
   }
 });

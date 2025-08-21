@@ -13,7 +13,7 @@ $(document).ready(function () {
     if (isMobile && $("body").hasClass("guides-product-page")) {
       // Hide the existing search container on mobile
       searchField.hide();
-      
+
       // Check if mobile search button already exists
       if ($(".mobile-search-btn").length === 0) {
         //if body has class guides-product-page then add mobile search button
@@ -24,28 +24,27 @@ $(document).ready(function () {
           </button>
         `);
 
-          hamburgerMenu.before(mobileSearchBtn);
-        
-                  // Handle mobile search button click
-          mobileSearchBtn.on("click", function() {
-            if (searchField.is(":visible")) {
-              // Hide search field and backdrop
-              searchField.hide();
-              $(".backdrop").hide();
-            } else {
-              // Show search field and backdrop
-              searchField.show();
-              $(".backdrop").show();
-            }
-          });
-          
-          // Use event delegation for backdrop click
-          $(document).on("click", ".backdrop", function() {
-            console.log("backdrop clicked");
+        hamburgerMenu.before(mobileSearchBtn);
+
+        // Handle mobile search button click
+        mobileSearchBtn.on("click", function () {
+          if (searchField.is(":visible")) {
+            // Hide search field and backdrop
             searchField.hide();
             $(".backdrop").hide();
-          });
-        
+          } else {
+            // Show search field and backdrop
+            searchField.show();
+            $(".backdrop").show();
+          }
+        });
+
+        // Use event delegation for backdrop click
+        $(document).on("click", ".backdrop", function () {
+          console.log("backdrop clicked");
+          searchField.hide();
+          $(".backdrop").hide();
+        });
       }
     } else {
       // Show the existing search container on desktop
@@ -56,44 +55,43 @@ $(document).ready(function () {
     }
   }
   function hideEmptySearchResults() {
-    const searchResults = $('.cmp-search__results');
+    const searchResults = $(".cmp-search__results");
     if (searchResults.children().length === 0) {
-      searchResults.css('display', 'none');
+      searchResults.css("display", "none");
     } else {
-      searchResults.css('display', 'block');
+      searchResults.css("display", "block");
     }
   }
 
   hideEmptySearchResults();
 
   const searchResultsObserver = new MutationObserver(hideEmptySearchResults);
-  
-  const searchResults = $('.cmp-search__results')[0];
+
+  const searchResults = $(".cmp-search__results")[0];
   if (searchResults) {
     searchResultsObserver.observe(searchResults, {
-      childList: true, 
-      subtree: true    
+      childList: true,
+      subtree: true,
     });
   }
-  
+
   // Initialize mobile search on page load
   initMobileSearch();
-  
+
   // Re-initialize on window resize
-  $(window).on("resize", function() {
+  $(window).on("resize", function () {
     initMobileSearch();
   });
 });
 
 $(document).ready(function () {
-  $('.gu-header__humberger').click(function () {
-    const toolbar = $('.gu-toolbar_wrapper')
+  $(".gu-header__humberger").click(function () {
+    const toolbar = $(".gu-toolbar_wrapper");
 
-    if (toolbar.is(':visible')) {
+    if (toolbar.is(":visible")) {
       toolbar.hide();
     } else {
-      toolbar.show(); 
+      toolbar.show();
     }
   });
 });
-

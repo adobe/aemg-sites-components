@@ -2,7 +2,11 @@ $(document).ready(function () {
     attachDropdownEvents();
 
     $(document).on("click", function () {
-        $(".toolbar:not(.hidden) .version-selector .dropdown__list").addClass("hidden");
+        const dropdownList = $(".toolbar:not(.hidden) .version-selector .dropdown__list");
+        const dropdownIcon = $(".toolbar:not(.hidden) .version-selector .dropdown__button svg path");
+
+        dropdownList.addClass("hidden");
+        updateDropdownIcon(dropdownList, dropdownIcon);
     });
 
 });
