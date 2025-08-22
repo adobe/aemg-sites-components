@@ -190,6 +190,12 @@
           }
         }
       }
+
+      &.cmp-navigation__item.cmp-navigation__item--active:not(:has(li.cmp-navigation__item--active)) {
+        > a {
+          font-weight: 700;
+        }
+      }
     }
   }
   .cmp-navigation__item > .cmp-navigation__item-arrow-icon {
@@ -294,8 +300,4 @@ background: var(--border-grey);
 
 
   }
-  .cmp-navigation__item--active {
-    a{
-     font-weight: 700 !important;
-    }
-  }
+ 
