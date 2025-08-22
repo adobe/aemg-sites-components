@@ -1,9 +1,26 @@
 html.adobeguides-text-size {
   .manufacturing-guides-topic-page .breadcrumb {
-    padding: 0.75rem !important;
+    padding: 1.25rem !important;
+  }
+  .custom-container {
+    .gu-custom-container {
+      margin-top: 70px;
+    }
+  }
+  .gu-header_search-container .cmp-search__icon {
+    top: 0.5rem;
   }
   .cmp-languagenavigation__item a {
     font-size: var(--body-1-fs) !important;
+  }
+  @media (max-width: 480px) {
+    .gu-header_search-container .cmp-search__icon {
+      top: 0.4rem;
+    }
+    .gu-header_toolbarheader .gu-search__container {
+      display: flex;
+      align-items: center;
+    }
   }
   @media (min-width: 767px) {
     .header .gu-header_toolbarheader .below-title .gu-theme__icon-container {
