@@ -6,10 +6,13 @@
       }
       .topic__updated .updated__container {
         display: block;
+        margin-bottom: 0rem;
         .updated__section {
           display: flex;
           width: 100%;
           justify-content: flex-start;
+          margin-bottom: 1.5rem !important;
+
           .published,
           .updated {
             width: max-content;
@@ -18,9 +21,9 @@
             padding: 0.25rem 0.5rem;
           }
         }
-        .contributors {
-          margin-top: 1.875rem !important;
-        }
+        //.contributors {
+        //margin-top: 1.875rem !important;
+        //}
       }
       .version-selector {
         .dropdown__item {
@@ -247,6 +250,20 @@ body.dark,
         }
       }
     }
+    .toolbar-container .below-updated.mobile .toolsection.mobile-horizon {
+      margin-top: -2rem !important;
+    }
+  }
+}
+
+.fsi-guides-topic-page {
+  #gu-nav {
+    .contributors {
+      display: none;
+    }
+  }
+  .shortdesc {
+    margin-top: 0.75rem;
   }
 }
 
@@ -266,7 +283,7 @@ html#adobeguides-dark-contrast {
 html#adobeguides-dark-contrast {
   .header {
     background-color: var(--footer-bg) !important;
-    border-bottom: 1px solid #43464A !important;
+    border-bottom: 1px solid #43464a !important;
   }
 }
 
