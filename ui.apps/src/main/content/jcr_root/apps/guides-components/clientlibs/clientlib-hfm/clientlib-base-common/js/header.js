@@ -20,7 +20,7 @@ $(document).ready(function () {
         // Create mobile search button
         const mobileSearchBtn = $(`
           <button class="mobile-search-btn" aria-label="Search">
-            <img src="/content/dam/guides/common-images/icons/search-icon.png" alt="Search Icon" />
+            <img src="/content/dam/guides/common-images/icons/search-icon.svg" alt="Search Icon" />
           </button>
         `);
 
