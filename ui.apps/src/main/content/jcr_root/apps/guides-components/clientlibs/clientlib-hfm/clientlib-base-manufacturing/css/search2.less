@@ -35,16 +35,58 @@
       font-weight: 400;
 
       &:hover {
-        background: var(--search-results-bg-hover);
+        background: #e0eeff;
       }
     }
+ &__item-mark {
+      background: transparent;
+    }
 
-    &__item-mark {
-      //background: var(--common-bg);
-      background: unset;
+  }
+}
+html#adobeguides-dark-contrast {
+  .header {
+    .cmp-search {
+      &__item {
+        color: var(--yellow-color);
+        &:hover{
+          background: var(--dark-grey);
+        }
+      }
+
+      &__item-mark {
+        background: none;
+        color: var(--yellow-color);
+      }
+      &__input {
+        outline: 1px solid var(--border-common);
+        &:focus-visible {
+          background: var(--search-bg);
+          color: var(--search-text-active);
+        }
+      }
     }
   }
 }
+body.dark {
+.header {
+  .cmp-search{
+    
+    &__item {
+    color: #e8e8e8;
+    &:hover{
+    background: #787878;
+    }
+}
+  
+  &__item-mark {
+        background: none;
+        color: #e8e8e8;
+      }
+    }
+}     
+}
+
 
 @media (max-width: 1023px) {
   .header {
