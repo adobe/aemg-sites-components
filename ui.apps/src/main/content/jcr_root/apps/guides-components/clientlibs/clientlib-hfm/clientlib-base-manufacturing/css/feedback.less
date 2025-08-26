@@ -138,17 +138,28 @@
 html#adobeguides-dark-contrast {
   .feedback {
     .gu-feedback {
-      //border: 1px solid var(--grey-border);
       color: var(--yellow-color);
       &__cta {
         border: 1px solid var(--grey-border);
         background-color: transparent;
         color: var(--yellow-color);
       }
+      &__close-icon svg path{
+        stroke: var(--primary-color);
+      }
     }
   }
 }
 
+.manufacturing-guides-topic-page.dark{
+  .feedback {
+    .gu-feedback {
+      &__close-icon svg path{
+        stroke: var(--primary-color);
+      }
+    }
+  }
+}
 
 
 

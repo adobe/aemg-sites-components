@@ -11,7 +11,6 @@
     }
 
     &__input {
-
       &:focus-visible {
         outline: 1px solid var(--border-common);
         background: var(--search-bg-active);
@@ -41,7 +40,8 @@
     }
 
     &__item-mark {
-      background: var(--common-bg);
+      //background: var(--common-bg);
+      background: unset;
     }
   }
 }
@@ -194,4 +194,20 @@
 .custom-search-suggestions {
   margin-left: 18px;
   margin-right: 18px;
+}
+
+.manufacturing-guides-topic-page.dark {
+  .header {
+    .cmp-search__item-mark {
+      color: var(--color-text);
+    }
+  }
+}
+
+html#adobeguides-dark-contrast{
+  .header {
+    .cmp-search__item-mark {
+      color: var(--yellow-color);
+    }
+  }
 }

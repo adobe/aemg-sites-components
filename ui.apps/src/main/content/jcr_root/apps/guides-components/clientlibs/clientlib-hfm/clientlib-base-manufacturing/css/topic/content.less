@@ -18,7 +18,7 @@ html#adobeguides-dark-contrast {
 
 html.adobeguides-light-contrast {
   .base-topic-page-section div.topic .section :last-child {
-    color: var(--blue-link-color) ;
+    color: var(--blue-link-color);
   }
 }
 html.adobeguides-light-contrast
@@ -322,6 +322,11 @@ html.adobeguides-light-contrast
           }
         }
       }
+      .navigation {
+        .cmp-navigation {
+          max-height: 48vh;
+        }
+      }
     }
   }
 
@@ -360,7 +365,7 @@ html.adobeguides-light-contrast
     #toc-content.show {
       width: calc(100% - 6.5rem);
       height: 70vh;
-      top: 11.875rem;
+      top: 15%;
       margin: 0 auto;
       left: 0rem;
       right: 0rem;
@@ -411,15 +416,13 @@ html#adobeguides-dark-contrast {
 html#adobeguides-dark-contrast {
   .base-topic-page-section {
     div.topic {
-
-    .topic__updated {
-      .updated__container {
-      
-      .updated__section span {
-        color: #454545;
+      .topic__updated {
+        .updated__container {
+          .updated__section span {
+            color: #454545;
+          }
+        }
       }
     }
-  }
-}
   }
 }

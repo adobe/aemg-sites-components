@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
             event.stopPropagation(); // Prevent click from bubbling to document
             outerContainer.classList.toggle("show");
             backdrop.classList.toggle("active");
-            $('.gu-pdf-export__wrapper').removeClass('active');
-        	$('.social-links').addClass('hidden');
-        	$('.cmp-languagenavigation').css('display', 'none');
+            $('.hi-tech .gu-pdf-export__wrapper').removeClass('active');
+        	$('.hi-tech .social-links').addClass('hidden');
+        	$('.hi-tech .cmp-languagenavigation').css('display', 'none');
         });
 
         // Close menu when clicking on the backdrop
