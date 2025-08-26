@@ -112,3 +112,15 @@ html.adobeguides-text-spacing {
     letter-spacing: normal !important;
   }
 }
+
+body.dark,
+html#adobeguides-dark-contrast {
+  @media (max-width: 1023px) {
+    .toolbar-container .below-updated.mobile .toolsection__left {
+      filter: brightness(2);
+    }
+  }
+  .toolbar-container .toolbar-topic.desktop .toolsection__left {
+    filter: brightness(2);
+  }
+}
