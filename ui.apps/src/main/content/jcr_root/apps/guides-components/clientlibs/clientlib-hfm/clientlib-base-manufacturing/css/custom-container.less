@@ -15,6 +15,12 @@
       max-width: 100%;
     }
 
+    @media (max-width: 1023px) {
+      .related-tags {
+        margin-top: 0;
+      }
+    }
+
     // Desktop styles
     @media (min-width: 1024px) {
       margin-top: 4.375rem;
@@ -122,12 +128,12 @@
         max-width: 50%;
         .home-banner {
           box-shadow: 0px 0px 24px 4px #00000008;
-        border-color: #00000008;
+          border-color: #00000008;
           overflow: hidden;
-        background-clip: border-box;
+          background-clip: border-box;
         }
 
-          &.collapsed {
+        &.collapsed {
           max-width: 70%;
           flex: 1 1 69.9%;
         }
@@ -198,10 +204,18 @@
   }
 }
 @media (min-width: 1024px) {
-  html.adobeguides-text-size {    
+  html.adobeguides-text-size {
     .custom-container .gu-custom-container .col-3grid {
       margin-bottom: 130px !important;
     }
   }
+}
+@media (max-width: 480px) {
+  html.adobeguides-text-size {
+    .custom-container {
+      .gu-custom-container {
+        margin-top: 60px !important;
+      }
+    }
   }
-
+}

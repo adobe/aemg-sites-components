@@ -14,6 +14,9 @@ html.adobeguides-text-size {
     font-size: var(--body-1-fs) !important;
   }
   @media (max-width: 480px) {
+    .manufacturing-guides-topic-page .breadcrumb {
+      padding: 0.75rem !important;
+    }
     .gu-header_search-container .cmp-search__icon {
       top: 0.4rem;
     }
@@ -31,19 +34,24 @@ html.adobeguides-text-size {
         brightness(105%) contrast(105%);
     }
   }
-  @media (max-width: 1023px){
+  @media (max-width: 1023px) {
     .header .cmp-search__clear-icon {
       top: 15px;
     }
 
     .toolbar-container .below-updated.mobile .toolsection__left {
       display: flex;
-    align-items: center;
-    gap: -0.5rem;
+      align-items: center;
+      gap: -0.5rem;
     }
     .toolbar.below-title.mobile img {
-      filter: invert(80%) sepia(75%) saturate(1000%) hue-rotate(360deg)
-        brightness(105%) contrast(105%);
+      filter: invert(25%) sepia(80%) saturate(600%) hue-rotate(10deg)
+        brightness(50%) contrast(120%);
+    }
+  }
+  @media (max-width: 767px) {
+    #gu-nav.show {
+      height: 84% !important;
     }
   }
 }
@@ -113,3 +121,34 @@ html.adobeguides-text-spacing {
   }
 }
 
+body.dark,
+html#adobeguides-dark-contrast {
+  @media (max-width: 1023px) {
+    .toolbar-container .below-updated.mobile .toolsection__left {
+      filter: brightness(2);
+    }
+    .header .gu-header__humberger .menu-tigger {
+      filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(85%) contrast(91%) !important;
+    }
+  }
+  .manufacturing-guides-topic-page .gu-copy-link__text {
+    color: var(--secondary-light);
+    background-color: var(--secondary-color);
+  }
+  .toolbar-container .toolbar-topic.desktop .toolsection__left {
+    filter: brightness(2);
+  }
+  .gu-theme_icon.dark {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
+      hue-rotate(33deg) brightness(75%) contrast(100%);
+  }
+  .gu-search__icon {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
+      hue-rotate(33deg) brightness(85%) contrast(91%) !important;
+  }
+  .updated,
+  .published {
+    background: none;
+  }
+}
