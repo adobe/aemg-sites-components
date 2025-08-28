@@ -372,7 +372,7 @@ body.dark {
 body.manufacturing-guides-topic-page.dark,
 body.manufacturing-guides-search-page.dark {
   --text-color: #fff;
-  --primary-color: #cc8400;
+  --primary-color: #5f4b00;
   --link-color: #fff;
   --secondary-color: #765507;
   --secondary-btn-color: #555;
@@ -395,8 +395,8 @@ body.manufacturing-guides-topic-page.light {
   --secondary-color: #0f1922;
   --primary-dark: #454545;
   --top-bg-color: #fff6d580;
-  --secondary-icon-bg: #cc8400;
-  --secondary-icon-text: #fff;
+  --secondary-icon-bg: #fff2c0;
+  --secondary-icon-text: #5f4b00;
 }
 
 html#adobeguides-dark-contrast body {
