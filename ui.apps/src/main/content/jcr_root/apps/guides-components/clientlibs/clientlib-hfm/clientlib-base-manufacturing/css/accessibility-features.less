@@ -133,6 +133,12 @@ html#adobeguides-dark-contrast {
     .toolbar-container .below-updated.mobile .toolsection__left .gu-pdf-export__button {
       filter: brightness(2);
     }
+
+    .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-copy-link:hover,
+   .toolbar-container .toolbar-topic.mobile .toolsection__left .share-icon:hover, 
+   .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-pdf-export__button:hover {
+  filter: none; /* or brightness(1) if you want natural look */
+}
     
     .header .gu-header__humberger .menu-tigger {
       filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
@@ -152,6 +158,11 @@ html#adobeguides-dark-contrast {
   .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button {
     filter: brightness(2);
   }
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link:hover,
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon:hover, 
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button:hover {
+  filter: none; /* or brightness(1) if you want natural look */
+}
 
   .gu-theme_icon.dark {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
@@ -166,3 +177,15 @@ html#adobeguides-dark-contrast {
     background: none;
   }
 }
+
+.social-share-container .share-icon:hover {
+  background-color: #fff2c0;
+
+
+}
+
+ .gu-pdf-export__wrapper .gu-pdf-export__button:hover {
+   background-color: #fff2c0;
+
+
+ }
