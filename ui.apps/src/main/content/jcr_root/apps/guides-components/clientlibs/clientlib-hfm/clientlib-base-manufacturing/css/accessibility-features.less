@@ -129,20 +129,36 @@ html#adobeguides-dark-contrast {
     // }
 
     .toolbar-container .below-updated.mobile .toolsection__left .gu-copy-link,
-    .toolbar-container .below-updated.mobile .toolsection__left .share-icon, 
-    .toolbar-container .below-updated.mobile .toolsection__left .gu-pdf-export__button {
+    .toolbar-container .below-updated.mobile .toolsection__left .share-icon,
+    .toolbar-container
+      .below-updated.mobile
+      .toolsection__left
+      .gu-pdf-export__button {
       filter: brightness(2);
     }
 
-    .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-copy-link:hover,
-   .toolbar-container .toolbar-topic.mobile .toolsection__left .share-icon:hover, 
-   .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-pdf-export__button:hover {
-  filter: none; /* or brightness(1) if you want natural look */
-}
-    
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .gu-copy-link:hover,
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .share-icon:hover,
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .gu-pdf-export__button:hover {
+      filter: none; /* or brightness(1) if you want natural look */
+    }
+
     .header .gu-header__humberger .menu-tigger {
       filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
-        saturate(4907%) hue-rotate(33deg) brightness(85%) contrast(91%) !important;
+        saturate(4907%) hue-rotate(33deg) brightness(200%) contrast(55%) !important;
+    }
+    img.gu-search__icon {
+      filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(200%) contrast(55%) !important;
     }
   }
   .manufacturing-guides-topic-page .gu-copy-link__text {
@@ -154,19 +170,41 @@ html#adobeguides-dark-contrast {
   // }
 
   .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link,
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon, 
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button {
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-pdf-export__button {
     filter: brightness(2);
   }
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link:hover,
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon:hover, 
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button:hover {
-  filter: none; /* or brightness(1) if you want natural look */
-}
+  .toolbar-wrapper {
+    img {
+      filter: brightness(1) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(115%) contrast(91%) !important;
+    }
+  }
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-copy-link:hover,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .share-icon:hover,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-pdf-export__button:hover {
+    filter: none; /* or brightness(1) if you want natural look */
+  }
 
   .gu-theme_icon.dark {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
-      hue-rotate(33deg) brightness(130%) contrast(100%);
+      hue-rotate(33deg) brightness(200%) contrast(55%);
+  }
+  .gu-theme_icon.light {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
+      hue-rotate(33deg) brightness(200%) contrast(55%);
   }
   .gu-search__icon {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
@@ -180,8 +218,6 @@ html#adobeguides-dark-contrast {
 
 .social-share-container .share-icon:hover {
   background-color: #fff2c0;
-
-
 }
 
  .gu-pdf-export__wrapper .gu-pdf-export__button:hover {
