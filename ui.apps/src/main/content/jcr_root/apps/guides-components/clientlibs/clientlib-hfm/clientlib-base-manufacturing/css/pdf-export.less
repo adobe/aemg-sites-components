@@ -107,3 +107,29 @@
     color: var(--link-color);
   }
 }
+
+html.adobeguides-light-contrast {
+  .manufacturing-guides-topic-page.dark {
+    .gu-pdf-export__wrapper {
+      .gu-pdf-export__dropdown {
+        .gu-pdf-export__options {
+          li {
+            a {
+              color: var(--toolbar-text-color);
+            }
+
+            &:hover {
+              background-color: var(--tags-bg) !important;
+              transition: background 0.3s ease-in-out;
+
+              a {
+                color: var(--link-color);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

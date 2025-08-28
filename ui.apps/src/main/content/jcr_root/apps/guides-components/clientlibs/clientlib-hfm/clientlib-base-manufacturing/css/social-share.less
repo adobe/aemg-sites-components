@@ -49,3 +49,21 @@
     color: var(--link-color);
   }
 }
+
+html.adobeguides-light-contrast {
+  .manufacturing-guides-topic-page.dark {
+    .base-topic-page-section div.topic .social-links li a {
+      color: var(--toolbar-text-color);
+    }
+    .base-topic-page-section div.topic .social-links li:hover{
+      background-color: var(--tags-bg)!important;
+      transition: background 0.3s ease-in-out;
+    }
+    .base-topic-page-section div.topic .social-links li:hover a {
+      color: var(--link-color);
+    }
+    .base-topic-page-section div.topic .social-links li:hover img {
+      filter: grayscale(100%) brightness(1000%);
+    }
+  }
+}
