@@ -9,15 +9,31 @@ body.dark {
       background-color: transparent !important;
     }
   }
+  .manufacturing-guides-topic-page .gu-copy-link__text {
+    color: var(--secondary-light);
+    background-color: var(--secondary-color);
+  }
   .gu-header_search-container .cmp-search__results {
     box-shadow: 0 13px 30px 0 var(--box-shadow-search);
     background: var(--search-results-bg);
   }
 
-  .version-selector .dropdown__container span:hover {
-    color: var(--primary-color);
+  .version-selector .dropdown__button svg {
+    fill: var(--version-unselected-color);
   }
-  .version-selector .dropdown__button svg:hover {
-    fill: var(--primary-color);
+
+  .version-selector .dropdown__item:hover {
+    background: var(--primary-color) !important;
+    color: var(--white-color) !important;
+    a {
+      color: var(--white-color);
+    }
+  }
+  .version-selector .dropdown__value {
+    color: var(--version-unselected-color) !important;
+  }
+  .updated,
+  .published {
+    background: none;
   }
 }

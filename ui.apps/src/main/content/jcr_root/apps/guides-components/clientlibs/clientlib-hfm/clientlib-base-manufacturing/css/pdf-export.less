@@ -38,3 +38,94 @@
     }
   }
 }
+
+@media (min-width: 1024px) {
+  .manufacturing-guides-topic-page {
+    .gu-pdf-export__wrapper {
+      .gu-pdf-export__dropdown {
+        transform: translateY(-5px);
+        left: -7.5rem !important;
+      }
+    }
+  }
+  
+  .adobeguides-text-size {
+    .manufacturing-guides-topic-page {
+      .gu-pdf-export__wrapper {
+        .gu-pdf-export__dropdown {
+          transform: translateY(-5px);
+          left: -8rem !important;
+        }
+      }
+    }
+  }
+
+  .adobeguides-text-spacing {
+    .manufacturing-guides-topic-page {
+      .gu-pdf-export__wrapper {
+        .gu-pdf-export__dropdown {
+          transform: translateY(-5px);
+          left: -9.5rem !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .adobeguides-text-size {
+    .manufacturing-guides-topic-page {
+      .gu-pdf-export__wrapper {
+        .gu-pdf-export__dropdown {
+          transform: translateY(0px);
+          left: -10.2rem !important;
+        }
+      }
+    }
+  }
+  .adobeguides-text-spacing {
+    .manufacturing-guides-topic-page {
+      .gu-pdf-export__wrapper {
+        .gu-pdf-export__dropdown {
+          transform: translateY(-5px);
+          left: -10.2rem !important;
+        }
+      }
+    }
+  }
+}
+
+.manufacturing-guides-topic-page.dark {
+  .gu-pdf-export__wrapper
+    .gu-pdf-export__dropdown
+    .gu-pdf-export__options
+    li:hover
+    a {
+    color: var(--link-color);
+  }
+}
+
+html.adobeguides-light-contrast {
+  .manufacturing-guides-topic-page.dark {
+    .gu-pdf-export__wrapper {
+      .gu-pdf-export__dropdown {
+        .gu-pdf-export__options {
+          li {
+            a {
+              color: var(--toolbar-text-color);
+            }
+
+            &:hover {
+              background-color: var(--tags-bg) !important;
+              transition: background 0.3s ease-in-out;
+
+              a {
+                color: var(--link-color);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
