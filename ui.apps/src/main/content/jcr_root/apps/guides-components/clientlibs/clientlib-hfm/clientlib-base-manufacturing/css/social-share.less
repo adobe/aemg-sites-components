@@ -24,7 +24,6 @@
   }
 }
 
-
 .adobeguides-text-spacing {
   .manufacturing-guides-topic-page {
     .social-share-container {
@@ -33,5 +32,20 @@
         left: -9rem !important;
       }
     }
+  }
+}
+
+.manufacturing-guides-topic-page.dark {
+  .base-topic-page-section div.topic .social-links li:hover a {
+    color: var(--link-color);
+  }
+  .cmp-languagenavigation__item-title{
+    color: var(--link-color);
+  }
+  .base-topic-page-section div.topic .social-links li:hover img {
+    filter: grayscale(100%) brightness(1000%);
+  }
+  .cmp-languagenavigation__item:active, .cmp-languagenavigation__item:hover a{
+    color: var(--link-color);
   }
 }
