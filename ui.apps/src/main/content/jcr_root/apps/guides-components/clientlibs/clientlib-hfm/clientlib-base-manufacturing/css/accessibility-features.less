@@ -124,9 +124,16 @@ html.adobeguides-text-spacing {
 body.dark,
 html#adobeguides-dark-contrast {
   @media (max-width: 1023px) {
-    .toolbar-container .below-updated.mobile .toolsection__left {
+    // .toolbar-container .below-updated.mobile .toolsection__left {
+    //   filter: brightness(2);
+    // }
+
+    .toolbar-container .below-updated.mobile .toolsection__left .gu-copy-link,
+    .toolbar-container .below-updated.mobile .toolsection__left .share-icon, 
+    .toolbar-container .below-updated.mobile .toolsection__left .gu-pdf-export__button {
       filter: brightness(2);
     }
+    
     .header .gu-header__humberger .menu-tigger {
       filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
         saturate(4907%) hue-rotate(33deg) brightness(85%) contrast(91%) !important;
@@ -136,9 +143,16 @@ html#adobeguides-dark-contrast {
     color: var(--secondary-light);
     background-color: var(--secondary-color);
   }
-  .toolbar-container .toolbar-topic.desktop .toolsection__left {
+  // .toolbar-container .toolbar-topic.desktop .toolsection__left {
+  //   filter: brightness(2);
+  // }
+
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link,
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon, 
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button {
     filter: brightness(2);
   }
+
   .gu-theme_icon.dark {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
       hue-rotate(33deg) brightness(75%) contrast(100%);

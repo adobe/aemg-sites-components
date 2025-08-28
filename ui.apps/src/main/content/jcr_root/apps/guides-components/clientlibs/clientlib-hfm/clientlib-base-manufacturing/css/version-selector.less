@@ -18,7 +18,6 @@
       cursor: pointer;
       gap: 0.15rem;
       justify-content: center;
-
       span {
         color: var(--primary-color);
         font-size: var(--body-font-size);
@@ -47,7 +46,7 @@
         fill: var(--primary-color);
 
         &:hover {
-          fill: #cc8400;
+          fill: var(--primary-color);
         }
       }
     }
@@ -84,7 +83,7 @@
         text-decoration: none;
 
         &:hover {
-          color: var(--primary-color);
+          text-decoration: none;
         }
       }
     }
@@ -99,12 +98,22 @@
     }
   }
 }
+html#adobeguides-dark-contrast {
+  .version-selector .dropdown__button {
+    color: var(--white-color);
+  }
+  .version-selector .dropdown__button svg {
+    fill: var(--white-color);
+  }
+  .version-selector .dropdown__container span {
+    color: var(--white-color) !important;
+  }
 
-.manufacturing-guides-topic-page.dark,
-.adobeguides-light-contrast .manufacturing-guides-topic-page.dark{
-  .version-selector {
-    .dropdown__item:hover a {
-      color: #fff;
+  .version-selector .dropdown__item:hover {
+    background: var(--primary-color) !important;
+    color: var(--white-color) !important;
+    a {
+      color: var(--white-color);
     }
   }
 }
