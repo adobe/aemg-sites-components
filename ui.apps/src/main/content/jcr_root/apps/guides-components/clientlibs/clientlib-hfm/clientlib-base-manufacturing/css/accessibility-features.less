@@ -44,10 +44,6 @@ html.adobeguides-text-size {
       align-items: center;
       gap: -0.5rem;
     }
-    .toolbar.below-title.mobile img {
-      filter: invert(25%) sepia(80%) saturate(600%) hue-rotate(10deg)
-        brightness(50%) contrast(120%);
-    }
   }
   @media (max-width: 767px) {
     #gu-nav.show {
@@ -97,6 +93,11 @@ html.adobeguides-light-contrast {
     .cmp-languagenavigation {
       border-color: transparent !important;
       border: none;
+    }
+  }
+  .toolbar-wrapper {
+    img {
+      filter: none !important;
     }
   }
 }
@@ -178,6 +179,12 @@ html#adobeguides-dark-contrast {
     filter: brightness(2);
   }
   .toolbar-wrapper {
+    img {
+      filter: brightness(1) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(115%) contrast(91%) !important;
+    }
+  }
+  .toolsection__left{
     img {
       filter: brightness(1) saturate(100%) invert(27%) sepia(25%)
         saturate(4907%) hue-rotate(33deg) brightness(115%) contrast(91%) !important;

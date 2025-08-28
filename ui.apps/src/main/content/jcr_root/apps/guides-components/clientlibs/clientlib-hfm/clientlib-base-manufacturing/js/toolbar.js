@@ -3,6 +3,7 @@ $(document).ready(function () {
   const $headerToolbarContainer = $(".gu-header__toolbar-container");
   const $toolbarTopic = $(".toolbar.toolbar-topic.desktop");
   const $toolbarHeader = $(".toolbar.toolbar-header.desktop");
+  const $html = $("html");
   if ($toolbarTopic.length && $toolbarContainer.length) {
     $toolbarContainer.append($toolbarTopic);
   }
@@ -69,4 +70,29 @@ document.addEventListener("DOMContentLoaded", function () {
       contributors.style.background = "red";
     }
   }
+
+  const applyManufacturingToolbarFilter = () => {
+    const $html = $("html");
+    const isLight = $html.hasClass("adobeguides-light-contrast");
+    const $imgs = $(".toolbar-wrapper img");
+
+    if (isLight) {
+      $imgs.each(function () {
+        this.style.setProperty("filter", "none", "important");
+      });
+    } else {
+      $imgs.each(function () {
+        this.style.removeProperty("filter");
+      });
+    }
+  };
+
+  const htmlEl = document.documentElement;
+  if (window.MutationObserver && htmlEl) {
+    const observer = new MutationObserver(() => applyManufacturingToolbarFilter());
+    observer.observe(htmlEl, { attributes: true, attributeFilter: ["class", "id"] });
+  }
+
+  applyManufacturingToolbarFilter();
+  setTimeout(applyManufacturingToolbarFilter, 300);
 });
