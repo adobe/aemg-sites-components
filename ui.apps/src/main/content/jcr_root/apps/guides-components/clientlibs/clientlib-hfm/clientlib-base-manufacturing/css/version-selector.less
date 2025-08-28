@@ -98,22 +98,36 @@
     }
   }
 }
-html#adobeguides-dark-contrast {
-  .version-selector .dropdown__button {
-    color: var(--white-color);
-  }
-  .version-selector .dropdown__button svg {
-    fill: var(--white-color);
-  }
-  .version-selector .dropdown__container span {
-    color: var(--white-color) !important;
-  }
 
-  .version-selector .dropdown__item:hover {
-    background: var(--primary-color) !important;
-    color: var(--white-color) !important;
-    a {
+html#adobeguides-dark-contrast {
+  .manufacturing-guides-topic-page {
+    .version-selector .dropdown__button {
       color: var(--white-color);
+    }
+    .version-selector .dropdown__button svg {
+      fill: var(--white-color);
+    }
+    .version-selector .dropdown__container span {
+      color: var(--white-color) !important;
+    }
+
+    .version-selector .dropdown__item:hover {
+      background: var(--primary-color) !important;
+      color: var(--text-color);
+      a {
+        color: var(--text-color) !important;
+      }
+    }
+  }
+}
+
+html.adobeguides-light-contrast {
+  .manufacturing-guides-topic-page {
+    .version-selector .dropdown__item:hover {
+      color: var(--text-color);
+      a {
+        color: var(--text-color);
+      }
     }
   }
 }
