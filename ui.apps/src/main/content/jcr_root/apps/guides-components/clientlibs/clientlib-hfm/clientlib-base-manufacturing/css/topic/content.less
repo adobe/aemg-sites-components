@@ -364,11 +364,26 @@ html.adobeguides-light-contrast
     #gu-nav.show,
     #toc-content.show {
       width: calc(100% - 6.5rem);
-      height: 76%;
+      height: 80% !important;
       top: 15%;
       margin: 0 auto;
       left: 0rem;
       right: 0rem;
+      overflow: scroll;
+    }
+
+    #gu-nav.show {
+      gap: 0rem;
+      .navigation .cmp-navigation {
+        max-height: 39vh;
+      }
+      .navigation {
+        height: 85%;
+      }
+      .related-tags {
+        height: 15%;
+        margin-top: 1rem;
+      }
     }
 
     #toc-content.show {
@@ -503,4 +518,23 @@ div.topic table {
 .base-topic-page-section div.topic .section :last-child {
   word-wrap: break-word;
   border-spacing: 0;
+}
+
+@media (max-width: 767px) {
+  .adobeguides-text-size {
+    .version-selector {
+      padding-right: unset !important;
+    }
+    .toolbar-container .below-updated.mobile .toolsection__left {
+      gap: unset !important;
+    }
+  }
+  .adobeguides-text-spacing {
+    .version-selector {
+      padding-right: unset !important;
+    }
+    .toolbar-container .below-updated.mobile .toolsection__left {
+      gap: unset !important;
+    }
+  }
 }
