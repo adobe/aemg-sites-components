@@ -16,7 +16,6 @@ html#adobeguides-dark-contrast {
   }
 }
 
-
 html.adobeguides-light-contrast {
   .base-topic-page-section div.topic .section :last-child {
     color: var(--blue-link-color);
@@ -404,6 +403,21 @@ html.adobeguides-light-contrast
       }
     }
   }
+
+  .manufacturing-guides-topic-page.dark {
+    .toolbar.above-title.mobile {
+      .gu-language-navigation__title-container,
+      .gu-accessibility__title-container {
+        color: var(--dropdown-border-color);
+      }
+
+      .gu-accessibility__title-container img,
+      .gu-language-navigation_icon {
+        filter: invert(84%) sepia(54%) saturate(549%) hue-rotate(358deg)
+          brightness(101%) contrast(101%);
+      }
+    }
+  }
 }
 
 html#adobeguides-dark-contrast {
@@ -414,21 +428,18 @@ html#adobeguides-dark-contrast {
   }
 }
 
-
-  .base-topic-page-section {
-    div.topic {
-
+.base-topic-page-section {
+  div.topic {
     .topic__updated {
       .updated__container {
-
-      .updated__section {
-        span {
-          color: #454545;
+        .updated__section {
+          span {
+            color: #454545;
+          }
         }
       }
     }
   }
-}
 }
 
 html#adobeguides-dark-contrast {
@@ -438,7 +449,7 @@ html#adobeguides-dark-contrast {
         .updated__container {
           .updated__section {
             span {
-              color:var(--dark-grey);
+              color: var(--dark-grey);
             }
           }
         }
@@ -448,9 +459,9 @@ html#adobeguides-dark-contrast {
 }
 
 html#adobeguides-dark-contrast {
-  .manufacturing-guides-topic-page.dark{
+  .manufacturing-guides-topic-page.dark {
     .updated__section .updated,
-    .updated__section .published{
+    .updated__section .published {
       background-color: unset;
     }
   }
