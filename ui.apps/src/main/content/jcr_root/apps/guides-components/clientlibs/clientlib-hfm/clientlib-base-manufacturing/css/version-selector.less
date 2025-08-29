@@ -9,7 +9,7 @@
     min-width: 4rem;
 
     &:hover {
-      border: 1px solid var(--primary-dark);
+      border: 1px solid var(--light-grey-border);
     }
 
     &__container {
@@ -99,6 +99,7 @@
   }
 }
 
+// dark-contrast
 html#adobeguides-dark-contrast {
   .manufacturing-guides-topic-page {
     .version-selector .dropdown__button {
@@ -106,6 +107,10 @@ html#adobeguides-dark-contrast {
     }
     .version-selector .dropdown__button svg {
       fill: var(--white-color);
+    }
+
+    .version-selector .dropdown__button.open svg {
+      fill: var(--primary-color);
     }
     .version-selector .dropdown__container span {
       color: var(--white-color) !important;
@@ -121,8 +126,7 @@ html#adobeguides-dark-contrast {
   }
 }
 
-
-
+// light-contrast
 html.adobeguides-light-contrast {
   .manufacturing-guides-topic-page {
     .version-selector .dropdown__item:hover {
@@ -133,6 +137,12 @@ html.adobeguides-light-contrast {
     }
   }
   .manufacturing-guides-topic-page.dark {
+    .version-selector .dropdown__button svg {
+      fill: var(--primary-color);
+    }
+    .version-selector .dropdown__button.open svg {
+      fill: var(--version-unselected-color);
+    }
     .version-selector .dropdown__item:hover {
       color: var(--text-color);
       a {
@@ -140,4 +150,32 @@ html.adobeguides-light-contrast {
       }
     }
   }
+}
+
+// dark
+.manufacturing-guides-topic-page.dark {
+  .version-selector .dropdown__container .dropdown__value {
+    color: var(--primary-color) !important;
+  }
+
+  .version-selector .dropdown__button svg {
+    fill: var(--primary-color);
+  }
+  .version-selector .dropdown__button svg:hover {
+    fill: var(--primary-color);
+  }
+  .version-selector .dropdown__button.open svg {
+    fill: var(--version-unselected-color);
+  }
+  .version-selector .dropdown__item:hover {
+    color: var(--primary-color);
+    a {
+      color: var(--text-color);
+    }
+  }
+}
+
+// default
+.version-selector .dropdown__button.open svg {
+  fill: var(--version-unselected-color);
 }

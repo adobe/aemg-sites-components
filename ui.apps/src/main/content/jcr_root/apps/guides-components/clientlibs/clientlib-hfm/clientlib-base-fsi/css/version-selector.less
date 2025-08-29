@@ -9,7 +9,7 @@
     min-width: 4rem;
 
     &:hover {
-      border: 1px solid var(--primary-dark);
+      border: 1px solid var(--light-grey-border);
     }
 
     &__container {
@@ -19,7 +19,7 @@
       gap: 0.15rem;
       justify-content: center;
       span {
-        color: var(--primary-color);
+        color: var(--blackish-color);
         font-size: var(--body-font-size);
         font-weight: 600;
         line-height: var(--body-font-line-height);
@@ -98,22 +98,84 @@
     }
   }
 }
-html#adobeguides-dark-contrast {
-  .version-selector .dropdown__button {
-    color: var(--white-color);
-  }
-  .version-selector .dropdown__button svg {
-    fill: var(--white-color);
-  }
-  .version-selector .dropdown__container span {
-    color: var(--white-color) !important;
-  }
 
-  .version-selector .dropdown__item:hover {
-    background: var(--primary-color) !important;
-    color: var(--white-color) !important;
-    a {
+// dark-contrast
+html#adobeguides-dark-contrast {
+  .fsi-guides-topic-page {
+    .version-selector .dropdown__button {
       color: var(--white-color);
     }
+    .version-selector .dropdown__button svg {
+      fill: var(--primary-color);
+    }
+
+    .version-selector .dropdown__button.open svg {
+      fill: var(--version-unselected-color);
+    }
+    .version-selector .dropdown__container span {
+      color: var(--white-color) !important;
+    }
+
+    .version-selector .dropdown__item:hover {
+      background: var(--primary-color) !important;
+      color: var(--white-color);
+      a {
+        color: var(--white-color) !important;
+      }
+    }
   }
+}
+
+// light-contrast
+html.adobeguides-light-contrast {
+  .fsi-guides-topic-page {
+    .version-selector .dropdown__item:hover {
+      color: var(--blackish-color);
+      a {
+        color: var(--blackish-color);
+      }
+    }
+  }
+  .fsi-guides-topic-page.dark {
+    .version-selector .dropdown__button svg {
+      fill: var(--primary-color);
+    }
+    .version-selector .dropdown__button.open svg {
+      fill: var(--version-unselected-color);
+    }
+    .version-selector .dropdown__item:hover {
+      color: var(--white-color);
+      a {
+        color: var(--white-color);
+      }
+    }
+  }
+}
+
+// dark
+.fsi-guides-topic-page.dark {
+  .version-selector .dropdown__container .dropdown__value {
+    color: var(--color-text)!important;
+  }
+
+  .version-selector .dropdown__button svg {
+    fill: var(--primary-color);
+  }
+  .version-selector .dropdown__button svg:hover {
+    fill: var(--primary-color);
+  }
+  .version-selector .dropdown__button.open svg {
+    fill: var(--version-unselected-color);
+  }
+  .version-selector .dropdown__item:hover {
+    color: var(--primary-color);
+    a {
+      color: var(--text-color);
+    }
+  }
+}
+
+// default
+.version-selector .dropdown__button.open svg {
+  fill: var(--version-unselected-color);
 }

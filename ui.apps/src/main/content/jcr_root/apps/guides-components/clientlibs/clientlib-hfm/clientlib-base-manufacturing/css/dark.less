@@ -37,3 +37,35 @@ body.dark {
     background: none;
   }
 }
+
+// dark
+.manufacturing-guides-topic-page.dark {
+  .cmp-navigation__group {
+    li.cmp-navigation__item--active a {
+      color: var(--dropdown-border-color) !important;
+    }
+  }
+  .toolsection__left img{
+      filter: unset!important;
+  }
+}
+
+// light-contrast
+.adobeguides-light-contrast{
+  .manufacturing-guides-topic-page.dark {
+    .cmp-navigation__group {
+      li.cmp-navigation__item--active a {
+        color: var(--primary-color)!important;
+      }
+    }
+  }
+}
+
+// dark-contrast
+#adobeguides-dark-contrast{
+  .manufacturing-guides-topic-page{
+    .topic h1.title {
+      color: var(--yellow-color)!important;
+    }
+  }
+}
