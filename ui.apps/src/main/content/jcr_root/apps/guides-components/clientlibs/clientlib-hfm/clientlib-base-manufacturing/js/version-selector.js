@@ -71,4 +71,3 @@ function updateDropdownIcon(dropdownList, dropdownIcon) {
     dropdownIcon.closest(".dropdown__button").removeClass("open");
   }
 }
-
