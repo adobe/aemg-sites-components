@@ -46,7 +46,7 @@ body.dark {
     }
   }
   .toolsection__left img{
-      filter: unset!important;
+      filter: unset;
   }
 }
 
@@ -68,4 +68,12 @@ body.dark {
       color: var(--yellow-color)!important;
     }
   }
+}
+html.adobeguides-light-contrast body.dark .base-topic-page-section div.topic .section :last-child {
+  color: unset;
+}
+html.adobeguides-light-contrast body.dark .toolsection__left{  
+  img{
+     filter: brightness(0) saturate(100%) invert(25%) sepia(25%) saturate(4902%) hue-rotate(35deg) brightness(46%) contrast(100%) ;
+  } 
 }
