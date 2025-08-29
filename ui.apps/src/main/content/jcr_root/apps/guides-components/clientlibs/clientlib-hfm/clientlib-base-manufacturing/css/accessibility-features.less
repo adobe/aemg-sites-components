@@ -44,10 +44,6 @@ html.adobeguides-text-size {
       align-items: center;
       gap: -0.5rem;
     }
-    .toolbar.below-title.mobile img {
-      filter: invert(25%) sepia(80%) saturate(600%) hue-rotate(10deg)
-        brightness(50%) contrast(120%);
-    }
   }
   @media (max-width: 767px) {
     #gu-nav.show {
@@ -56,6 +52,7 @@ html.adobeguides-text-size {
   }
 }
 
+//dark-contrast
 html#adobeguides-dark-contrast {
   .base-topic-page-section {
     div.topic {
@@ -79,7 +76,12 @@ html#adobeguides-dark-contrast {
       background-color: transparent !important;
     }
   }
+  .cmp-languagenavigation__item a:hover{
+    color: var(--yellow-color)!important;
+  }
 }
+
+// light-contrast
 html.adobeguides-light-contrast {
   .base-topic-page-section {
     div.topic {
@@ -97,6 +99,11 @@ html.adobeguides-light-contrast {
     .cmp-languagenavigation {
       border-color: transparent !important;
       border: none;
+    }
+  }
+  .toolbar-wrapper {
+    img {
+      filter: none !important;
     }
   }
 }
@@ -129,20 +136,36 @@ html#adobeguides-dark-contrast {
     // }
 
     .toolbar-container .below-updated.mobile .toolsection__left .gu-copy-link,
-    .toolbar-container .below-updated.mobile .toolsection__left .share-icon, 
-    .toolbar-container .below-updated.mobile .toolsection__left .gu-pdf-export__button {
+    .toolbar-container .below-updated.mobile .toolsection__left .share-icon,
+    .toolbar-container
+      .below-updated.mobile
+      .toolsection__left
+      .gu-pdf-export__button {
       filter: brightness(2);
     }
 
-    .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-copy-link:hover,
-   .toolbar-container .toolbar-topic.mobile .toolsection__left .share-icon:hover, 
-   .toolbar-container .toolbar-topic.mobile .toolsection__left .gu-pdf-export__button:hover {
-  filter: none; /* or brightness(1) if you want natural look */
-}
-    
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .gu-copy-link:hover,
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .share-icon:hover,
+    .toolbar-container
+      .toolbar-topic.mobile
+      .toolsection__left
+      .gu-pdf-export__button:hover {
+      filter: none; /* or brightness(1) if you want natural look */
+    }
+
     .header .gu-header__humberger .menu-tigger {
       filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
-        saturate(4907%) hue-rotate(33deg) brightness(85%) contrast(91%) !important;
+        saturate(4907%) hue-rotate(33deg) brightness(200%) contrast(55%) !important;
+    }
+    img.gu-search__icon {
+      filter: brightness(0) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(200%) contrast(55%) !important;
     }
   }
   .manufacturing-guides-topic-page .gu-copy-link__text {
@@ -154,19 +177,41 @@ html#adobeguides-dark-contrast {
   // }
 
   .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link,
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon, 
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button {
+  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-pdf-export__button {
     filter: brightness(2);
   }
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-copy-link:hover,
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .share-icon:hover, 
-  .toolbar-container .toolbar-topic.desktop .toolsection__left .gu-pdf-export__button:hover {
-  filter: none; /* or brightness(1) if you want natural look */
-}
+  .toolbar-wrapper {
+    img {
+      filter: brightness(1) saturate(100%) invert(27%) sepia(25%)
+        saturate(4907%) hue-rotate(33deg) brightness(115%) contrast(91%) !important;
+    }
+  }
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-copy-link:hover,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .share-icon:hover,
+  .toolbar-container
+    .toolbar-topic.desktop
+    .toolsection__left
+    .gu-pdf-export__button:hover {
+    filter: none; /* or brightness(1) if you want natural look */
+  }
 
   .gu-theme_icon.dark {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
-      hue-rotate(33deg) brightness(130%) contrast(100%);
+      hue-rotate(33deg) brightness(200%) contrast(55%);
+  }
+  .gu-theme_icon.light {
+    filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
+      hue-rotate(33deg) brightness(200%) contrast(55%);
   }
   .gu-search__icon {
     filter: brightness(0) saturate(100%) invert(27%) sepia(25%) saturate(4907%)
@@ -180,8 +225,6 @@ html#adobeguides-dark-contrast {
 
 .social-share-container .share-icon:hover {
   background-color: #fff2c0;
-
-
 }
 
  .gu-pdf-export__wrapper .gu-pdf-export__button:hover {
@@ -196,7 +239,7 @@ html#adobeguides-dark-contrast {
 
  .gu-accessibility_wrapper .gu-accessibility_icon-container:hover {
    background-color: #fff2c0;
- }  
+ }
  .language-selector__toggle:hover {
    background-color: #fff2c0;
  }
@@ -205,10 +248,10 @@ html#adobeguides-dark-contrast {
 body.dark .social-share-container .share-icon:hover {
    background-color: #fff2c0;
  }
- 
+
   body.dark .gu-pdf-export__wrapper .gu-pdf-export__button:hover{
     background-color: #fff2c0;
-  
+
  }
 }
 
@@ -216,9 +259,9 @@ body.dark .social-share-container .share-icon:hover {
 body.dark .social-share-container .share-icon:hover {
    background-color: #fff2c0;
  }
- 
+
   body.dark .gu-pdf-export__wrapper .gu-pdf-export__button:hover{
     background-color: #fff2c0;
-  
+
  }
 }

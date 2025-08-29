@@ -130,6 +130,7 @@ html.adobeguides-text-size {
       .gu-custom-container {
         .col-6grid {
           border-top: unset;
+          border-bottom: unset;
         }
       }
     }
@@ -218,16 +219,31 @@ body.dark,
 
     #gu-nav.show,
     #toc-content.show {
-      width: calc(100% - 4rem);
-      height: 76%;
-      top: 16%!important;
+      width: calc(100% - 6.5rem);
+      height: 80%!important;
+      top: 15%;
       margin: 0 auto;
       left: 0rem;
       right: 0rem;
+      overflow: scroll;
+    }
+
+    #gu-nav.show {
+      gap: 0rem;
+      .navigation .cmp-navigation {
+        max-height: 35vh;
+      }
+      .navigation {
+        height: 85%;
+      }
+      .related-tags {
+        height: 15%;
+        margin-top: 1rem;
+      }
     }
 
     #toc-content.show {
-      height: unset;
+      height: unset!important;
     }
 
     .base-topic-page-section {
@@ -250,7 +266,7 @@ body.dark,
         }
       }
     }
-    
+
     .toolbar-container .below-updated.mobile .toolsection.mobile-horizon {
       margin-top: -2rem !important;
     }

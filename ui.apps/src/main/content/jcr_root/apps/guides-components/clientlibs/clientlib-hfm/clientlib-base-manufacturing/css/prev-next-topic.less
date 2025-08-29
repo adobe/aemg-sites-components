@@ -9,7 +9,7 @@
   .gu-pre-topic_container,
   .gu-next-topic_container {
     display: flex;
-    align-items: center;    
+    align-items: center;
     border: 1px solid var(--grey-border);
     border-radius: 0.75rem;
     padding: 1rem 0.5rem;
@@ -106,21 +106,18 @@
       margin-top: -0.3rem;
     }
   }
-   @media (min-width: 1024px) {
-  .gu-next-topic_container-wrapper ,
-   .gu-pre-topic_container-wrapper {
-width:50%;
-
+  @media (min-width: 1024px) {
+    .gu-next-topic_container-wrapper,
+    .gu-pre-topic_container-wrapper {
+      width: 50%;
+    }
   }
-}
 
-   @media (min-width: 1024px) {
-  .gu-next-topic_container-wrapper {
-   float: right;
- 
-
+  @media (min-width: 1024px) {
+    .gu-next-topic_container-wrapper {
+      float: right;
+    }
   }
-}
 }
 
 html#adobeguides-dark-contrast {
@@ -128,33 +125,33 @@ html#adobeguides-dark-contrast {
     .gu-pre-next-topic_link {
       color: var(--yellow-color);
     }
-    .gu-pre-topic_container , .gu-next-topic_container {
-    box-shadow: 0 0 1.5rem 0.25rem var(--dark-shadow);
-    border-radius: 0.75rem;
-    background-color: var(--pre-next-bg) !important;
-    border: none;
+    .gu-pre-topic_container,
+    .gu-next-topic_container {
+      box-shadow: 0 0 1.5rem 0.25rem var(--dark-shadow);
+      border-radius: 0.75rem;
+      background-color: var(--pre-next-bg) !important;
+      border: none;
+    }
   }
-   }
-  }
+}
 @media (min-width: 1025px) {
-html.adobeguides-text-size, html.adobeguides-text-spacing {
-.prev-next-topic {
-  .gu-pre-next-topic_link {
-    white-space: nowrap !important;
-    overflow: hidden;
-    text-overflow: ellipsis !important;
+  html.adobeguides-text-size,
+  html.adobeguides-text-spacing {
+    .prev-next-topic {
+      .gu-pre-next-topic_link {
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis !important;
+      }
+    }
   }
-}
-}
 }
 
-body.dark {
+// dark
+.manufacturing-guides-topic-page.dark {
   .prev-next-topic {
- .gu-pre-next-topic_link {
-  color: #F8DD78 ;
- }
+    .gu-pre-next-topic_link {
+      color: var(--dropdown-border-color);
+    }
   }
-}
-body.dark .cmp-navigation__item--active a {
-    color: #F8DD78 !important;
 }

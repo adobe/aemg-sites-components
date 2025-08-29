@@ -48,7 +48,7 @@
       }
     }
   }
-  
+
   .adobeguides-text-size {
     .manufacturing-guides-topic-page {
       .gu-pdf-export__wrapper {
@@ -95,6 +95,7 @@
   }
 }
 
+// dark
 .manufacturing-guides-topic-page.dark {
   .gu-pdf-export__wrapper
     .gu-pdf-export__dropdown
@@ -105,6 +106,7 @@
   }
 }
 
+// light-contrast
 html.adobeguides-light-contrast {
   .manufacturing-guides-topic-page.dark {
     .gu-pdf-export__wrapper {
@@ -126,6 +128,16 @@ html.adobeguides-light-contrast {
           }
         }
       }
+    }
+  }
+  // light
+  .manufacturing-guides-topic-page.light {
+    ul.gu-pdf-export__options li a {
+      color: var(--blue-link-color) !important;
+      transition: color 0.3s ease-in-out;
+    }
+    ul.gu-pdf-export__options li a:hover {
+      color: var(--primary-color) !important;
     }
   }
 }

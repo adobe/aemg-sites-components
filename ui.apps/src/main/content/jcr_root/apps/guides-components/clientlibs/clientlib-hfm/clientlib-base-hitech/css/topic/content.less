@@ -343,6 +343,34 @@ html.adobeguides-text-size {
       }
     }
   }
+
+   #gu-nav.show,
+    #toc-content.show {
+      width: calc(100% - 6.5rem);
+      height: 73%!important;
+      top: 15%;
+      margin: 0 auto;
+      left: 0rem;
+      right: 0rem;
+      overflow: scroll;
+    }
+
+    #gu-nav.show {
+      gap: 0rem;
+      .navigation .cmp-navigation {
+        max-height: 35vh;
+      }
+      .navigation {
+        height: 85%;
+      }
+      .related-tags {
+        height: 15%;
+        margin-top: 2rem;
+      }
+    }
+     #toc-content.show {
+      height: unset!important;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -375,7 +403,7 @@ html.adobeguides-text-size {
       max-height: 32px;
     }
   }
-  
+
   .base-topic-page-section
   div.topic
   .topic__container
@@ -388,4 +416,4 @@ html.adobeguides-text-size {
   background: var(--breadcrumb-bg);
 }
 
-  
+
