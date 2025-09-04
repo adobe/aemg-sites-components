@@ -69,25 +69,25 @@
   }
 }
 
-.gu-pdf-export__wrapper.active .gu-pdf-export__dropdown {
-  display: block;
-}
+  .gu-pdf-export__wrapper.active .gu-pdf-export__dropdown {
+    display: block;
+  }
 
-@media (min-width: 1024px) {
-  .gu-pdf-export__wrapper {
-    .gu-pdf-export__dropdown {
-      top: 100%;
-      transform: translateY(-40px);
-      left: auto;
-      right: 55px;
-      width: max-content;
-      height: max-content;
 
-      .gu-pdf-export__options {
-        li {
-          padding: 0.625rem 0.75rem;
+  @media (min-width: 1024px) {
+    .gu-pdf-export__wrapper {
+      .gu-pdf-export__dropdown {
+        top: calc(100% + 8px);
+        left: auto;
+        right: 0;
+        width: max-content;
+        height: max-content;
+
+        .gu-pdf-export__options {
+          li {
+            padding: 0.625rem 0.75rem;
+          }
         }
       }
     }
   }
-}

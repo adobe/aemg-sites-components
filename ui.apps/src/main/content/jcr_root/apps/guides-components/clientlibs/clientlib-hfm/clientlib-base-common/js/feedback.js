@@ -5,36 +5,39 @@ $(document).ready(function() {
         window.dataLayer = []; // Initialize if not already defined
     }
 
-    const likeButton = $('.gu-likeButton');
-    const dislikeButton = $('.gu-dislikeButton');
+    const likeButton = document.getElementById('gu-likeButton');
+    const dislikeButton = document.getElementById('gu-dislikeButton');
     const pageID = window.location.pathname;
     let storedReaction = localStorage.getItem(`reaction_${pageID}`);
     updateUI(storedReaction);
 
-    $('.gu-likeButton, .gu-likeButton .gu-feedback__like-icon, .gu-likeButton .gu-feedback__button-text').on('click', function(event) {
-        if(!window.dataLayer) {window.dataLayer = [];}
-        window.dataLayer.push({
-            event: 'feedback_click',
-            feedback_type: 'like',
-            page_id: window.location.pathname,
+    if (likeButton) {
+        likeButton.addEventListener('click', () => {
+            if(!window.dataLayer) {window.dataLayer = [];}
+            window.dataLayer.push({
+                event: 'feedback_click',
+                feedback_type: 'like',
+                page_id: window.location.pathname,
+            });
+            sendEventToAdobeAnalytics();
+            localStorage.setItem(`reaction_${pageID}`, "liked");
+            updateUI("liked");
         });
-        sendEventToAdobeAnalytics();
-        localStorage.setItem(`reaction_${pageID}`, "liked");
-        updateUI("liked");
-    });
+    }
 
-    $('.gu-dislikeButton, .gu-dislikeButton .gu-feedback__dislike-icon, .gu-dislikeButton .gu-feedback__button-text').on('click', function(event) {
-        if(!window.dataLayer) {window.dataLayer = [];}
-        window.dataLayer.push({
-            event: 'feedback_click',
-            feedback_type: 'dislike',
-            page_id: window.location.pathname,
+    if (dislikeButton) {
+        dislikeButton.addEventListener('click', () => {
+            if(!window.dataLayer) {window.dataLayer = [];}
+            window.dataLayer.push({
+                event: 'feedback_click',
+                feedback_type: 'dislike',
+                page_id: window.location.pathname,
+            });
+            sendEventToAdobeAnalytics();
+            localStorage.setItem(`reaction_${pageID}`, "disliked");
+            updateUI("disliked");
         });
-        sendEventToAdobeAnalytics();
-        localStorage.setItem(`reaction_${pageID}`, "disliked");
-        updateUI("disliked");
-    });
-
+    }
 
     function sendEventToAdobeAnalytics() {
         if (window._satellite) {
@@ -44,20 +47,32 @@ $(document).ready(function() {
 
     function updateUI(reaction) {
         if (reaction === "liked") {
-            likeButton.toggleClass('selected');
-            likeButton.attr("disabled","true");
-            dislikeButton.removeClass('selected');
-            dislikeButton.attr("disabled","true");
+            if(likeButton) {
+                likeButton.classList.toggle('selected');
+                likeButton.disabled = true;
+            }
+            if(dislikeButton) {
+                dislikeButton.classList.remove('selected');
+                dislikeButton.disabled = false;
+            }
         } else if (reaction === "disliked") {
-            likeButton.removeClass('selected');
-            likeButton.attr("disabled","true");
-            dislikeButton.toggleClass('selected');
-            dislikeButton.attr("disabled","true");
+            if(likeButton) {
+                likeButton.classList.remove('selected');
+                likeButton.disabled = false;
+            }
+            if(dislikeButton) {
+                dislikeButton.classList.toggle('selected');
+                dislikeButton.disabled = true;
+            }
         } else {
-            likeButton.removeClass('selected');
-            likeButton.attr("disabled","true");
-            dislikeButton.removeClass('selected');
-            dislikeButton.attr("disabled","true");
+            if(likeButton) {
+                likeButton.classList.remove('selected');
+                likeButton.disabled = false;
+            }
+            if(dislikeButton) {
+                dislikeButton.classList.remove('selected');
+                dislikeButton.disabled = false;
+            }
         }
     }
 

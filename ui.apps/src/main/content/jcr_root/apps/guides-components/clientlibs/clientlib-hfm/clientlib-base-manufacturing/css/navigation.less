@@ -1,6 +1,5 @@
 .navigation {
   padding-bottom: 1rem;
-  margin: 0;
   nav > ul.cmp-navigation__group {
     padding: 0;
     li {
@@ -32,17 +31,15 @@
   }
   .cmp-navigation-filter-container {
     .cmp-navigation-filter__section {
-      padding: 0.625rem 0.438rem 0.625rem 0.6rem;
-
       .cmp-navigation-filter__closeicon {
         display: none;
         position: absolute;
         background-image: url("/content/dam/guides/common-images/icons/cross-or.svg");
         background-size: contain;
-        width: 11px;
-        height: 11px;
+        width: 10px;
+        height: 10px;
         right: 10px;
-        top: 14px;
+        top: 13px;
         cursor: pointer;
       }
     }
@@ -62,53 +59,17 @@
   }
 }
 
-@media (min-width: 1024px) {
+body.manufacturing-guides-topic-page.dark{
   .navigation {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-
-    .cmp-navigation {
-      overflow: auto;
-      padding-inline: 1.25rem;
-
-      &-filter__wrapper {
-        padding-inline: 1.25rem;
-      }
-
-      &::-webkit-scrollbar {
-        width: 6px;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: var(--nav-bg);
-        border-radius: 0.39rem;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: var(--border-common);
-        border-radius: 0.39rem;
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background: var(--light-grey-border);
+    .cmp-navigation-filter-container {
+      .cmp-navigation-filter__section {
+        .cmp-navigation-filter__closeicon {
+          background-image: url("/content/dam/guides/common-images/icons/cross-light.svg");
+        }
       }
     }
   }
 }
-
-// body.manufacturing-guides-topic-page.dark{
-//   .navigation {
-//     .cmp-navigation-filter-container {
-//       .cmp-navigation-filter__section {
-//         .cmp-navigation-filter__closeicon {
-//           background-image: url("/content/dam/guides/common-images/icons/cross-light.svg");
-//         }
-//       }
-//     }
-//   }
-// }
 
 html.adobeguides-text-size {
   .navigation {
@@ -120,32 +81,4 @@ html.adobeguides-text-size {
       }
     }
   }
-}
- html#adobeguides-dark-contrast {
-  .navigation {
-     .cmp-navigation-filter-container {
-    .cmp-navigation-filter__section {
-border: 1px solid #43464a;
-    background: var(--brown-bg-hp);
-
-    input {
-      color: #fff;
-    }
-    }
-  }
-}
- }
-
-body.manufacturing-guides-topic-page.dark,
-html#adobeguides-dark-contrast {
-.navigation {
-  .cmp-navigation-filter-container {
-    .cmp-navigation-filter__section {
-
-      .cmp-navigation-filter__closeicon {
-       filter: brightness(2.5);
-      }
-    }
-  }
-}
 }

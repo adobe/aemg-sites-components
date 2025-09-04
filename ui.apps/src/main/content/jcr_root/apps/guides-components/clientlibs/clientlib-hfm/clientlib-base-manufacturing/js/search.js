@@ -15,16 +15,9 @@ $(document).ready(function () {
 
   // Remove backdrop when clicking outside
 
-  $(document).on("click", function (e) {
-    const $target = $(e.target);
+  $(document).on("click", ".gu-search-backdrop", function () {
+    $(".gu-header_search-container").removeClass("search-visible");
 
-    // If clicked outside search
-    if (
-      !$target.closest(".gu-header_search-container, .gu-search__toggle").length ||
-      $target.closest("#gu_theme-icon, .language-selector__toggle, #gu_accessibility-icon").length
-    ) {
-      $(".gu-header_search-container").removeClass("search-visible");
-      $(".gu-search-backdrop").remove();
-    }
+    $(this).remove();
   });
 });

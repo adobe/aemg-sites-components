@@ -19,7 +19,7 @@ custom-container.less
 feedback.less
 header.less
 prev-next-topic.less
-search2.less
+search.less
 toolbar.less
 version-selector.less
 dark.less
@@ -28,5 +28,3 @@ accessibility-features.less
 topic-pdf.less
 style.less
 social-share.less
-navigation2.less
-related-tags.less

@@ -2,11 +2,10 @@
   .dropdown {
     margin-bottom: 1rem;
     width: max-content;
-    padding: 0.375rem 0.2rem 0.375rem 0.2rem;
+    padding: 0.375rem 0.5rem 0.375rem 0.75rem;
     border-radius: 0.25rem;
-    border: 1px solid var(--border-common);
-    //background: var(--common-bg);
-    min-width: 4rem;
+    border: 1px solid var(--light-grey-border);
+    background: var(--common-bg);
 
     &:hover {
       border: 1px solid var(--primary-dark);
@@ -16,8 +15,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      gap: 0.15rem;
-      justify-content: center;
+      gap: 0.25rem;
 
       span {
         color: var(--version-unselected-color);
@@ -29,15 +27,6 @@
           color: var(--version-selected-color);
         }
       }
-    }
-
-    &__value {
-      display: inline-block;
-      max-width: 5ch;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      vertical-align: bottom;
     }
 
     &__button {
@@ -58,34 +47,22 @@
       list-style: none;
       z-index: var(--z-index-2);
       border-radius: 0.25rem;
-      border: 1px solid var(--border-common);
-      background: var(--common-bg);
+      border: 1px solid var(--light-grey-border);
+      background: var(--white-color);
       box-shadow: 0 4px 16px 0 var(--box-shadow-color);
       width: 64px;
     }
 
     &__item {
-      padding: 0.2rem 0.75rem 0.25rem 0.688rem;
-      //text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
+      padding: 0.5rem 0.75rem 0.25rem 0.688rem;
+
       &:hover {
         background: var(--accent-light-blue);
-        cursor: pointer;
-        color: var(--version-selected-color);
         padding: 0.25rem 0.688rem;
-        a {
-          color: var(--version-selected-color);
-        }
       }
 
       a {
-        display: inline-block;
-        max-width: 5ch;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: var(--version-unselected-color);
+        color: var(--secondary-light);
         font-size: var(--body-font-size);
         font-weight: 600;
         line-height: var(--body-font-line-height);

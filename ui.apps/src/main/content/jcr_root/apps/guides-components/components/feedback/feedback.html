@@ -8,18 +8,14 @@
   <button class="gu-feedback__cta">Give Feedback</button>
   <div class="gu-feedback__container">
     <button class="gu-feedback__close-btn">
-      <span class="gu-feedback__close-icon">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.757812 11.2428L6.00081 5.99984L11.2438 11.2428M11.2438 0.756836L5.99981 5.99984L0.757812 0.756836" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
+      <span class="gu-feedback__close-icon">X</span>
     </button>
     <div class="gu-feedback__wrapper">
       <div class="gu-feedback__text" data-sly-test="${feedback.title}">
         ${feedback.title @ i18n}
       </div>
       <div class="gu-feedback__button-container">
-        <button class="gu-likeButton gu-feedback__button" type="button">
+        <button id="gu-likeButton" class="gu-feedback__button" type="button">
           <img
             class="gu-feedback__like-icon"
             src="${feedback.likeIcon ? feedback.likeIcon : '/content/dam/guides/common-images/icons/thumbs-up-grey.svg'}"
@@ -27,7 +23,7 @@
           />
           <span class="gu-feedback__button-text">${'Yes' @ i18n}</span>
         </button>
-        <button class="gu-dislikeButton gu-feedback__button" type="button">
+        <button id="gu-dislikeButton" class="gu-feedback__button" type="button">
           <img
             class="gu-feedback__dislike-icon"
             src="${feedback.dislikeIcon ? feedback.dislikeIcon : '/content/dam/guides/common-images/icons/thumbs-down-grey.svg'}"

@@ -24,11 +24,11 @@ feedback.less
 footer.less
 header.less
 languagenavigation.less
-navigation2.less
+navigation.less
 pdf-export.less
 prev-next-topic.less
 related-tags.less
-search2.less
+search.less
 social-share.less
 theme-selector.less
 toolbar.less

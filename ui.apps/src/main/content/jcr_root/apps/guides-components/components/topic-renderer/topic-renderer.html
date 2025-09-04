@@ -15,9 +15,9 @@
                 <div class="topic__updated">
                     <div class="updated__container">
                         <div class="updated__section">
-                            <span class="updated"><span>${'Updated On' @ i18n} : </span> <span>${metadata.lastUpdated}</span></span>
+                            <span class="updated">${'Updated On' @ i18n} : ${metadata.lastUpdated}</span>
                             <span class="separator">| </span>
-                            <span class="published"><span>${'Published On' @ i18n} :</span> <span>${metadata.lastPublished}</span></span>
+                            <span class="published">${'Published On' @ i18n} : ${metadata.lastPublished}</span>
                         </div>
                         <div class="contributors" data-sly-resource="${'contributors' @ resourceType='guides-components/components/contributors'}"></div>
                     </div>

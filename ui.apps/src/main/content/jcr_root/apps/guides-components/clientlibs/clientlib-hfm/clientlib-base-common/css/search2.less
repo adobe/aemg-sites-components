@@ -36,7 +36,7 @@ header .cmp-search:focus-within .cmp-search__input {
     &__clear-icon {
       top: 55px;
       left: 165px;
-      background-image: url(../resources/icons/cross.svg);
+      background-image: url(/content/dam/guides/common-images/icons/cross.svg);
       background-size: contain;
       width: 1.25rem;
       height: 1.25rem;
@@ -216,23 +216,11 @@ input::placeholder {
 // Search Results Header
 .search-results-header {
   padding-bottom: 0.94rem;
-  padding-left: 1.56rem; 
-  color: var(--color-text); 
-  margin-bottom: 2rem !important;
-  
-	.search-results-header-title {
-		font-size: 32px;
-		font-weight: 600;
-		line-height: 32px;
-	}
-	.search_results_header_subtitle {
-		font-size:18px;
-		font-weight:400;
-		line-height:24px;
-		margin:1rem 0;
-	}
+  padding-left: 1.56rem;
+  font-size: 1.25rem;
+  color: var(--color-text);
+  font-weight: normal;
 }
-
 
 // Pagination Container Styling
 .pagination-container {
@@ -360,17 +348,7 @@ input::placeholder {
 
   .search-results-header {
     padding-left: 1.25rem;
-	.search-results-header-title {
-		font-size: 28px;
-		font-weight: 600;
-		line-height: 32px;
-	}
-	.search_results_header_subtitle {
-		font-size:18px;
-		font-weight:400;
-		line-height:20px;
-		margin:1rem 0;
-	}
+    font-size: 18px;
   }
 
   .pagination-container {
@@ -407,15 +385,8 @@ input::placeholder {
   .search-results-header {
     padding-left: 1rem;
     padding-bottom: 0.75rem;
-	.search_results_header_title {
-		font-size: 24px;
-	}
-	.search_results_header_subtitle {
-		font-size:16px;
-		line-height:20px;
-	}
+    font-size: 1rem;
   }
-	
 
   .no-results-message {
     padding: 1.25rem 1.25rem 0.75rem;
@@ -475,17 +446,10 @@ input::placeholder {
 
   .search-results-header {
     padding-left: 0.75rem;
-    padding-bottom: 0.625rem;  
-	
-	.search_results_header_title {
-		font-size: 20px;
-	}
-	.search_results_header_subtitle {
-		font-size:14px;
-		line-height:28px;
-	}
+    padding-bottom: 0.625rem;
+    font-size: 0.94rem;
   }
-	
+
   .pagination-container {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
@@ -505,7 +469,6 @@ input::placeholder {
 @media screen and (max-width: 480px) {
   .topic {
     #search-container {
-      margin-top: 0 !important;
       ul {
         li {
           margin: 0.375rem 0.5rem !important;
@@ -517,59 +480,14 @@ input::placeholder {
           }
         }
       }
-      h2.search-results-header {
-        padding-bottom: 0.94rem;
-        padding-left: 1rem;
-        font-size: 1rem;
-        color: var(--color-text);
-        font-weight: 600;
-        margin-bottom: 0rem !important;
-        margin-top: 1rem;
-        line-height: 3rem;
-      }
-      .cmp-search-results {
-        .cmp-search-result {
-          
-          > a {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-          }
-          .cmp-searchresult-description {
-              margin: 1rem 0;
-              font-size: 12px;
-              line-height: 16px;
-              font-weight: 400;
-          }
-        }
-        .cmp-seaarchresult-breadcrumbs a {
-            font-size: 10px;
-            font-weight: 400;
-            line-height: 24px;
-            color: var(--primary-color) !important;
-        }
-      }
-
     }
-  }
-  .custom-container .gu-custom-container .col-9grid .col-9grid-container {
-    margin-top: 5px !important;
   }
 
   .search-results-header {
     padding-left: 0.5rem;
     padding-bottom: 0.5rem;
-	
-	.search_results_header_title {
-		font-size: 16px;
-	}
-	.search_results_header_subtitle {
-		font-size:14px;
-		line-height:24px;
-	}
-	
+    font-size: 0.88rem;
   }
-  
 
   .pagination-container {
     margin-top: 1rem;
@@ -650,7 +568,7 @@ input::placeholder {
   transform: translateY(-50%);
   width: 1.25rem;
   height: 1.25rem;
-  background-image: url(../resources/icons/search.svg);
+  background-image: url(/content/dam/guides/common-images/icons/search.svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -743,101 +661,4 @@ input::placeholder {
 .cmp-breadcrumb__item-link {
   text-decoration: none;
   color: var(--breadcrumb-item-color) !important;
-}
-
-.base-topic-page-section #search-container {
-	.cmp-search-results {
-		.cmp-search-result {
-			
-			> a {
-				font-size: 20px;
-				@media (max-width:767px) {
-					font-size : 18px;
-				}
-				@media (max-width:480px) {
-					font-size : 16px;
-				}
-			}
-            .cmp-searchresult-header {
-                margin: 0.5rem 0;
-                display:flex;
-				.cmp-searchresult-tags {
-                	margin: 0.2rem;
-    				padding: 0.2rem;
-                }
-                .cmp-searchresult-tag {
-                    display: inline;
-                    margin: 0.2rem;
-                    padding: 0.2rem;
-                    background: whitesmoke;
-                    border-radius: 5px;
-                    text-align: center;
-                    font-size: small;
-                }
-                .cmp-searchresult-date {
-                    display: inline;
-                    margin: 0.2rem;
-                    padding: 0.2rem;
-                    background: aliceblue;
-                    border-radius: 5px;
-                    text-align: center;
-                    font-size: small;
-                    margin-left: auto;
-                }
-            }
-			.cmp-searchresult-description {
-				margin: 1rem 0;
-				font-size:16px;
-				@media (max-width:767px) {
-					font-size : 16px;
-				}
-				@media (max-width:480px) {
-					font-size : 14px;
-				}
-			}
-			.cmp-seaarchresult-breadcrumbs {
-				display:flex;
-				margin-top: 1.5rem;
-				span.cmp-seaarchresult-breadcrumbs-step:not(:last-child):after {
-					margin: 0.3rem;
-					content: "\2B9C";
-					font-weight: 700;
-				}
-				a {
-                    font-size:16px;
-					color:#436ff6 !important;
-					@media (max-width:767px) {
-						font-size : 14px;
-					}
-					@media (max-width:480px) {
-						font-size : 12px;
-					}
-                }
-			}
-		}
-	}
-}
-
-html#adobeguides-dark-contrast, html.adobeguides-light-contrast, body.dark {
-	.base-topic-page-section #search-container {
-		.search_results_header_subtitle {
-			color: var(--color-text);
-        }
-        .cmp-search-results {
-            .cmp-search-result {			
-                > a {
-    				color: var(--color-text);
-                }
-                .cmp-searchresult-header {
-                    .cmp-searchresult-date {
-						background: var(--search-bg);
-                    }
-                }
-                .cmp-searchresult-description  {
-					color: var(--color-text);
-            	}
-            }
-
-        }
-    }
 }

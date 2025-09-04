@@ -28,4 +28,3 @@ toolbar.js
 toolbar-multiple-mobile.js
 toolbar-mobile.js
 header.js
-custom-container.js

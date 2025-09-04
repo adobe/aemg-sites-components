@@ -18,7 +18,7 @@ html#adobeguides-dark-contrast {
 
 html.adobeguides-light-contrast {
   .base-topic-page-section div.topic .section :last-child {
-    color: var(--blue-link-color);
+    color: var(--blue-link-color) !important;
   }
 }
 html.adobeguides-light-contrast
@@ -48,7 +48,7 @@ html.adobeguides-light-contrast
         background: var(--top-bg-color);
       }
       .topic__container {
-        padding: 0 0.5rem 0 1rem;
+        padding: 0 0.5rem 0 0.5rem;
       }
       .toolbar-scenario-mobile {
         padding: 0.5rem 0.5rem 0 0.5rem;
@@ -56,7 +56,7 @@ html.adobeguides-light-contrast
         border-top-right-radius: 12px;
       }
       .topic__updated {
-        padding: 1rem 0.5rem 0.5rem 1rem;
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
         border-bottom-right-radius: 12px;
         border-bottom-left-radius: 12px;
         margin-top: 0;
@@ -74,7 +74,7 @@ html.adobeguides-light-contrast
           flex-wrap: wrap;
           width: 100%;
           justify-content: start;
-          padding-bottom: 12px;
+          padding-bottom: 10px;
           .published,
           .updated {
             color: var(--primary-color);
@@ -84,13 +84,10 @@ html.adobeguides-light-contrast
           .updated {
             white-space: nowrap;
           }
-          .separator {
-            display: none;
-          }
         }
-        // .updated__section span:nth-child(2) {
-        //   display: none;
-        // }
+        .updated__section span:nth-child(2) {
+          display: none;
+        }
         .updated:after {
           content: " • ";
           font-size: 1rem;
@@ -106,7 +103,6 @@ html.adobeguides-light-contrast
       .version-selector {
         padding-bottom: 0.5rem;
         padding-right: 0.5rem;
-        //border: 1px solid var(--dropdown-border-color);
 
         .dropdown {
           background-color: var(--dropdown-bg);
@@ -119,8 +115,8 @@ html.adobeguides-light-contrast
         .dropdown__list {
           background-color: var(--dropdown-bg);
           border: 1px solid var(--dropdown-border-color);
-          width: 100%;
-          right: 0rem;
+          width: 60px;
+          right: 1.1rem;
           position: absolute;
           top: 2rem;
           left: auto;
@@ -241,300 +237,6 @@ html.adobeguides-light-contrast
           padding: 1rem 1.5rem 1.5rem 1.5rem;
         }
       }
-    }
-  }
-}
-
-.backdropAccessibility {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--backdrop-bg);
-  display: none;
-  z-index: var(--z-index-11);
-}
-
-.gu-accessibility_menu {
-  z-index: 15;
-}
-
-@media (min-width: 1024px) {
-  body.manufacturing-guides-topic-page.dark,
-  html#adobeguides-dark-contrast .manufacturing-guides-topic-page {
-    .custom-container {
-      .gu-custom-container {
-        .col-6grid {
-          border-top: unset;
-        }
-      }
-    }
-  }
-
-  .manufacturing-guides-topic-page {
-    .base-topic-page-section {
-      div.topic {
-        .topic__updated .updated__container {
-          display: flex;
-          .contributors {
-            margin-top: 0 !important;
-          }
-        }
-        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
-          left: 0;
-        }
-        .social-links {
-          left: 0;
-        }
-
-        .version-selector .dropdown__item {
-          text-align: unset;
-        }
-
-        .version-selector .dropdown__item a:hover {
-          text-decoration: none;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .manufacturing-guides-topic-page.dark,
-  html#adobeguides-dark-contrast {
-    .navigation {
-      .navigation-title {
-        display: block;
-        color: var(--white-color);
-      }
-    }
-  }
-
-  html.adobeguides-text-size {
-    .manufacturing-guides-topic-page {
-      .base-topic-page-section {
-        div.topic {
-          .version-selector {
-            .dropdown__list {
-              width: 80px !important;
-            }
-          }
-        }
-      }
-      .navigation {
-        .cmp-navigation {
-          max-height: 48vh;
-        }
-      }
-    }
-  }
-
-  .manufacturing-guides-topic-page {
-    .header .cmp-search {
-      margin-top: 1.6rem;
-    }
-
-    .navigation {
-      .navigation-title {
-        display: block;
-      }
-    }
-
-    .version-selector .dropdown__item {
-      text-align: unset;
-    }
-
-    .version-selector .dropdown__list {
-      width: 64px !important;
-      right: 1rem !important;
-    }
-
-    .above-title {
-      .left-section {
-        button {
-          img {
-            width: 24px;
-            height: 24px;
-          }
-        }
-      }
-    }
-
-    #gu-nav.show,
-    #toc-content.show {
-      width: calc(100% - 6.5rem);
-      height: 80% !important;
-      top: 15%;
-      margin: 0 auto;
-      left: 0rem;
-      right: 0rem;
-      overflow: scroll;
-    }
-
-    #gu-nav.show {
-      gap: 0rem;
-      .navigation .cmp-navigation {
-        max-height: 39vh;
-      }
-      .navigation {
-        height: 85%;
-      }
-      .related-tags {
-        height: 15%;
-        margin-top: 1rem;
-      }
-    }
-
-    #toc-content.show {
-      height: unset!important;
-    }
-
-    .toolbar.above-title.mobile {
-      .gu-language-navigation__title-container,
-      .gu-accessibility__title-container {
-        color: var(--primary-color);
-      }
-    }
-
-    .base-topic-page-section {
-      div.topic {
-        .social-links,
-        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
-          top: 100%;
-          margin-top: 10px;
-          z-index: 12;
-          width: 13.625rem;
-          left: unset;
-        }
-
-        .social-links {
-          right: -3rem;
-        }
-
-        .gu-pdf-export__wrapper .gu-pdf-export__dropdown {
-          right: 0rem;
-        }
-      }
-    }
-  }
-
-  .manufacturing-guides-topic-page.dark {
-    .toolbar.above-title.mobile {
-      .gu-language-navigation__title-container,
-      .gu-accessibility__title-container {
-        color: var(--dropdown-border-color);
-      }
-
-      .gu-accessibility__title-container img,
-      .gu-language-navigation_icon {
-        filter: invert(84%) sepia(54%) saturate(549%) hue-rotate(358deg)
-          brightness(101%) contrast(101%);
-      }
-    }
-  }
-}
-
-html#adobeguides-dark-contrast {
-  .manufacturing-guides-topic-page {
-    .header {
-      background-color: var(--footer-bg) !important;
-    }
-  }
-}
-
-.base-topic-page-section {
-  div.topic {
-    .topic__updated {
-      .updated__container {
-        .updated__section {
-          span {
-            color: #454545;
-          }
-        }
-      }
-    }
-  }
-}
-
-html#adobeguides-dark-contrast {
-  .base-topic-page-section {
-    div.topic {
-      .topic__updated {
-        .updated__container {
-          .updated__section {
-            span {
-              color: var(--dark-grey);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-html#adobeguides-dark-contrast {
-  .manufacturing-guides-topic-page.dark {
-    .updated__section .updated,
-    .updated__section .published {
-      background-color: unset;
-    }
-  }
-}
-
-// table
-.base-topic-page-section div.topic .table {
-  border-collapse: separate;
-  border-spacing: 0;
-  overflow: hidden;
-  border: 0px;
-}
-.base-topic-page-section div.topic .tgroup tr:last-child td.entry {
-  border-bottom: 1px solid var(--grey-border);
-}
-
-.base-topic-page-section div.topic .tgroup tr:last-child td.entry:first-child {
-  border-bottom-left-radius: 0.5rem;
-}
-
-.base-topic-page-section div.topic .tgroup tr:last-child td.entry:last-child {
-  border-bottom-right-radius: 0.5rem;
-}
-
-.base-topic-page-section div.topic .tgroup tr:nth-child(even) td.entry {
-  background-color: var(--table-bg);
-}
-
-.base-topic-page-section div.topic .tgroup tr:nth-child(odd) td.entry {
-  background-color: var(--white-color);
-}
-
-div.topic table {
-  border: 1px solid var(--grey-border);
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
-
-.base-topic-page-section div.topic .section :last-child {
-  word-wrap: break-word;
-  border-spacing: 0;
-}
-
-@media (max-width: 767px) {
-  .adobeguides-text-size {
-    .version-selector {
-      padding-right: unset !important;
-    }
-    .toolbar-container .below-updated.mobile .toolsection__left {
-      gap: unset !important;
-    }
-  }
-  .adobeguides-text-spacing {
-    .version-selector {
-      padding-right: unset !important;
-    }
-    .toolbar-container .below-updated.mobile .toolsection__left {
-      gap: unset !important;
     }
   }
 }
