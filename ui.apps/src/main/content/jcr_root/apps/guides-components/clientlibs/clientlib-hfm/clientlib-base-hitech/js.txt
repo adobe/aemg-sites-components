@@ -22,3 +22,4 @@ version-selector.js
 toolbar.js
 toolbar-mobile.js
 search.js
+nav.js

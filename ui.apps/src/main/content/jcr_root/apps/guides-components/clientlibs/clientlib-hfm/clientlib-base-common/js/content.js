@@ -33,12 +33,6 @@ $(document).ready(function () {
         this.classList.toggle('expanded');
     });
 
-    $(document).on("click", ".gu-next-topic_container, .gu-pre-topic_container", function () {
-        const selectedBtn = $(this);
-        const link = selectedBtn.find("a").attr("href");
-        if (link) window.location.href = link;
-    });
-
     window.addEventListener('resize', updateBackground);
 });
 

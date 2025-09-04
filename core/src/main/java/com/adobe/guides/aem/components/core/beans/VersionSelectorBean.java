@@ -1,20 +1,14 @@
 package com.adobe.guides.aem.components.core.beans;
 
 public class VersionSelectorBean {
-    private String name;
     private String title;
     private String pagePath;
 
-    public VersionSelectorBean(String name, String title, String pagePath) {
-        this.name = name;
+    public VersionSelectorBean(String title, String pagePath) {
         this.title = title;
         this.pagePath = pagePath;
     }
 
-    public String getName() {
-        return this.name;
-    }
-    
     public String getTitle() {
         return title;
     }

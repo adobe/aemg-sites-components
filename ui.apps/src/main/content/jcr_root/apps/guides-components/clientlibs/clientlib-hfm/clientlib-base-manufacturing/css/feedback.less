@@ -41,7 +41,7 @@
       padding-left: 3rem;
       padding-right: 1rem;
       padding-top: 0.2rem;
-      color: var(--text-color);
+      color: var(--color-text);
     }
 
     &__wrapper {
@@ -70,7 +70,6 @@
       font-size: var(--body-font-size);
       line-height: var(--body-font-line-height);
       font-weight: var(--fw-h4);
-      color: var(--primary-color);
     }
 
     &__button {
@@ -78,7 +77,7 @@
       border: none;
       padding: 0.5rem 0.75rem;
       border-radius: 0.5rem;
-      background: var(--tags-bg);
+      background: var(--grey-border);
       color: var(--toolbar-text-color);
       display: flex;
       justify-content: center;
@@ -138,28 +137,13 @@
 html#adobeguides-dark-contrast {
   .feedback {
     .gu-feedback {
+      border: 1px solid var(--grey-border);
       color: var(--yellow-color);
       &__cta {
         border: 1px solid var(--grey-border);
         background-color: transparent;
         color: var(--yellow-color);
       }
-      &__close-icon svg path{
-        stroke: var(--primary-color);
-      }
     }
   }
 }
-
-.manufacturing-guides-topic-page.dark{
-  .feedback {
-    .gu-feedback {
-      &__close-icon svg path{
-        stroke: var(--primary-color);
-      }
-    }
-  }
-}
-
-
-

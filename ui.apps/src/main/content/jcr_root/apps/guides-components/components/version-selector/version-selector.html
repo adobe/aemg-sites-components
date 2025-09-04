@@ -6,7 +6,7 @@
 <sly data-sly-use.versionSelector="com.adobe.guides.aem.components.core.models.VersionSelector"/>
 <div class="dropdown">
     <div class="dropdown__container">
-        <span class="dropdown__value" title="${versionSelector.currentVersionTitle}">${versionSelector.currentVersionName}</span>
+        <span class="dropdown__value">${versionSelector.currentVersion}</span>
         <button class="dropdown__button">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
@@ -16,6 +16,6 @@
         </button>
     </div>
     <ul class="dropdown__list hidden" data-sly-list.versionList="${versionSelector.versionSelectorBeans}">
-        <li class="dropdown__item"><a href="${versionList.pagePath}" title="${versionList.title}">${versionList.name}</a></li>
+        <li class="dropdown__item"><a href="${versionList.pagePath}">${versionList.title}</a></li>
     </ul>
 </div>

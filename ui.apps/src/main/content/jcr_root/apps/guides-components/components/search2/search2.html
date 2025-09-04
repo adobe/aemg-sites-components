@@ -6,10 +6,10 @@
          data-cmp-min-length="${search.searchTermMinimumLength}"
          data-cmp-results-size="${search.resultsSize}">
     <div class="cmp_search__info" aria-live="polite" role="status"></div>
-    <input id="search_page-path" value="${search.searchRootPageLink}" type="hidden">
+    <input id="search_page-path" value="${search.searchRootPagePath}/search.html" type="hidden">
     <form class="cmp-search__form" data-cmp-hook-search="form"
           method="get"
-          action="${currentPage.path @ addSelectors=[search.searchRootPageLink == request.pathInfo ? 'aemsitesearchresults' : 'searchresults'], extension='json', suffix = search.relativePath}"
+          action="${currentPage.path @ addSelectors=['searchresults'], extension='json', suffix = search.relativePath}"
           autocomplete="off">
         <div class="cmp-search__field">
             <img class="cmp-search__icon" src="${properties.searchIcon}" alt="Search Icon" />

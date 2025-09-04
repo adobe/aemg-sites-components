@@ -64,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 let nested = item.closest("li").querySelector("ul");
                 if(nested) {
                     nested.classList.add("tree");
+                } else {
+                    nested.classList.remove("tree");
                 }
             }
         });
