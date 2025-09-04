@@ -1,7 +1,14 @@
 .navigation {
   margin: 0 1.25rem;
+	.navigation-title {
+        display:none;
+    	padding: 0.5rem 0;
+	} 
   .cmp-navigation {
   	padding-left:0;
+    overflow: auto;
+    max-height:46vh;
+    scrollbar-width: thin;
   }
   .cmp-navigation__col-icon {
     display: none;
@@ -46,8 +53,9 @@
       input {
         width: 100%;
         border: none;
+        font-size: var(--body-font-size);
         margin-left: 0.5rem;
-        margin-top: 0.188rem;
+        //margin-top: 0.188rem;
         background: transparent;
 
         &:focus {
@@ -93,6 +101,7 @@
 
   nav > ul.cmp-navigation__group {
     list-style: none;
+    margin-left: 20px;
 
     &.expanded {
       color: var(--primary-color);
@@ -101,7 +110,8 @@
     li {
       a {
         color: var(--secondary-color);
-        font-weight: 400;
+        font-weight: 600!important;
+		word-break: break-word;
       }
 
       &.expanded {
@@ -146,46 +156,13 @@
             display: contents;
             pointer-events: auto;
           }
-
-          // &::before {
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   margin-right: 0.25rem;
-          //   content: "";
-          //   display: inline-block;
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-right-arrow.svg");
-          //   background-size: contain;
-          //   background-repeat: no-repeat;
-          //   width: 20px;
-          //   height: 20px;
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   vertical-align: middle;
-          // }
-
-          // &.expanded:has(ul)::before {
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-down-arrow.svg");
-          //   vertical-align: middle;
-          // }
-
-          // &.expanded ul li.expanded::before {
-          //   color: var(--primary-color);
-          //   content: "";
-          //   display: inline-block;
-          //   background-image: url("/content/dam/guides/common-images/icons/ch-down-arrow.svg");
-          //   background-size: contain;
-          //   background-repeat: no-repeat;
-          //   width: 20px;
-          //   height: 20px;
-          //   cursor: pointer;
-          //   pointer-events: auto;
-          //   vertical-align: middle;
-          // }
         }
 
         ul {
-          padding-left: 1.188rem;
+          padding-left: 33px;
           margin-left: 0.563rem;
+          position: relative;
+          left: -22.5px;
 
           &:hover {
             background: unset;
@@ -213,6 +190,12 @@
           }
         }
       }
+
+      &.cmp-navigation__item.cmp-navigation__item--active:not(:has(li.cmp-navigation__item--active)) {
+        > a {
+          font-weight: 700;
+        }
+      }
     }
   }
   .cmp-navigation__item > .cmp-navigation__item-arrow-icon {
@@ -220,6 +203,10 @@
     width: 20px;
     vertical-align: middle;
     cursor: pointer;
+    margin-left: -23px;
+  }
+  .cmp-navigation__item.cmp-navigation__item--level-0 > .cmp-navigation__item-arrow-icon {
+    transform: rotate(-90deg);
   }
   .cmp-navigation__item.expanded > .cmp-navigation__item-arrow-icon {
     transform: rotate(90deg); // or 180deg depending on original orientation
@@ -257,3 +244,60 @@
     }
   }
 }
+
+html.adobeguides-text-size {
+  .navigation {
+        .cmp-navigation-filter__section {
+           .cmp-navigation-filter__closeicon {
+                  top: 13px;
+
+      }
+    }
+  }
+}
+
+html.adobeguides-text-size {
+    .navigation {
+        .cmp-navigation-filter-container {
+            .cmp-navigation-filter__section {
+                input {
+                    line-height: 14px;
+                }
+            }
+        }
+    }
+}
+
+html.adobeguides-text-size {
+    .navigation {
+        .cmp-navigation {
+          max-height: 34vh;
+
+        }
+      }
+    }
+
+ html#adobeguides-dark-contrast {
+  .navigation {
+     .cmp-navigation-filter-container {
+    .cmp-navigation-filter__section {
+border: 1px solid var(--border-grey);
+    background: var(--input-bg);
+
+         input {
+          color: var(--white-color);
+        }
+
+    }}}
+ }
+  html#adobeguides-dark-contrast {
+.updated__section {
+  .updated ,.published {
+background: var(--border-grey);
+
+  }
+} 
+
+
+  }
+ 

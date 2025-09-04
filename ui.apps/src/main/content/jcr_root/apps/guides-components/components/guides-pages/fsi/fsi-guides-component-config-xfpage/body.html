@@ -27,7 +27,7 @@
         </div>
         <div class="gu-search__container">
           <button class="gu-search__toggle" aria-label="Search">
-            <img class="gu-search__icon" src="${toolbarConfig.searchIcon}" alt="Search Icon"/>
+            <img class="gu-search__icon" src="/content/dam/guides/common-images/icons/search-icon.svg" alt="Search Icon"/>
           </button>
         </div>
         <div class="language-navigation" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
@@ -70,15 +70,15 @@
       <div class="toolbar-wrapper">
         <div class="left-section">
           <button class="layout-button">
-            <img src="/content/dam/guides/common-images/icons/navigation-section.svg" alt="Layout button"/>
+            <img src="${toolbarConfig.mobNavIcon ? toolbarConfig.mobNavIcon : '/content/dam/guides/common-images/icons/navigation-section.svg'}" alt="Layout button"/>
           </button>
           <button class="toc-button">
-            <img src="/content/dam/guides/common-images/icons/toc.svg" alt="Toc button"/>
+            <img src="${toolbarConfig.tocIcon ? toolbarConfig.tocIcon : '/content/dam/guides/common-images/icons/toc.svg'}" alt="Toc button"/>
           </button>
         </div>
         <div class="right-section">
           <button class="lat-button">
-            <img src="/content/dam/guides/common-images/icons/Kebab.svg" alt="Lat button"/>
+            <img src="${toolbarConfig.latButtonIcon ? toolbarConfig.latButtonIcon : '/content/dam/guides/common-images/icons/Kebab.svg'}" alt="Lat button"/>
           </button>
         </div>
       </div>
@@ -86,19 +86,19 @@
       <div class="lat-section hidden">
         <div class="lat-closewarpper">
           <button class="lat-closebutton">
-            <img src="/content/dam/guides/common-images/icons/cross.svg" alt="Lat close icon"/>
+            <img src="${toolbarConfig.latCloseIcon ? toolbarConfig.latCloseIcon : '/content/dam/guides/common-images/icons/cross.svg'}" alt="Lat close icon"/>
           </button>
         </div>
         <div class="gu-language-navigation-toolbar" data-sly-test="${toolbarConfig.embedLanguageNavigation}">
           <div class="gu-language-navigation__title-container">
-            <img class="gu-language-navigation_icon" src="/content/dam/guides/common-images/icons/language.svg" alt="Language Navigation Icon"/>
+            <img class="gu-language-navigation_icon" src="${toolbarConfig.languageIcon ? toolbarConfig.languageIcon : '/content/dam/guides/common-images/icons/language.svg'}" alt="Language Navigation Icon"/>
             <span>Language</span>
           </div>
           <sly data-sly-resource="${'toolbar/language-navigation' @ resourceType='guides-components/components/languagenavigation2'}"/>
         </div>
         <div class="gu-accessibility-toolbar" data-sly-test="${toolbarConfig.embedAccessibility}">
           <div class="gu-accessibility__title-container">
-            <img class="gu-accessibility_icon" src="/content/dam/guides/common-images/icons/accessibility.svg" alt="Accessibility Icon"/>
+            <img class="gu-accessibility_icon" src="${toolbarConfig.accessibilityIcon ? toolbarConfig.accessibilityIcon : '/content/dam/guides/common-images/icons/accessibility.svg'}" alt="Accessibility Icon"/>
             <span>Accessibility</span>
           </div>
           <sly data-sly-resource="${'toolbar/accessibility' @ resourceType='guides-components/components/accessibility'}"/>
@@ -108,7 +108,7 @@
     <div class="toolbar below-title mobile hidden">
       <div class="gu-search__container">
         <button class="gu-search__toggle" aria-label="Search">
-          <img class="gu-search__icon" src="/content/dam/guides/common-images/icons/search-icon.png" alt="Search Icon"/>
+          <img class="gu-search__icon" src="/content/dam/guides/common-images/icons/search-icon.svg" alt="Search Icon"/>
         </button>
       </div>
       <div class="theme-selector" data-sly-test="${toolbarConfig.embedThemeSelector}">
