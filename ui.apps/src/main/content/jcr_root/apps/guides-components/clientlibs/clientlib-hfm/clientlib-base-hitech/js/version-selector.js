@@ -88,6 +88,32 @@ $(document).ready(function () {
       }
     }
   );
+  $(".version-selector .dropdown").hover(
+    function() {
+      const isLightAndDarkContrast = $('body').hasClass('light') && 
+                                    $('html').attr('id') === 'adobeguides-dark-contrast';
+      
+      $(this).css('border', '1px solid var(--primary-dark)');
+      
+      if (isLightAndDarkContrast) {
+        $(this).find('.dropdown__value').css('color', 'var(--white-color) !important');
+        $(this).find('.dropdown__button svg path').attr('fill', 'var(--white-color)');
+      } else {
+        $(this).find('.dropdown__value').css('color', 'var(--version-selected-color) !important');
+        $(this).find('.dropdown__button svg path').attr('fill', 'var(--version-selected-color)');
+      }
+    },
+    function() {
+      const dropdownList = $(this).find('.dropdown__list');
+      const isHidden = dropdownList.hasClass('hidden');
+      
+      if (isHidden) {
+        $(this).attr('style', 'border: 1px solid var(--border-common) !important');
+        $(this).find('.dropdown__value').css('color', '');
+        $(this).find('.dropdown__button svg path').attr('fill', 'var(--version-unselected-color)');
+      }
+    }
+  );
 
   attachDropdownEvents();
 
