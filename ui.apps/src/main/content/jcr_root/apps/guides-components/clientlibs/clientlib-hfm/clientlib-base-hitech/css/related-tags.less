@@ -1,0 +1,36 @@
+@media (min-width: 1024px) {
+  .gu-custom-container.DISABLEDMODE {
+    .related-tags {
+      min-height: 77px;
+    }
+  }
+}
+
+.navigation {
+  h4 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 767px) {
+  .related-tags {
+    .tags {
+      &__envelop {
+        display: flex;
+        white-space: nowrap;
+        flex-wrap: wrap;
+        gap: 0;
+        column-gap: 0.75rem;
+      }
+    }
+  }
+  #gu-nav.show {
+    top: 10%;
+    height: 76%;
+  }
+  html.adobeguides-text-size #gu-nav.show {
+    top: 10%;
+    height: 76%;
+    margin-top: 0;
+  }
+}

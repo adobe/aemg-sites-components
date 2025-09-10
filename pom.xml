@@ -21,16 +21,17 @@
     <groupId>com.adobe.guides.aem.components</groupId>
     <artifactId>guides-components</artifactId>
     <packaging>pom</packaging>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.2-SNAPSHOT</version>
     <description>Guides Components</description>
 
     <modules>
-        <module>all</module>
+        <module>all</module> 
         <module>core</module>
         <module>ui.apps</module>
         <module>ui.apps.structure</module>
+        <module>ui.config</module>
         <module>it.tests</module>
-        <module>ui.tests</module>
+        <module>ui.tests</module>		       
     </modules>
 
     <properties>

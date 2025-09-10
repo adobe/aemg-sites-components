@@ -2,7 +2,8 @@ $(document).ready(function () {
   // Store search results globally
   var globalSearchResults = [];
   var currentPage = 1;
-  var itemsPerPage = 7;
+  var itemsPerPage = 10;
+  var totalPages = 0;
 
   function serialize(form) {
     if (!form || !form.elements) return "";
@@ -86,12 +87,9 @@ $(document).ready(function () {
     adjustTopicWidth();
   });
 
-  function populateItems(data, page) {
+  function populateItems(response) {
     // Store search results globally
-    globalSearchResults = data || [];
-
-    // If page is not provided, default to first page
-    currentPage = page || 1;
+    globalSearchResults = response.data || [];
 
     var $topicDiv = $(".topic");
     var $innerDiv = $topicDiv.find("div").first();
@@ -113,14 +111,15 @@ $(document).ready(function () {
     var searchQuery = $(".cmp-search__input").val();
 
     // Add results header
-    var resultsHeader = $('<h2 class="search-results-header"></h2>').text(
-      (data.length || 0) + ' Results found for "' + searchQuery + '"'
-    );
+    var resultsHeader = $('<div class="search-results-header"></div>');
+	let resultsHeaderTitle = $(`<h2 class="search-results-header-title"></h2>"`).text(
+      (response.totalRecords || 0) + ' Results found for "' + searchQuery + '"'
+    );	
 
-    $searchContainer.append(resultsHeader);
+    resultsHeader.append(resultsHeaderTitle);
 
     // Check if there are results
-    if (!data || data.length === 0) {
+    if (!response.data || response.data.length === 0) {
       // No results found
       var noResultsMessage = $('<div class="no-results-message"></div>').html(
         "<p>No results match your search criteria.</p>" +
@@ -135,17 +134,52 @@ $(document).ready(function () {
       $searchContainer.append(noResultsMessage);
     } else {
       // Calculate pagination values
-      var totalPages = Math.ceil(data.length / itemsPerPage);
+      totalPages = Math.ceil(response.totalRecords / itemsPerPage);
+	  let params = new URLSearchParams(window.location.search);
       var startIndex = (currentPage - 1) * itemsPerPage;
-      var endIndex = Math.min(startIndex + itemsPerPage, data.length);
-      var currentPageItems = data.slice(startIndex, endIndex);
-
+      var endIndex = Math.min(startIndex + itemsPerPage, response.totalRecords);
+      var currentPageItems = response.data; //data.slice(startIndex, endIndex);
+	
+		let resultsHeaderSubtitle = $(`<p class="search_results_header_subtitle">Showing ${endIndex} out of ${response.totalRecords} results</p>`)
+		resultsHeader.append(resultsHeaderSubtitle);
+		
+		$searchContainer.append(resultsHeader);
+		
+		let searchFormAction = $("form.cmp-search__form").attr("action");
+		let searchRoot = searchFormAction.substring(0, searchFormAction.indexOf(".aemsitesearchresults.json"));
+        searchRoot = searchRoot.substring(0, searchRoot.lastIndexOf("/"));
+                
       // Display results for current page
-      var $ul = $("<ul>");
+      var $ul = $(`<ul class="cmp-search-results">`);
       currentPageItems.forEach(function (item) {
-        $("<li>")
-          .append($("<a>").attr("href", item.url).text(item.title))
-          .appendTo($ul);
+			let li =  $(`<li class="cmp-search-result">`);
+			let headerfacet	= $(`<div class="cmp-searchresult-header">`);		
+			if(item.tags) {
+              let tags = item.tags.slice(1,item.tags.length-1).split(",")  
+			  for(let tag of tags){
+				  headerfacet.append(`<span class="cmp-searchresult-tag">${tag}</span>`);
+			  }
+			}
+			if(item.formattedLastModifiedDate) {
+				headerfacet.append(`<span class="cmp-searchresult-date">${item.formattedLastModifiedDate}</span>`);
+			}
+			li.append(headerfacet);
+			
+			li.append($("<a>").attr("href", item.url).append(`<h3 class="cmp-searchresult-title">`).text(item.title));
+			if(item.excerpt) {
+				li.append(`<p class="cmp-searchresult-description">${item.excerpt}</p>`);
+			}
+			if(item.path) {	
+                let searchResultRelativePath = item.path.substring(searchRoot.length+1);
+                let parts = searchResultRelativePath.split('/');
+				let breadcrumbs = $(`<div class="cmp-seaarchresult-breadcrumbs">`);
+				for(let index in parts) {
+                    let part = parts[index];
+					breadcrumbs.append(`<span class="cmp-seaarchresult-breadcrumbs-step"><a href="${searchRoot + '/' + parts.slice(0,index).join('/').concat('/' + part + '.html')}">${part}</a></span>`);
+				}
+				li.append(breadcrumbs);
+			}
+			li.appendTo($ul);
       });
 
       $searchContainer.append($ul);
@@ -175,7 +209,9 @@ $(document).ready(function () {
         } else {
           $prevButton.on("click", function () {
             if (currentPage > 1) {
-              populateItems(globalSearchResults, currentPage - 1);
+              //populateItems(globalSearchResults, currentPage - 1);
+			  let form = $("form.cmp-search__form")[0];
+			  generateItemList(form, event, currentPage--, itemsPerPage);
               // Scroll to the top of results
               $("html, body").animate(
                 {
@@ -195,7 +231,9 @@ $(document).ready(function () {
         } else {
           $nextButton.on("click", function () {
             if (currentPage < totalPages) {
-              populateItems(globalSearchResults, currentPage + 1);
+              //populateItems(globalSearchResults, currentPage + 1);
+			  let form = $("form.cmp-search__form")[0];
+			  generateItemList(form, event, currentPage++, itemsPerPage);
               // Scroll to the top of results
               $("html, body").animate(
                 {
@@ -217,16 +255,28 @@ $(document).ready(function () {
     }
   }
 
-  function generateItemList(form, event) {
+  function generateItemList(form, event, numrec) {
     event.preventDefault();
 
     if (!form) return;
-    var url = `${form.action}?${serialize(form)}`;
-
-    $.getJSON(url)
+    //var url = `${form.action}?${serialize(form)}`;
+	
+	let query = $(".cmp-search__input").val();
+	if(!query) {
+		query = new URLSearchParams(window.location.search).get("input");
+	}
+	let params = new URLSearchParams();
+	params.set("fulltext", query);
+	params.set("resultsOffset", (currentPage-1) * itemsPerPage);
+	params.set("resultsSize", numrec || itemsPerPage);
+	params.set("orderby", "@jcr:content/jcr:score");
+	params.set("sort", "desc");
+	let url = new URL(form.action);
+	url.search = params.toString();;
+    $.getJSON(url.href)
       .done(function (data) {
         // Always call populateItems, even with empty data
-        populateItems(data || [], 1);
+        populateItems(data || []);
       })
       .fail(function (error) {
         // Show empty results on failure
@@ -370,12 +420,12 @@ $(document).ready(function () {
 
       // Fetch search results
       $.getJSON(url)
-        .done(function (data) {
+        .done(function (response) {
           // Cache the results
-          searchResultsCache[searchTerm] = data || [];
+          searchResultsCache[searchTerm] = response.data || [];
 
           // Display suggestions
-          displaySuggestions(data, searchTerm);
+          displaySuggestions(response.data, searchTerm);
         })
         .fail(function () {
           $suggestionsContainer.empty().hide();
@@ -550,7 +600,7 @@ $(document).ready(function () {
     } else {
       if (hasUrlParameter("input")) {
         updateUrlParam();
-        generateItemList($form[0], { preventDefault: function () {} });
+        generateItemList($form[0], { preventDefault: function () {} }, 0, itemsPerPage);
 
         // Also update our custom search input
         const queryParameterValue = new URLSearchParams(
@@ -564,7 +614,7 @@ $(document).ready(function () {
       $input.on("keydown", function (event) {
         if (event.key === "Enter") {
           event.preventDefault();
-          generateItemList($form[0], event);
+          generateItemList($form[0], event, 0, itemsPerPage);
         }
       });
 

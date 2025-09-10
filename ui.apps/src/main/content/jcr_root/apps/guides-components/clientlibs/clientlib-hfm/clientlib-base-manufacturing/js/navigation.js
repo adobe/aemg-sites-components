@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   const $navigation = $(".navigation");
+  const $relatedTags = $(".related-tags");
   const $targetContainer = $(".custom-container")
     .has(".topic")
     .find(".col-3grid .outer-container");
 
   if ($navigation.length && $targetContainer.length) {
     $navigation.detach().prependTo($targetContainer);
+  }
+
+  if(window.innerWidth < 1023) {
+    if ($relatedTags.length && $targetContainer.length) {
+      $relatedTags.detach().appendTo($targetContainer);
+    }
   }
 
   let cmp_navigation_links_selector =
@@ -128,8 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
             let nested = item.closest("li").querySelector("ul");
             if (nested) {
               nested.classList.add("tree");
-            } else {
-              nested.classList.remove("tree");
             }
           }
         });

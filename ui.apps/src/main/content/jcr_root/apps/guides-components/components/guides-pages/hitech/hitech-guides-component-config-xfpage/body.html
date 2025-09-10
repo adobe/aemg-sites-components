@@ -59,7 +59,7 @@
     <div class="toolbar toolbar-header mobile hidden">
       <div class="gu-search__container">
         <button class="gu-search__toggle" aria-label="Search">
-          <img class="gu-search__icon" src="${toolbarConfig.searchIcon}" alt="Search Icon"/>
+          <img class="gu-search__icon" src="${toolbarConfig.searchIcon ? toolbarConfig.searchIcon : '/content/dam/guides/common-images/icons/search-icon.svg'}" alt="Search Icon"/>
         </button>
       </div>
       <div class="accessibility" data-sly-test="${toolbarConfig.embedAccessibility}">
@@ -76,7 +76,7 @@
     </div>
     <div class="toolbar sticky-middle mobile hidden">
       <button class="layout-button">
-        <img src="${toolbarConfig.mobNavIcon}" alt="Layout button"/>
+        <img src="${toolbarConfig.mobNavIcon ? toolbarConfig.mobNavIcon : '/content/dam/guides/common-images/icons/navigation-section.svg'}" alt="Layout button"/>
       </button>
       <div class="pdf-export" data-sly-test="${toolbarConfig.embedPdfExport}">
         <sly data-sly-resource="${'toolbar/pdf-export' @ resourceType='guides-components/components/pdf-export'}"/>

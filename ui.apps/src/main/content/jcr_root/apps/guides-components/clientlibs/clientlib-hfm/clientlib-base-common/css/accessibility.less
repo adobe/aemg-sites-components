@@ -6,7 +6,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 8px;
 
     &:hover {
       background-color: var(--accent-light-blue);
@@ -21,7 +21,7 @@
     box-shadow: 0 4px 16px 0 var(--box-shadow-color);
     padding: 1rem 0.75rem;
     position: absolute;
-    top: 100%;
+    top: 170%;
     right: 0;
     list-style: none;
     width: 218px;
@@ -76,5 +76,35 @@
 
   .gu-accessibility_menu.show {
     display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gu-accessibility_icon-container {
+    width: 3rem;
+    height: 3rem;
+  }
+  .gu-accessibility_wrapper {
+    .gu-accessibility_menu {
+      top: 100%;
+      transform: translateY(-40px);
+      right: 55px;
+    }
+  }
+
+  .fsi-guides-topic-page .gu-accessibility_wrapper,
+  .manufacturing-guides-topic-page .gu-accessibility_wrapper {
+    .gu-accessibility_menu {
+      transform: translateY(-5px) !important;
+      right: 0px !important;
+    }
+  }
+
+  .fsi-guides-topic-page .gu-accessibility_wrapper,
+  .manufacturing-guides-topic-page .gu-accessibility_wrapper {
+    .gu-accessibility_menu {
+      transform: translateY(-5px) !important;
+      right: 0px !important;
+    }
   }
 }

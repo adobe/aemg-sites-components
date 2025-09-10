@@ -22,9 +22,9 @@ import java.util.List;
 
 @Model(adaptables = {Resource.class, SlingHttpServletRequest.class},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class PreNextModel {
+public class PrevNextTopicModel {
 
-    private static final Logger logger = LoggerFactory.getLogger(PreNextModel.class);
+    private static final Logger logger = LoggerFactory.getLogger(PrevNextTopicModel.class);
 
     @SlingObject
     private ResourceResolver resourceResolver;

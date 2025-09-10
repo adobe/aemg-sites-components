@@ -5,7 +5,7 @@
     margin-top: 3.125rem;
     .fsi-container {
       background: var(--pre-next-bg);
-      border-top: 1px solid var(--light-grey-border);
+      border-top: 1px solid #DFDFDF;
       padding: 1.25rem 1rem;
     }
     .col-6grid {
@@ -21,9 +21,9 @@
   .custom-container {
     padding: 0;
     .gu-custom-container {
-      margin-top: 4.375rem;
+      margin-top: 70px;
       display: flex;
-      border-top: 1px solid var(--light-grey-border);
+      border-top: 1px solid #E8E8E8;
       .col-3grid {
         padding: 1.25rem 0;
         display: flex;
@@ -32,11 +32,22 @@
         flex: 0 0 25%;
         .outer-container {
           width: 100%;
+          position: sticky;
+          top: 70px;
+          max-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        &.col-3grid--left {
           overflow: visible;
+          max-height: unset;
+          margin-inline: 0;
+          max-width: 25%;
+          flex: 0 0 25%;
         }
       }
       .col-6grid {
-        border: 1px solid var(--light-grey-border);
+        border: 1px solid #E8E8E8;
         border-top: none;
         -webkit-box-flex: 0;
         -webkit-flex: 0 0 50%;
@@ -50,27 +61,26 @@
         }
         &.collapsed {
           max-width: 70%;
-          flex: 0 0 69.9%;
+          flex: 0 0 70%;
         }
       }
       .col-3grid {
         display: flex;
         -webkit-box-flex: 0;
-        -webkit-flex: 0 0 23%;
-        -ms-flex: 0 0 23%;
-        flex: 0 0 23%;
-        max-width: 23%;
-        margin: 0 1rem;
+        -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+        margin: 0;
         min-height: 40rem;
         height: auto;
         max-height: calc(100vh - 5rem);
         overflow: auto;
-        scrollbar-width: thin;
 
         &--right {
           position: sticky;
           top: 10%;
-          margin: 0 1rem;
+          margin: 0;
           padding: 0.5rem 1.25rem;
           flex-direction: column;
           justify-content: space-between;
@@ -87,13 +97,14 @@
           }
 
           &.collapsed {
-            width: fit-content !important;
+            flex: 0 0 5%;
+            max-width: 5%;
             box-shadow: none;
             border-radius: 0;
             margin: 0;
             background-color: transparent;
             height: auto;
-            flex: 0 0 fit-content !important;
+            padding: 0;
 
             > div:not(.tableofcontents) {
               display: none;
@@ -101,7 +112,7 @@
 
             .tableofcontents {
               display: flex;
-              justify-content: flex-end;
+              justify-content: center;
             }
 
             .gu-toc__title {
@@ -120,7 +131,7 @@
       }
       .fsi-container {
         background: var(--pre-next-bg);
-        border-top: 1px solid var(--light-grey-border);
+        border-top: 1px solid #DFDFDF;
         padding: 1.5rem 1rem;
 
         .aem-Grid {
@@ -129,15 +140,39 @@
       }
       &.left-collapsed {
         .col-3grid--left {
-          flex: 0 0 4.1%;
+          flex: 0 0 5%;
+          max-width: 5%;
         }
         .col-6grid {
-          flex: 0 0 68.9%;
+          flex: 0 0 68%;
+          max-width: 68%;
         }
         .col-3grid--right {
-          flex: 0 0 23%;
+          flex: 0 0 25%;
+        }
+        .col-6grid.collapsed {
+          flex: 0 0 90%;
+          max-width: 90%;
+        }
+        .col-3grid--right.collapsed {
+          flex: 0 0 5%;
+          max-width: 5%;
+          padding: 0;
+        }
+        .cmp-navigation-filter__wrapper {
+          justify-content: center;
         }
       }
     }
   }
+}
+
+.fsi-guides-topic-page.dark .custom-container .gu-custom-container .col-3grid--right {
+  border-radius: unset;
+  background-color: var(--common-bg);
+  min-height: 100vh;
+}
+
+html#adobeguides-dark-contrast .fsi-guides-topic-page .custom-container .gu-custom-container .col-3grid--right{
+  background-color: var(--common-bg);
 }

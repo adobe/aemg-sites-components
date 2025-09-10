@@ -46,7 +46,7 @@ public class CustomLanguageNavModel {
             if (!"*".equals(country)) {
                 String[] localeParts = locale.split("_");
                 String countryDisplay = (localeParts.length > 1)
-                        ? StringUtils.capitalize(localeParts[1])
+                        ? localeParts[1].toUpperCase()
                         : country;
 
                 language += " (" + countryDisplay + ")";

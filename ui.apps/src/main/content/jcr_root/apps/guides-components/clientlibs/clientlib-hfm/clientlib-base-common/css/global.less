@@ -1,9 +1,10 @@
-.gu-container {
+.gu-container.gu-banner__container {
   max-width: 85vw;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  left: 4rem;
 }
-.guides-site-page, .guides-product-page {
+.guides-site-page,
+.guides-product-page {
   .cmp-experiencefragment--header {
     height: 70px;
   }
@@ -11,7 +12,7 @@
 .guides-product-page {
   .banner {
     .gu-banner {
-      height: 350px;
+      height: 576px;
     }
     .gu-banner__cta {
       margin-bottom: 1rem;
@@ -21,5 +22,236 @@
       gap: 1rem;
     }
   }
+
+  // Ensure search component is visible in header for guides product pages
+  .gu-header_search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+
+    .cmp-search {
+      display: block;
+      position: relative;
+
+      &__field {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      &__input {
+        display: block;
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
+        color: var(--search-text-color);
+        font-size: var(--body-font-size);
+        font-weight: 500;
+        line-height: var(--body-font-line-height);
+        border: none;
+        background: var(--grey-border);
+        border-radius: 0.5rem;
+        width: 300px;
+        margin: 0;
+        position: relative;
+        left: auto;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: var(--search-text-color);
+          opacity: 0.7;
+        }
+      }
+
+      &__icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: var(--z-index-11);
+        background-image: url(/content/dam/guides/common-images/icons/search.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        pointer-events: none;
+      }
+
+      &__results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--common-bg) !important;
+        border-radius: 0 0 0.25rem 0.25rem;
+        border: none;
+        z-index: var(--z-index-10);
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 0.25rem;
+      }
+
+      &__item {
+        color: var(--search-text-active);
+        font-size: var(--body-font-size);
+        font-weight: 500;
+        line-height: var(--body-font-line-height);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        display: block;
+        border-bottom: 1px solid var(--grey-border);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: var(--search-hover-bg, #f5f5f5);
+        }
+
+        &:focus {
+          background-color: var(--search-hover-bg, #f5f5f5);
+          outline: none;
+        }
+      }
+
+      &__loading-indicator {
+        position: absolute;
+        right: 2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid var(--grey-border);
+        border-top: 2px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: var(--z-index-11);
+      }
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-50%) rotate(360deg);
+    }
+  }
+}
+@media (max-width: 768px) {
+  .guides-product-page {
+    .banner {
+      .gu-banner {
+        height: 474px;
+        padding: 0;
+      }
+      .gu-banner__title {
+        font-size: 2.25rem;
+        line-height: 2.875rem;
+        margin-top: 12.35rem;
+      }
+
+      &__description {
+        font-size: 0.875rem;
+        max-width: 80%;
+        line-height: 1.5rem;
+      }
+
+      &__cta {
+        padding: 0.6rem 1.8rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    // Mobile styles for search component
+    .gu-header_search-container {
+      .cmp-search {
+        &__input {
+          width: 25rem;
+          font-size: 0.875rem;
+        }
+
+        &__field {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 23rem;
+          left: -9.5rem;
+        }
+
+        &__results {
+          position: absolute;
+          top: 4rem;
+          left: -156px;
+          right: 2px;
+          background-color: var(--common-bg) !important;
+          border-radius: 0 0 0.25rem 0.25rem;
+          border: none;
+          z-index: var(--z-index-10);
+          max-height: 300px;
+          overflow-y: auto;
+          margin-top: 0.25rem;
+        }
+        &__clear {
+          position: absolute;
+          width: 1.5rem;
+          top: -2.9rem;
+          right: 9.5rem;
+        }
+      }
+    }
+  }
+  .gu-container.gu-banner__container {
+    left: 1rem;
+    .gu-banner__title{
+      margin-top: 12.75rem;
+    }
+  }
 }
 
+@media (max-width: 480px) {
+  .guides-product-page {
+    .gu-header_search-container {
+      .cmp-search {
+        &__input {
+          width: 100%;
+          padding: 0.4rem 0.8rem 0.4rem 2rem;
+        }
+        .cmp-search__field {
+          position: absolute;
+          top: 2rem;
+          right: -6.5rem;
+          align-items: center;
+          width: 21rem;
+        }
+
+        &__icon {
+          left: 0.5rem;
+          width: 1rem;
+          height: 1rem;
+        }
+
+        &__clear-icon {
+          right: 0.5rem;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+  }
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--backdrop-bg);
+    z-index: var(--z-index-11);
+    display: none;
+  }
+}
