@@ -1,3 +1,28 @@
+@media (max-width: 1024px) {
+html.adobeguides-text-size {
+  .header {
+  .gu-header {
+     &_toolbarheader {
+      .below-title {
+
+  position: absolute;
+        right: 16%;
+        top: 30%;
+        display: flex;
+        justify-content: center;
+               gap: 25px;
+
+      }}}}
+
+    .gu-theme_icon.light {
+        margin-bottom: 6px;
+    }
+    .gu-theme_icon.dark {
+        margin-bottom: 6px;
+    }
+  }
+}
+
 .header {
   .gu-header {
     &_wrapper {
@@ -14,7 +39,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 1.25rem;
+        gap: 25px;
         .gu-search__toggle {
           border: none;
           background: none;
@@ -56,5 +81,13 @@
 @media (min-width: 767px) {
   .header .gu-header_toolbarheader .below-title {
     right: 8%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header .gu-header {
+    &_logo-container {
+      flex: 0 0 26%;
+    }
   }
 }

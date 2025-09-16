@@ -35,7 +35,8 @@ public class VersionSelector {
     ResourceResolver resourceResolver;
 
     List<VersionSelectorBean> versionSelectorBeans = new ArrayList<>();
-    String currentVersion;
+    String currentVersionName;
+    String currentVersionTitle;
 
     @ValueMapValue
     String rootPagePath;
@@ -80,9 +81,10 @@ public class VersionSelector {
                 return;
             }
 
-            this.currentVersion = versionPage.getTitle();                        
+            this.currentVersionName = versionPage.getName(); 
+            this.currentVersionTitle = versionPage.getTitle();                       
             String topicRelativePath = currentPagePath.replace(versionPage.getPath(), "");
-            LOGGER.trace("currentVersion -> {}, topicRelativePath -> {}", currentVersion, topicRelativePath);
+            LOGGER.trace("currentVersionName -> {}, topicRelativePath -> {}", currentVersionName, topicRelativePath);
 
             //Iterator<Page> childPages = rootPage.listChildren();
             Iterator<Page> childPages  = versionPages.iterator();
@@ -94,6 +96,7 @@ public class VersionSelector {
                     Page topicPage = pageManager.getContainingPage(topicPagePath);
                     if (topicPage != null && !topicPagePath.equalsIgnoreCase(currentPagePath)) {
                         versionSelectorBeans.add(new VersionSelectorBean(
+                                childPage.getName(),
                                 childPage.getTitle(),
                                 topicPage.getPath() + ".html"
                         ));
@@ -133,8 +136,12 @@ public class VersionSelector {
         return versionSelectorBeans;
     }
 
-    public String getCurrentVersion() {
-        return currentVersion;
+    public String getCurrentVersionName() {
+        return currentVersionName;
+    }
+
+    public String getCurrentVersionTitle() {
+        return currentVersionTitle;
     }
     
     

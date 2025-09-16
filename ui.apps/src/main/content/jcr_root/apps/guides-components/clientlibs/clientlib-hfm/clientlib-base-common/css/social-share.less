@@ -9,6 +9,9 @@
     padding: 0.75rem;
     width: 48px;
     height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background-color: var(--secondary-btn-color-hover);
@@ -89,9 +92,10 @@
   .social-share-container {
     .social-links {
       position: absolute;
-      top: calc(100% + 8px);
+      top: 100%;
+      transform: translateY(-40px);
       left: auto;
-      right: 0;
+      right: 55px;
       width: 218px;
       height: max-content;
       border-radius: 0.75rem;

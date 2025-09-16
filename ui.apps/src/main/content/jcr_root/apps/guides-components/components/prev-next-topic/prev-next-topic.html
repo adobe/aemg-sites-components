@@ -1,4 +1,4 @@
-<sly data-sly-use.preNextModel="com.adobe.guides.aem.components.core.models.PreNextModel"
+<sly data-sly-use.preNextModel="com.adobe.guides.aem.components.core.models.PrevNextTopicModel"
      data-sly-use.template="core/wcm/components/commons/v1/templates.html"
      data-sly-test.hasContent="${preNextModel.previousTopicTitle || preNextModel.nextTopicTitle}"/>
 
@@ -11,7 +11,7 @@
                 </div>
             </a>
             <div class="gu-pre-next-topic_text-container">
-                <p class="gu-pre-next-topic_text">${preNextModel.previousLabel @ i18n}</p>
+                <a href="${preNextModel.previousTopicLink}" style="text-decoration: none;"><p class="gu-pre-next-topic_text">${preNextModel.previousLabel @ i18n}</p></a>
                 <a class="gu-pre-next-topic_link"
                     href="${preNextModel.previousTopicLink}">${preNextModel.previousTopicTitle}</a>
             </div>
@@ -21,7 +21,7 @@
         <div class="gu-next-topic_container" data-sly-test="${preNextModel.nextTopicTitle}">
 
             <div class="gu-pre-next-topic_text-container">
-                <p class="gu-pre-next-topic_text">${preNextModel.nextLabel @ i18n}</p>
+                <a href="${preNextModel.nextTopicLink}" style="text-decoration: none;"><p class="gu-pre-next-topic_text">${preNextModel.nextLabel @ i18n}</p></a>
                 <a class="gu-pre-next-topic_link"
                     href="${preNextModel.nextTopicLink}">${preNextModel.nextTopicTitle}</a>
             </div>
