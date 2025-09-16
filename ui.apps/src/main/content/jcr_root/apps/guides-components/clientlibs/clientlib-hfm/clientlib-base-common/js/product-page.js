@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     window.__productCardPagination__ = {
         PAGE_SIZE: 6,
         currentPage: 1,
-        selectedTag: "all",
+        // Multi-select: maintain a Set of selected tags
+        selectedTags: new Set(),
         nodes: {
             paginationContainer,
             prevBtn,
@@ -30,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
     attachDropdownEvents();
     attachPaginationEvents(productCards);
 
-    // Initial render
-    paginatedFilterProducts("all", productCards);
+    // Initial render (empty selection = all)
+    paginatedFilterProducts(new Set(), productCards);
 });
 
 function attachDropdownEvents() {
@@ -58,26 +59,52 @@ function attachDropdownEvents() {
             return; // Click outside selectable items
         }
 
-        const selectedTag = selectedItem.getAttribute("data-value");
-        const selectedText = selectedItem.textContent.trim();
+        const tagValue = selectedItem.getAttribute("data-value");
+        const state = window.__productCardPagination__;
+        if (!state) return;
 
-        dropdownValue.textContent = selectedText;
-        dropdownList.classList.add("hidden");
-
-        document.querySelectorAll(".tag-filter .dropdown__item-wrapper").forEach(function(wrapper) {
-            wrapper.removeAttribute("style");
-            wrapper.classList.remove("active");
-        });
-
-        if (itemWrapper) {
-            itemWrapper.classList.add("active");
-            itemWrapper.setAttribute("style", "background: var(--accent-light-blue)");
+        // Handle "All" shortcut: clear selection and close
+        if (tagValue === "all") {
+            state.selectedTags.clear();
+            // reset UI selection states
+            document.querySelectorAll(".tag-filter .dropdown__item-wrapper").forEach(function(wrapper) {
+                wrapper.removeAttribute("style");
+                wrapper.classList.remove("active");
+            });
+            dropdownValue.textContent = "All Products";
+            dropdownList.classList.add("hidden");
+            updateDropdownIcon();
+            paginatedFilterProducts(state.selectedTags, productCards);
+            return;
         }
 
-        updateDropdownIcon();
+        // Toggle selection for clicked tag
+        const normalized = (tagValue || "").trim();
+        const itemWrapperSvg = itemWrapper.querySelector("svg path");
+        if (normalized.length > 0) {
+            if (state.selectedTags.has(normalized)) {
+                state.selectedTags.delete(normalized);
+                if (itemWrapper) {
+                    itemWrapper.removeAttribute("style");
+                    itemWrapper.classList.remove("active");
+                    itemWrapperSvg.setAttribute("fill", "var(--version-unselected-color)");
+                }
+            } else {
+                state.selectedTags.add(normalized);
+                if (itemWrapper) {
+                    itemWrapper.classList.add("active");
+                    itemWrapper.setAttribute("style", "background: var(--accent-light-blue)");
+                    itemWrapperSvg.setAttribute("fill", "var(--primary-color) !important");
+                }
+            }
+        }
 
-        // Always run filtering, including when "all" is selected
-        paginatedFilterProducts(selectedTag, productCards);
+        // Update dropdown label (show count or joined names)
+        updateDropdownLabel(dropdownValue, state.selectedTags);
+
+        // Keep the list open to allow multi-select; just update filtering
+        updateDropdownIcon();
+        paginatedFilterProducts(state.selectedTags, productCards);
     });
     
     document.addEventListener("click", function(event) {
@@ -109,18 +136,36 @@ function updateDropdownIcon() {
     }
 }
 
+function updateDropdownLabel(dropdownValueNode, selectedTagsSet) {
+    if (!dropdownValueNode) return;
+    if (!(selectedTagsSet && selectedTagsSet.size > 0)) {
+        dropdownValueNode.textContent = "All Products";
+        return;
+    }
+    const tags = Array.from(selectedTagsSet);
+    if (tags.length <= 2) {
+        dropdownValueNode.textContent = tags.join(", ");
+    } else {
+        dropdownValueNode.textContent = tags.slice(0, 2).join(", ") + " +" + (tags.length - 2);
+    }
+}
+
 // New: Pagination + Filtering integration
-function paginatedFilterProducts(selectedTag, productCards) {
+function paginatedFilterProducts(selectedTags, productCards) {
     const state = window.__productCardPagination__;
     if (!state) return;
 
+    // Normalize to a stable key for comparison
+    const prevKey = Array.from(state.selectedTags || []).sort().join("||");
+    const nextKey = Array.from(selectedTags || []).sort().join("||");
+
     // Reset to page 1 when filter changes
-    if (state.selectedTag !== selectedTag) {
+    if (prevKey !== nextKey) {
         state.currentPage = 1;
     }
-    state.selectedTag = selectedTag;
+    state.selectedTags = new Set(Array.from(selectedTags || []));
 
-    const filtered = getFilteredCards(selectedTag, productCards);
+    const filtered = getFilteredCards(state.selectedTags, productCards);
     const total = filtered.length;
     const totalPages = Math.max(1, Math.ceil(total / state.PAGE_SIZE));
     state.currentPage = clamp(state.currentPage, 1, totalPages);
@@ -132,17 +177,18 @@ function paginatedFilterProducts(selectedTag, productCards) {
     updatePaginationUI(total, state.currentPage, totalPages);
 }
 
-function getFilteredCards(selectedTag, productCards) {
+function getFilteredCards(selectedTags, productCards) {
     const result = [];
     productCards.forEach(function(card) {
         const cardTags = card.getAttribute("data-tags");
-        if (selectedTag === "all") {
+        // No selection = show all
+        if (!(selectedTags && selectedTags.size)) {
             result.push(card);
         } else if (cardTags) {
             const tags = cardTags.split(",").map(function(tag) { return tag.trim(); });
-            if (tags.includes(selectedTag)) {
-                result.push(card);
-            }
+            // AND logic: card must include all selected tags
+            const allSelectedPresent = Array.from(selectedTags).every(function(sel) { return tags.includes(sel); });
+            if (allSelectedPresent) result.push(card);
         }
     });
     return result;
@@ -198,7 +244,7 @@ function attachPaginationEvents(productCards) {
 
     if (prevBtn) {
         prevBtn.addEventListener("click", function() {
-            const filtered = getFilteredCards(state.selectedTag, productCards);
+            const filtered = getFilteredCards(state.selectedTags, productCards);
             const totalPages = Math.max(1, Math.ceil(filtered.length / state.PAGE_SIZE));
             state.currentPage = clamp(state.currentPage - 1, 1, totalPages);
             showOnlyPage(filtered, productCards, state.currentPage, state.PAGE_SIZE);
@@ -208,7 +254,7 @@ function attachPaginationEvents(productCards) {
 
     if (nextBtn) {
         nextBtn.addEventListener("click", function() {
-            const filtered = getFilteredCards(state.selectedTag, productCards);
+            const filtered = getFilteredCards(state.selectedTags, productCards);
             const totalPages = Math.max(1, Math.ceil(filtered.length / state.PAGE_SIZE));
             state.currentPage = clamp(state.currentPage + 1, 1, totalPages);
             showOnlyPage(filtered, productCards, state.currentPage, state.PAGE_SIZE);
