@@ -3,9 +3,39 @@
      data-sly-test.hasContent="${productCardObj.productCardBeanList}"/>
 
 <div class="gu-container" data-sly-test="${hasContent}">
+  <!-- Filter Dropdown -->
+  <div class="gu-product-filter">
+    <label class="gu-product-filter__label">Filter by Tag:</label>
+    <div class="tag-filter">
+      <div class="dropdown">
+        <div class="dropdown__container">
+          <span class="dropdown__value" title="All Products">All Products</span>
+          <button class="dropdown__button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M14.7194 7.27931C14.5417 7.10041 14.3012 7 14.0506 7C13.8 7 13.5596 7.10041 13.3818 7.27931L9.97628 10.6796L6.61816 7.27931C6.44042 7.10041 6.19999 7 5.94938 7C5.69877 7 5.45834 7.10041 5.2806 7.27931C5.19169 7.36861 5.12112 7.47484 5.07296 7.59189C5.0248 7.70894 5 7.83448 5 7.96129C5 8.08809 5.0248 8.21363 5.07296 8.33068C5.12112 8.44773 5.19169 8.55396 5.2806 8.64326L9.30276 12.7159C9.39095 12.8059 9.49587 12.8774 9.61147 12.9261C9.72706 12.9749 9.85105 13 9.97628 13C10.1015 13 10.2255 12.9749 10.3411 12.9261C10.4567 12.8774 10.5616 12.8059 10.6498 12.7159L14.7194 8.64326C14.8083 8.55396 14.8789 8.44773 14.927 8.33068C14.9752 8.21363 15 8.08809 15 7.96129C15 7.83448 14.9752 7.70894 14.927 7.59189C14.8789 7.47484 14.8083 7.36861 14.7194 7.27931Z"/>
+            </svg>
+          </button>
+        </div>
+        <ul class="dropdown__list hidden">
+          <li class="dropdown__item" data-value="all">All Products</li>
+          <sly data-sly-list.tag="${productCardObj.allTags}">
+            <div class="dropdown__item-wrapper">
+
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.568 10.2C6.64237 10.275 6.73085 10.3345 6.82834 10.3751C6.92583 10.4157 7.03039 10.4366 7.136 10.4366C7.24161 10.4366 7.34617 10.4157 7.44366 10.3751C7.54115 10.3345 7.62963 10.275 7.704 10.2L10.968 6.936C11.1186 6.78536 11.2033 6.58104 11.2033 6.368C11.2033 6.15496 11.1186 5.95064 10.968 5.8C10.8174 5.64936 10.613 5.56473 10.4 5.56473C10.187 5.56473 9.98264 5.64936 9.832 5.8L7.136 8.504L6.168 7.528C6.01736 7.37736 5.81304 7.29273 5.6 7.29273C5.38696 7.29273 5.18264 7.37736 5.032 7.528C4.88136 7.67864 4.79673 7.88296 4.79673 8.096C4.79673 8.30904 4.88136 8.51336 5.032 8.664L6.568 10.2ZM15.2 0H0.8C0.587827 0 0.384344 0.0842854 0.234315 0.234315C0.0842854 0.384344 0 0.587827 0 0.8V15.2C0 15.4122 0.0842854 15.6157 0.234315 15.7657C0.384344 15.9157 0.587827 16 0.8 16H15.2C15.4122 16 15.6157 15.9157 15.7657 15.7657C15.9157 15.6157 16 15.4122 16 15.2V0.8C16 0.587827 15.9157 0.384344 15.7657 0.234315C15.6157 0.0842854 15.4122 0 15.2 0ZM14.4 14.4H1.6V1.6H14.4V14.4Z" fill="#787878"/>
+              </svg>
+              <li class="dropdown__item" data-value="${tag}">${tag}</li>
+            </div> 
+          </sly>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Product Cards Container -->
   <div class="gu-product-card-container" data-sly-list.productDetails="${productCardObj.productCardBeanList}">
     <!-- card 1 -->
-    <div class="gu-product-card">
+    <div class="gu-product-card" data-tags="${productDetails.productTags @ join=', '}">
       <div class="gu-product-card--icon-container">
         <img
           src="${productDetails.productIconPath || '/content/dam/guides/common-images/icons/product-icon.svg'}"
@@ -21,6 +51,26 @@
         ${productDetails.productDescription}
       </div>
     </div>
+  </div>
+  
+  <!-- Pagination Controls -->
+  <div class="gu-product-pagination" style="display: none;">
+    <button class="gu-pagination-btn gu-pagination-prev" disabled>
+      <img class="gu-pagination-btn__icon" src="${properties.prevIcon || '/content/dam/guides/common-images/icons/previous.svg'}">
+      Previous
+    </button>
+    <span class="gu-pagination-info">
+      <span class="gu-pagination-current">1</span> of <span class="gu-pagination-total">1</span>
+    </span>
+    <button class="gu-pagination-btn gu-pagination-next" disabled>
+      Next
+      <img class="gu-pagination-btn__icon" src="${properties.nextIcon || '/content/dam/guides/common-images/icons/next.svg'}">
+    </button>
+  </div>
+
+  <!-- No Results Message -->
+  <div class="gu-product-no-results" style="display: none;">
+    <p>No products found for the selected tag. Please try a different filter.</p>
   </div>
 </div>
 <sly data-sly-call="${template.placeholder @ isEmpty=!hasContent, classAppend='gu-container'}"></sly>

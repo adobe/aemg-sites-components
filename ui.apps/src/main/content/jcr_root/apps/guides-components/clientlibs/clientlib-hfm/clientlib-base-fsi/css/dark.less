@@ -12,6 +12,106 @@ body.dark {
   .gu-header_search-container .cmp-search__results {
     box-shadow: 0 13px 30px 0 var(--box-shadow-search);
     background: var(--border-black-color);
+     margin-top: 0.25rem;
+      scrollbar-width: thin;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+  }
+
+  .header {
+    .cmp-search {
+      &__item:hover {
+          background: var(--dark-grey);
+      }
+      &__item-mark {
+        background: transparent;
+        color: var(--search-text-active);
+      }
+      &__input {
+        &:focus-visible {
+          outline: 1px solid var(--border-common);
+          background: var(--search-bg);
+          color: var(--text-color);
+        }
+      }
+    }
+
+    background: var(--footer-bg);
+
+    @media (min-width: 600px) {
+      border-bottom: none !important;
+      box-shadow: 0 2px 8px var(--box-shadow-bar);
+    }
+  }
+
+  .version-selector .dropdown__button svg {
+    fill: var(--version-unselected-color);
+  }
+
+  .version-selector .dropdown__item:hover {
+    background: var(--primary-color) !important;
+    color: var(--white-color) !important;
+    a {
+      color: var(--white-color);
+    }
+  }
+  .version-selector .dropdown__value {
+    color: var(--version-unselected-color) !important;
+  }
+}
+
+body.dark,
+#adobeguides-dark-contrast,
+body.dark #adobeguides-dark-contrast {
+  .custom-container {
+    .gu-custom-container {
+      .fsi-container {
+        border-top: 1px solid #43464A;
+      }
+    }
+  }
+  @media (min-width: 1024px) {
+    .custom-container {
+      .gu-custom-container {
+        border-top: 1px solid #43464A;
+        .col-6grid {
+          border: 1px solid #43464A;
+        }
+        .fsi-container {
+          border-top: 1px solid #43464A;
+        }
+      }
+    }
+  }
+}
+
+
+#adobeguides-dark-contrast {
+  .fsi-guides-topic-page {
+    div.topic {
+      .toolbar-container {
+        border-bottom: 1px solid #787878;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  body.dark {
+    .base-topic-page-section {
+      div.topic .toolbar-container {
+        margin-top: 0rem;
+      }
+    }
+  }
+}
+
+// dark-contrast
+#adobeguides-dark-contrast{
+  .fsi-guides-topic-page{
+    .topic h1.title {
+      color: var(--yellow-color)!important;
+    }
   }
 
   .header {

@@ -34,3 +34,4 @@ search2.js
 accessibility-features.js
 collapse.js
 logo-theme.js
+product-page.js

@@ -347,7 +347,7 @@ html.adobeguides-light-contrast
 
     .version-selector .dropdown__list {
       width: 64px !important;
-      right: 1rem !important;
+      // right: 1rem !important;
     }
 
     .above-title {
@@ -387,7 +387,7 @@ html.adobeguides-light-contrast
     }
 
     #toc-content.show {
-      height: unset!important;
+      height: unset !important;
     }
 
     .toolbar.above-title.mobile {
@@ -520,6 +520,15 @@ div.topic table {
   border-spacing: 0;
 }
 
+.base-topic-page-section div.topic .table {
+  display: block;
+}
+
+.base-topic-page-section div.topic table {
+  border-collapse: unset;
+}
+// Table End
+
 @media (max-width: 767px) {
   .adobeguides-text-size {
     .version-selector {
@@ -538,3 +547,23 @@ div.topic table {
     }
   }
 }
+
+html#adobeguides-dark-contrast .footer .gu-footer_social-icon {
+  filter: invert(80%) brightness(95%) contrast(90%);
+}
+@media (max-width: 599px) {
+    .manufacturing-guides-topic-page {
+      .version-selector .dropdown__list {
+        right: 1rem !important;
+      }
+    }
+  }
+    @media (max-width: 599px) {
+    html.adobeguides-text-size ,.adobeguides-text-spacing {
+      .manufacturing-guides-topic-page {
+        .version-selector .dropdown__list {
+          right: 10px !important;
+        }
+      }
+    }
+  }

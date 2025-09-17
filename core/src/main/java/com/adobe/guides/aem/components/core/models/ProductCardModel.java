@@ -5,6 +5,7 @@ import com.adobe.cq.wcm.core.components.commons.link.LinkManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.api.NameConstants;
+import com.day.cq.tagging.Tag;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -12,7 +13,6 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
-import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +23,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.Set;
+import java.util.HashSet;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.jackrabbit.JcrConstants;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
@@ -65,6 +66,7 @@ public class ProductCardModel {
     private PageManager pageManager;
 
     private List<ProductCardBean> productCardBeanList = new ArrayList<>();
+    private Set<String> allTags = new HashSet<>();
 
     @PostConstruct
     public void init() {
@@ -132,14 +134,30 @@ public class ProductCardModel {
             if(linkManager != null) {
                 productLink = linkManager.get(productLink).build().getMappedURL();
             }
-            productCardBeanList.add(new ProductCardBean(productTitle, productDescription, productThumbnail, productLink));
-            logger.info("Added product: {} from {}", productTitle, productPage.getPath());
+            
+            // Get tags for this product page
+            List<String> productTags = new ArrayList<>();
+            Tag[] tags = productPage.getTags();
+            if (tags != null) {
+                for (Tag tag : tags) {
+                    String tagTitle = tag.getTitle();
+                    productTags.add(tagTitle);
+                    allTags.add(tagTitle);
+                }
+            }
+            
+            productCardBeanList.add(new ProductCardBean(productTitle, productDescription, productThumbnail, productLink, productTags));
+            logger.info("Added product: {} from {} with tags: {}", productTitle, productPage.getPath(), productTags);
 
         }
     }
 
     public List<ProductCardBean> getProductCardBeanList() {
         return productCardBeanList;
+    }
+    
+    public Set<String> getAllTags() {
+        return allTags;
     }
     
     private String getProductPageTemplate(Page page) {

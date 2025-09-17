@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (contributors && contributors.children.length > 0) {
       toolbarSection.style.marginTop = "-3.3rem";
     } else {
-      toolbarSection.style.marginTop = "-2.6rem";
+      toolbarSection.style.marginTop = "-1.6rem";
       contributors.style.background = "red";
     }
   }

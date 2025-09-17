@@ -7,11 +7,8 @@ $(document).ready(function () {
     function checkTOCContent() {
         const tocContent = document.querySelector(".cmp-toc__content");
 
-        if (tocContent) {
-            const isEmpty = tocContent.innerHTML.trim() === "";
-            if (isEmpty) {
-                $(".col-3grid--right, .col-6grid").addClass("collapsed");
-            }
+        if (!tocContent || tocContent.innerHTML.trim() === "") {
+            $(".col-3grid--right, .col-6grid").addClass("collapsed");
         }
     }
 
