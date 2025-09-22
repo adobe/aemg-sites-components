@@ -6,7 +6,6 @@ $(document).ready(function () {
   $(".version-selector .dropdown__value").css({
       color: "var(--blackish-color)",
     });
-
   $(".version-selector .dropdown").hover(
     function() {
       const isLightAndDarkContrast = $('body').hasClass('light') &&
