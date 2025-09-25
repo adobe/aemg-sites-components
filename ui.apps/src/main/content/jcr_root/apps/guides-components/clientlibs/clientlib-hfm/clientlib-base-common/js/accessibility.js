@@ -127,7 +127,8 @@ $(document).ready(function () {
   }
   
   function setMenu() {
-    $(".toolbar-hitech .desktop").css("z-index", "14");
+    $(".toolbar-hitech .desktop").css("z-index", "8");
+    $(".toolbar-hitech .desktop").css("top", "-7rem");
 
     $(".toolsection .share-icon").css("pointer-events", "none");
     $(".toolsection #gu_theme-icon").css("pointer-events", "none");
