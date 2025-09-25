@@ -13,7 +13,52 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */-->
+<script>
+    (function() {
+        try {
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = saved || (prefersDark ? 'dark' : 'light');
 
+            var root = document.documentElement;
+            root.classList.remove('dark', 'light');
+            root.classList.add(theme);
+            root.classList.add('no-transition');
+
+            function applyToBodyNow() {
+                try {
+                    var b = document.body;
+                    if (!b) return false;
+                    b.classList.remove('dark', 'light');
+                    b.classList.add(theme);
+                    return true;
+                } catch (e) { return true; }
+            }
+            if (!applyToBodyNow()) {
+                var obs = new MutationObserver(function(){
+                    if (applyToBodyNow()) { obs.disconnect(); }
+                });
+                obs.observe(document.documentElement, { childList: true, subtree: true });
+            }
+
+            // Improve initial paint for form controls/scrollbars
+            root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
+
+            // remove transition guard on next frame
+            requestAnimationFrame(function(){
+                root.classList.remove('no-transition');
+            });
+        } catch (e) {}
+    })();
+    // Note: theme-selector.js will still handle icon toggling and user changes on load
+</script>
+<style>
+    html.no-transition *, html.no-transition *::before, html.no-transition *::after { transition: none !important; }
+    html.dark, body.dark { background-color: #0b0b0b; color: #f5f5f5; }
+    @media (prefers-color-scheme: dark) {
+        html:not(.light) { background-color: #0b0b0b; color: #f5f5f5; }
+    }
+</style>
 <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
     <sly data-sly-call="${clientlib.css @ categories='guides-components.base.hitech'}"/>
 </sly>
