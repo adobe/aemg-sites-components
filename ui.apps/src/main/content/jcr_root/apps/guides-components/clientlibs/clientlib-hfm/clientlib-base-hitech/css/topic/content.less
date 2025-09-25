@@ -147,6 +147,16 @@ div.topic table {
   border-spacing: 0;
 }
 
+.base-topic-page-section div.topic .table {
+  display: block;
+}
+
+.base-topic-page-section div.topic table {
+  border-collapse: unset;
+}
+
+// table end
+
 .theme-selector .gu-theme__icon-container {
   display: flex;
   align-items: center;
@@ -344,33 +354,33 @@ html.adobeguides-text-size {
     }
   }
 
-   #gu-nav.show,
-    #toc-content.show {
-      width: calc(100% - 6.5rem);
-      height: 73%!important;
-      top: 15%;
-      margin: 0 auto;
-      left: 0rem;
-      right: 0rem;
-      overflow: scroll;
-    }
+  #gu-nav.show,
+  #toc-content.show {
+    width: calc(100% - 6.5rem);
+    height: 73% !important;
+    top: 15%;
+    margin: 0 auto;
+    left: 0rem;
+    right: 0rem;
+    overflow: scroll;
+  }
 
-    #gu-nav.show {
-      gap: 0rem;
-      .navigation .cmp-navigation {
-        max-height: 35vh;
-      }
-      .navigation {
-        height: 85%;
-      }
-      .related-tags {
-        height: 15%;
-        margin-top: 2rem;
-      }
+  #gu-nav.show {
+    gap: 0rem;
+    .navigation .cmp-navigation {
+      max-height: 35vh;
     }
-     #toc-content.show {
-      height: unset!important;
+    .navigation {
+      height: 85%;
     }
+    .related-tags {
+      height: 15%;
+      margin-top: 2rem;
+    }
+  }
+  #toc-content.show {
+    height: unset !important;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -404,11 +414,8 @@ html.adobeguides-text-size {
     }
   }
 
-  .base-topic-page-section
-  div.topic
-  .topic__container
-  .copy-link-component {
-    display: block!important;
+  .base-topic-page-section div.topic .topic__container .copy-link-component {
+    display: block !important;
   }
 }
 
@@ -416,4 +423,6 @@ html.adobeguides-text-size {
   background: var(--breadcrumb-bg);
 }
 
-
+html#adobeguides-dark-contrast .footer .gu-footer_social-icon {
+  filter: invert(80%) brightness(95%) contrast(90%);
+}

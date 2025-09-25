@@ -1,7 +1,7 @@
 .card {
   background-color: #f5f6f7;
   .gu-card {
-    margin: 2rem 0;
+    margin: 2rem 4rem;
 
     &__heading {
       font-size: 2.375rem;
@@ -81,7 +81,7 @@
       &__container {
         grid-template-columns: 1fr;
       }
-      img{
+      img {
         height: auto;
       }
       &__title {
@@ -92,6 +92,13 @@
         font-size: 0.75rem;
         line-height: 20px;
       }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .guides-product-page {
+    .gu-card {
+      margin: 0 1rem 2rem 1rem;
     }
   }
 }

@@ -135,6 +135,7 @@ html#adobeguides-dark-contrast {
   }
 }
 @media (min-width: 1025px) {
+  .manufacturing-guides-topic-page,
   html.adobeguides-text-size,
   html.adobeguides-text-spacing {
     .prev-next-topic {
@@ -142,6 +143,9 @@ html#adobeguides-dark-contrast {
         white-space: nowrap !important;
         overflow: hidden;
         text-overflow: ellipsis !important;
+      }
+      .gu-pre-next-topic_text-container {
+        overflow: hidden;
       }
     }
   }
@@ -153,5 +157,22 @@ html#adobeguides-dark-contrast {
     .gu-pre-next-topic_link {
       color: var(--dropdown-border-color);
     }
+  }
+}
+ @media (max-width: 768px) {
+  .manufacturing-guides-topic-page.dark{
+  .gu-pre-next-wrapper {
+
+    border: none;
+
+  }
+}
+ }
+
+ .manufacturing-guides-topic-page.dark{
+ .gu-pre-topic_container,
+  .gu-next-topic_container {
+
+    border: none;
   }
 }
