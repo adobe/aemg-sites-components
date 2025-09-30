@@ -74,6 +74,7 @@ $(document).ready(function () {
   function setMenu() {
     setTimeout(function () {
       $(".toolbar-hitech .desktop").css("z-index", "14");
+      $(".fsi-guides-topic-page .breadcrumb").css("z-index", "7");
 
       $(".toolsection .share-icon").css("pointer-events", "none");
       $(".toolsection #gu_theme-icon").css("pointer-events", "none");
