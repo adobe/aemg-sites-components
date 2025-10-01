@@ -3,6 +3,6 @@
     <filter root="/apps/guides-components/clientlibs"/>
     <filter root="/apps/guides-components/components" mode="update"/>
     <filter root="/apps/guides-components/i18n"/>
-	<filter root="/apps/wcm"/>
-	<filter root="/apps/fmdita"/>
+    <filter root="/apps/wcm" mode="update"/>
+    <filter root="/apps/fmdita" mode="update"/>
 </workspaceFilter>
