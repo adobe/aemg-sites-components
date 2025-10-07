@@ -1,0 +1,7 @@
+{
+	"scripts": [
+		"create service user guides-reader-service with path /home/users/system/cq:services/guides\nset ACL for guides-reader-service\n allow jcr:read on /content\nend",
+		"create service user guides-writer-service with path /home/users/system/cq:services/guides",
+		"set ACL for guides-writer-service\n allow jcr:versionManagement,jcr:read,rep:write,jcr:lockManagement,crx:replicate on /content\n allow jcr:read on /apps/guides-components/clientlibs/clientlib-hfm\nend"
+	]
+}

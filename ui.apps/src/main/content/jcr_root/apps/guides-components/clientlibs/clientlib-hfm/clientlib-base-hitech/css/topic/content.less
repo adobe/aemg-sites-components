@@ -15,6 +15,17 @@
   }
 }
 
+.hitech-guides-topic-page #section-topic .topic__container {
+  .copy-link-component {
+    position: relative;
+    .gu-copy-link__text {
+      position: absolute;
+      width: max-content;
+      top: 100%;
+    }
+  }
+}
+
 html.adobeguides-text-size
   .hitech-guides-topic-page
   .base-topic-page-section
@@ -195,12 +206,12 @@ div.topic table {
   height: 100%;
   background: var(--backdrop-bg);
   display: none;
-  z-index: var(--z-index-12);
+  z-index: var(--z-index-7);
 }
 
 @media (max-width: 1023px) {
   .backdropAccessibility {
-    z-index: 11;
+    z-index: 7;
   }
 }
 .cmp-languagenavigation,
@@ -222,16 +233,24 @@ div.topic table {
 
 body.hi-tech.dark {
   .language-backdrop,
-  .backdrop,
-  .backdropAccessibility {
+  .backdrop {
     z-index: 9;
+  }
+}
+body.hi-tech.dark {
+  .backdropAccessibility {
+    z-index: 7;
   }
 }
 html#adobeguides-dark-contrast {
   .language-backdrop,
-  .backdrop,
-  .backdropAccessibility {
+  .backdrop {
     z-index: 9;
+  }
+}
+html#adobeguides-dark-contrast {
+  .backdropAccessibility {
+    z-index: 7;
   }
 }
 
@@ -425,4 +444,9 @@ html.adobeguides-text-size {
 
 html#adobeguides-dark-contrast .footer .gu-footer_social-icon {
   filter: invert(80%) brightness(95%) contrast(90%);
+}
+
+.base-topic-page-section div.topic .related-links .link {
+  margin-bottom: 0.25rem;
+  margin-left: -3px;
 }
