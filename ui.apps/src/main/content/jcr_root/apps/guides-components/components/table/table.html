@@ -2,8 +2,11 @@
   Table Component
   Renders HTML table with Core Image Component integration.
   
-  Pattern based on Adobe's Teaser component - uses ComponentsResourceWrapper
-  to delegate image rendering to core/wcm/components/image/v2/image
+  Server-Side Rendering Approach:
+  - Images are rendered by Core Image Component in the Sling Model
+  - Complete HTML (with rendered images) is returned to HTL
+  - No client-side JavaScript processing needed
+  - Images are in the HTML from the start (better for SEO, performance, accessibility)
 -->
 <sly data-sly-use.model="com.adobe.guides.aem.components.core.models.TableModel"
      data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
@@ -17,60 +20,22 @@
     <div class="cq-placeholder" data-emptytext="${component.title}"></div>
 </sly>
 
-<!-- Main table component -->
+<!-- 
+    Render the complete table HTML.
+    Images are already rendered by Core Image Component on the server side.
+    The HTML is complete and ready to display - no JavaScript manipulation needed.
+-->
 <div data-sly-test="${model.hasContent}"
      class="gu-table-wrapper ${model.enableResponsive ? 'gu-table--responsive' : ''} gu-table--style-${model.tableStyle}"
      id="${model.componentId}">
-
-    <div class="gu-table-content">
-        <!-- 
-            Render the sanitized table HTML with placeholders.
-            The 'unsafe' context is required because:
-            1. HTML is already sanitized by Jsoup in the model
-            2. We need to preserve placeholder divs with data attributes
-        -->
-        ${model.processedTableHtml @ context='unsafe'}
-    </div>
-
-    <!--
-        Render images using Core Image Component (Adobe's pattern).
-        
-        Each image is rendered via a ComponentsResourceWrapper that:
-        1. Wraps the table resource
-        2. Overrides resourceType to point to core/wcm/components/image/v2/image
-        3. Provides image properties (fileReference, alt, etc.)
-        4. Can be properly adapted by the Image component
-        
-        These images are initially hidden and moved into placeholders via JavaScript.
+    
+    <!-- 
+        The processedTableHtml already contains the fully rendered Image components.
+        Using 'unsafe' context because:
+        1. HTML was sanitized by Jsoup in the Sling Model
+        2. We need to preserve the Image component markup
+        3. No XSS risk - all content is server-processed
     -->
-    <sly data-sly-test="${model.hasImages}">
-        <div class="gu-table-images" style="display: none;" aria-hidden="true">
-            <sly data-sly-list.img="${model.imagePlaceholders}">
-                <!--
-                    Container for each image with its placeholder ID.
-                    The JavaScript will move this container's content into the
-                    corresponding placeholder div in the table.
-                -->
-                <div class="gu-table-image-container"
-                     data-placeholder-id="${img.placeholderId}">
-                    
-                    <!--
-                        Render the Core Image Component using the wrapped resource.
-                        This is the Adobe Teaser pattern - data-sly-resource with
-                        a ComponentsResourceWrapper that delegates to the image component.
-                        
-                        The wrapped resource has:
-                        - resourceType: core/wcm/components/image/v2/image
-                        - properties: fileReference, alt, jcr:title, etc.
-                    -->
-                    <sly data-sly-resource="${model.imageResources[img.placeholderId]}"></sly>
-                    
-                </div>
-            </sly>
-        </div>
-    </sly>
-
+    ${model.processedTableHtml @ context='unsafe'}
+    
 </div>
-
-<!-- Include client library JavaScript -->
-<sly data-sly-call="${clientLib.js @ categories='guides-components.table'}"></sly>
