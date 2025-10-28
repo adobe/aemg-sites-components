@@ -1,35 +1,41 @@
 package com.adobe.guides.aem.components.core.models;
 
-import com.adobe.guides.aem.components.core.beans.ImagePlaceholder;
-import com.adobe.guides.aem.components.core.utils.ComponentsResourceWrapper;
+import com.adobe.guides.aem.components.core.services.ImageComponentRenderer;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 /**
  * Sling Model for the Table Component
  * 
- * This model processes HTML table input, extracts images, and creates
- * delegating resources for rendering via the Core Image Component.
+ * This model processes HTML table input and renders images using the Core Image Component.
  * 
- * Pattern based on Adobe's Teaser component implementation.
+ * Server-Side Rendering Approach:
+ * 1. Parse the input table HTML
+ * 2. Find all <img> tags
+ * 3. For each image, use ImageComponentRenderer to render the Core Image Component
+ * 4. Capture the rendered HTML from the Image component
+ * 5. Replace the <img> tag with the captured HTML
+ * 6. Return complete table HTML with images already rendered
+ * 
+ * This approach provides all benefits of the Core Image Component (responsive images,
+ * lazy loading, renditions) while allowing dynamic image injection into arbitrary HTML.
  */
 @Model(
     adaptables = {Resource.class, SlingHttpServletRequest.class},
@@ -38,11 +44,18 @@ import java.util.UUID;
 public class TableModel {
 
     private static final Logger LOG = LoggerFactory.getLogger(TableModel.class);
-    private static final String PLACEHOLDER_PREFIX = "gu-table-img-";
-    private static final String IMAGE_RESOURCE_TYPE = "core/wcm/components/image/v2/image";
 
     @SlingObject
     private Resource resource;
+    
+    @SlingObject
+    private SlingHttpServletRequest request;
+    
+    @SlingObject
+    private SlingHttpServletResponse response;
+    
+    @OSGiService
+    private ImageComponentRenderer imageRenderer;
 
     @ValueMapValue
     private String tableHtml;
@@ -54,158 +67,125 @@ public class TableModel {
     private String tableStyle;
 
     private String processedTableHtml;
-    private List<ImagePlaceholder> imagePlaceholders;
-    private Map<String, Resource> imageResourceMap;
     private String componentId;
 
     @PostConstruct
     protected void init() {
-        imagePlaceholders = new ArrayList<>();
-        imageResourceMap = new HashMap<>();
         componentId = "table-" + UUID.randomUUID().toString().substring(0, 8);
 
-        if (tableHtml != null && !tableHtml.trim().isEmpty()) {
+        // Only process if we have content, request context, and service
+        if (tableHtml != null && !tableHtml.trim().isEmpty() 
+            && request != null && response != null && imageRenderer != null) {
             try {
-                processTableHtml();
+                processTableHtmlWithServerSideRendering();
             } catch (Exception e) {
-                LOG.error("Error processing table HTML for component at path: {}", 
-                         resource.getPath(), e);
-                processedTableHtml = "";
+                LOG.error("Error processing table HTML", e);
+                processedTableHtml = tableHtml; // Fallback to original HTML
             }
         } else {
-            processedTableHtml = "";
+            processedTableHtml = tableHtml != null ? tableHtml : "";
         }
     }
 
+
     /**
-     * Process the table HTML: extract images, create placeholders, and sanitize
+     * Process table HTML - replace <img> tags with Core Image Component rendered HTML
      */
-    private void processTableHtml() {
+    private void processTableHtmlWithServerSideRendering() {
         Document doc = Jsoup.parse(tableHtml);
         Elements imgTags = doc.select("img");
 
+        // Process each image
         for (Element img : imgTags) {
             String src = img.attr("src");
             if (src == null || src.trim().isEmpty()) {
-                continue; // Skip images without src
+                continue;
             }
 
+            // Normalize DAM path (remove /jcr:content/renditions/*)
+            String normalizedSrc = normalizeDamAssetPath(src);
+
+            // Build properties for Image component
+            Map<String, Object> imageProps = new HashMap<>();
+            imageProps.put("fileReference", normalizedSrc);
+            
             String alt = img.attr("alt");
+            if (alt != null && !alt.isEmpty()) {
+                imageProps.put("alt", alt);
+            } else {
+                imageProps.put("isDecorative", true);
+            }
+            
             String title = img.attr("title");
-            String cssClass = img.attr("class");
-            String width = img.attr("width");
-            String height = img.attr("height");
-
-            // Generate unique placeholder ID
-            String placeholderId = PLACEHOLDER_PREFIX + UUID.randomUUID().toString().substring(0, 8);
-
-            // Create ImagePlaceholder bean
-            ImagePlaceholder placeholder = new ImagePlaceholder(
-                placeholderId, src, alt, title, cssClass, width, height
-            );
-            imagePlaceholders.add(placeholder);
-
-            // Create a delegating resource for this image (Adobe's pattern)
-            Resource imageResource = createImageResource(placeholder);
-            imageResourceMap.put(placeholderId, imageResource);
-
-            // Replace img tag with placeholder div
-            Element placeholderDiv = new Element("div");
-            placeholderDiv.addClass("gu-table-image-placeholder");
-            placeholderDiv.attr("data-placeholder-id", placeholderId);
-            if (cssClass != null && !cssClass.isEmpty()) {
-                placeholderDiv.addClass(cssClass);
+            if (title != null && !title.isEmpty()) {
+                imageProps.put("jcr:title", title);
             }
 
-            img.replaceWith(placeholderDiv);
-            LOG.debug("Created placeholder {} for image: {}", placeholderId, src);
+            // Render the Image component
+            String imageHtml = imageRenderer.renderImageComponent(resource, imageProps, request, response);
+
+            // Replace <img> with rendered HTML
+            if (imageHtml != null && !imageHtml.trim().isEmpty()) {
+                Document imageDoc = Jsoup.parseBodyFragment(imageHtml);
+                Element renderedElement = imageDoc.body().children().first();
+                
+                if (renderedElement != null) {
+                    // Fix the src attribute - Core Image Component generates servlet URLs
+                    // which don't work for synthetic resources. Replace with actual DAM path.
+                    Element imgElement = renderedElement.selectFirst("img");
+                    if (imgElement != null && imgElement.hasAttr("src")) {
+                        String generatedSrc = imgElement.attr("src");
+                        // If src contains servlet path (.coreimg.), replace with direct DAM path
+                        if (generatedSrc.contains(".coreimg.")) {
+                            imgElement.attr("src", normalizedSrc);
+                            // Also remove srcset if present (as it would also have servlet URLs)
+                            imgElement.removeAttr("srcset");
+                        }
+                    }
+                    
+                    // Preserve original class attribute
+                    String cssClass = img.attr("class");
+                    if (cssClass != null && !cssClass.isEmpty()) {
+                        renderedElement.addClass(cssClass);
+                    }
+                    
+                    // Preserve original style attribute
+                    String style = img.attr("style");
+                    if (style != null && !style.isEmpty()) {
+                        renderedElement.attr("style", style);
+                    }
+                    
+                    img.replaceWith(renderedElement);   
+                }
+            }
         }
 
-        // Sanitize the HTML
-        processedTableHtml = sanitizeHtml(doc);
+        // Return the processed HTML
+        processedTableHtml = doc.body().html();
     }
 
-    /**
-     * Create a delegating resource for the Image component
-     * This follows Adobe's Teaser pattern using ComponentsResourceWrapper
-     * 
-     * @param placeholder the image placeholder with properties
-     * @return a wrapped resource that can be rendered by the Image component
-     */
-    private Resource createImageResource(ImagePlaceholder placeholder) {
-        // Prepare properties for the Image component
-        Map<String, Object> imageProperties = new HashMap<>();
-        imageProperties.put("fileReference", placeholder.getImagePath());
-        
-        if (placeholder.getAltText() != null && !placeholder.getAltText().isEmpty()) {
-            imageProperties.put("alt", placeholder.getAltText());
-        }
-        
-        if (placeholder.getTitle() != null && !placeholder.getTitle().isEmpty()) {
-            imageProperties.put("jcr:title", placeholder.getTitle());
-        }
-        
-        // Add decorative flag if no alt text (accessibility best practice)
-        if (placeholder.getAltText() == null || placeholder.getAltText().isEmpty()) {
-            imageProperties.put("isDecorative", true);
-        }
-
-        // Create a wrapped resource that delegates to the Image component
-        // This is the Adobe pattern - wrap the current resource with image properties
-        ComponentsResourceWrapper imageResource = new ComponentsResourceWrapper(
-            resource,
-            IMAGE_RESOURCE_TYPE,
-            imageProperties
-        );
-
-        return imageResource;
-    }
 
     /**
-     * Sanitize HTML to prevent XSS attacks
+     * Normalize DAM asset path - remove /jcr:content/renditions/* suffix
      */
-    private String sanitizeHtml(Document doc) {
-        Safelist safelist = Safelist.relaxed()
-            .addTags("table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", 
-                     "div", "span", "p", "br", "strong", "em", "a", "ul", "ol", "li")
-            .addAttributes("table", "class", "id", "border", "cellspacing", "cellpadding", "style")
-            .addAttributes("td", "colspan", "rowspan", "class", "style")
-            .addAttributes("th", "colspan", "rowspan", "class", "style", "scope")
-            .addAttributes("div", "class", "id", "data-placeholder-id")
-            .addAttributes("a", "href", "target", "rel")
-            .addAttributes("span", "class", "style");
-
-        String cleanHtml = Jsoup.clean(doc.body().html(), "", safelist, 
-                                        new Document.OutputSettings().prettyPrint(false));
-        return cleanHtml;
+    private String normalizeDamAssetPath(String assetPath) {
+        if (assetPath == null || assetPath.trim().isEmpty()) {
+            return assetPath;
+        }
+        
+        int jcrContentIndex = assetPath.indexOf("/jcr:content");
+        return (jcrContentIndex > 0) ? assetPath.substring(0, jcrContentIndex) : assetPath;
     }
 
     // ==================== Getters for HTL ====================
 
+    /**
+     * Gets the processed table HTML with images already rendered server-side
+     * 
+     * @return the complete table HTML with Image components rendered
+     */
     public String getProcessedTableHtml() {
         return processedTableHtml;
-    }
-
-    public List<ImagePlaceholder> getImagePlaceholders() {
-        return imagePlaceholders;
-    }
-
-    /**
-     * Get the wrapped image resource for a given placeholder ID
-     * This resource can be rendered using data-sly-resource
-     * 
-     * @param placeholderId the placeholder ID
-     * @return the wrapped image resource, or null if not found
-     */
-    public Resource getImageResource(String placeholderId) {
-        return imageResourceMap.get(placeholderId);
-    }
-
-    /**
-     * Get all image resources as a map (for HTL access)
-     */
-    public Map<String, Resource> getImageResources() {
-        return imageResourceMap;
     }
 
     public boolean isEnableResponsive() {
@@ -220,11 +200,12 @@ public class TableModel {
         return componentId;
     }
 
+    /**
+     * Checks if the component has content to display
+     * 
+     * @return true if there is processed HTML to render
+     */
     public boolean hasContent() {
         return processedTableHtml != null && !processedTableHtml.trim().isEmpty();
-    }
-
-    public boolean hasImages() {
-        return !imagePlaceholders.isEmpty();
     }
 }

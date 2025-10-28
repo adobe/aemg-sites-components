@@ -43,7 +43,12 @@
                         </goals>
                         <configuration>
                             <bnd><![CDATA[
-							Import-Package: javax.annotation;version=0.0.0,*
+Import-Package: javax.annotation;version=0.0.0,\
+  javax.annotation.meta;resolution:=optional,\
+  *
+# Embed Jsoup library for HTML parsing
+-includeresource: @jsoup-*.jar!/**
+Embed-Dependency: jsoup;scope=compile|runtime;inline=true
                                 ]]></bnd>
                         </configuration>
                     </execution>
