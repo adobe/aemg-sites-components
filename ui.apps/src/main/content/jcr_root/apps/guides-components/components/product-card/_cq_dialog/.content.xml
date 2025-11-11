@@ -29,18 +29,36 @@
                                         sling:resourceType="granite/ui/components/coral/foundation/container">
                                         <items jcr:primaryType="nt:unstructured">
                                             <sectionId
-                                                    jcr:primaryType="nt:unstructured"
-                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                                    fieldDescription="Enter section Id "
-                                                    fieldLabel="Section id"
-                                                    name="./sectionId"/>
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                                fieldDescription="Enter section Id "
+                                                fieldLabel="Section id"
+                                                name="./sectionId"/>
                                             <rootPath
-                                                    jcr:primaryType="nt:unstructured"
-                                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
-                                                    fieldDescription="Select the root path of products"
-                                                    fieldLabel="Product Root path"
-                                                    name="./rootPath"
-                                                    rootPath="/content"/>
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                fieldDescription="Select the root path of products"
+                                                fieldLabel="Product Root path"
+                                                name="./rootPath"
+                                                rootPath="/content"/>
+                                            <nextIcon
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                fieldDescription="Select the root path of products"
+                                                fieldLabel="NextIcon path"
+                                                name="./nextIcon"/>
+                                            <prevIcon
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                fieldDescription="Select the root path of products"
+                                                fieldLabel="PrevIcon path"
+                                                name="./prevIcon"/>
+                                            <productIconPath
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                                fieldDescription="Select the root path of products"
+                                                fieldLabel="Product Icon Path"
+                                                name="./productIconPath"/>
                                         </items>
                                     </column>
                                 </items>
