@@ -12,6 +12,7 @@ import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,9 @@ public class SocialShareModel {
     @OSGiService
     private ResourceResolverFactory resourceResolverFactory;
 
+    @SlingObject
+    private ResourceResolver rr;
+
     @Inject
     String[] social;
 
@@ -42,7 +46,7 @@ public class SocialShareModel {
         try {
             resolver = CommonUtils.getResourceResolver(resourceResolverFactory);
 
-            Resource resource = resolver.getResource(CommonConstants.SOCIAL_JSON_PATH);
+            Resource resource = rr.getResource(CommonConstants.SOCIAL_JSON_PATH);
             if (resource == null) {
                 LOGGER.warn("Resource not found at path: {}", CommonConstants.SOCIAL_JSON_PATH);
                 return jsonObjectList; // Return empty list if resource not found

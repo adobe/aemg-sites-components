@@ -11,13 +11,16 @@ window.onload = function () {
     const $darkIcon = $themIcon.querySelector(".gu-theme_icon.dark");
 	
 	
-    // Select the dark theme icon and update its src
-    $darkIcon.src =
-      "/content/dam/guides/common-images/icons/dark-theme.svg";
+	
+   const pagePath = window.location.pathname;
+// site root (e.g., /content/mysite/…)
+const siteName = pagePath.split('/')[2];
 
-    // Select the light theme icon and update its src
-    $lightIcon.src =
-      "/content/dam/guides/common-images/icons/light-theme.svg";
+$darkIcon.src =
+  `/content/dam/${siteName}/common-images/icons/dark-theme.svg`;
+
+$lightIcon.src =
+  `/content/dam/${siteName}/common-images/icons/light-theme.svg`;
 	
 	
     if (theme === "dark") {
