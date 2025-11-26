@@ -1,0 +1,84 @@
+/**
+ * Table Component Styles
+ * Provides basic styling and responsive behavior
+ */
+
+.gu-table-wrapper {
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.gu-table-content table {
+    width: 100%;
+    margin-bottom: 0;
+    color: #212529;
+    border-collapse: collapse;
+}
+
+.gu-table-content th,
+.gu-table-content td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.gu-table-content thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #e9ecef;
+    font-weight: 600;
+}
+
+.gu-table-content tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+/* Responsive table styling */
+.gu-table--responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Image placeholder styling */
+.gu-table-image-placeholder {
+    min-width: 50px;
+    min-height: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Ensure images in table are responsive */
+.gu-table-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Table style variations */
+.gu-table--style-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.gu-table--style-bordered th,
+.gu-table--style-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.gu-table--style-bordered thead th {
+    border-bottom-width: 2px;
+}
+
+/* Placeholder for edit mode */
+.cq-placeholder {
+    padding: 1rem;
+    border: 2px dashed #ccc;
+    color: #888;
+    text-align: center;
+    font-style: italic;
+    background-color: #f5f5f5;
+}
+
