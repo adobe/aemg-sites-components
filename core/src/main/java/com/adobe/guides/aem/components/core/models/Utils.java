@@ -342,6 +342,10 @@ public class Utils {
 
         JSONObject json = new JSONObject();
         for (String path : paths) {
+            if (!isSafePath(path)) {
+                logger.warn("Skipping unsafe path {} which resolves outside /content", path);
+                continue;
+            }
             json.put(path, true);
         }
 
@@ -387,4 +391,31 @@ public class Utils {
         }
     }
 
+    public static boolean isSafePath(String path) {
+        return path.startsWith(CONTENT_ROOT_PATH);
+    }
+
+    public static void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
+        boolean isVisible =  (toc.has("visible") && Boolean.TRUE.equals(toc.get("visible")));
+        boolean hasDisplayName =  toc.has("displayName");
+        if (toc.has("outputPath") && isVisible && hasDisplayName) {
+            String outputPath = toc.getString("outputPath");
+            String fullPath = Paths.get(categoryPath, outputPath).normalize().toString();
+            
+            if (!Utils.isSafePath(fullPath)) {
+                logger.warn("Skipping unsafe outputPath {} which resolves outside /content: {}", outputPath, fullPath);
+            } else {
+                PagerItem item = new PagerItem()
+                        .setTitle(toc.get("displayName").toString())
+                        .setUrl(fullPath);
+                collector.add(item);
+            }
+        }
+        if (toc.has("children") && isVisible) {
+            JSONArray children = toc.getJSONArray("children");
+            for (int i = 0; i < children.length(); i++) {
+                flattenToc(children.getJSONObject(i), categoryPath, collector);
+            }
+        }
+    }
 }
