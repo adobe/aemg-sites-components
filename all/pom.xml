@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.adobe.guides.aem.components</groupId>
         <artifactId>guides-components</artifactId>
-        <version>1.5.2-SNAPSHOT</version>
+        <version>1.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -49,6 +49,7 @@
                 <artifactId>filevault-package-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <finalName>guides-components-all-aem6.5-${project.parent.version}</finalName>
                     <group>com.adobe.guides.aem.components</group>
                     <packageType>container</packageType>
                     <properties>
