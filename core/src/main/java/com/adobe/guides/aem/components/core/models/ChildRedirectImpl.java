@@ -28,7 +28,6 @@ import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -40,7 +39,6 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -84,49 +82,11 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
         toc.put("visible", true);
         ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
-        LOGGER.info("Pager: flatten toc {}", flat);
-        redirectUrl = flat.get(0).getUrl();
-    }
-
-    @PostConstruct
-    private void activate() throws RepositoryException, JSONException, IOException {
-        String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
-        Session session = request.getResourceResolver().adaptTo(Session.class);
-        String categoryPath = Utils.getCategoryPathFromPage(currentPage);
-        Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
-        Binary tocBinary = node.getProperty("guides-navigation").getBinary();
-        String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
-        String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
-        JSONObject toc = new JSONObject(tocBinaryString);
-        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
-        toc.put("visible", true);
-        ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
-        LOGGER.info("Pager: flatten toc {}", flat);
+        Utils.flattenToc(toc, categoryPath, flat);
         redirectUrl = flat.get(0).getUrl();
         if (redirectUrl != null) {
             LOGGER.info("Redirecting ({}) to {}", Optional.of(301), redirectUrl);
-            response.sendRedirect(categoryPath + redirectUrl);
-        }
-    }
-
-    public void flattenToc(JSONObject toc, String categoryPath, ArrayList<PagerItem> collector) throws JSONException {
-        boolean isVisible =  (toc.has("visible") && toc.get("visible").equals(Optional.of(true)));
-        boolean hasDisplayName =  toc.has("displayName");
-        if (toc.has("outputPath") && isVisible && hasDisplayName) {
-            String outputPath = toc.getString("outputPath");
-            String fullPath = Paths.get(categoryPath, outputPath).normalize().toString();
-            PagerItem item = new PagerItem()
-                    .setTitle(toc.get("displayName").toString())
-                    .setUrl(outputPath);
-            collector.add(item);
-        }
-        if (toc.has("children") && isVisible) {
-            JSONArray children = toc.getJSONArray("children");
-            for (int i = 0; i < children.length(); i++) {
-                flattenToc(children.getJSONObject(i), categoryPath, collector);
-            }
+            response.sendRedirect(redirectUrl);
         }
     }
 

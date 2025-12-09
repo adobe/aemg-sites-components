@@ -1,0 +1,41 @@
+<!--
+  Table Component
+  Renders HTML table with Core Image Component integration.
+  
+  Server-Side Rendering Approach:
+  - Images are rendered by Core Image Component in the Sling Model
+  - Complete HTML (with rendered images) is returned to HTL
+  - No client-side JavaScript processing needed
+  - Images are in the HTML from the start (better for SEO, performance, accessibility)
+-->
+<sly data-sly-use.model="com.adobe.guides.aem.components.core.models.TableModel"
+     data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
+</sly>
+
+<!-- Include client library CSS -->
+<sly data-sly-call="${clientLib.css @ categories='guides-components.table'}"></sly>
+
+<!-- Edit mode placeholder when no content -->
+<sly data-sly-test="${wcmmode.edit && !model.hasContent}">
+    <div class="cq-placeholder" data-emptytext="${component.title}"></div>
+</sly>
+
+<!-- 
+    Render the complete table HTML.
+    Images are already rendered by Core Image Component on the server side.
+    The HTML is complete and ready to display - no JavaScript manipulation needed.
+-->
+<div data-sly-test="${model.hasContent}"
+     class="gu-table-wrapper ${model.enableResponsive ? 'gu-table--responsive' : ''} gu-table--style-${model.tableStyle}"
+     id="${model.componentId}">
+    
+    <!-- 
+        The processedTableHtml already contains the fully rendered Image components.
+        Using 'unsafe' context because:
+        1. HTML was sanitized by Jsoup in the Sling Model
+        2. We need to preserve the Image component markup
+        3. No XSS risk - all content is server-processed
+    -->
+    ${model.processedTableHtml @ context='unsafe'}
+    
+</div>
