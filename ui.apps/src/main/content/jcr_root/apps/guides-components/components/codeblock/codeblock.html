@@ -1,0 +1,42 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2024 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<sly data-sly-use.codeblock="com.adobe.guides.aem.components.core.models.CodeBlock"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"/>
+
+<sly data-sly-test="${codeblock.codeText}">
+    <div class="cmp-codeblock cmp-codeblock--${codeblock.theme}"
+         data-cmp-codeblock-language="${codeblock.language}"
+         data-cmp-codeblock-theme="${codeblock.theme}">
+
+        <div class="cmp-codeblock__header">
+            <span class="cmp-codeblock__title"
+                  data-sly-test="${codeblock.codeTitle}">${codeblock.codeTitle}</span>
+            <button class="cmp-codeblock__copy" type="button" title="Copy code">
+                <svg class="cmp-codeblock__copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M11 1H3C2.45 1 2 1.45 2 2V12H3V2H11V1ZM13 3H5C4.45 3 4 3.45 4 4V14C4 14.55 4.45 15 5 15H13C13.55 15 14 14.55 14 14V4C14 3.45 13.55 3 13 3ZM13 14H5V4H13V14Z" fill="currentColor"/>
+                </svg>
+                <span class="cmp-codeblock__copy-text">Copy code</span>
+            </button>
+        </div>
+
+        <div class="cmp-codeblock__body">
+            <pre class="cmp-codeblock__pre"><code class="cmp-codeblock__code language-${codeblock.language}">${codeblock.codeText}</code></pre>
+        </div>
+    </div>
+</sly>
+
+<sly data-sly-test="${!codeblock.codeText}" data-sly-call="${template.placeholder @ isEmpty=true}"/>
