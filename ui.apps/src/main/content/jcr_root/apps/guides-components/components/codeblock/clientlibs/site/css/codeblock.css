@@ -1,0 +1,302 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ Copyright 2024 Adobe Systems Incorporated
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~     http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/* ============================================================
+   Code Block Component
+   ============================================================ */
+
+.cmp-codeblock {
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+}
+
+/* ---- Header ---- */
+
+.cmp-codeblock__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem !important;
+    min-height: 52px;
+    box-sizing: border-box;
+}
+
+.cmp-codeblock__title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---- Copy Button ---- */
+
+.cmp-codeblock__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    margin-left: auto;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+.cmp-codeblock__copy-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ---- Code Body ---- */
+
+.cmp-codeblock__body {
+    padding: 1rem !important;
+    overflow: auto;
+}
+
+.cmp-codeblock__pre {
+    margin: 0;
+    padding: 24px 32px 28px;
+    overflow-x: auto;
+    border-radius: 0;
+    background: transparent !important;
+}
+
+.cmp-codeblock__pre[class*="language-"] {
+    margin: 0;
+    border-radius: 0;
+    background: transparent !important;
+}
+
+.cmp-codeblock__code {
+    font-family: 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.9;
+    tab-size: 4;
+    white-space: pre;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+/* ---- Scrollbar ---- */
+
+.cmp-codeblock__body::-webkit-scrollbar,
+.cmp-codeblock__pre::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+.cmp-codeblock__body::-webkit-scrollbar-track,
+.cmp-codeblock__pre::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ============================================================
+   Dark Theme
+   ============================================================ */
+
+.cmp-codeblock--dark {
+    background-color: #1b1b1b;
+    border: 2px solid #3a3a3a;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__header {
+    background-color: #2a2a2a;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__title {
+    color: #ffffff;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__copy {
+    background-color: transparent;
+    border: 1.5px solid #888888;
+    color: #e0e0e0;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__copy:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #aaaaaa;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__copy--success {
+    background-color: #2d5a2d;
+    border-color: #4a8c4a;
+    color: #90ee90;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__body {
+    background-color: #1b1b1b;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__code {
+    color: #d4d4d4;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__body::-webkit-scrollbar-thumb,
+.cmp-codeblock--dark .cmp-codeblock__pre::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   Light Theme
+   ============================================================ */
+
+.cmp-codeblock--light {
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+}
+
+.cmp-codeblock--light .cmp-codeblock__header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cmp-codeblock--light .cmp-codeblock__title {
+    color: #1a1a1a;
+}
+
+.cmp-codeblock--light .cmp-codeblock__copy {
+    background-color: transparent;
+    border: 1.5px solid #999999;
+    color: #444444;
+}
+
+.cmp-codeblock--light .cmp-codeblock__copy:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: #666666;
+}
+
+.cmp-codeblock--light .cmp-codeblock__copy--success {
+    background-color: #e6f4e6;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.cmp-codeblock--light .cmp-codeblock__body {
+    background-color: #fafafa;
+}
+
+.cmp-codeblock--light .cmp-codeblock__code {
+    color: #333333;
+}
+
+.cmp-codeblock--light .cmp-codeblock__body::-webkit-scrollbar-thumb,
+.cmp-codeblock--light .cmp-codeblock__pre::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+/* ============================================================
+   Light Theme - Syntax Highlighting Override
+   When using the light theme, override Prism's dark theme colors
+   ============================================================ */
+
+.cmp-codeblock--light .token.comment,
+.cmp-codeblock--light .token.prolog,
+.cmp-codeblock--light .token.doctype,
+.cmp-codeblock--light .token.cdata {
+    color: #6a9955;
+}
+
+.cmp-codeblock--light .token.punctuation {
+    color: #333333;
+}
+
+.cmp-codeblock--light .token.property,
+.cmp-codeblock--light .token.tag,
+.cmp-codeblock--light .token.boolean,
+.cmp-codeblock--light .token.number,
+.cmp-codeblock--light .token.constant,
+.cmp-codeblock--light .token.symbol,
+.cmp-codeblock--light .token.deleted {
+    color: #d32f2f;
+}
+
+.cmp-codeblock--light .token.selector,
+.cmp-codeblock--light .token.attr-name,
+.cmp-codeblock--light .token.string,
+.cmp-codeblock--light .token.char,
+.cmp-codeblock--light .token.builtin,
+.cmp-codeblock--light .token.inserted {
+    color: #2e7d32;
+}
+
+.cmp-codeblock--light .token.operator,
+.cmp-codeblock--light .token.entity,
+.cmp-codeblock--light .token.url,
+.cmp-codeblock--light .language-css .token.string,
+.cmp-codeblock--light .style .token.string {
+    color: #e65100;
+}
+
+.cmp-codeblock--light .token.atrule,
+.cmp-codeblock--light .token.attr-value,
+.cmp-codeblock--light .token.keyword {
+    color: #1565c0;
+}
+
+.cmp-codeblock--light .token.function,
+.cmp-codeblock--light .token.class-name {
+    color: #6f42c1;
+}
+
+.cmp-codeblock--light .token.regex,
+.cmp-codeblock--light .token.important,
+.cmp-codeblock--light .token.variable {
+    color: #e65100;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .cmp-codeblock {
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    .cmp-codeblock__header {
+        padding: 10px 16px;
+    }
+
+    .cmp-codeblock__pre {
+        padding: 16px 20px;
+    }
+
+    .cmp-codeblock__code {
+        font-size: 12px;
+    }
+
+    .cmp-codeblock__copy-text {
+        display: none;
+    }
+}

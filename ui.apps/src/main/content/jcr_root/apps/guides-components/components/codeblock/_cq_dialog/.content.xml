@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Code Block"
+          sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                    maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <general
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="General"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <codeTitle
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Optional title displayed in the code block header"
+                                    fieldLabel="Title"
+                                    name="./codeTitle"/>
+                            <codeText
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                    fieldDescription="Enter the code to be displayed in the code block"
+                                    fieldLabel="Code"
+                                    name="./codeText"
+                                    required="{Boolean}true"/>
+                            <language
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                    fieldDescription="Select the programming language for syntax highlighting"
+                                    fieldLabel="Language"
+                                    name="./language">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <plaintext
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Plain Text"
+                                            value="plaintext"/>
+                                    <javascript
+                                            jcr:primaryType="nt:unstructured"
+                                            text="JavaScript"
+                                            value="javascript"/>
+                                    <typescript
+                                            jcr:primaryType="nt:unstructured"
+                                            text="TypeScript"
+                                            value="typescript"/>
+                                    <java
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Java"
+                                            value="java"/>
+                                    <python
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Python"
+                                            value="python"/>
+                                    <html
+                                            jcr:primaryType="nt:unstructured"
+                                            text="HTML"
+                                            value="markup"/>
+                                    <css
+                                            jcr:primaryType="nt:unstructured"
+                                            text="CSS"
+                                            value="css"/>
+                                    <json
+                                            jcr:primaryType="nt:unstructured"
+                                            text="JSON"
+                                            value="json"/>
+                                    <xml
+                                            jcr:primaryType="nt:unstructured"
+                                            text="XML"
+                                            value="xml"/>
+                                    <sql
+                                            jcr:primaryType="nt:unstructured"
+                                            text="SQL"
+                                            value="sql"/>
+                                    <bash
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Bash / Shell"
+                                            value="bash"/>
+                                    <csharp
+                                            jcr:primaryType="nt:unstructured"
+                                            text="C#"
+                                            value="csharp"/>
+                                    <cpp
+                                            jcr:primaryType="nt:unstructured"
+                                            text="C / C++"
+                                            value="c"/>
+                                    <php
+                                            jcr:primaryType="nt:unstructured"
+                                            text="PHP"
+                                            value="php"/>
+                                    <ruby
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Ruby"
+                                            value="ruby"/>
+                                    <go
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Go"
+                                            value="go"/>
+                                    <yaml
+                                            jcr:primaryType="nt:unstructured"
+                                            text="YAML"
+                                            value="yaml"/>
+                                    <cfscript
+                                            jcr:primaryType="nt:unstructured"
+                                            text="CFScript / ColdFusion"
+                                            value="cfscript"/>
+                                </items>
+                            </language>
+                        </items>
+                    </general>
+                    <theme
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="Theme"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <theme
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                                    fieldDescription="Select the visual theme for the code block"
+                                    fieldLabel="Theme"
+                                    name="./theme">
+                                <items jcr:primaryType="nt:unstructured">
+                                    <dark
+                                            jcr:primaryType="nt:unstructured"
+                                            selected="{Boolean}true"
+                                            text="Dark"
+                                            value="dark"/>
+                                    <light
+                                            jcr:primaryType="nt:unstructured"
+                                            text="Light"
+                                            value="light"/>
+                                </items>
+                            </theme>
+                        </items>
+                    </theme>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>
