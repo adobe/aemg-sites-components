@@ -5,28 +5,71 @@
           sling:resourceType="cq/gui/components/authoring/dialog">
     <content
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+            sling:resourceType="granite/ui/components/coral/foundation/container">
         <items jcr:primaryType="nt:unstructured">
-            <column
+            <tabs
                     jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                    sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                    maximized="{Boolean}true">
                 <items jcr:primaryType="nt:unstructured">
-                    <limit
+                    <productHeader
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                            fieldDescription="Total items to show in a level"
-                            fieldLabel="Limit"
-                            name="./limit"
-                            value="1000" />
-                    <loadMoreText
+                            jcr:title="Product Header"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <productLogo
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldDescription="Select the product logo image from DAM"
+                                    fieldLabel="Product Logo"
+                                    mimeTypes="[image/*,image/gif,image/jpeg,image/png,image/webp,image/svg+xml]"
+                                    name="./productLogo"
+                                    rootPath="/content/dam"/>
+                            <productTitle
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Enter the product title displayed next to the logo"
+                                    fieldLabel="Product Title"
+                                    name="./productTitle"/>
+                            <appLinkText
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Enter the link text (e.g. Open app)"
+                                    fieldLabel="App Link Text"
+                                    name="./appLinkText"/>
+                            <appLinkUrl
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Enter the URL for the app link"
+                                    fieldLabel="App Link URL"
+                                    name="./appLinkUrl"/>
+                        </items>
+                    </productHeader>
+                    <navigation
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                            fieldDescription="Load more items button text"
-                            fieldLabel="Load more items text"
-                            name="./loadMoreText"
-                            value="load more..." />
+                            jcr:title="Navigation"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <limit
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Total items to show in a level"
+                                    fieldLabel="Limit"
+                                    name="./limit"
+                                    value="1000" />
+                            <loadMoreText
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Load more items button text"
+                                    fieldLabel="Load more items text"
+                                    name="./loadMoreText"
+                                    value="load more..." />
+                        </items>
+                    </navigation>
                 </items>
-            </column>
+            </tabs>
         </items>
     </content>
 </jcr:root>

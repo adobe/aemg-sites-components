@@ -13,6 +13,58 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+/* ===== Product Header ===== */
+.cmp-guidesnav-product-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 0.75rem;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 0.5rem;
+}
+
+.cmp-guidesnav-product-header__left {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-width: 0;
+}
+
+.cmp-guidesnav-product-header__logo {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.cmp-guidesnav-product-header__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cmp-guidesnav-product-header__app-link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #1473e6;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+}
+
+.cmp-guidesnav-product-header__app-link:hover {
+    text-decoration: underline;
+    color: #0d57af;
+}
+
+/* ===== Side Navigation TOC ===== */
  .cmp-guidesnavigation__group .cmp-guidesnavigation__item .toc-list-item {
     display: flex;
     height: fit-content;

@@ -14,9 +14,28 @@
 ~ limitations under the License.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
 
-<div data-sly-use.guidesnavigation="com.adobe.guides.aem.components.core.models.GuidesNavigation"
-     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
-     data-cmp-guides-side-nav-list="${guidesnavigation.guidesNavigation}"
+<sly data-sly-use.guidesnavigation="com.adobe.guides.aem.components.core.models.GuidesNavigation"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"/>
+
+<div data-sly-test="${properties.productLogo || properties.productTitle || properties.appLinkText}"
+     class="cmp-guidesnav-product-header">
+    <div class="cmp-guidesnav-product-header__left">
+        <img data-sly-test="${properties.productLogo}"
+             class="cmp-guidesnav-product-header__logo"
+             src="${properties.productLogo}"
+             alt="${properties.productTitle || 'Product logo'}"
+             loading="lazy"/>
+        <span data-sly-test="${properties.productTitle}"
+              class="cmp-guidesnav-product-header__title">${properties.productTitle}</span>
+    </div>
+    <a data-sly-test="${properties.appLinkText && properties.appLinkUrl}"
+       class="cmp-guidesnav-product-header__app-link"
+       href="${properties.appLinkUrl}"
+       target="_blank"
+       rel="noopener noreferrer">${properties.appLinkText}</a>
+</div>
+
+<div data-cmp-guides-side-nav-list="${guidesnavigation.guidesNavigation}"
      data-cmp-guides-side-nav-index="${guidesnavigation.guidesNavigationIndex}"
      data-cmp-guides-current-page-relative-url="${guidesnavigation.currentPageRelativeUrl}"
      data-cmp-guides-side-nav-items-limit="${guidesnavigation.limit}"
