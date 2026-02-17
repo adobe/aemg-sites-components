@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    cq:icon="feedback"
+    jcr:description="Displays a page feedback widget that collects user satisfaction and suggestions"
+    jcr:primaryType="cq:Component"
+    jcr:title="Page Feedback"
+    componentGroup="Guides Components - Content"/>
