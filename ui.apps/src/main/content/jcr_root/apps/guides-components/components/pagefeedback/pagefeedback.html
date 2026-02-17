@@ -1,0 +1,107 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Copyright 2024 Adobe Systems Incorporated
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     class="cmp-page-feedback" id="page-feedback-component">
+
+        <!--/* State 1: Initial question */-->
+        <section id="page-feedback-prompt" class="cmp-page-feedback__prompt">
+            <span class="cmp-page-feedback__question">Was this page helpful?</span>
+            <div class="cmp-page-feedback__actions">
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--positive yes-button" type="button">
+                    <span class="cmp-page-feedback__icon cmp-page-feedback__icon--positive" aria-hidden="true"></span>
+                    <span>Yes, thanks</span>
+                </button>
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--negative no-button" type="button">
+                    <span class="cmp-page-feedback__icon cmp-page-feedback__icon--negative" aria-hidden="true"></span>
+                    <span>Not really</span>
+                </button>
+            </div>
+        </section>
+
+        <!--/* State 2: Positive feedback form */-->
+        <section id="page-feedback-positive" class="cmp-page-feedback__form cmp-page-feedback__form--positive tcx-hide">
+            <div class="cmp-page-feedback__form-header">
+                <span class="cmp-page-feedback__form-icon cmp-page-feedback__form-icon--positive" aria-hidden="true"></span>
+                <span class="cmp-page-feedback__form-heading">We're glad. Tell us how this page helped.</span>
+            </div>
+            <div class="cmp-page-feedback__form-body">
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="found_answer"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Found the answer to my problem</span>
+                </label>
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="understood_instructions"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Understood the instructions</span>
+                </label>
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="liked_feature"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Liked the feature</span>
+                </label>
+                <div class="cmp-page-feedback__suggestions">
+                    <label class="cmp-page-feedback__suggestions-label">Other suggestions</label>
+                    <textarea class="cmp-page-feedback__suggestions-input suggestions-input" placeholder="Value"></textarea>
+                </div>
+            </div>
+            <div class="cmp-page-feedback__form-footer">
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--skip skip-button" type="button">Skip</button>
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--submit submit-button" type="button">Submit</button>
+            </div>
+        </section>
+
+        <!--/* State 3: Negative feedback form */-->
+        <section id="page-feedback-negative" class="cmp-page-feedback__form cmp-page-feedback__form--negative tcx-hide">
+            <div class="cmp-page-feedback__form-header">
+                <span class="cmp-page-feedback__form-icon cmp-page-feedback__form-icon--negative" aria-hidden="true"></span>
+                <span class="cmp-page-feedback__form-heading">We're sorry. Can you tell us what didn't work for you?</span>
+            </div>
+            <div class="cmp-page-feedback__form-body">
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="no_answer"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Didn't find the answer to my problem</span>
+                </label>
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="unclear_instructions"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Couldn't understand the instructions</span>
+                </label>
+                <label class="cmp-page-feedback__checkbox">
+                    <input type="checkbox" name="reason" value="disliked_feature"/>
+                    <span class="cmp-page-feedback__checkbox-box"></span>
+                    <span class="cmp-page-feedback__checkbox-label">Didn't like the feature</span>
+                </label>
+                <div class="cmp-page-feedback__suggestions">
+                    <label class="cmp-page-feedback__suggestions-label">Other suggestions</label>
+                    <textarea class="cmp-page-feedback__suggestions-input suggestions-input" placeholder="Value"></textarea>
+                </div>
+            </div>
+            <div class="cmp-page-feedback__form-footer">
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--skip skip-button" type="button">Skip</button>
+                <button class="cmp-page-feedback__btn cmp-page-feedback__btn--submit submit-button" type="button">Submit</button>
+            </div>
+        </section>
+
+        <!--/* State 4: Thank you confirmation */-->
+        <section id="page-feedback-thankyou" class="cmp-page-feedback__thankyou tcx-hide">
+            <span class="cmp-page-feedback__thankyou-icon" aria-hidden="true"></span>
+            <span class="cmp-page-feedback__thankyou-text">Thank you for your feedback. Your response will help improve this page.</span>
+        </section>
+
+    </div>
