@@ -51,6 +51,7 @@ public class SearchBarImpl implements Searchbar {
     private Resource resource;
     private boolean hidebutton = false;
     private String resultPage;
+    private String placeholder;
 
     @PostConstruct
     private void initModel() {
@@ -63,6 +64,8 @@ public class SearchBarImpl implements Searchbar {
 	if (properties.containsKey(PN_HIDE_BUTTON)) {
 	    hidebutton = true;
 	}
+
+	placeholder = properties.get(PN_PLACEHOLDER, "Search");
     }
 
     @Override
@@ -73,6 +76,11 @@ public class SearchBarImpl implements Searchbar {
     @Override
     public String getResultpage() {
 	return resultPage;
+    }
+
+    @Override
+    public String getPlaceholder() {
+	return placeholder;
     }
 
     @NotNull

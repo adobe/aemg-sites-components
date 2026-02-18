@@ -35,6 +35,12 @@
                                         fieldDescription="Search result page path ."
                                         fieldLabel="Search Result Page"
                                         name="./resultpage"/>
+                                    <placeholder
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                        fieldDescription="Placeholder text displayed in the search input field. Defaults to 'Search' if left empty."
+                                        fieldLabel="Search Placeholder Text"
+                                        name="./placeholder"/>
                                 </items>
                             </column>
                         </items>
