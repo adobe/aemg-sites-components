@@ -42,14 +42,22 @@ const PRISM_LANGUAGE_MAP: Record<string, string[]> = {
 
 function loadScript(src: string): Promise<void> {
     return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) {
-            resolve();
+        const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
+        if (existingScript) {
+            if (existingScript.getAttribute("data-loaded") === "true") {
+                resolve();
+            } else {
+                existingScript.addEventListener("load", () => resolve());
+                existingScript.addEventListener("error", () => reject(new Error(`Failed to load script: ${src}`)));
+            }
             return;
         }
         const script = document.createElement("script");
         script.src = src;
-        script.async = true;
-        script.onload = () => resolve();
+        script.onload = () => {
+            script.setAttribute("data-loaded", "true");
+            resolve();
+        };
         script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
         document.head.appendChild(script);
     });
@@ -79,11 +87,25 @@ async function loadPrism(language: string): Promise<void> {
     }
 }
 
+function decodeHTMLEntities(text: string): string {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+}
+
 async function highlightCodeBlock(block: HTMLElement): Promise<void> {
     const language = block.getAttribute("data-cmp-codeblock-language") || "plaintext";
     const codeElement = block.querySelector<HTMLElement>(".cmp-codeblock__code");
 
-    if (!codeElement || language === "plaintext") {
+    if (!codeElement) {
+        return;
+    }
+
+    codeElement.textContent = decodeHTMLEntities(
+        (codeElement.textContent || "").replace(/<br\s*\/?>/gi, "")
+    );
+
+    if (language === "plaintext") {
         return;
     }
 

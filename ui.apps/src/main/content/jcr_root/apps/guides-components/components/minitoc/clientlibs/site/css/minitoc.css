@@ -29,7 +29,7 @@
 
 .minitoc-list li a {
     color: #484848;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -37,14 +37,14 @@
 
 .minitoc-list li.selected a {
     color: #222;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
 }
 
 .minitoc-title {
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.125;
     color: #606060;
     font-size: 1rem;
@@ -75,7 +75,7 @@
     }
     .minitoc-level.selected::before {
         content: '';
-        width: 4px;
+        width: 2px;
         background: #0B1D59;
         display: inline-block;
         height: 100%;
@@ -98,7 +98,7 @@
     height: 1.125rem;
 }
 .minitoc-container {
-    width: 10rem;
+    width: 15rem;
 }
 .minitoc-container.collapse {
     display: none;
