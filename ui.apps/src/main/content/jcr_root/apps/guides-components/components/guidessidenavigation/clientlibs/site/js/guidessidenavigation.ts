@@ -88,6 +88,8 @@ class GuidesNavigation {
         container.classList.add('toc-list-item')
         const paddingDepth = 1.25 * incrementer;
         container.style.paddingLeft = `${paddingDepth}rem`;
+        container.style.paddingTop = '0.5rem';
+        container.style.paddingBottom = '0.5rem';
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
@@ -114,7 +116,7 @@ class GuidesNavigation {
         } else {
             listItem.classList.add("cmp-guidesnavigation__item--inactive")
         }
-
+        container.appendChild(anchor)
         if (hasChildren) {
             if (!expandChildren) {
                 chevron.classList.add('hide-children')
@@ -124,7 +126,7 @@ class GuidesNavigation {
             })
             container.appendChild(chevron)
         }
-        container.appendChild(anchor)
+        
         listItem.appendChild(container)
         if (subtree) {
             listItem.appendChild(subtree)
