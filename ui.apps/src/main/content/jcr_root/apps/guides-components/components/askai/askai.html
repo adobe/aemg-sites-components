@@ -1,0 +1,67 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright 2024 Adobe Systems Incorporated
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div class="cmp-askai"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-cmp-placeholder="${properties.placeholder || 'Ask a question...'}"
+     data-cmp-endpoint="${properties.endpoint || ''}"
+     data-cmp-disclaimer="${properties.disclaimerText || 'AI responses may be inaccurate and any offers provided are non-binding.'}">
+
+    <!-- Search Input Bar -->
+    <div class="cmp-askai__search-bar">
+        <input type="text"
+               class="cmp-askai__search-input"
+               placeholder="${properties.placeholder @ i18n}"
+               id="askai-input"/>
+        <button type="button" class="cmp-askai__search-clear" id="askai-clear" title="Clear" style="display:none;"></button>
+    </div>
+
+    <!-- AI Summary Response Section -->
+    <div class="cmp-askai__summary" id="askai-summary" style="display:none;">
+        <div class="cmp-askai__summary-header">
+            <div class="cmp-askai__summary-title-group">
+                <h3 class="cmp-askai__summary-title">AI summary title</h3>
+            </div>
+            <div class="cmp-askai__summary-actions">
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-copy" id="askai-copy" title="Copy summary"></button>
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-like" id="askai-like" title="Helpful"></button>
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-dislike" id="askai-dislike" title="Not helpful"></button>
+            </div>
+        </div>
+
+        <div class="cmp-askai__summary-body" id="askai-body">
+            <div class="cmp-askai__summary-content" id="askai-content">
+            </div>
+        </div>
+
+        <div class="cmp-askai__summary-footer">
+            <button type="button" class="cmp-askai__toggle-btn" id="askai-toggle">
+                <span id="askai-toggle-text">Show more</span>
+            </button>
+        </div>
+
+        <div class="cmp-askai__disclaimer">
+            <span id="askai-disclaimer-text">AI responses may be inaccurate and any offers provided are non-binding.</span>
+            <a href="#" class="cmp-askai__disclaimer-link">Terms</a>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="cmp-askai__loading" id="askai-loading" style="display:none;">
+        <div class="cmp-askai__loading-spinner"></div>
+        <span class="cmp-askai__loading-text">Generating response...</span>
+    </div>
+</div>
