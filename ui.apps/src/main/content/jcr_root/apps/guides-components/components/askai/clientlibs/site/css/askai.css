@@ -20,9 +20,6 @@
 
 .cmp-askai {
     font-family: "Adobe Clean", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 24px 16px;
 }
 
 /* ========================================================================
@@ -107,7 +104,6 @@
     margin-top: 32px;
     background: #fff;
     border-radius: 12px;
-    padding: 28px 32px 20px;
 }
 
 .cmp-askai__summary-header {
