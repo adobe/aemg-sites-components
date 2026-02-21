@@ -40,6 +40,14 @@ it.
     var $getSortAscDesVal = document.getElementById("js-sorting-des-asc");
     var $getSortDirVal = document.getElementById("js-sort-dir");
 
+    var ARTICLE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">' +
+        '<circle cx="12" cy="12" r="10.5" stroke="#959595" stroke-width="1.2"/>' +
+        '<line x1="2" y1="12" x2="22" y2="12" stroke="#959595" stroke-width="1"/>' +
+        '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" stroke="#959595" stroke-width="1"/>' +
+        '</svg>';
+
+    var SHORT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
     var getCategory = new Array();
     var resultSize = 0;
     var showCountVal = 0;
@@ -49,19 +57,27 @@ it.
     var getSortAscDesVal = getSortingVal($getSortAscDesVal);
     var getSortDirVal = getSortingVal($getSortDirVal);
 
-    // GET SORTING DROP-DOWN VALUES
     function getSortingVal(val) {
         if(!val) return ""
         return val[val.selectedIndex].value;
     }
 
-    // Load More Button Click Function
+    function formatShortDate(dateStr) {
+        if (!dateStr) return "";
+        try {
+            var date = new Date(dateStr);
+            if (isNaN(date.getTime())) return dateStr;
+            return SHORT_MONTHS[date.getMonth()] + " " + date.getFullYear();
+        } catch (e) {
+            return dateStr;
+        }
+    }
+
     getLoadMoreBtn.addEventListener("click", function(event) {
         resultSize = resultSize + parseInt(document.querySelector(".search__field--view").dataset.cmpResultsSize);
         getCategory.length > 0 ? fetchDataNew(getCategory) : fetchDataNew();
     });
 
-    // CATEGORIES CLICK EVENT
     $getFacetFilterCheckbox.forEach(function(getFacetFilterCheckbox) {
         getFacetFilterCheckbox.addEventListener("click", function(event) {
             resultSize = 0;
@@ -78,7 +94,6 @@ it.
         });
     });
 
-    // SORT BY CLICK EVENT AND PAGE LOAD
     if($getSortAscDesVal) {
         $getSortAscDesVal.addEventListener("change", function(event) {
             resultSize = 0;
@@ -97,36 +112,29 @@ it.
         });
     }
 
-    // On page load function
     function onDocumentReady() {
         searchResultEndMessage.style.display = "none";
         getLoadMoreBtn.style.display = "none";
         fetchDataNew();
     }
 
-    // FETCH DATA API CALL
     function fetchDataNew(getCategory) {
         var apiURL = getDataURL(getCategory);
-	console.log("API URL=", apiURL);
         fetch(apiURL)
             .then(function(response) {
                 return response.json();
             })
             .then(function(json) {
-		console.log("fetchDataNew(json) => json =", json);
                 return displayDataOnPage(json);
             });
     }
 
-    // FETCH DATA URL CREATION
     function getDataURL(getCategory) {
-	console.log(`getDataURL($getCategory)) called`);
         var fetchAPIURL = getPageURL + "." + RESULTS_JSON + getRelativePath + getQueryParam + "&" + PARAM_RESULTS_OFFSET + "=" + resultSize + "&orderby=" + getSortDirVal + "&sort=" + getSortAscDesVal;
         var fetchAPIURLNew = getCategory ? fetchAPIURL + "&tags=" + getCategory : fetchAPIURL;
         return fetchAPIURLNew;
     }
 
-    // Check null value and replace with empty string
     function checkNull(inputValue) {
         var value = "";
         if (inputValue === null) {
@@ -143,10 +151,34 @@ it.
         return ""
     }
 
-    // DISPLAY DATA ON PAGE LOAD
-    function displayDataOnPage(resultData) {
-        console.log("Result Data: ", resultData);
+    function buildResultItem(item, breadcrumb) {
+        var shortDate = formatShortDate(item.formattedLastModifiedDate);
+        var url = checkNull(item.url);
+        var displayUrl = url;
+        try {
+            if (window.location.origin && url.indexOf("/") === 0) {
+                displayUrl = window.location.origin + url;
+            }
+        } catch (e) { /* keep relative url */ }
 
+        var html = "<li class='cmp-searchresult-item'>" +
+            "<div class='cmp-searchresult-icon'>" + ARTICLE_ICON + "</div>" +
+            "<div class='cmp-searchresult-content'>" +
+                "<h3 class='cmp-searchresult-title'>" +
+                    "<a class='cmp-searchresult-link' target='_blank' href='" + url + "'>" + checkNull(item.title) + "</a>" +
+                "</h3>" +
+                "<p class='cmp-searchresult-description'>" + checkNull(item.excerpt) + "</p>" +
+                "<span class='cmp-searchresult-meta'>" +
+                    "<span class='cmp-searchresult-date'>" + shortDate + "</span>" +
+                    "<span class='cmp-searchresult-separator'>|</span>" +
+                    "<span class='cmp-searchresult-url'>" + displayUrl + "</span>" +
+                "</span>" +
+            "</div>" +
+        "</li>";
+        return html;
+    }
+
+    function displayDataOnPage(resultData) {
         totalRecords.innerHTML = "";
         NUMBER_OF_RECORDS = "";
 
@@ -176,24 +208,23 @@ it.
         }
 
         for (var i = 0; i < dataCount; i++) {
-            let breadcrumb = data[i].path.slice(1).replaceAll('/', ' > ')
-            var fifthIndex = breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ') + 1) + 1) + 1) + 3; // Finding the index of the fifth '>'
+            var breadcrumb = data[i].path.slice(1).replaceAll('/', ' > ');
+            var fifthIndex = breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ', breadcrumb.indexOf(' > ') + 1) + 1) + 1) + 3;
             breadcrumb = breadcrumb.slice(fifthIndex);
-            LIST_GROUP += "<li class='cmp-searchresult-item'><h3 class='cmp-searchresult-title'><a class='cmp-searchresult-link' target='_blank' href=" + checkNull(data[i].url) + ">" + checkNull(data[i].title) + "</a></h3><span class='cmp-searchresult-tags'>" + checkNull(data[i].tags) + "<span class='cmp-searchresult-date'>" + checkNull(data[i].formattedLastModifiedDate) + "</span> <p class='cmp-searchresult-description'>" + checkNull(data[i].excerpt) + "</p><p class='cmp-searchresult-breadcrumb'>" + checkNull(breadcrumb) + "</p></li>";
+            LIST_GROUP += buildResultItem(data[i], breadcrumb);
         }
         searchFieldListGroup.innerHTML = LIST_GROUP;
-        let total = resultData.totalRecords
+        var total = resultData.totalRecords;
         if(hasMore) {
             total = total + "+"
         }
-        const format = totalRecords.getAttribute("data-cmp-format")
+        var format = totalRecords.getAttribute("data-cmp-format");
         if(dataCount === 0){
             searchResultEndMessage.style.display = "block";
             totalRecords.style.display = "none"
         } else {
             totalRecords.innerHTML = createResultsHeader(format, showCountVal, total);
         }
-
     }
 
     document.addEventListener("DOMContentLoaded", onDocumentReady);

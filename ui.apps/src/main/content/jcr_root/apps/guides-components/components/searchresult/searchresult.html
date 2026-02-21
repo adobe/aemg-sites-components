@@ -13,21 +13,23 @@
 ~ See the License for the specific language governing permissions and
 ~ limitations under the License.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<section
-	data-sly-use.search="com.adobe.guides.aem.components.core.models.Search"
+<sly data-sly-use.search="com.adobe.guides.aem.components.core.models.Search"
 	data-sly-use.templates="core/wcm/components/commons/v1/templates.html"
 	data-sly-use.facetTemplate="facet.html"
-	data-sly-use.sortTemplate="sort.html" class="search__field--results">
+	data-sly-use.sortTemplate="sort.html"></sly>
 
-	<sly data-sly-test="${search.facetEnabled}" data-sly-call="${facetTemplate.facet @ search=search}"></sly>
-	<sly data-sly-test="${search.sortEnabled}" data-sly-call="${sortTemplate.sort @ search=search}"></sly>
+<section data-sly-test="${search.facetEnabled}" class="search__field--facets">
+	<sly data-sly-call="${facetTemplate.facet @ search=search}"></sly>
 </section>
 
 <section data-cmp-results-size="${search.resultsSize}"
 	data-cmp-relative-path="${search.relativePath}"
 	class="search__field--view" id="js-display-diff-view">
-	<div class = "search-result-header">
-		<div data-cmp-format="${search.resultFormat}" class="cmp-search__total-records"></div>
+	<div class="search-result-header">
+		<div data-cmp-format="Showing {total} results" class="cmp-search__total-records"></div>
+		<div data-sly-test="${search.sortEnabled}" class="cmp-sort__wrapper">
+			<sly data-sly-call="${sortTemplate.sort @ search=search}"></sly>
+		</div>
 		<div id="js-searchResults-endData"><p>${search.noResultText @ i18n}</p></div>
 	</div>
 	<ul class="cmp-search-list__item-group">
