@@ -37,6 +37,7 @@ class AskAI {
     private copyBtn: HTMLButtonElement;
     private likeBtn: HTMLButtonElement;
     private dislikeBtn: HTMLButtonElement;
+    private digDeeperBtn: HTMLButtonElement;
     private disclaimerText: HTMLElement;
     private endpoint: string;
     private isExpanded: boolean;
@@ -64,6 +65,7 @@ class AskAI {
         this.copyBtn = this.wrapper.querySelector('#askai-copy') as HTMLButtonElement;
         this.likeBtn = this.wrapper.querySelector('#askai-like') as HTMLButtonElement;
         this.dislikeBtn = this.wrapper.querySelector('#askai-dislike') as HTMLButtonElement;
+        this.digDeeperBtn = this.wrapper.querySelector('#askai-dig-deeper') as HTMLButtonElement;
         this.disclaimerText = this.wrapper.querySelector('#askai-disclaimer-text') as HTMLElement;
 
         const placeholder = this.wrapper.getAttribute('data-cmp-placeholder') || 'Ask a question...';
@@ -102,6 +104,19 @@ class AskAI {
         this.copyBtn.addEventListener('click', () => this.copySummary());
         this.likeBtn.addEventListener('click', () => this.toggleLike());
         this.dislikeBtn.addEventListener('click', () => this.toggleDislike());
+
+        if (this.digDeeperBtn) {
+            this.digDeeperBtn.addEventListener('click', () => this.openAskDoc());
+        }
+    }
+
+    private openAskDoc(): void {
+        const query = this.input.value.trim();
+        const event = new CustomEvent('askdoc:open', {
+            detail: { query: query || '' },
+            bubbles: true
+        });
+        window.dispatchEvent(event);
     }
 
     private showDefaultResponse(): void {
@@ -149,7 +164,7 @@ class AskAI {
                 this.applyCollapse();
             }
         };
-        xhr.send(JSON.stringify({ query: query }));
+        xhr.send(JSON.stringify({ question: query }));
     }
 
     private renderMarkdown(md: string): void {
