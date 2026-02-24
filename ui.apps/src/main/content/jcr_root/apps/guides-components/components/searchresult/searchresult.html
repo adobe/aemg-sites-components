@@ -18,6 +18,8 @@
 	data-sly-use.facetTemplate="facet.html"
 	data-sly-use.sortTemplate="sort.html"></sly>
 
+<h2 class="search-results-title">${'Search results' @ i18n}</h2>
+
 <section data-sly-test="${search.facetEnabled}" class="search__field--facets">
 	<sly data-sly-call="${facetTemplate.facet @ search=search}"></sly>
 </section>

@@ -1,0 +1,89 @@
+.cmp-pager {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+.cmp-pager__prev,
+.cmp-pager__next {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  background: #fff;
+}
+
+.cmp-pager__prev:hover,
+.cmp-pager__next:hover {
+  border-color: #c0c0c0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cmp-pager__prev {
+  justify-content: flex-start;
+}
+
+.cmp-pager__next {
+  justify-content: flex-end;
+}
+
+.cmp-pager__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #333;
+}
+
+.cmp-pager__prev .cmp-pager__icon {
+  margin-right: 16px;
+}
+
+.cmp-pager__next .cmp-pager__icon {
+  margin-left: 16px;
+}
+
+.cmp-pager__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cmp-pager__next .cmp-pager__content {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.cmp-pager__prev .cmp-pager__content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cmp-pager__label {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: #222;
+}
+
+.cmp-pager__title {
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: #666;
+}
+
+@media screen and (max-width: 769px) {
+  .cmp-pager {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cmp-pager__next {
+    justify-content: flex-end;
+  }
+}

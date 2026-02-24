@@ -79,7 +79,7 @@ class AskAI {
         }
 
         this.bindEvents();
-        this.showDefaultResponse();
+        this.initFromUrlParams();
     }
 
     private bindEvents(): void {
@@ -125,11 +125,33 @@ class AskAI {
         this.applyCollapse();
     }
 
+    private initFromUrlParams(): void {
+        const params = new URLSearchParams(window.location.search);
+        const fulltext = params.get('fulltext');
+        if (fulltext && fulltext.trim()) {
+            this.input.value = fulltext.trim();
+            this.clearBtn.style.display = '';
+            this.submitQuery();
+        } else {
+            this.showDefaultResponse();
+        }
+    }
+
+    private dispatchSearchEvent(query: string): void {
+        window.dispatchEvent(new CustomEvent('askai:search', {
+            detail: { fulltext: query },
+            bubbles: true
+        }));
+    }
+
     private submitQuery(): void {
         const query = this.input.value.trim();
         if (!query) return;
 
         this.clearBtn.style.display = '';
+        this.dispatchSearchEvent(query);
+
+        this.dispatchSearchEvent(query);
 
         if (!this.endpoint) {
             this.renderMarkdown(DEFAULT_MARKDOWN_RESPONSE);

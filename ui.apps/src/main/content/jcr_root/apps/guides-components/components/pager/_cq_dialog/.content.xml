@@ -28,6 +28,33 @@
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/coral/foundation/container">
         <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <labels
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Labels"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <prevLabel
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldDescription="Label displayed above the previous page title. Defaults to 'Previous page'."
+                                fieldLabel="Previous Label"
+                                name="./prevLabel"/>
+                            <nextLabel
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldDescription="Label displayed above the next page title. Defaults to 'Next page'."
+                                fieldLabel="Next Label"
+                                name="./nextLabel"/>
+                        </items>
+                    </labels>
+                </items>
+            </tabs>
         </items>
     </content>
 </jcr:root>

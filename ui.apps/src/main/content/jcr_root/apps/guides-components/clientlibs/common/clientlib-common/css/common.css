@@ -893,15 +893,6 @@ q::after,
   font-family: auto;
 }
 
-.guides-pager > .cmp-pager:first-child {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
 .guides-pager {
   margin-top: 40px;
   margin-bottom: 84px;
@@ -910,45 +901,6 @@ q::after,
   .guides-pager {
     margin-bottom: 64px;
   }
-}
-
-.cmp-pager__prev .prev,
-.cmp-pager__next .next {
-  font-family: var(--font-fam-primary);
-  font-weight: 500;
-  color: var(--color-primary);
-  font-size: var(--text-base);
-  line-height: var(--text-base-lh);
-  letter-spacing: 1px;
-}
-
-.cmp-pager__prev,
-.cmp-pager__next {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.cmp-pager__prev .prev {
-  padding-left: 4px;
-}
-
-.cmp-pager__prev svg,
-.cmp-pager__next svg {
-  color: var(--color-primary);
-  font-size: var(--text-5xs);
-}
-
-.cmp-pager__prev a,
-.cmp-pager__next a {
-  text-decoration: none;
-}
-
-.cmp-pager__next .next {
-  padding-right: 4px;
 }
 
 /**** List Styles ****/

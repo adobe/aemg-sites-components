@@ -66,8 +66,10 @@ class AskDoc {
         }
 
         this.bindEvents();
+        this.restoreState();
     }
 
+    private static readonly STORAGE_KEY = 'askdoc-state';
 
     private bindEvents(): void {
         this.closeBtn.addEventListener('click', () => this.close());
@@ -97,6 +99,8 @@ class AskDoc {
             const query = e.detail?.query || '';
             this.open(query);
         }) as EventListener);
+
+        window.addEventListener('beforeunload', () => this.saveState());
     }
 
     private autoResize(): void {
@@ -135,9 +139,50 @@ class AskDoc {
         document.body.style.overflow = '';
     }
 
+    private saveState(): void {
+        const state = {
+            chatHistory: this.chatHistory,
+            isOpen: this.isOpen
+        };
+        try {
+            sessionStorage.setItem(AskDoc.STORAGE_KEY, JSON.stringify(state));
+        } catch {
+            // storage full or unavailable
+        }
+    }
+
+    private restoreState(): boolean {
+        const saved = sessionStorage.getItem(AskDoc.STORAGE_KEY);
+        if (!saved) return false;
+
+        try {
+            const state = JSON.parse(saved);
+            if (!state.chatHistory || state.chatHistory.length === 0) return false;
+
+            state.chatHistory.forEach((msg: ChatMessage) => {
+                if (msg.role === 'user') {
+                    this.addUserMessage(msg.content);
+                } else {
+                    this.addBotMessage(msg.content, msg.suggestions);
+                }
+            });
+
+            if (state.isOpen) {
+                this.isOpen = true;
+                this.wrapper.classList.add('cmp-askdoc--open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
     private resetConversation(): void {
         this.chatHistory = [];
         this.messagesContainer.innerHTML = '';
+        sessionStorage.removeItem(AskDoc.STORAGE_KEY);
         this.addBotMessage(this.welcomeMessage);
     }
 
