@@ -15,12 +15,26 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
 <div data-sly-use.pager="com.adobe.guides.aem.components.core.models.Pager"
      class="cmp-pager">
-    <div data-sly-test="${pager.prev}" class="cmp-pager__prev">
-        <span>Previous: </span>
-        <a href="${pager.prevUrl}">${pager.prevTitle}</a>
-    </div>
-    <div data-sly-test="${pager.next}" class="cmp-pager__next">
-        <span>Next: </span>
-        <a href="${pager.nextUrl}">${pager.nextTitle}</a>
-    </div>
+    <a data-sly-test="${pager.prev}" class="cmp-pager__prev" href="${pager.prevUrl}">
+        <span class="cmp-pager__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </span>
+        <div class="cmp-pager__content">
+            <span class="cmp-pager__label">${properties.prevLabel || 'Previous page'}</span>
+            <span class="cmp-pager__title">${pager.prevTitle}</span>
+        </div>
+    </a>
+    <a data-sly-test="${pager.next}" class="cmp-pager__next" href="${pager.nextUrl}">
+        <div class="cmp-pager__content">
+            <span class="cmp-pager__label">${properties.nextLabel || 'Next page'}</span>
+            <span class="cmp-pager__title">${pager.nextTitle}</span>
+        </div>
+        <span class="cmp-pager__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </span>
+    </a>
 </div>

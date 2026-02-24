@@ -41,9 +41,12 @@ it.
     var $getSortDirVal = document.getElementById("js-sort-dir");
 
     var ARTICLE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">' +
-        '<circle cx="12" cy="12" r="10.5" stroke="#959595" stroke-width="1.2"/>' +
-        '<line x1="2" y1="12" x2="22" y2="12" stroke="#959595" stroke-width="1"/>' +
-        '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z" stroke="#959595" stroke-width="1"/>' +
+        '<rect width="24" height="24" rx="5" fill="#323232"/>' +
+        '<g transform="translate(4,4)">' +
+        '<path d="M7.9905 12.4218C7.80598 12.4283 7.6262 12.3627 7.48921 12.2389C7.22495 11.9469 7.22495 11.5021 7.48921 11.2101C7.62469 11.0833 7.80508 11.0156 7.99053 11.022C8.17961 11.0144 8.36324 11.0863 8.49694 11.2202C8.6266 11.3545 8.69627 11.5357 8.69004 11.7223C8.69994 11.9102 8.63437 12.0944 8.50788 12.2338C8.36901 12.3656 8.18158 12.4337 7.9905 12.4218Z" fill="#ffffff"/>' +
+        '<path d="M8 15C4.13984 15 1 11.8602 1 8C1 4.13984 4.13984 1 8 1C11.8602 1 15 4.13984 15 8C15 11.8602 11.8602 15 8 15ZM8 2.2C4.80156 2.2 2.2 4.80156 2.2 8C2.2 11.1984 4.80156 13.8 8 13.8C11.1984 13.8 13.8 11.1984 13.8 8C13.8 4.80156 11.1984 2.2 8 2.2Z" fill="#ffffff"/>' +
+        '<path d="M7.99382 10.1641C7.66257 10.1641 7.39382 9.89531 7.39382 9.56407C7.39382 8.7461 7.45007 8.19297 8.22507 7.41797C8.85319 6.78906 8.95944 6.53672 8.95944 6.09687C8.95944 5.92891 8.90631 5.09063 7.86023 5.09063C6.76804 5.09063 6.65163 6.01562 6.63913 6.20078C6.61803 6.53126 6.32507 6.77735 6.00163 6.76016C5.67038 6.73829 5.42038 6.45313 5.44225 6.12266C5.49303 5.35079 6.06335 3.89062 7.86022 3.89062C9.36959 3.89062 10.1594 5.00078 10.1594 6.09687C10.1594 7.01171 9.79381 7.54531 9.0735 8.2664C8.61256 8.72734 8.59381 8.91562 8.59381 9.56406C8.59381 9.89531 8.32507 10.1641 7.99382 10.1641Z" fill="#ffffff"/>' +
+        '</g>' +
         '</svg>';
 
     var SHORT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -226,6 +229,15 @@ it.
             totalRecords.innerHTML = createResultsHeader(format, showCountVal, total);
         }
     }
+
+    window.addEventListener("askai:search", function(e) {
+        getQueryParam = "?fulltext=" + encodeURIComponent(e.detail.fulltext);
+        resultSize = 0;
+        showCountVal = 0;
+        LIST_GROUP = "";
+        getCategory = [];
+        fetchDataNew();
+    });
 
     document.addEventListener("DOMContentLoaded", onDocumentReady);
 })();
