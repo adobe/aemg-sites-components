@@ -14,15 +14,7 @@
  *  limitations under the License.
  */
 
-const DEFAULT_MARKDOWN_RESPONSE = `Based on the provided search results, there is no evidence suggesting Adobe ColdFusion should be used for physical "cold storage" (refrigerated, long-term storage of physical goods).
-
-However, the results indicate that **Adobe ColdFusion is a powerful, Java-based web application development platform** that is highly suitable for archival, data management, and secure storage of digital information.
-
-Here is why you should use Adobe ColdFusion for digital cold storage/archival solutions:
-
-- **Secure Data Archival:** ColdFusion provides robust, built-in security features to protect data, including encryption and secure authentication mechanisms, making it ideal for storing sensitive, rarely accessed, or compliance-related records.
-- **Multi-Cloud Integration (AWS, Azure, GCP):** Modern ColdFusion (2021/2023 releases) has native, built-in support for cloud storage services like AWS S3 and Azure Blob, allowing you to easily move data to low-cost, long-term storage buckets.
-- **Rapid Development for Data Handling:** It excels at rapidly building applications that manage, index, and query large datasets. Its tag-based syntax (CFML) allows developers to handle complex data manipulation, file system tasks, and PDF generation with less code.`;
+const DEFAULT_ENDPOINT = 'https://flameback.adobe.io/flameback/api/v1/sites/46b038a7-9878-4c69-ac4c-001e290cb88a/answer';
 
 class AskAI {
     private wrapper: HTMLElement;
@@ -52,7 +44,7 @@ class AskAI {
         this.isDisliked = false;
         this.collapsedHeight = 150;
 
-        this.endpoint = this.wrapper.getAttribute('data-cmp-endpoint') || '';
+        this.endpoint = this.wrapper.getAttribute('data-cmp-endpoint') || DEFAULT_ENDPOINT;
 
         this.input = this.wrapper.querySelector('#askai-input') as HTMLInputElement;
         this.clearBtn = this.wrapper.querySelector('#askai-clear') as HTMLButtonElement;
@@ -119,12 +111,6 @@ class AskAI {
         window.dispatchEvent(event);
     }
 
-    private showDefaultResponse(): void {
-        this.renderMarkdown(DEFAULT_MARKDOWN_RESPONSE);
-        this.summary.style.display = '';
-        this.applyCollapse();
-    }
-
     private initFromUrlParams(): void {
         const params = new URLSearchParams(window.location.search);
         const fulltext = params.get('fulltext');
@@ -132,8 +118,6 @@ class AskAI {
             this.input.value = fulltext.trim();
             this.clearBtn.style.display = '';
             this.submitQuery();
-        } else {
-            this.showDefaultResponse();
         }
     }
 
@@ -150,15 +134,6 @@ class AskAI {
 
         this.clearBtn.style.display = '';
         this.dispatchSearchEvent(query);
-
-        this.dispatchSearchEvent(query);
-
-        if (!this.endpoint) {
-            this.renderMarkdown(DEFAULT_MARKDOWN_RESPONSE);
-            this.summary.style.display = '';
-            this.applyCollapse();
-            return;
-        }
 
         this.summary.style.display = 'none';
         this.loading.style.display = '';

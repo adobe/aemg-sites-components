@@ -20,8 +20,7 @@
    .cmp-page-feedback {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 .cmp-page-feedback__container {
     font-size: 0.875rem;
@@ -43,10 +42,14 @@
     border-radius: 0.5rem;
     display: flex;
     padding: 1rem !important;
+    width: 37.5rem;
+    height: 3.375rem;
+    justify-content: center;
+    border-radius: 0.75rem;
 }
 
 .cmp-page-feedback__question {
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #444;
     white-space: nowrap;
@@ -65,7 +68,7 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 1.25rem;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
