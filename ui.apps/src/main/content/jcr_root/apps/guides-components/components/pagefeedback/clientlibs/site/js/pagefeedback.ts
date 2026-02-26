@@ -13,6 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+export {}
+
+declare global {
+    interface Window {
+        _satellite?: { track: (ruleName: string, detail?: object) => void }
+    }
+}
+
 class Pagefeedback {
     component: HTMLElement
     prompt: HTMLElement
@@ -28,6 +36,13 @@ class Pagefeedback {
     currentSentiment: boolean
 
     hideclass = 'tcx-hide'
+
+    static readonly ANALYTICS_EVENTS = {
+        HELPFUL: 'event147',
+        NOT_HELPFUL: 'event136',
+        COMMENT_HELPFUL: 'event137',
+        COMMENT_NOT_HELPFUL: 'event138'
+    }
 
     hideSection(section: Element) {
         section.classList.add(this.hideclass)
@@ -74,6 +89,33 @@ class Pagefeedback {
         return textarea ? textarea.value.trim() : ""
     }
 
+    trackAnalyticsEvent(eventId: string, extraData?: Record<string, string>) {
+        if (!window._satellite) {
+            return
+        }
+        window._satellite.track('pageFeedback', {
+            detail: {
+                event: eventId,
+                pageUrl: window.location.href,
+                ...extraData
+            }
+        })
+    }
+
+    trackRating(isHelpful: boolean) {
+        const event = isHelpful
+            ? Pagefeedback.ANALYTICS_EVENTS.HELPFUL
+            : Pagefeedback.ANALYTICS_EVENTS.NOT_HELPFUL
+        this.trackAnalyticsEvent(event)
+    }
+
+    trackComment(isHelpful: boolean, comment: string) {
+        const event = isHelpful
+            ? Pagefeedback.ANALYTICS_EVENTS.COMMENT_HELPFUL
+            : Pagefeedback.ANALYTICS_EVENTS.COMMENT_NOT_HELPFUL
+        this.trackAnalyticsEvent(event, { comment })
+    }
+
     buildPayload(formSection: HTMLElement, isHelpful: boolean) {
         return {
             helpful: isHelpful,
@@ -113,18 +155,24 @@ class Pagefeedback {
     subscribeEvents() {
         this.yesButton.addEventListener('click', () => {
             this.currentSentiment = true
+            this.trackRating(true)
             this.hideSection(this.prompt)
             this.showSection(this.positiveForm)
         })
 
         this.noButton.addEventListener('click', () => {
             this.currentSentiment = false
+            this.trackRating(false)
             this.hideSection(this.prompt)
             this.showSection(this.negativeForm)
         })
 
         this.positiveSubmitButton.addEventListener('click', () => {
             const payload = this.buildPayload(this.positiveForm, true)
+            const comment = this.getSuggestionsText(this.positiveForm)
+            if (comment) {
+                this.trackComment(true, comment)
+            }
             this.submitFeedback(payload)
             this.hideSection(this.positiveForm)
             this.showSection(this.thankyou)
@@ -138,6 +186,10 @@ class Pagefeedback {
 
         this.negativeSubmitButton.addEventListener('click', () => {
             const payload = this.buildPayload(this.negativeForm, false)
+            const comment = this.getSuggestionsText(this.negativeForm)
+            if (comment) {
+                this.trackComment(false, comment)
+            }
             this.submitFeedback(payload)
             this.hideSection(this.negativeForm)
             this.showSection(this.thankyou)
