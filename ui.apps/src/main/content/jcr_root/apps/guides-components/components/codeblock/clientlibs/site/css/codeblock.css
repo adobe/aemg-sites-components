@@ -21,9 +21,12 @@
 .cmp-codeblock {
     border-radius: 12px;
     overflow: hidden;
-    font-family: 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.8;
+    font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 150%;
+    letter-spacing: normal;
     margin: 1.5rem 0;
     border: 1px solid #292929 !important;
 }
@@ -54,7 +57,7 @@
 .cmp-codeblock__actions {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.75rem;
     margin-left: auto;
 }
 
@@ -64,7 +67,7 @@
     align-items: center;
     gap: 6px;
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 6px 6px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     font-size: 13px;
@@ -74,18 +77,29 @@
     line-height: 1.4;
 }
 
-.cmp-codeblock__copy-icon,
-.cmp-codeblock__cffiddle-icon {
+.cmp-codeblock__copy-icon {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
 }
 
+.cmp-codeblock__cffiddle-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--Alias-content-neutral-default, #292929);
+}
+
 /* ---- Code Body ---- */
 
 .cmp-codeblock__body {
-    padding: 1rem !important;
-    overflow: auto;
+    padding: 1.25rem !important;
+    overflow: auto; 
+
+    pre {
+        white-space: pre-wrap !important; /* Allows text to wrap while preserving spaces */
+        overflow-x: hidden !important;
+    }
 }
 
 .cmp-codeblock__pre {
@@ -96,16 +110,31 @@
     background: transparent !important;
 }
 
-.cmp-codeblock__pre[class*="language-"] {
+.cmp-codeblock__pre[class*="language-"],
+.cmp-codeblock code[class*="language-"] {
     margin: 0;
     border-radius: 0;
     background: transparent !important;
+    font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: 1rem !important;
+    line-height: 150% !important;
+    letter-spacing: normal !important;
+}
+
+.cmp-codeblock__code,
+.cmp-codeblock__code span {
+    font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: 1rem !important;
+    line-height: 150% !important;
+    letter-spacing: normal !important;
+    vertical-align: middle !important;
 }
 
 .cmp-codeblock__code {
-    font-family: 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.9;
     tab-size: 4;
     white-space: pre;
     word-break: normal;
@@ -147,6 +176,10 @@
 .cmp-codeblock--dark .cmp-codeblock__cffiddle {
     background-color: transparent;
     border: 1.5px solid #888888;
+    color: #e0e0e0;
+}
+
+.cmp-codeblock--dark .cmp-codeblock__cffiddle-icon {
     color: #e0e0e0;
 }
 
@@ -193,7 +226,7 @@
 
 .cmp-codeblock--light .cmp-codeblock__header {
     background-color: #EBEEFF;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #292929 !important;
 }
 
 .cmp-codeblock--light .cmp-codeblock__title {
@@ -317,8 +350,9 @@
         padding: 16px 20px;
     }
 
-    .cmp-codeblock__code {
-        font-size: 12px;
+    .cmp-codeblock__code,
+    .cmp-codeblock__code span {
+        font-size: 1rem !important;
     }
 
     .cmp-codeblock__copy-text,

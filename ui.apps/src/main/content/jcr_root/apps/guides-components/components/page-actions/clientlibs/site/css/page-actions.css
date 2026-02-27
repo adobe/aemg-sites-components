@@ -1,0 +1,277 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ Copyright 2024 Adobe Systems Incorporated
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~     http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/* ============================================================
+   Page Actions Component
+   ============================================================ */
+
+.cmp-page-actions {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* ---- Title Bar Layout ---- */
+
+.topic__title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.topic__title-bar > .title {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ---- Trigger Button ---- */
+
+.cmp-page-actions__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: #ffffff;
+    border: 1px solid #d4d4d4;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.4;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    user-select: none;
+}
+
+.cmp-page-actions__trigger:hover {
+    background-color: #f5f5f5;
+    border-color: #b8b8b8;
+}
+
+.cmp-page-actions__trigger:active {
+    background-color: #ebebeb;
+}
+
+.cmp-page-actions__trigger[aria-expanded="true"] {
+    background-color: #f0f0f0;
+    border-color: #b8b8b8;
+}
+
+/* ---- Trigger Icon ---- */
+
+.cmp-page-actions__trigger-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ---- Trigger Caret ---- */
+
+.cmp-page-actions__trigger-caret {
+    width: 10px;
+    height: 6px;
+    flex-shrink: 0;
+    color: #666666;
+    transition: transform 0.2s ease;
+}
+
+.cmp-page-actions__trigger[aria-expanded="true"] .cmp-page-actions__trigger-caret {
+    transform: rotate(180deg);
+}
+
+/* ---- Panel (Backdrop + Menu) ---- */
+
+.cmp-page-actions__panel {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.cmp-page-actions__panel[hidden] {
+    display: none;
+}
+
+/* ---- Backdrop Overlay ---- */
+
+.cmp-page-actions__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: -1;
+    animation: cmp-page-actions-fade-in 0.15s ease;
+}
+
+/* ---- Dropdown Menu ---- */
+
+.cmp-page-actions__menu {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14), 0 2px 12px rgba(0, 0, 0, 0.06);
+    min-width: 280px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: cmp-page-actions-slide-in 0.15s ease;
+}
+
+/* ---- Menu Item ---- */
+
+.cmp-page-actions__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1a1a1a;
+    text-align: left;
+    width: 100%;
+    transition: background-color 0.12s ease;
+    line-height: 1.4;
+}
+
+.cmp-page-actions__item:hover {
+    background-color: #f5f5f5;
+}
+
+.cmp-page-actions__item:active {
+    background-color: #ebebeb;
+}
+
+/* ---- Item Icon ---- */
+
+.cmp-page-actions__item-icon {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ---- Icon Definitions (Data URIs) ---- */
+
+.cmp-page-actions__icon--copy-page {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10.5748%2016.2004H3.8248C2.7086%2016.2004%201.7998%2015.2916%201.7998%2014.1754V7.42539C1.7998%206.30918%202.7086%205.40039%203.8248%205.40039C4.19746%205.40039%204.4998%205.70274%204.4998%206.07539C4.4998%206.44804%204.19746%206.75039%203.8248%206.75039C3.45302%206.75039%203.1498%207.05361%203.1498%207.42539V14.1754C3.1498%2014.5472%203.45302%2014.8504%203.8248%2014.8504H10.5748C10.9466%2014.8504%2011.2498%2014.5472%2011.2498%2014.1754C11.2498%2013.8027%2011.5522%2013.5004%2011.9248%2013.5004C12.2975%2013.5004%2012.5998%2013.8027%2012.5998%2014.1754C12.5998%2015.2916%2011.691%2016.2004%2010.5748%2016.2004Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M6.07539%204.4998C5.70274%204.4998%205.40039%204.19746%205.40039%203.8248C5.40039%202.7086%206.30918%201.7998%207.42539%201.7998C7.79804%201.7998%208.10039%202.10215%208.10039%202.4748C8.10039%202.84746%207.79804%203.1498%207.42539%203.1498C7.05361%203.1498%206.75039%203.45302%206.75039%203.8248C6.75039%204.19746%206.44804%204.4998%206.07539%204.4998Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M11.6996%203.1498H9.89961C9.52696%203.1498%209.22461%202.84746%209.22461%202.4748C9.22461%202.10215%209.52696%201.7998%209.89961%201.7998H11.6996C12.0723%201.7998%2012.3746%202.10215%2012.3746%202.4748C12.3746%202.84746%2012.0723%203.1498%2011.6996%203.1498Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M11.6996%2012.6H9.89961C9.52696%2012.6%209.22461%2012.2977%209.22461%2011.925C9.22461%2011.5523%209.52696%2011.25%209.89961%2011.25H11.6996C12.0723%2011.25%2012.3746%2011.5523%2012.3746%2011.925C12.3746%2012.2977%2012.0723%2012.6%2011.6996%2012.6Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M14.175%2012.6004C13.8023%2012.6004%2013.5%2012.298%2013.5%2011.9254C13.5%2011.5527%2013.8023%2011.2504%2014.175%2011.2504C14.5468%2011.2504%2014.85%2010.9472%2014.85%2010.5754C14.85%2010.2027%2015.1523%209.90039%2015.525%209.90039C15.8977%209.90039%2016.2%2010.2027%2016.2%2010.5754C16.2%2011.6916%2015.2912%2012.6004%2014.175%2012.6004Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M15.525%204.4998C15.1523%204.4998%2014.85%204.19746%2014.85%203.8248C14.85%203.45302%2014.5468%203.1498%2014.175%203.1498C13.8023%203.1498%2013.5%202.84746%2013.5%202.4748C13.5%202.10215%2013.8023%201.7998%2014.175%201.7998C15.2912%201.7998%2016.2%202.7086%2016.2%203.8248C16.2%204.19746%2015.8977%204.4998%2015.525%204.4998Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M15.5246%208.775C15.152%208.775%2014.8496%208.47265%2014.8496%208.1V6.3C14.8496%205.92735%2015.152%205.625%2015.5246%205.625C15.8973%205.625%2016.1996%205.92735%2016.1996%206.3V8.1C16.1996%208.47265%2015.8973%208.775%2015.5246%208.775Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M6.07539%208.775C5.70274%208.775%205.40039%208.47265%205.40039%208.1V6.3C5.40039%205.92735%205.70274%205.625%206.07539%205.625C6.44804%205.625%206.75039%205.92735%206.75039%206.3V8.1C6.75039%208.47265%206.44804%208.775%206.07539%208.775Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M7.42539%2012.6004C6.30918%2012.6004%205.40039%2011.6916%205.40039%2010.5754C5.40039%2010.2027%205.70274%209.90039%206.07539%209.90039C6.44804%209.90039%206.75039%2010.2027%206.75039%2010.5754C6.75039%2010.9472%207.05361%2011.2504%207.42539%2011.2504C7.79804%2011.2504%208.10039%2011.5527%208.10039%2011.9254C8.10039%2012.298%207.79804%2012.6004%207.42539%2012.6004Z%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.cmp-page-actions__icon--copy-mcp {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M16.1998%203.82539C16.1998%201.90498%2012.5778%200.900391%208.9998%200.900391C5.42177%200.900391%201.7998%201.90498%201.7998%203.82539C1.7998%203.88582%201.81365%203.94272%201.82073%204.00139C1.81507%204.03655%201.7998%204.06819%201.7998%204.10489V13.0504C1.7998%2014.6658%204.48267%2015.3065%206.08183%2015.5456C6.11567%2015.55%206.14951%2015.5526%206.18247%2015.5526C6.51118%2015.5526%206.79947%2015.3118%206.84912%2014.9769C6.90406%2014.6087%206.65005%2014.265%206.28135%2014.2097C4.01201%2013.8713%203.19155%2013.2376%203.1498%2013.0504V10.211C3.37777%2010.3264%203.62908%2010.4394%203.93599%2010.5446C4.00894%2010.5701%204.08277%2010.5815%204.15528%2010.5815C4.43564%2010.5815%204.69756%2010.4058%204.7938%2010.1254C4.91465%209.77294%204.727%209.38886%204.37456%209.26845C3.41611%208.93886%203.1643%208.61454%203.1498%208.55038V5.60242C4.52667%206.36037%206.77134%206.75038%208.9998%206.75038C11.2283%206.75038%2013.4729%206.36037%2014.8499%205.60231L14.85%208.54555C14.8334%208.61828%2014.5675%208.95512%2013.5591%209.29042C13.2054%209.4082%2013.0138%209.79052%2013.1311%2010.1438C13.2251%2010.4268%2013.4888%2010.6061%2013.7718%2010.6061C13.8421%2010.6061%2013.9138%2010.5956%2013.9845%2010.5719C14.3259%2010.4585%2014.6024%2010.3359%2014.8501%2010.2102L14.8502%2013.0451C14.8076%2013.2411%2013.9726%2013.8836%2011.6594%2014.2184C11.2902%2014.2721%2011.0345%2014.6139%2011.0881%2014.9831C11.1368%2015.3197%2011.4251%2015.5614%2011.7552%2015.5614C11.7872%2015.5614%2011.8202%2015.5588%2011.8527%2015.5544C13.4765%2015.3188%2016.1998%2014.6808%2016.1998%2013.0504V4.10489C16.1998%204.06819%2016.1845%204.03655%2016.1789%204.00139C16.1859%203.94272%2016.1998%203.88582%2016.1998%203.82539ZM8.9998%205.40039C5.14009%205.40039%203.1498%204.29649%203.1498%203.82539C3.1498%203.35429%205.14009%202.25039%208.9998%202.25039C12.8595%202.25039%2014.8498%203.35429%2014.8498%203.82539C14.8498%204.29649%2012.8595%205.40039%208.9998%205.40039Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M11.2278%2012.1338C11.4005%2012.1338%2011.5733%2012.0679%2011.7051%2011.936C11.9688%2011.6724%2011.9688%2011.2452%2011.7051%2010.9815L9.4775%208.7544C9.21382%208.49072%208.78667%208.49072%208.523%208.7544L6.29541%2010.9815C6.03174%2011.2452%206.03174%2011.6724%206.29541%2011.936C6.55908%2012.1997%206.98623%2012.1997%207.24991%2011.936L8.32524%2010.8609V16.8676C8.32524%2017.2402%208.62759%2017.5426%209.00024%2017.5426C9.3729%2017.5426%209.67524%2017.2402%209.67524%2016.8676V10.8609L10.7506%2011.936C10.8824%2012.0679%2011.0551%2012.1338%2011.2278%2012.1338Z%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.cmp-page-actions__icon--connect-cursor {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13.7207%203.78707L7.33145%200.0890818C7.12628%20-0.0296939%206.87312%20-0.0296939%206.66795%200.0890818L0.278956%203.78707C0.106483%203.8869%200%204.07153%200%204.27149V11.7285C0%2011.9285%200.106483%2012.1131%200.278956%2012.2129L6.66825%2015.9109C6.87342%2016.0297%207.12658%2016.0297%207.33175%2015.9109L13.721%2012.2129C13.8935%2012.1131%2014%2011.9285%2014%2011.7285V4.27149C14%204.07153%2013.8935%203.8869%2013.721%203.78707H13.7207ZM13.3194%204.57039L7.15148%2015.2801C7.10978%2015.3522%206.9997%2015.3228%206.9997%2015.2392V8.22657C6.9997%208.08645%206.92501%207.95685%206.80383%207.88649L0.745983%204.38035C0.673994%204.33855%200.703389%204.22819%200.786776%204.22819H13.1226C13.2978%204.22819%2013.4073%204.41853%2013.3197%204.57069H13.3194V4.57039Z%22%20fill%3D%22%2326251E%22%2F%3E%3C%2Fsvg%3E");
+}
+
+/* ---- Animations ---- */
+
+@keyframes cmp-page-actions-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cmp-page-actions-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Feedback Toast ---- */
+
+.cmp-page-actions__toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    pointer-events: none;
+    animation: cmp-page-actions-toast-in 0.2s ease, cmp-page-actions-toast-out 0.2s ease 1.6s forwards;
+}
+
+@keyframes cmp-page-actions-toast-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes cmp-page-actions-toast-out {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px);
+    }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .topic__title-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .cmp-page-actions__trigger-text {
+        display: none;
+    }
+
+    .cmp-page-actions__menu {
+        min-width: 240px;
+        right: 8px;
+    }
+}

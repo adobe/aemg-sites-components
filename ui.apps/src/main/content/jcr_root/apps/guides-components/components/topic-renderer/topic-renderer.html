@@ -10,7 +10,10 @@
             <div class="topic section">
                 <div class="toolbar-scenario-mobile"></div>
                 <div class="topic__container">
-                    <h1 class="title">${metadata.pageTitle}</h1>
+                    <div class="topic__title-bar">
+                        <h1 class="title">${metadata.pageTitle}</h1>
+                        <div data-sly-resource="${'page-actions' @ resourceType='guides-components/components/page-actions'}"></div>
+                    </div>
                 </div>
                 <div class="topic__updated">
                     <div class="updated__container">
