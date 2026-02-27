@@ -6,12 +6,13 @@
 
 .cmp-pager__prev,
 .cmp-pager__next {
-  flex: 1;
+  flex: 0 0 calc(50% - 12px);
+  max-width: calc(50% - 12px);
   display: flex;
   align-items: center;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
-  padding: 20px 24px;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   color: inherit;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
@@ -30,6 +31,7 @@
 
 .cmp-pager__next {
   justify-content: flex-end;
+  margin-left: auto;
 }
 
 .cmp-pager__icon {
@@ -51,6 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .cmp-pager__next .cmp-pager__content {
@@ -64,17 +67,23 @@
 }
 
 .cmp-pager__label {
+  font-family: adobe-clean, Arial, sans-serif;
   font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.4;
-  color: #222;
+  font-size: 20px;
+  line-height: 125%;
+  color: #2C2C2C;
 }
 
 .cmp-pager__title {
+  font-family: adobe-clean, Arial, sans-serif;
   font-weight: 400;
-  font-size: 1.125rem;
-  line-height: 1.4;
-  color: #666;
+  font-size: 16px;
+  line-height: 150%;
+  color: #2C2C2C;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 769px) {

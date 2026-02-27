@@ -1,0 +1,52 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ Copyright 2024 Adobe Systems Incorporated
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~     http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div class="cmp-page-actions"
+     data-cmp-page-actions
+     data-copy-selector="#section-topic"
+     data-mcp-config='{"mcpServers":{"aemg-docs":{"command":"npx","args":["-y","@anthropic/mcp-fetch"]}}}'
+     data-cursor-scheme="cursor://anysphere.cursor-deeplink/mcp/install">
+
+    <button class="cmp-page-actions__trigger"
+            type="button"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Page actions menu">
+        <span class="cmp-page-actions__trigger-icon cmp-page-actions__icon--copy-page" aria-hidden="true"></span>
+        <span class="cmp-page-actions__trigger-text">Copy page</span>
+        <svg class="cmp-page-actions__trigger-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <div class="cmp-page-actions__panel" aria-label="Page actions" hidden>
+        <div class="cmp-page-actions__backdrop"></div>
+        <div class="cmp-page-actions__menu" role="menu">
+            <button class="cmp-page-actions__item" role="menuitem" data-action="copy-page">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--copy-page" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">Copy page</span>
+            </button>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="copy-mcp">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--copy-mcp" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">Copy MCP Server</span>
+            </button>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="connect-cursor">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--connect-cursor" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">Connect to Cursor</span>
+            </button>
+        </div>
+    </div>
+</div>

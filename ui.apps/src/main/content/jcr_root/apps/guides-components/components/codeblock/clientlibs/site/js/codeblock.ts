@@ -171,6 +171,17 @@ function handleCopy(button: HTMLElement): void {
     });
 }
 
+function handleCFFiddle(button: HTMLElement): void {
+    window.open("https://cffiddle.org/", "_blank", "noopener,noreferrer");
+
+    const fiddleTextLabel = button.querySelector<HTMLElement>(".cmp-codeblock__cffiddle-text");
+    button.classList.add("cmp-codeblock__cffiddle--opened");
+
+    setTimeout(() => {
+        button.classList.remove("cmp-codeblock__cffiddle--opened");
+    }, 2000);
+}
+
 function initCodeBlocks(): void {
     const codeBlocks = document.querySelectorAll<HTMLElement>(".cmp-codeblock");
 
@@ -185,6 +196,11 @@ function initCodeBlocks(): void {
         const copyButton = block.querySelector<HTMLElement>(".cmp-codeblock__copy");
         if (copyButton) {
             copyButton.addEventListener("click", () => handleCopy(copyButton));
+        }
+
+        const cffiddleButton = block.querySelector<HTMLElement>(".cmp-codeblock__cffiddle");
+        if (cffiddleButton) {
+            cffiddleButton.addEventListener("click", () => handleCFFiddle(cffiddleButton));
         }
     });
 }
