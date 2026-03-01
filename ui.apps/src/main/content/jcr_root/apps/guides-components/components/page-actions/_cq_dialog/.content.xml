@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured"
+          jcr:title="Page Actions"
+          sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                    maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <mcpSettings
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="MCP Settings"
+                            sling:resourceType="granite/ui/components/coral/foundation/container"
+                            margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <mcpName
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Display name for the MCP server (e.g. Coldfusion Documentation-Test)"
+                                    fieldLabel="MCP Server Name"
+                                    name="./mcpName"
+                                    required="{Boolean}true"/>
+                            <mcpConfig
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                    fieldDescription="JSON configuration for the MCP server used in Cursor deeplink (e.g. {&quot;url&quot;:&quot;https://...&quot;,&quot;headers&quot;:{...}})"
+                                    fieldLabel="MCP Config (JSON)"
+                                    name="./mcpConfig"
+                                    required="{Boolean}true"/>
+                            <mcpServer
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="MCP server URL copied to clipboard (e.g. https://guides-knowledge-graph.adobe.io/mcp)"
+                                    fieldLabel="MCP Server URL"
+                                    name="./mcpServer"
+                                    required="{Boolean}true"/>
+                        </items>
+                    </mcpSettings>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

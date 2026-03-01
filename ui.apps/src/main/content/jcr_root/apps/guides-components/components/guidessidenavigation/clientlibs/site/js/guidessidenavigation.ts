@@ -222,6 +222,40 @@ class GuidesNavigation {
         return path.substring(0, path.lastIndexOf('.')) || path
     }
 
+    expandAllSections(navigationParent: Element) {
+        let collapsed: NodeListOf<Element>
+        do {
+            collapsed = navigationParent.querySelectorAll(
+                '.cmp-guidesnavigation__item-has-children > .toc-list-item > .item-child-toggle.hide-children'
+            )
+            collapsed.forEach((chevron: HTMLElement) => chevron.click())
+        } while (collapsed.length > 0)
+    }
+
+    collapseAllSections(navigationParent: Element) {
+        const expanded = navigationParent.querySelectorAll(
+            '.cmp-guidesnavigation__item-has-children > .toc-list-item > .item-child-toggle.show-children'
+        )
+        expanded.forEach((chevron: HTMLElement) => chevron.click())
+    }
+
+    initExpandAllToggle(navigationParent: Element) {
+        const toggleBtn = document.querySelector('.cmp-guidesnav-expand-all__toggle')
+        if (!toggleBtn) return
+
+        toggleBtn.addEventListener('click', () => {
+            const isChecked = toggleBtn.getAttribute('aria-checked') === 'true'
+            const newState = !isChecked
+            toggleBtn.setAttribute('aria-checked', String(newState))
+
+            if (newState) {
+                this.expandAllSections(navigationParent)
+            } else {
+                this.collapseAllSections(navigationParent)
+            }
+        })
+    }
+
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
         if (navigationParent === null) {
@@ -247,6 +281,7 @@ class GuidesNavigation {
             this.categoryPath = categoryPath
             const ul = this.renderLevel(navData.children, 0, '', 0, 0)
             navigationParent.appendChild(ul)
+            this.initExpandAllToggle(navigationParent)
         } catch (e) {
 
         }

@@ -14,17 +14,19 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+const CURSOR_DEEPLINK = "cursor://anysphere.cursor-deeplink/mcp/install";
+
 interface PageActionsConfig {
-    copySelector: string;
     mcpConfig: string;
-    cursorScheme: string;
+    mcpServer: string;
+    mcpName: string;
 }
 
 function getConfig(root: HTMLElement): PageActionsConfig {
     return {
-        copySelector: root.getAttribute("data-copy-selector") || "#section-topic",
-        mcpConfig: root.getAttribute("data-mcp-config") || '{"mcpServers":{"aemg-docs":{"command":"npx","args":["-y","@anthropic/mcp-fetch"]}}}',
-        cursorScheme: root.getAttribute("data-cursor-scheme") || "cursor://anysphere.cursor-deeplink/mcp/install",
+        mcpConfig: root.getAttribute("data-mcp-config") || "",
+        mcpServer: root.getAttribute("data-mcp-server") || "",
+        mcpName: root.getAttribute("data-mcp-name") || "",
     };
 }
 
@@ -62,30 +64,123 @@ function copyToClipboard(text: string): Promise<void> {
     });
 }
 
+function buildStyledHtml(contentEl: HTMLElement): string {
+    const clone = contentEl.cloneNode(true) as HTMLElement;
+    const origNodes = contentEl.querySelectorAll("*");
+    const cloneNodes = clone.querySelectorAll("*");
+
+    const BASE_PROPS = [
+        "color", "background-color",
+        "font-size", "font-weight", "font-family", "font-style",
+        "line-height", "text-align", "text-decoration",
+        "margin-top", "margin-bottom", "margin-left", "margin-right",
+        "padding-top", "padding-right", "padding-bottom", "padding-left",
+        "border-top", "border-right", "border-bottom", "border-left",
+        "white-space", "list-style-type",
+    ];
+
+    const TABLE_EXTRA_PROPS = [
+        "display", "border-collapse", "border-spacing",
+        "vertical-align", "width",
+    ];
+
+    for (let i = 0; i < origNodes.length; i++) {
+        const orig = origNodes[i] as HTMLElement;
+        const cloned = cloneNodes[i] as HTMLElement;
+        const cs = window.getComputedStyle(orig);
+        const display = cs.getPropertyValue("display");
+
+        const isTableRelated =
+            display.startsWith("table") ||
+            orig.matches("table, thead, tbody, tfoot, tr, th, td, caption");
+
+        const props = isTableRelated
+            ? [...BASE_PROPS, ...TABLE_EXTRA_PROPS]
+            : BASE_PROPS;
+
+        const parts: string[] = [];
+        for (const p of props) {
+            const v = cs.getPropertyValue(p);
+            if (v) parts.push(`${p}:${v}`);
+        }
+        if (parts.length) {
+            cloned.setAttribute("style", parts.join(";"));
+        }
+    }
+
+    return clone.outerHTML;
+}
+
+function copyRichContent(html: string, plainText: string): Promise<void> {
+    if (navigator.clipboard && typeof ClipboardItem !== "undefined") {
+        const item = new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([plainText], { type: "text/plain" }),
+        });
+        return navigator.clipboard.write([item]);
+    }
+    return new Promise((resolve, reject) => {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        wrapper.style.position = "fixed";
+        wrapper.style.opacity = "0";
+        wrapper.style.pointerEvents = "none";
+        document.body.appendChild(wrapper);
+        const range = document.createRange();
+        range.selectNodeContents(wrapper);
+        const sel = window.getSelection();
+        if (!sel) {
+            document.body.removeChild(wrapper);
+            reject(new Error("No selection available"));
+            return;
+        }
+        sel.removeAllRanges();
+        sel.addRange(range);
+        try {
+            document.execCommand("copy");
+            resolve();
+        } catch (e) {
+            reject(e);
+        } finally {
+            sel.removeAllRanges();
+            document.body.removeChild(wrapper);
+        }
+    });
+}
+
 function handleCopyPage(config: PageActionsConfig): void {
-    const contentEl = document.querySelector<HTMLElement>(config.copySelector);
+    const contentEl = document.querySelector<HTMLElement>('.cmp-dita-topic-content');
     if (!contentEl) {
         showToast("No content found to copy");
         return;
     }
 
-    const textContent = contentEl.innerText || contentEl.textContent || "";
-    copyToClipboard(textContent.trim())
+    const plainText = (contentEl.innerText || contentEl.textContent || "").trim();
+    const styledHtml = buildStyledHtml(contentEl);
+
+    copyRichContent(styledHtml, plainText)
         .then(() => showToast("Page copied to clipboard"))
         .catch(() => showToast("Failed to copy page"));
 }
 
 function handleCopyMcp(config: PageActionsConfig): void {
-    copyToClipboard(config.mcpConfig)
+    if (!config.mcpServer) {
+        showToast("MCP Server configuration is missing");
+        return;
+    }
+    copyToClipboard(config.mcpServer)
         .then(() => showToast("MCP Server config copied to clipboard"))
         .catch(() => showToast("Failed to copy MCP config"));
 }
 
 function handleConnectCursor(config: PageActionsConfig): void {
-    const mcpConfig = config.mcpConfig;
-    const encodedConfig = encodeURIComponent(btoa(mcpConfig));
-    const url = `${config.cursorScheme}?config=${encodedConfig}`;
-
+    if (!config.mcpConfig || !config.mcpName) {
+        showToast("MCP configuration is missing");
+        return;
+    }
+    const encodedName = encodeURIComponent(config.mcpName);
+    const encodedConfig = btoa(config.mcpConfig);
+    const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
     window.open(url, "_self");
 }
 

@@ -17,8 +17,9 @@
 <div class="cmp-page-actions"
      data-cmp-page-actions
      data-copy-selector="#section-topic"
-     data-mcp-config='{"mcpServers":{"aemg-docs":{"command":"npx","args":["-y","@anthropic/mcp-fetch"]}}}'
-     data-cursor-scheme="cursor://anysphere.cursor-deeplink/mcp/install">
+     data-mcp-name="${properties.mcpName}"
+     data-mcp-config="${properties.mcpConfig}"
+     data-mcp-server="${properties.mcpServer}">
 
     <button class="cmp-page-actions__trigger"
             type="button"

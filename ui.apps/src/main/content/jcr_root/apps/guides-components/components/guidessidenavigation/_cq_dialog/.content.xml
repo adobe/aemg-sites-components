@@ -44,6 +44,12 @@
                                     fieldDescription="Enter the URL for the app link"
                                     fieldLabel="App Link URL"
                                     name="./appLinkUrl"/>
+                            <expandAllText
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldDescription="Label text for the expand-all-sections toggle (e.g. Expand all sections). Leave empty to hide the toggle."
+                                    fieldLabel="Expand All Toggle Text"
+                                    name="./expandAllText"/>
                         </items>
                     </productHeader>
                     <navigation
