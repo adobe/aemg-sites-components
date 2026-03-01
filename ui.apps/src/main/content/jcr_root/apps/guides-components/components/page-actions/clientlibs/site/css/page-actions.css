@@ -78,8 +78,8 @@
 
 .cmp-page-actions__trigger-icon {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: 1.25rem;
+    height: 1.25rem;
     flex-shrink: 0;
     background-size: contain;
     background-repeat: no-repeat;

@@ -35,6 +35,20 @@
        rel="noopener noreferrer">${properties.appLinkText}</a>
 </div>
 
+<div data-sly-test="${properties.expandAllText}"
+     class="cmp-guidesnav-expand-all">
+    <button class="cmp-guidesnav-expand-all__toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            aria-label="${properties.expandAllText}">
+        <span class="cmp-guidesnav-expand-all__toggle-track">
+            <span class="cmp-guidesnav-expand-all__toggle-thumb"></span>
+        </span>
+    </button>
+    <span class="cmp-guidesnav-expand-all__label">${properties.expandAllText}</span>
+</div>
+
 <div data-cmp-guides-side-nav-list="${guidesnavigation.guidesNavigation}"
      data-cmp-guides-side-nav-index="${guidesnavigation.guidesNavigationIndex}"
      data-cmp-guides-current-page-relative-url="${guidesnavigation.currentPageRelativeUrl}"
