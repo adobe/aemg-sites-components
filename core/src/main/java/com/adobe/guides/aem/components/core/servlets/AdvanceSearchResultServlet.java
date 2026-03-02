@@ -208,6 +208,7 @@ public class AdvanceSearchResultServlet extends SlingSafeMethodsServlet {
 		}
 		Map<String, String> predicatesMap = new HashMap<>();
 		predicatesMap.put(PREDICATE_FULLTEXT, fulltext);
+		predicatesMap.put("fulltext.relPath", "jcr:content");
 		predicatesMap.put(PREDICATE_PATH, searchRootPagePath);
 		predicatesMap.put(PREDICATE_TYPE, NameConstants.NT_PAGE);
 		predicatesMap.put(PREDICATE_ORDERBY, orderBy);

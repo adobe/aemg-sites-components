@@ -292,12 +292,14 @@
 }
 
 .cmp-askai__summary-content code {
-    font-family: "Source Code Pro", "Courier New", monospace;
-    background-color: #f5f3ff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 13px;
-    color: #5b21b6;
+    font-family: Adobe Clean;
+    background: #E9E9E9;
+    border: 1px solid #E9E9E9;
+    padding: 0.125rem 0.125rem 0 0.125rem;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    color: #F03823;
+    font-weight: 400;
 }
 
 .cmp-askai__summary-content pre {
@@ -314,6 +316,7 @@
     padding: 0;
     font-size: 13px;
     color: #333;
+    border: 0 !important;
 }
 
 .cmp-askai__summary-content h1,
