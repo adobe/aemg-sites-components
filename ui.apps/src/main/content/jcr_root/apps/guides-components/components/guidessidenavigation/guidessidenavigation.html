@@ -19,7 +19,8 @@
 
 <div data-sly-test="${properties.productLogo || properties.productTitle || properties.appLinkText}"
      class="cmp-guidesnav-product-header">
-    <div class="cmp-guidesnav-product-header__left">
+    <a class="cmp-guidesnav-product-header__left"
+       href="${properties.appLinkUrl}">
         <img data-sly-test="${properties.productLogo}"
              class="cmp-guidesnav-product-header__logo"
              src="${properties.productLogo}"
@@ -27,7 +28,7 @@
              loading="lazy"/>
         <span data-sly-test="${properties.productTitle}"
               class="cmp-guidesnav-product-header__title">${properties.productTitle}</span>
-    </div>
+    </a>
     <a data-sly-test="${properties.appLinkText && properties.appLinkUrl}"
        class="cmp-guidesnav-product-header__app-link"
        href="${properties.appLinkUrl}"
