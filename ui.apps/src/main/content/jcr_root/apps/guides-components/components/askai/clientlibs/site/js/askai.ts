@@ -31,6 +31,8 @@ class AskAI {
     private dislikeBtn: HTMLButtonElement;
     private digDeeperBtn: HTMLButtonElement;
     private disclaimerText: HTMLElement;
+    private sourcesContainer: HTMLElement;
+    private sourcesList: HTMLElement;
     private endpoint: string;
     private isExpanded: boolean;
     private isLiked: boolean;
@@ -59,6 +61,8 @@ class AskAI {
         this.dislikeBtn = this.wrapper.querySelector('#askai-dislike') as HTMLButtonElement;
         this.digDeeperBtn = this.wrapper.querySelector('#askai-dig-deeper') as HTMLButtonElement;
         this.disclaimerText = this.wrapper.querySelector('#askai-disclaimer-text') as HTMLElement;
+        this.sourcesContainer = this.wrapper.querySelector('#askai-sources') as HTMLElement;
+        this.sourcesList = this.wrapper.querySelector('#askai-sources-list') as HTMLElement;
 
         const placeholder = this.wrapper.getAttribute('data-cmp-placeholder') || 'Ask a question...';
         if (this.input && !this.input.getAttribute('placeholder')) {
@@ -151,11 +155,14 @@ class AskAI {
                         const response = JSON.parse(xhr.responseText);
                         const markdown = response.answer || response.content || response.text || xhr.responseText;
                         this.renderMarkdown(markdown);
+                        this.renderSources(response.final_document_list);
                     } catch {
                         this.renderMarkdown(xhr.responseText);
+                        this.renderSources(null);
                     }
                 } else {
                     this.renderMarkdown('*An error occurred while fetching the response. Please try again.*');
+                    this.renderSources(null);
                 }
                 this.summary.style.display = '';
                 this.applyCollapse();
@@ -166,6 +173,25 @@ class AskAI {
 
     private renderMarkdown(md: string): void {
         this.content.innerHTML = this.markdownToHtml(md);
+    }
+
+    private renderSources(documents: Array<{title: string; outputPath: string; guid?: string; relevance_score?: number; published_url?: string}> | null | undefined): void {
+        if (!documents || documents.length === 0) {
+            this.sourcesContainer.style.display = 'none';
+            this.sourcesList.innerHTML = '';
+            return;
+        }
+
+        this.sourcesList.innerHTML = '';
+        documents.forEach((doc, index) => {
+            const link = document.createElement('a');
+            link.className = 'cmp-askai__sources-link';
+            link.href = doc.outputPath || doc.published_url || '#';
+            link.textContent = `${doc.title}`;
+            link.setAttribute('data-index', String(index + 1));
+            this.sourcesList.appendChild(link);
+        });
+        this.sourcesContainer.style.display = '';
     }
 
     private markdownToHtml(md: string): string {
