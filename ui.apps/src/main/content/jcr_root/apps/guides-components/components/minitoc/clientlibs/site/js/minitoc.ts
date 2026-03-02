@@ -121,7 +121,7 @@ class MiniTOC {
                         }
                         if (targetNode) {
                             const parentScrollNode = htmlTag
-                            this.scrollContentWRTMinitoc(targetNode, parentScrollNode, 300)
+                            this.scrollContentWRTMinitoc(targetNode, parentScrollNode, 80)
                         }
                     }
                 }, 0)
@@ -147,7 +147,7 @@ class MiniTOC {
     isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
-            rect.top >= 100 &&
+            rect.top >= 70 &&
             rect.left >= 0 &&
             rect.bottom <= (window.innerHeight || (document.documentElement.clientHeight - 100)) &&
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)

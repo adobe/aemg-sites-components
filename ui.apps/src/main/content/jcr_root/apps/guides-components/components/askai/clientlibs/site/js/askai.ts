@@ -182,8 +182,18 @@ class AskAI {
             return;
         }
 
+        const filtered = documents
+            // .filter(doc => doc.published_url)
+            .slice(0, 5);
+
+        if (filtered.length === 0) {
+            this.sourcesContainer.style.display = 'none';
+            this.sourcesList.innerHTML = '';
+            return;
+        }
+
         this.sourcesList.innerHTML = '';
-        documents.forEach((doc, index) => {
+        filtered.forEach((doc, index) => {
             const link = document.createElement('a');
             link.className = 'cmp-askai__sources-link';
             link.href = doc.outputPath || doc.published_url || '#';
@@ -299,7 +309,7 @@ class AskAI {
         this.toggleBtn.classList.add('cmp-askai__toggle-btn--collapsed');
 
         requestAnimationFrame(() => {
-            const scrollHeight = this.content.scrollHeight;
+            const scrollHeight = this.body.scrollHeight;
             if (scrollHeight <= this.collapsedHeight) {
                 this.toggleBtn.style.display = 'none';
                 this.body.style.maxHeight = '';
@@ -313,7 +323,7 @@ class AskAI {
     private toggleExpand(): void {
         this.isExpanded = !this.isExpanded;
         if (this.isExpanded) {
-            this.body.style.maxHeight = this.content.scrollHeight + 'px';
+            this.body.style.maxHeight = this.body.scrollHeight + 'px';
             this.body.classList.remove('cmp-askai__summary-body--collapsed');
             this.toggleText.textContent = 'Show less';
             this.toggleBtn.classList.remove('cmp-askai__toggle-btn--collapsed');
