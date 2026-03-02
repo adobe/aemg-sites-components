@@ -333,6 +333,59 @@
 .cmp-askai__summary-content h3 { font-size: 16px; }
 
 /* ========================================================================
+   Sources Section
+   ======================================================================== */
+
+.cmp-askai__sources {
+    margin-top: 20px;
+    padding-top: 16px;
+}
+
+.cmp-askai__sources-label {
+    display: block;
+    color: var(--C1-Text-text, #2C2C2C);
+    font-family: Adobe Clean;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.125rem;
+    line-height: 150%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.cmp-askai__sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cmp-askai__sources-link {
+    display: block;
+    font-family: Adobe Clean;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: var(--C1-Content-link, #274DEA);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cmp-askai__sources-link::before {
+    content: "Article " attr(data-index) " | ";
+    color: var(--C1-Content-link, #274DEA);
+}
+
+.cmp-askai__sources-link:hover {
+    text-decoration: underline;
+}
+
+/* ========================================================================
    Show More / Show Less Toggle
    ======================================================================== */
 
@@ -520,5 +573,13 @@
 
     .cmp-askai__summary-content {
         font-size: 13px;
+    }
+
+    .cmp-askai__sources-label {
+        font-size: 15px;
+    }
+
+    .cmp-askai__sources-link {
+        font-size: 14px;
     }
 }
