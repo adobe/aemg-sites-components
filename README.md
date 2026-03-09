@@ -67,6 +67,74 @@ Steps for cutting a release:
 3. Tag the merge commit on `main` as `v{version}` (for example `v1.5.1`).
 4. Build each variant from the tagged commit, rename the output `guides-components.all-{version}.zip` according to the table above, and attach all three variants to the GitHub Release for `v{version}`.
 
+## Live Development with aemsync (Port 7000)
+
+For rapid front-end development (CSS, JS, HTL), use [aemsync](https://www.npmjs.com/package/aemsync) to push changes to your local AEM instance in real-time — no Maven build required. Changes are viewable on the `aem-site-theme-builder` proxy at **localhost:7000**.
+
+### Prerequisites
+
+- AEM running on `localhost:4502`
+- `aem-site-theme-builder live` running on `localhost:7000` (from the [aemg-sites-template](https://github.com/adobe/aemg-sites-template) repo)
+
+### Setup (one-time)
+
+    npm install -g aemsync
+
+### Steps to see live changes on port 7000
+
+**Step 1 — Start aemsync** (in a terminal, from this project root):
+
+    aemsync -d ui.apps/src/main/content/jcr_root -t http://admin:admin@localhost:4502
+
+Keep this terminal open. It watches for file changes and pushes them to AEM.
+
+**Step 2 — Edit & save a file** under `ui.apps/src/main/content/jcr_root/`.
+
+The terminal should show output like:
+
+    + jcr_root/apps/guides-components/components/pager/clientlibs/site/css/pager.css
+    http://admin:admin@localhost:4502 > OK
+
+If you don't see `> OK`, AEM is likely not running or credentials are incorrect.
+
+**Step 3 — Hard-refresh your browser** at `http://localhost:7000` with **Cmd+Shift+R** (Mac) or **Ctrl+Shift+R** (Windows/Linux).
+
+### Troubleshooting
+
+If changes don't appear on port 7000 after saving:
+
+1. **Check aemsync is still running.** It can silently die. Restart it if the terminal has exited.
+
+2. **Invalidate the AEM clientlib cache.** AEM caches merged clientlibs. Run:
+
+       curl -u admin:admin -X POST "http://localhost:4502/libs/granite/ui/content/dumplibs.rebuild.html?invalidate=true"
+
+3. **Push the file manually** if aemsync died before your save was picked up:
+
+       curl -u admin:admin -T <path-to-local-file> http://localhost:4502/<jcr-path-to-file>
+
+   Example:
+
+       curl -u admin:admin \
+         -T ui.apps/src/main/content/jcr_root/apps/guides-components/components/pager/clientlibs/site/css/pager.css \
+         http://localhost:4502/apps/guides-components/components/pager/clientlibs/site/css/pager.css
+
+4. **Verify the file on AEM** to confirm your changes are there:
+
+       curl -u admin:admin http://localhost:4502/apps/guides-components/components/pager/clientlibs/site/css/pager.css
+
+> **Note:** aemsync only works for content/front-end resources (CSS, JS, HTL, dialog XML, etc.). For Java code changes in `core/`, you still need to build and deploy the bundle:
+>
+>     mvn clean install -PautoInstallBundle -pl core
+
+### Quick Reference
+
+| Change type | Command |
+| --- | --- |
+| CSS / JS / HTL (live) | `aemsync -d ui.apps/src/main/content/jcr_root -t http://admin:admin@localhost:4502` |
+| Java bundle only | `mvn clean install -PautoInstallBundle -pl core` |
+| UI apps package only | `mvn clean install -PautoInstallPackage -pl ui.apps` |
+| Full project | `mvn clean install -PautoInstallPackage` |
 
 ## Testing
 
