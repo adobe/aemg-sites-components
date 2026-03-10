@@ -19,9 +19,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 1rem 3rem;
+}
+
+.cmp-guides-navigation {
     padding-top: 1rem;
-    border-bottom: 1px solid #e8e8e8;
-    padding-bottom: 1rem;
 }
 
 .cmp-guidesnav-product-header__left {
@@ -84,7 +86,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.875rem 0;
+    padding: 1rem 3rem;
 }
 
 .cmp-guidesnav-expand-all__toggle {
@@ -144,6 +146,11 @@
  .cmp-guidesnavigation__group {
     display: grid;
     font-size: 1rem;
+    width: 264px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
  }
 
 
@@ -241,8 +248,10 @@ ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
 
     a {
         width: 90%;
-        background-color: #002258;
+        background-color: #EBEEFF;
+        color: #2C2C2C;
         border-radius: 0.5rem;
+        font-weight: 700;
         padding: 0.5rem 0.75rem 0.25rem 0.75rem;
     }
 }
