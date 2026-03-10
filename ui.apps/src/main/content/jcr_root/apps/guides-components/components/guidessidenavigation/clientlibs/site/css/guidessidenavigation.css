@@ -80,6 +80,53 @@
     color: #0d57af;
 }
 
+/* ===== Filter Input ===== */
+
+.cmp-guidesnav-filter {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    margin: 0 1.5rem;
+}
+
+.cmp-guidesnav-filter__icon {
+    position: absolute;
+    left: 2rem;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.cmp-guidesnav-filter__input {
+    width: 100%;
+    padding: 0.625rem 0.75rem 0.625rem 2.75rem;
+    border: 2px solid var(--Palette-gray-300, #DADADA);
+    border-radius: 1.5rem;
+    font-family: "Adobe Clean", adobe-clean, "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 125%;
+    color: #292929;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.cmp-guidesnav-filter__input:focus {
+    border-color: #1473e6;
+}
+
+.cmp-guidesnav-filter__input::placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #292929;
+}
+
+.cmp-guidesnav-filter-hidden {
+    display: none !important;
+}
+
 /* ===== Expand All Toggle ===== */
 
 .cmp-guidesnav-expand-all {
