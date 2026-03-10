@@ -86,19 +86,18 @@ class GuidesNavigation {
         const isSelected = (currPath === this.selectedPath)
         const isActive = item.active !== false
         container.classList.add('toc-list-item')
-        const paddingDepth = 0.75 * incrementer;
+        const paddingDepth = 0.5 * incrementer;
         container.style.paddingLeft = `${paddingDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
             anchor.setAttribute("href", outputPath);
-            anchor.style.fontWeight = "400";
             
         } else {
             anchor.style.cursor = "default";
             anchor.style.color = "#505050";
-            anchor.style.fontWeight = "700";
+            anchor.style.fontWeight = "400";
         }
         anchor.setAttribute("title", item.displayName)
         anchor.innerText = item.displayName

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-const DEFAULT_ENDPOINT = 'https://flameback.adobe.io/flameback/api/v1/sites/46b038a7-9878-4c69-ac4c-001e290cb88a/answer';
+const DEFAULT_ENDPOINT = 'https://guidesai.adobe.io/flameback/api/v1/sites/46b038a7-9878-4c69-ac4c-001e290cb88a/answer';
 
 class AskAI {
     private wrapper: HTMLElement;
