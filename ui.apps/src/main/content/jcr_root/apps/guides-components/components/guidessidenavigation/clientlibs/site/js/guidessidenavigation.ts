@@ -87,8 +87,8 @@ class GuidesNavigation {
         const isSelected = (currPath === this.selectedPath)
         const isActive = item.active !== false
         container.classList.add('toc-list-item')
-        const paddingDepth = 0.5 * incrementer;
-        container.style.paddingLeft = `${paddingDepth}rem`;
+        const marginDepth = 0.5 * incrementer;
+        container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
@@ -96,7 +96,6 @@ class GuidesNavigation {
             anchor.setAttribute("href", outputPath);
             
         } else {
-            anchor.style.cursor = "default";
             anchor.style.color = "#505050";
             anchor.style.fontWeight = "400";
         }
@@ -364,6 +363,13 @@ class GuidesNavigation {
         }
     }
 
+    scrollSelectedIntoView(navigationParent: Element) {
+        const selectedItem = navigationParent.querySelector('.cmp-nav-item-selected')
+        if (selectedItem) {
+            selectedItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+        }
+    }
+
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
         if (navigationParent === null) {
@@ -392,6 +398,7 @@ class GuidesNavigation {
             navigationParent.appendChild(ul)
             this.initExpandAllToggle(navigationParent)
             this.initFilterInput()
+            this.scrollSelectedIntoView(navigationParent)
         } catch (e) {
 
         }

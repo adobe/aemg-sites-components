@@ -286,21 +286,24 @@ ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
 }
 
 .cmp-guidesnavigation__item.cmp-guidesnavigation__item-no-children a {
-    padding-left: .5rem;
+    padding: 0.5rem 0.75rem;
 }
 
 ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
-    --tw-text-opacity: 1;
-    color: #fff;
+    background-color: #EBEEFF;
+    border-radius: 0.5rem;
 
     a {
-        width: 90%;
-        background-color: #EBEEFF;
+        flex: 1;
+        min-width: 0;
         color: #2C2C2C;
-        border-radius: 0.5rem;
         font-weight: 700;
         padding: 0.5rem 0.75rem 0.25rem 0.75rem;
     }
+}
+
+.cmp-guidesnavigation__item-has-children > .toc-list-item {
+    cursor: pointer;
 }
 
 ul.cmp-guidesnavigation__group .toc-list-item a {
