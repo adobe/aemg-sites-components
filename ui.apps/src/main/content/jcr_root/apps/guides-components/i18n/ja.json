@@ -17,5 +17,16 @@
   "Yes": "はい",
   "No": "いいえ",
   "Breadcrumb": "パンくずリスト",
-  "opens in a new tab": "新しいタブで開きます"
+  "opens in a new tab": "新しいタブで開きます",
+  "Copy summary": "要約をコピー",
+  "Helpful": "役に立った",
+  "Not helpful": "役に立たなかった",
+  "AI Overview": "AI概要",
+  "Sources:": "ソース:",
+  "Show more": "もっと見る",
+  "Show less": "折りたたむ",
+  "Terms": "利用規約",
+  "Generating response...": "回答を生成中...",
+  "Ask a question...": "質問を入力...",
+  "AI responses may be inaccurate and any offers provided are non-binding.": "AI の回答は不正確な場合があり、提供されるオファーには拘束力がありません。"
 }

@@ -38,6 +38,8 @@ class AskAI {
     private isLiked: boolean;
     private isDisliked: boolean;
     private collapsedHeight: number;
+    private showMoreLabel: string;
+    private showLessLabel: string;
 
     constructor(wrapper: HTMLElement) {
         this.wrapper = wrapper;
@@ -47,6 +49,8 @@ class AskAI {
         this.collapsedHeight = 150;
 
         this.endpoint = this.wrapper.getAttribute('data-cmp-endpoint') || DEFAULT_ENDPOINT;
+        this.showMoreLabel = this.wrapper.getAttribute('data-cmp-show-more') || 'Show more';
+        this.showLessLabel = this.wrapper.getAttribute('data-cmp-show-less') || 'Show less';
 
         this.input = this.wrapper.querySelector('#askai-input') as HTMLInputElement;
         this.clearBtn = this.wrapper.querySelector('#askai-clear') as HTMLButtonElement;
@@ -305,7 +309,7 @@ class AskAI {
         this.isExpanded = false;
         this.body.style.maxHeight = this.collapsedHeight + 'px';
         this.body.classList.add('cmp-askai__summary-body--collapsed');
-        this.toggleText.textContent = 'Show more';
+        this.toggleText.textContent = this.showMoreLabel;
         this.toggleBtn.classList.add('cmp-askai__toggle-btn--collapsed');
 
         requestAnimationFrame(() => {
@@ -325,12 +329,12 @@ class AskAI {
         if (this.isExpanded) {
             this.body.style.maxHeight = this.body.scrollHeight + 'px';
             this.body.classList.remove('cmp-askai__summary-body--collapsed');
-            this.toggleText.textContent = 'Show less';
+            this.toggleText.textContent = this.showLessLabel;
             this.toggleBtn.classList.remove('cmp-askai__toggle-btn--collapsed');
         } else {
             this.body.style.maxHeight = this.collapsedHeight + 'px';
             this.body.classList.add('cmp-askai__summary-body--collapsed');
-            this.toggleText.textContent = 'Show more';
+            this.toggleText.textContent = this.showMoreLabel;
             this.toggleBtn.classList.add('cmp-askai__toggle-btn--collapsed');
         }
     }

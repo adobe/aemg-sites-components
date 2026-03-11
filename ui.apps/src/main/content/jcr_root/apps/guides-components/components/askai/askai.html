@@ -16,9 +16,11 @@
 
 <div class="cmp-askai"
      data-sly-use.template="core/wcm/components/commons/v1/templates.html"
-     data-cmp-placeholder="${properties.placeholder || 'Ask a question...'}"
+     data-cmp-placeholder="${properties.placeholder || 'Ask a question...' @ i18n}"
      data-cmp-endpoint="${properties.endpoint || ''}"
-     data-cmp-disclaimer="${properties.disclaimerText || 'AI responses may be inaccurate and any offers provided are non-binding.'}">
+     data-cmp-disclaimer="${properties.disclaimerText || 'AI responses may be inaccurate and any offers provided are non-binding.' @ i18n}"
+     data-cmp-show-more="${'Show more' @ i18n}"
+     data-cmp-show-less="${'Show less' @ i18n}">
 
     <!-- Search Input Bar -->
     <div class="cmp-askai__search-row">
@@ -45,7 +47,7 @@
                    class="cmp-askai__search-input"
                    placeholder="${properties.placeholder @ i18n}"
                    id="askai-input"/>
-            <button type="button" class="cmp-askai__search-clear" id="askai-clear" title="Clear" style="display:none;"></button>
+            <button type="button" class="cmp-askai__search-clear" id="askai-clear" title="${'Clear' @ i18n}" style="display:none;"></button>
         </div>
         <button type="button" class="cmp-askai__dig-deeper-btn" id="askai-dig-deeper">
             AskAI
@@ -56,12 +58,12 @@
     <div class="cmp-askai__summary" id="askai-summary" style="display:none;">
         <div class="cmp-askai__summary-header">
             <div class="cmp-askai__summary-title-group">
-                <h3 class="cmp-askai__summary-title">AI Overview</h3>
+                <h3 class="cmp-askai__summary-title">${'AI Overview' @ i18n}</h3>
             </div>
             <div class="cmp-askai__summary-actions">
-                <button type="button" class="cmp-askai__action-btn cmp-askai__action-copy" id="askai-copy" title="Copy summary"></button>
-                <button type="button" class="cmp-askai__action-btn cmp-askai__action-like" id="askai-like" title="Helpful"></button>
-                <button type="button" class="cmp-askai__action-btn cmp-askai__action-dislike" id="askai-dislike" title="Not helpful"></button>
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-copy" id="askai-copy" title="${'Copy summary' @ i18n}"></button>
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-like" id="askai-like" title="${'Helpful' @ i18n}"></button>
+                <button type="button" class="cmp-askai__action-btn cmp-askai__action-dislike" id="askai-dislike" title="${'Not helpful' @ i18n}"></button>
             </div>
         </div>
 
@@ -69,26 +71,26 @@
             <div class="cmp-askai__summary-content" id="askai-content">
             </div>
             <div class="cmp-askai__sources" id="askai-sources" style="display:none;">
-                <span class="cmp-askai__sources-label">Sources:</span>
+                <span class="cmp-askai__sources-label">${'Sources:' @ i18n}</span>
                 <div class="cmp-askai__sources-list" id="askai-sources-list"></div>
             </div>
         </div>
 
         <div class="cmp-askai__summary-footer">
             <button type="button" class="cmp-askai__toggle-btn" id="askai-toggle">
-                <span id="askai-toggle-text">Show more</span>
+                <span id="askai-toggle-text">${'Show more' @ i18n}</span>
             </button>
         </div>
 
         <div class="cmp-askai__disclaimer">
             <span id="askai-disclaimer-text">AI responses may be inaccurate and any offers provided are non-binding.</span>
-            <a href="#" class="cmp-askai__disclaimer-link">Terms</a>
+            <a href="#" class="cmp-askai__disclaimer-link">${'Terms' @ i18n}</a>
         </div>
     </div>
 
     <!-- Loading State -->
     <div class="cmp-askai__loading" id="askai-loading" style="display:none;">
         <div class="cmp-askai__loading-spinner"></div>
-        <span class="cmp-askai__loading-text">Generating response...</span>
+        <span class="cmp-askai__loading-text">${'Generating response...' @ i18n}</span>
     </div>
 </div>
