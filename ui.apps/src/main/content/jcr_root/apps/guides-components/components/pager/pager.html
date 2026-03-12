@@ -22,13 +22,13 @@
             </svg>
         </span>
         <div class="cmp-pager__content">
-            <span class="cmp-pager__label">${properties.prevLabel || 'Previous page'}</span>
+            <span class="cmp-pager__label">${properties.prevLabel || 'Previous page' @ i18n}</span>
             <span class="cmp-pager__title">${pager.prevTitle}</span>
         </div>
     </a>
     <a data-sly-test="${pager.next}" class="cmp-pager__next" href="${pager.nextUrl}">
         <div class="cmp-pager__content">
-            <span class="cmp-pager__label">${properties.nextLabel || 'Next page'}</span>
+            <span class="cmp-pager__label">${properties.nextLabel || 'Next page' @ i18n}</span>
             <span class="cmp-pager__title">${pager.nextTitle}</span>
         </div>
         <span class="cmp-pager__icon">

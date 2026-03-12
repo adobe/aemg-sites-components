@@ -212,7 +212,12 @@
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
-
+		<dependency>
+            <groupId>com.adobe.guides.aem.components</groupId>
+            <artifactId>guides-components.core</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
          <!-- Core Component Dependency (6.x only)-->
         <dependency>
             <groupId>com.adobe.cq</groupId>

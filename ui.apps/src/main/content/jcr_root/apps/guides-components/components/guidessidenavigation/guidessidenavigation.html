@@ -24,7 +24,7 @@
         <img data-sly-test="${properties.productLogo}"
              class="cmp-guidesnav-product-header__logo"
              src="${properties.productLogo}"
-             alt="${properties.productTitle || 'Product logo'}"
+             alt="${properties.productTitle || 'Product logo' @ i18n}"
              loading="lazy"/>
         <span data-sly-test="${properties.productTitle}"
               class="cmp-guidesnav-product-header__title">${properties.productTitle}</span>
@@ -42,8 +42,8 @@
     </svg>
     <input class="cmp-guidesnav-filter__input"
            type="text"
-           placeholder="Filter by keyword"
-           aria-label="Filter navigation by keyword" />
+           placeholder="${'Filter by keyword' @ i18n}"
+           aria-label="${'Filter navigation by keyword' @ i18n}" />
 </div>
 
 <div data-sly-test="${properties.expandAllText}"

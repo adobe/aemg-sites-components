@@ -63,7 +63,7 @@ class AskAI {
         this.copyBtn = this.wrapper.querySelector('#askai-copy') as HTMLButtonElement;
         this.likeBtn = this.wrapper.querySelector('#askai-like') as HTMLButtonElement;
         this.dislikeBtn = this.wrapper.querySelector('#askai-dislike') as HTMLButtonElement;
-        this.digDeeperBtn = this.wrapper.querySelector('#askai-dig-deeper') as HTMLButtonElement;
+        // this.digDeeperBtn = this.wrapper.querySelector('#askai-dig-deeper') as HTMLButtonElement;
         this.disclaimerText = this.wrapper.querySelector('#askai-disclaimer-text') as HTMLElement;
         this.sourcesContainer = this.wrapper.querySelector('#askai-sources') as HTMLElement;
         this.sourcesList = this.wrapper.querySelector('#askai-sources-list') as HTMLElement;
@@ -105,19 +105,19 @@ class AskAI {
         this.likeBtn.addEventListener('click', () => this.toggleLike());
         this.dislikeBtn.addEventListener('click', () => this.toggleDislike());
 
-        if (this.digDeeperBtn) {
-            this.digDeeperBtn.addEventListener('click', () => this.openAskDoc());
-        }
+        // if (this.digDeeperBtn) {
+        //     this.digDeeperBtn.addEventListener('click', () => this.openAskDoc());
+        // }
     }
 
-    private openAskDoc(): void {
-        const query = this.input.value.trim();
-        const event = new CustomEvent('askdoc:open', {
-            detail: { query: query || '' },
-            bubbles: true
-        });
-        window.dispatchEvent(event);
-    }
+    // private openAskDoc(): void {
+    //     const query = this.input.value.trim();
+    //     const event = new CustomEvent('askdoc:open', {
+    //         detail: { query: query || '' },
+    //         bubbles: true
+    //     });
+    //     window.dispatchEvent(event);
+    // }
 
     private initFromUrlParams(): void {
         const params = new URLSearchParams(window.location.search);
