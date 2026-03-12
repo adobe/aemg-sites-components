@@ -16,10 +16,21 @@
 
 const CURSOR_DEEPLINK = "cursor://anysphere.cursor-deeplink/mcp/install";
 
+interface PageActionsMessages {
+    noContent: string;
+    pageCopied: string;
+    pageCopyFailed: string;
+    mcpMissing: string;
+    mcpCopied: string;
+    mcpCopyFailed: string;
+    mcpConfigMissing: string;
+}
+
 interface PageActionsConfig {
     mcpConfig: string;
     mcpServer: string;
     mcpName: string;
+    messages: PageActionsMessages;
 }
 
 function getConfig(root: HTMLElement): PageActionsConfig {
@@ -27,6 +38,15 @@ function getConfig(root: HTMLElement): PageActionsConfig {
         mcpConfig: root.getAttribute("data-mcp-config") || "",
         mcpServer: root.getAttribute("data-mcp-server") || "",
         mcpName: root.getAttribute("data-mcp-name") || "",
+        messages: {
+            noContent: root.getAttribute("data-msg-no-content") || "No content found to copy",
+            pageCopied: root.getAttribute("data-msg-page-copied") || "Page copied to clipboard",
+            pageCopyFailed: root.getAttribute("data-msg-page-copy-failed") || "Failed to copy page",
+            mcpMissing: root.getAttribute("data-msg-mcp-missing") || "MCP Server configuration is missing",
+            mcpCopied: root.getAttribute("data-msg-mcp-copied") || "MCP Server config copied to clipboard",
+            mcpCopyFailed: root.getAttribute("data-msg-mcp-copy-failed") || "Failed to copy MCP config",
+            mcpConfigMissing: root.getAttribute("data-msg-mcp-config-missing") || "MCP configuration is missing",
+        },
     };
 }
 
@@ -151,7 +171,7 @@ function copyRichContent(html: string, plainText: string): Promise<void> {
 function handleCopyPage(config: PageActionsConfig): void {
     const contentEl = document.querySelector<HTMLElement>('.cmp-dita-topic-content');
     if (!contentEl) {
-        showToast("No content found to copy");
+        showToast(config.messages.noContent);
         return;
     }
 
@@ -159,23 +179,23 @@ function handleCopyPage(config: PageActionsConfig): void {
     const styledHtml = buildStyledHtml(contentEl);
 
     copyRichContent(styledHtml, plainText)
-        .then(() => showToast("Page copied to clipboard"))
-        .catch(() => showToast("Failed to copy page"));
+        .then(() => showToast(config.messages.pageCopied))
+        .catch(() => showToast(config.messages.pageCopyFailed));
 }
 
 function handleCopyMcp(config: PageActionsConfig): void {
     if (!config.mcpServer) {
-        showToast("MCP Server configuration is missing");
+        showToast(config.messages.mcpMissing);
         return;
     }
     copyToClipboard(config.mcpServer)
-        .then(() => showToast("MCP Server config copied to clipboard"))
-        .catch(() => showToast("Failed to copy MCP config"));
+        .then(() => showToast(config.messages.mcpCopied))
+        .catch(() => showToast(config.messages.mcpCopyFailed));
 }
 
 function handleConnectCursor(config: PageActionsConfig): void {
     if (!config.mcpConfig || !config.mcpName) {
-        showToast("MCP configuration is missing");
+        showToast(config.messages.mcpConfigMissing);
         return;
     }
     const encodedName = encodeURIComponent(config.mcpName);
