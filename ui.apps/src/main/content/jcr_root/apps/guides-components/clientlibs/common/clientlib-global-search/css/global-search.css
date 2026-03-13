@@ -171,21 +171,21 @@
 }
 
 /* Search bar clear icon styles */
-#cmp-search-page-result .search-container .cmp-search-bar__input:-moz-placeholder-shown + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:-moz-placeholder-shown ~ .cmp-search-bar__clear-icon {
   display: none !important;
 }
-#cmp-search-page-result .search-container .cmp-search-bar__input:-ms-input-placeholder + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:-ms-input-placeholder ~ .cmp-search-bar__clear-icon {
   display: none !important;
 }
-#cmp-search-page-result .search-container .cmp-search-bar__input:placeholder-shown + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:placeholder-shown ~ .cmp-search-bar__clear-icon {
   display: none !important;
 }
-#cmp-search-page-result .search-container .cmp-search-bar__input:not(:-moz-placeholder-shown) + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:not(:-moz-placeholder-shown) ~ .cmp-search-bar__clear-icon {
   display: block !important;
 }
-#cmp-search-page-result .search-container .cmp-search-bar__input:not(:-ms-input-placeholder) + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:not(:-ms-input-placeholder) ~ .cmp-search-bar__clear-icon {
   display: block !important;
 }
-#cmp-search-page-result .search-container .cmp-search-bar__input:not(:placeholder-shown) + .cmp-search-bar__clear-icon {
+#cmp-search-page-result .search-container .cmp-search-bar__input:not(:placeholder-shown) ~ .cmp-search-bar__clear-icon {
   display: block !important;
 }
