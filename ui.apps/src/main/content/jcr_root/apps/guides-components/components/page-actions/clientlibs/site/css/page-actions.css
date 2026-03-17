@@ -46,7 +46,7 @@
     align-items: center;
     gap: 8px;
     padding: 7px 14px;
-    background: #ffffff;
+    background: #F3F3F3;
     border: 1px solid #d4d4d4;
     border-radius: 8px;
     cursor: pointer;
@@ -61,12 +61,11 @@
 }
 
 .cmp-page-actions__trigger:hover {
-    background-color: #f5f5f5;
-    border-color: #b8b8b8;
+    background-color: #F3F3F3;
 }
 
 .cmp-page-actions__trigger:active {
-    background-color: #ebebeb;
+    background-color: #F3F3F3;
 }
 
 .cmp-page-actions__trigger[aria-expanded="true"] {
@@ -193,6 +192,14 @@
 
 .cmp-page-actions__icon--connect-cursor {
     background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M13.7207%203.78707L7.33145%200.0890818C7.12628%20-0.0296939%206.87312%20-0.0296939%206.66795%200.0890818L0.278956%203.78707C0.106483%203.8869%200%204.07153%200%204.27149V11.7285C0%2011.9285%200.106483%2012.1131%200.278956%2012.2129L6.66825%2015.9109C6.87342%2016.0297%207.12658%2016.0297%207.33175%2015.9109L13.721%2012.2129C13.8935%2012.1131%2014%2011.9285%2014%2011.7285V4.27149C14%204.07153%2013.8935%203.8869%2013.721%203.78707H13.7207ZM13.3194%204.57039L7.15148%2015.2801C7.10978%2015.3522%206.9997%2015.3228%206.9997%2015.2392V8.22657C6.9997%208.08645%206.92501%207.95685%206.80383%207.88649L0.745983%204.38035C0.673994%204.33855%200.703389%204.22819%200.786776%204.22819H13.1226C13.2978%204.22819%2013.4073%204.41853%2013.3197%204.57069H13.3194V4.57039Z%22%20fill%3D%22%2326251E%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.cmp-page-actions__icon--download-topic {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9%202.25v8.1%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M5.85%207.2L9%2010.35l3.15-3.15%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M3.15%2012.15v1.8a1.35%201.35%200%20001.35%201.35h9a1.35%201.35%200%20001.35-1.35v-1.8%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.35%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.cmp-page-actions__icon--download-document {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10.35%201.8H5.4a1.35%201.35%200%2000-1.35%201.35v11.7a1.35%201.35%200%20001.35%201.35h7.2a1.35%201.35%200%20001.35-1.35V5.4l-3.6-3.6z%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M10.35%201.8V5.4h3.6%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9%208.55v4.05%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M7.2%2010.8L9%2012.6l1.8-1.8%22%20stroke%3D%22%23292929%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
 }
 
 /* ---- Animations ---- */

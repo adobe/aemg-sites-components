@@ -24,12 +24,15 @@ interface PageActionsMessages {
     mcpCopied: string;
     mcpCopyFailed: string;
     mcpConfigMissing: string;
+    topicNoContent: string;
+    pdfMissing: string;
 }
 
 interface PageActionsConfig {
     mcpConfig: string;
     mcpServer: string;
     mcpName: string;
+    pdfPath: string;
     messages: PageActionsMessages;
 }
 
@@ -38,6 +41,7 @@ function getConfig(root: HTMLElement): PageActionsConfig {
         mcpConfig: root.getAttribute("data-mcp-config") || "",
         mcpServer: root.getAttribute("data-mcp-server") || "",
         mcpName: root.getAttribute("data-mcp-name") || "",
+        pdfPath: root.getAttribute("data-pdf-path") || "",
         messages: {
             noContent: root.getAttribute("data-msg-no-content") || "No content found to copy",
             pageCopied: root.getAttribute("data-msg-page-copied") || "Page copied to clipboard",
@@ -46,6 +50,8 @@ function getConfig(root: HTMLElement): PageActionsConfig {
             mcpCopied: root.getAttribute("data-msg-mcp-copied") || "MCP Server config copied to clipboard",
             mcpCopyFailed: root.getAttribute("data-msg-mcp-copy-failed") || "Failed to copy MCP config",
             mcpConfigMissing: root.getAttribute("data-msg-mcp-config-missing") || "MCP configuration is missing",
+            topicNoContent: root.getAttribute("data-msg-topic-no-content") || "No topic content found to download",
+            pdfMissing: root.getAttribute("data-msg-pdf-missing") || "PDF path is not configured",
         },
     };
 }
@@ -204,6 +210,69 @@ function handleConnectCursor(config: PageActionsConfig): void {
     window.open(url, "_self");
 }
 
+function loadHtml2Pdf(): Promise<void> {
+    if (typeof (window as any).html2pdf === "function") {
+        return Promise.resolve();
+    }
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Failed to load html2pdf"));
+        document.head.appendChild(script);
+    });
+}
+
+function generatePdf(topicEl: HTMLElement, filename: string): void {
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+        const options = {
+            margin: 0,
+            filename: filename,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0, optimizeClipping: true },
+            pagebreak: { mode: ["css", "legacy"] },
+            jsPDF: { unit: "in", format: "A4", orientation: "portrait" },
+        };
+        (window as any).html2pdf().set(options).from(topicEl).save();
+    }, 500);
+}
+
+function handleDownloadTopic(config: PageActionsConfig): void {
+    const topicEl = document.querySelector<HTMLElement>("#topic-container");
+    if (!topicEl) {
+        showToast(config.messages.topicNoContent);
+        return;
+    }
+    const titleEl = topicEl.querySelector<HTMLElement>(".title h1.cmp-title__text");
+    let filename = "topic.pdf";
+    if (titleEl && titleEl.textContent) {
+        filename = titleEl.textContent.trim().toLowerCase().replace(/\s+/g, "-") + ".pdf";
+    }
+
+    if (typeof (window as any).CreatePDFfromHTML === "function") {
+        (window as any).CreatePDFfromHTML(".cmp-dita-topic-content", filename);
+    } else {
+        loadHtml2Pdf()
+            .then(() => generatePdf(topicEl, filename))
+            .catch(() => showToast(config.messages.topicNoContent));
+    }
+}
+
+function handleDownloadDocument(config: PageActionsConfig): void {
+    if (!config.pdfPath) {
+        showToast(config.messages.pdfMissing);
+        return;
+    }
+    const link = document.createElement("a");
+    link.href = config.pdfPath;
+    link.target = "_blank";
+    link.download = "";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function positionMenu(trigger: HTMLElement, menu: HTMLElement): void {
     const rect = trigger.getBoundingClientRect();
     menu.style.top = `${rect.bottom + 8}px`;
@@ -272,6 +341,12 @@ function initPageActions(root: HTMLElement): void {
                     break;
                 case "connect-cursor":
                     handleConnectCursor(config);
+                    break;
+                case "download-topic":
+                    handleDownloadTopic(config);
+                    break;
+                case "download-document":
+                    handleDownloadDocument(config);
                     break;
             }
         });
