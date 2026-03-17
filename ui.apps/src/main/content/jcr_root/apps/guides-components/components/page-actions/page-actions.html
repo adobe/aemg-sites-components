@@ -16,17 +16,20 @@
 
 <div class="cmp-page-actions"
      data-cmp-page-actions
-     data-copy-selector="#section-topic"
+     data-copy-selector="#topic-container"
      data-mcp-name="${properties.mcpName}"
      data-mcp-config="${properties.mcpConfig}"
      data-mcp-server="${properties.mcpServer}"
+     data-pdf-path="${properties.pdfPath}"
      data-msg-no-content="${'No content found to copy' @ i18n}"
      data-msg-page-copied="${'Page copied to clipboard' @ i18n}"
      data-msg-page-copy-failed="${'Failed to copy page' @ i18n}"
      data-msg-mcp-missing="${'MCP Server configuration is missing' @ i18n}"
      data-msg-mcp-copied="${'MCP Server config copied to clipboard' @ i18n}"
      data-msg-mcp-copy-failed="${'Failed to copy MCP config' @ i18n}"
-     data-msg-mcp-config-missing="${'MCP configuration is missing' @ i18n}">
+     data-msg-mcp-config-missing="${'MCP configuration is missing' @ i18n}"
+     data-msg-topic-no-content="${'No topic content found to download' @ i18n}"
+     data-msg-pdf-missing="${'PDF path is not configured' @ i18n}">
 
     <button class="cmp-page-actions__trigger"
             type="button"
@@ -54,6 +57,15 @@
             <button class="cmp-page-actions__item" role="menuitem" data-action="connect-cursor">
                 <span class="cmp-page-actions__item-icon cmp-page-actions__icon--connect-cursor" aria-hidden="true"></span>
                 <span class="cmp-page-actions__item-text">${'Connect to Cursor' @ i18n}</span>
+            </button>
+            <div class="cmp-page-actions__separator" role="separator"></div>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="download-topic">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--download-topic" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Download this topic' @ i18n}</span>
+            </button>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="download-document">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--download-document" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Download entire document' @ i18n}</span>
             </button>
         </div>
     </div>

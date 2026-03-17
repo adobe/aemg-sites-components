@@ -198,6 +198,7 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
+    gap: 0.25rem;
  }
 
 
@@ -207,7 +208,7 @@
     justify-content: space-between;
     min-height: 2rem;
     align-items: center;
-    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
 }
 
 
@@ -286,7 +287,7 @@ ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
 }
 
 .cmp-guidesnavigation__item.cmp-guidesnavigation__item-no-children a {
-    padding: 0.5rem 0.75rem;
+    /* padding: 0.5rem 0.75rem; */
 }
 
 ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
@@ -298,7 +299,6 @@ ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
         min-width: 0;
         color: #2C2C2C;
         font-weight: 700;
-        padding: 0.5rem 0.75rem 0.25rem 0.75rem;
     }
 }
 

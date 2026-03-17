@@ -394,7 +394,7 @@ class GuidesNavigation {
             this.selectedPath = this.tokens.join('-')
             this.loadMoreText = loadMoreText
             this.categoryPath = categoryPath
-            const ul = this.renderLevel(navData.children, 0, '', 0, 0)
+            const ul = this.renderLevel(navData.children, 0, '', -1, 0)
             navigationParent.appendChild(ul)
             this.initExpandAllToggle(navigationParent)
             this.initFilterInput()
