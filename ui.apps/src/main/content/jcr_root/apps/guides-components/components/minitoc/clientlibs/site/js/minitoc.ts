@@ -134,11 +134,9 @@ class MiniTOC {
     }
 
     scrollContentWRTMinitoc(element, parentScrollNode, offset) {
-        if (element.offsetTop < parentScrollNode.scrollTop || element.offsetTop + element.offsetHeight > parentScrollNode.scrollTop + parentScrollNode.clientHeight) {
-            parentScrollNode.scrollTo({
-                top: Math.max(element.offsetTop - offset, 0)
-            });
-        }
+        parentScrollNode.scrollTo({
+            top: Math.max(element.offsetTop - offset, 0)
+        });
         setTimeout(() => {
             parentScrollNode.style.overflowY = ''
         }, 100)

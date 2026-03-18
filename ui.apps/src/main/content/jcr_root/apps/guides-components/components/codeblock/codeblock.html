@@ -22,9 +22,7 @@
          data-cmp-codeblock-language="${codeblock.language}"
          data-cmp-codeblock-theme="${codeblock.theme}">
 
-        <div class="cmp-codeblock__header">
-            <span class="cmp-codeblock__title"
-                  data-sly-test="${codeblock.codeTitle}">${codeblock.codeTitle}</span>
+        <div class="cmp-codeblock__body">
             <div class="cmp-codeblock__actions">
                 <button class="cmp-codeblock__copy" type="button" title="Copy code">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,9 +44,6 @@
                     </svg>
                 </button>
             </div>
-        </div>
-
-        <div class="cmp-codeblock__body">
             <pre class="cmp-codeblock__pre"><code class="cmp-codeblock__code language-${codeblock.language}">${codeblock.codeText}</code></pre>
         </div>
     </div>

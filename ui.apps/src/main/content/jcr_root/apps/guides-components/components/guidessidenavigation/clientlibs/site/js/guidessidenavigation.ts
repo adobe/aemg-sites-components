@@ -87,7 +87,7 @@ class GuidesNavigation {
         const isSelected = (currPath === this.selectedPath)
         const isActive = item.active !== false
         container.classList.add('toc-list-item')
-        const marginDepth = 0.5 * incrementer;
+        const marginDepth = 1 * incrementer;
         container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")

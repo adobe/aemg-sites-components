@@ -31,34 +31,16 @@
     border: 1px solid #dadada !important;
 }
 
-/* ---- Header ---- */
-
-.cmp-codeblock__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem !important;
-    min-height: 52px;
-    box-sizing: border-box;
-}
-
-.cmp-codeblock__title {
-    font-family: 'Adobe Clean';
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 /* ---- Action Buttons ---- */
 
 .cmp-codeblock__actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-left: auto;
+    gap: 0.5rem;
+    z-index: 1;
 }
 
 .cmp-codeblock__copy,
@@ -66,13 +48,15 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    border: none;
     border-radius: 6px;
-    padding: 6px 6px;
+    padding: 6px;
     cursor: pointer;
+    background-color: transparent;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     font-size: 13px;
     font-weight: 500;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease;
     white-space: nowrap;
     line-height: 1.4;
 }
@@ -93,11 +77,12 @@
 /* ---- Code Body ---- */
 
 .cmp-codeblock__body {
+    position: relative;
     padding: 0.5rem 1.25rem !important;
-    overflow: auto; 
+    overflow: auto;
 
     pre {
-        white-space: pre-wrap !important; /* Allows text to wrap while preserving spaces */
+        white-space: pre-wrap !important;
         overflow-x: hidden !important;
     }
 }
@@ -136,9 +121,9 @@
 
 .cmp-codeblock__code {
     tab-size: 4;
-    white-space: pre;
-    word-break: normal;
-    word-wrap: normal;
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
 }
 
 /* ---- Scrollbar ---- */
@@ -161,15 +146,6 @@
 .cmp-codeblock--dark {
     background-color: #1b1b1b;
     border: 2px solid #3a3a3a;
-}
-
-.cmp-codeblock--dark .cmp-codeblock__header {
-    background-color: #2a2a2a;
-    border-bottom: 1px solid #3a3a3a;
-}
-
-.cmp-codeblock--dark .cmp-codeblock__title {
-    color: #ffffff;
 }
 
 .cmp-codeblock--dark .cmp-codeblock__copy,
@@ -224,15 +200,6 @@
     border: 2px solid #e0e0e0;
 }
 
-.cmp-codeblock--light .cmp-codeblock__header {
-    background-color: #EBEEFF;
-    border-bottom: 1px solid #DADADA !important;
-}
-
-.cmp-codeblock--light .cmp-codeblock__title {
-    color: #2c2c2c;
-}
-
 .cmp-codeblock--light .cmp-codeblock__copy,
 .cmp-codeblock--light .cmp-codeblock__cffiddle {
     /* background-color: transparent;
@@ -259,7 +226,7 @@
 }
 
 .cmp-codeblock--light .cmp-codeblock__body {
-    background-color: #FFFFFF;
+    background-color: #F8F8F8;
 }
 
 .cmp-codeblock--light .cmp-codeblock__code {
@@ -340,10 +307,6 @@
     .cmp-codeblock {
         font-size: 12px;
         border-radius: 8px;
-    }
-
-    .cmp-codeblock__header {
-        padding: 10px 16px;
     }
 
     .cmp-codeblock__pre {

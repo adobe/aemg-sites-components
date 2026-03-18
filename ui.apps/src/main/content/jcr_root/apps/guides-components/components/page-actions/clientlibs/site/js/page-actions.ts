@@ -223,15 +223,75 @@ function loadHtml2Pdf(): Promise<void> {
     });
 }
 
+function preparePdfClone(clonedDoc: Document): void {
+    const topicContainer = clonedDoc.querySelector<HTMLElement>("#topic-container");
+    if (topicContainer) {
+        topicContainer.style.paddingLeft = "0";
+        topicContainer.style.paddingRight = "0";
+        // topicContainer.style.marginLeft = "-100px";
+        // topicContainer.style.marginRight = "-100px";
+    }
+
+    const boxContainer = clonedDoc.querySelector<HTMLElement>(".box-container");
+    if (boxContainer) {
+        boxContainer.style.maxWidth = "100%";
+        boxContainer.style.padding = "0";
+        boxContainer.style.margin = "0";
+    }
+
+    clonedDoc.querySelectorAll<HTMLElement>(".left-container, .right-container").forEach((el) => {
+        el.style.display = "none";
+    });
+
+    const middleContainer = clonedDoc.querySelector<HTMLElement>(".middle-container");
+    if (middleContainer) {
+        middleContainer.style.padding = "0";
+        middleContainer.style.maxWidth = "100%";
+        middleContainer.style.width = "100%";
+    }
+
+    clonedDoc.querySelectorAll(".cmp-codeblock__actions").forEach((el) => el.remove());
+
+    clonedDoc.querySelectorAll<HTMLElement>(".cmp-codeblock").forEach((el) => {
+        el.style.overflow = "visible";
+        el.style.borderRadius = "0";
+        el.style.border = "1px solid #dadada";
+        el.style.setProperty("page-break-inside", "avoid");
+        el.style.setProperty("break-inside", "avoid");
+    });
+
+    clonedDoc.querySelectorAll<HTMLElement>(".cmp-codeblock__body").forEach((el) => {
+        el.style.overflow = "visible";
+    });
+
+    const avoidBreak = "pre, table, thead, tbody, tr, figure, blockquote, img, .cmp-image, h1, h2, h3, h4, h5, h6";
+    clonedDoc.querySelectorAll<HTMLElement>(avoidBreak).forEach((el) => {
+        el.style.setProperty("page-break-inside", "avoid");
+        el.style.setProperty("break-inside", "avoid");
+    });
+}
+
 function generatePdf(topicEl: HTMLElement, filename: string): void {
     window.scrollTo(0, 0);
     setTimeout(() => {
         const options = {
-            margin: 0,
+            margin: [0.5, 0.5, 0.5, 0.5],
+            padding: [0, 0, 0, 0],
             filename: filename,
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, scrollY: 0, optimizeClipping: true },
-            pagebreak: { mode: ["css", "legacy"] },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                scrollY: 0,
+                onclone: (clonedDoc: Document) => preparePdfClone(clonedDoc),
+            },
+            pagebreak: {
+                mode: ["css", "legacy"],
+                avoid: [
+                    ".cmp-codeblock", "pre", "table", "figure",
+                    "blockquote", "img", ".cmp-image",
+                ],
+            },
             jsPDF: { unit: "in", format: "A4", orientation: "portrait" },
         };
         (window as any).html2pdf().set(options).from(topicEl).save();
@@ -244,6 +304,7 @@ function handleDownloadTopic(config: PageActionsConfig): void {
         showToast(config.messages.topicNoContent);
         return;
     }
+
     const titleEl = topicEl.querySelector<HTMLElement>(".title h1.cmp-title__text");
     let filename = "topic.pdf";
     if (titleEl && titleEl.textContent) {
