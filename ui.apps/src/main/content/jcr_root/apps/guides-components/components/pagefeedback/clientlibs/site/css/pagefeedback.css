@@ -39,13 +39,11 @@
     gap: 1rem;
     padding: 1rem 1.5rem;
     background-color: #f5f5f5;
-    border-radius: 0.5rem;
-    display: flex;
-    padding: 1rem !important;
-    width: 37.5rem;
-    height: 3.375rem;
-    justify-content: center;
     border-radius: 0.75rem;
+    max-width: 37.5rem;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .cmp-page-feedback__question {
@@ -335,26 +333,31 @@
 @media (max-width: 40rem) {
     .cmp-page-feedback {
         max-width: 100%;
+        padding: 0 1rem;
+        box-sizing: border-box;
     }
 
     .cmp-page-feedback__prompt {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .cmp-page-feedback__question {
         white-space: normal;
+        text-align: center;
     }
 
     .cmp-page-feedback__actions {
         width: 100%;
+        justify-content: center;
     }
 
     .cmp-page-feedback__btn {
         flex: 1;
         justify-content: center;
+        padding: 0.625rem 1.25rem;
     }
 
     .cmp-page-feedback__form {
