@@ -113,7 +113,7 @@ class MiniTOC {
                         let targetNode
                         for (var i = 0; i < this.headings.length; i++) {
                             let heading = this.headings[i]
-                            let id = heading.attributes['id'].value
+                            let id = heading.attributes?.['id']?.value
                             if (id === target_id) {
                                 targetNode = heading
                                 break;

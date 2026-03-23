@@ -1,5 +1,5 @@
 .cmp-pager {
-  display: flex;
+  /* display: flex; */
   gap: 24px;
   width: 100%;
 }
@@ -90,8 +90,12 @@
   .cmp-pager {
     flex-direction: column;
     gap: 16px;
+    display: flex !important
   }
-
+  .cmp-pager__prev, .cmp-pager__next {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
   .cmp-pager__next {
     justify-content: flex-end;
   }
