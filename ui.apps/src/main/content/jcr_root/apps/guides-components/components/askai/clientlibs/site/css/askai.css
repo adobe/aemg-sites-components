@@ -550,6 +550,12 @@
    Responsive
    ======================================================================== */
 
+@media (max-width: 1324px) {
+    .cmp-askai__summary {
+        padding: 2.5rem 2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .cmp-askai {
         padding: 16px 12px;
