@@ -17,66 +17,101 @@ class CategoryList {
     private protocol: string;
     private host: string;
     private pathName: string;
+    private static ITEMS_PER_GROUP = 4;
+
     constructor() {
         this.protocol = window.location.protocol;
         this.host = window.location.host;
         this.pathName = window.location.pathname;
     }
 
-    checkNull(inputValue) {
-        const value = "";
-        if (inputValue === null) {
-            return value;
-        } else {
-            return inputValue;
-        }
+    private safeText(value: string | null): string {
+        return value ?? "";
     }
 
-    displayCategory(resultData) {
-        const categoryDiv = document.querySelector(".cmp-category-list-group");
-        const listFragment = new DocumentFragment();
+    private createChevronSVG(): SVGSVGElement {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "20");
+        svg.setAttribute("height", "20");
+        svg.setAttribute("viewBox", "0 0 20 20");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("aria-hidden", "true");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M7.5 4.167L13.333 10 7.5 15.833");
+        path.setAttribute("stroke", "currentColor");
+        path.setAttribute("stroke-width", "1.5");
+        path.setAttribute("stroke-linecap", "round");
+        path.setAttribute("stroke-linejoin", "round");
+        svg.appendChild(path);
+        return svg;
+    }
 
-        if(resultData == null || resultData.length === 0) {
+    displayCategory(resultData: string[]) {
+        const categoryDiv = document.querySelector(".cmp-category-list-group");
+        if (!categoryDiv || !resultData || resultData.length === 0) {
             return;
         }
 
-        resultData.forEach((categoryPath, index) => {
-            if (index % 3 === 0) {
-                const categoryTitle = resultData[index + 1];
-                const categoryTumbnail = resultData[index + 2];
-                const categoryURL = this.protocol + '//' + this.host + categoryPath + '.html';
-                const templateName = this.pathName.split("/")[2];
-                if (categoryPath.startsWith('/content/' + templateName)) {
-                    const listItem = document.createElement('div');
-                    listItem.classList.add('category-list-item');
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('category-list-item-image-container');
-                    imageContainer.style.backgroundImage = `url('${categoryTumbnail}')`
-                    const titleElement = document.createElement('span');
-                    titleElement.classList.add('category-list-item-title');
+        const listFragment = new DocumentFragment();
+        const templateName = this.pathName.split("/")[2];
 
-                    const linkElement = document.createElement('a');
-                    linkElement.classList.add('category-list-item-link');
-                    linkElement.target = '_blank';
-                    linkElement.rel = 'noopener noreferrer';
-                    linkElement.href = this.checkNull(categoryURL);
-                    linkElement.textContent = this.checkNull(categoryTitle);
+        for (let i = 0; i < resultData.length; i += CategoryList.ITEMS_PER_GROUP) {
+            const categoryPath = resultData[i];
+            const categoryTitle = resultData[i + 1];
+            const categoryDescription = resultData[i + 2];
+            const categoryThumbnail = resultData[i + 3];
+            const categoryURL = `${this.protocol}//${this.host}${categoryPath}.html`;
 
-                    titleElement.appendChild(linkElement);
-                    listItem.appendChild(imageContainer);
-                    listItem.appendChild(titleElement);
-                    listFragment.appendChild(listItem);
-                }
+            if (!categoryPath.startsWith('/content/' + templateName)) {
+                continue;
             }
-        });
 
+            const card = document.createElement('a');
+            card.classList.add('category-list-item');
+            card.href = this.safeText(categoryURL);
+            card.setAttribute('role', 'listitem');
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.classList.add('category-list-item-icon');
+            if (categoryThumbnail) {
+                const img = document.createElement('img');
+                img.src = categoryThumbnail;
+                img.alt = "";
+                img.loading = "lazy";
+                iconWrapper.appendChild(img);
+            }
+
+            const textWrapper = document.createElement('div');
+            textWrapper.classList.add('category-list-item-text');
+
+            const titleEl = document.createElement('span');
+            titleEl.classList.add('category-list-item-title');
+            titleEl.textContent = this.safeText(categoryTitle);
+            textWrapper.appendChild(titleEl);
+
+            if (categoryDescription) {
+                const descEl = document.createElement('span');
+                descEl.classList.add('category-list-item-description');
+                descEl.textContent = this.safeText(categoryDescription);
+                textWrapper.appendChild(descEl);
+            }
+
+            const chevron = document.createElement('span');
+            chevron.classList.add('category-list-item-chevron');
+            chevron.appendChild(this.createChevronSVG());
+
+            card.appendChild(iconWrapper);
+            card.appendChild(textWrapper);
+            card.appendChild(chevron);
+            listFragment.appendChild(card);
+        }
 
         categoryDiv.appendChild(listFragment);
     }
 
     onDocumentReady() {
         const categoryParentDiv = document.querySelector(".category-list");
-        if(categoryParentDiv === null) {
+        if (!categoryParentDiv) {
             return;
         }
         const categoryList = categoryParentDiv.getAttribute("data-cmp-category-list").split(",");

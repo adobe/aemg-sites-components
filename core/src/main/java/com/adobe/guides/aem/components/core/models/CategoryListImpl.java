@@ -123,6 +123,8 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
             Page aemPage = resourceResolver.getResource(node.getPath()).adaptTo(Page.class);
             newCategoryList.add(aemPage.getPath());
             newCategoryList.add(aemPage.getTitle());
+            String description = aemPage.getDescription();
+            newCategoryList.add(description != null ? description : "");
             newCategoryList.add(aemPage.getPath()+".thumb.480.300.png");
         }
         return newCategoryList;
