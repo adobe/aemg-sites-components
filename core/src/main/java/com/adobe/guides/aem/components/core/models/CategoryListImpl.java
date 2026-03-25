@@ -44,6 +44,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = {CategoryList.class, ComponentExporter.class}, resourceType = {CategoryListImpl.RESOURCE_TYPE_V1})
@@ -126,6 +127,9 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
             String description = aemPage.getDescription();
             newCategoryList.add(description != null ? description : "");
             newCategoryList.add(aemPage.getPath()+".thumb.480.300.png");
+            Iterator<Page> children = aemPage.listChildren();
+            String firstChildPath = children.hasNext() ? children.next().getPath() : "";
+            newCategoryList.add(firstChildPath);
         }
         return newCategoryList;
     }
