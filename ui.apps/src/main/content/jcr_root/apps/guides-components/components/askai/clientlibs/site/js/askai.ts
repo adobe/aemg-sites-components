@@ -211,8 +211,11 @@ class AskAI {
     private markdownToHtml(md: string): string {
         let html = this.escapeHtml(md);
 
+        const codeBlocks: string[] = [];
         html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_match, _lang, code) => {
-            return `<pre><code>${code.trim()}</code></pre>`;
+            const index = codeBlocks.length;
+            codeBlocks.push(`<pre><code>${code.trimEnd()}</code></pre>`);
+            return `\n%%CODEBLOCK_${index}%%\n`;
         });
 
         html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -229,6 +232,21 @@ class AskAI {
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
             const trimmed = line.trim();
+
+            const codeBlockMatch = trimmed.match(/^%%CODEBLOCK_(\d+)%%$/);
+            if (codeBlockMatch) {
+                if (inList) {
+                    result.push(listType === 'ul' ? '</ul>' : '</ol>');
+                    inList = false;
+                    listType = '';
+                }
+                if (inParagraph) {
+                    result.push('</p>');
+                    inParagraph = false;
+                }
+                result.push(codeBlocks[parseInt(codeBlockMatch[1], 10)]);
+                continue;
+            }
 
             if (trimmed === '') {
                 if (inList) {
