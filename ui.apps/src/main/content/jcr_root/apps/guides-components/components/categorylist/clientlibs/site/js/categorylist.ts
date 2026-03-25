@@ -17,7 +17,7 @@ class CategoryList {
     private protocol: string;
     private host: string;
     private pathName: string;
-    private static ITEMS_PER_GROUP = 4;
+    private static ITEMS_PER_GROUP = 5;
 
     constructor() {
         this.protocol = window.location.protocol;
@@ -60,7 +60,9 @@ class CategoryList {
             const categoryTitle = resultData[i + 1];
             const categoryDescription = resultData[i + 2];
             const categoryThumbnail = resultData[i + 3];
-            const categoryURL = `${this.protocol}//${this.host}${categoryPath}.html`;
+            const firstChildPath = resultData[i + 4];
+            const targetPath = firstChildPath || categoryPath;
+            const categoryURL = `${this.protocol}//${this.host}${targetPath}.html`;
 
             if (!categoryPath.startsWith('/content/' + templateName)) {
                 continue;

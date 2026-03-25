@@ -93,7 +93,9 @@ public class CategoryListImplTest {
         List<String> templateCategoryList = new ArrayList<>();
         templateCategoryList.add("/content/Tragopan/en/kb/category");
         templateCategoryList.add("Category");
+        templateCategoryList.add("");
         templateCategoryList.add("/content/Tragopan/en/kb/category.thumb.480.300.png");
+        templateCategoryList.add("/content/Tragopan/en/kb/category/article1");
         assertEquals(templateCategoryList, sessionCategoryList);
     }
 
