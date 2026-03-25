@@ -385,3 +385,12 @@
         padding: 1rem;
     }
 }
+
+@media (max-width: 390px) {
+    .cmp-page-feedback__actions {
+        flex-direction: column;
+    }
+    .cmp-page-feedback__question {
+        font-size: 0.875rem;
+    }
+}
