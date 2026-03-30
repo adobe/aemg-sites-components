@@ -19,6 +19,7 @@ import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
@@ -73,7 +74,15 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
     @PostConstruct
     protected void initModel() throws RepositoryException, JSONException, IOException {
         String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+        if (StringUtils.isBlank(sitePath)) {
+            LOGGER.warn("ChildRedirect: sitePath is not configured on {}", currentPage.getPath());
+            return;
+        }
         Session session = request.getResourceResolver().adaptTo(Session.class);
+        if (session == null) {
+            LOGGER.warn("ChildRedirect: JCR session is null");
+            return;
+        }
         String categoryPath = Utils.getCategoryPathFromPage(currentPage);
         Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
         Binary tocBinary = node.getProperty("guides-navigation").getBinary();
@@ -91,7 +100,15 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
     @PostConstruct
     private void activate() throws RepositoryException, JSONException, IOException {
         String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+        if (StringUtils.isBlank(sitePath)) {
+            LOGGER.warn("ChildRedirect: sitePath is not configured on {}", currentPage.getPath());
+            return;
+        }
         Session session = request.getResourceResolver().adaptTo(Session.class);
+        if (session == null) {
+            LOGGER.warn("ChildRedirect: JCR session is null");
+            return;
+        }
         String categoryPath = Utils.getCategoryPathFromPage(currentPage);
         Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
         Binary tocBinary = node.getProperty("guides-navigation").getBinary();
