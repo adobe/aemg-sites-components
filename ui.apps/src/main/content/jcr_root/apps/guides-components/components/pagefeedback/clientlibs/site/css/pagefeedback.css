@@ -21,6 +21,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2.5rem;
+    padding: 1rem;
 }
 .cmp-page-feedback__container {
     font-size: 0.875rem;
@@ -40,7 +41,7 @@
     padding: 1rem 1.5rem;
     background-color: #f5f5f5;
     border-radius: 0.75rem;
-    max-width: 37.5rem;
+    max-width: fit-content;
     width: 100%;
     justify-content: center;
     box-sizing: border-box;
@@ -71,8 +72,9 @@
     cursor: pointer;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     line-height: 1;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     width: fit-content;
+    height: auto;
 }
 
 .cmp-page-feedback__btn:focus-visible {
