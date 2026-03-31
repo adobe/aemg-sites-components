@@ -16,19 +16,44 @@
 
 /* ============================================================
    Code Block Component
+   The outer .cmp-codeblock is a transparent content wrapper.
+   Each embedded <code class="codeblock"> is promoted by JS
+   into a .cmp-codeblock__body with the bordered code-block look.
    ============================================================ */
 
 .cmp-codeblock {
+    overflow: visible;
+}
+
+/* ---- Content wrapper (HTML rendered normally) ---- */
+
+.cmp-codeblock__content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ---- Individual code block body (JS-created per <code>) ---- */
+
+.cmp-codeblock__body {
+    position: relative;
+    padding: 0.5rem 1.25rem !important;
+    overflow: auto;
     border-radius: 12px;
-    overflow: hidden;
+    border: 1px solid #dadada;
+    margin: 1.5rem 0;
     font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', 'Consolas', monospace;
     font-size: 1rem;
     font-weight: 400;
     font-style: normal;
     line-height: 150%;
     letter-spacing: normal;
-    margin: 1.5rem 0;
-    border: 1px solid #dadada !important;
+
+    pre {
+        white-space: pre-wrap !important;
+        overflow-x: hidden !important;
+    }
 }
 
 /* ---- Action Buttons ---- */
@@ -74,18 +99,7 @@
     color: var(--Alias-content-neutral-default, #292929);
 }
 
-/* ---- Code Body ---- */
-
-.cmp-codeblock__body {
-    position: relative;
-    padding: 0.5rem 1.25rem !important;
-    overflow: auto;
-
-    pre {
-        white-space: pre-wrap !important;
-        overflow-x: hidden !important;
-    }
-}
+/* ---- Pre / Code ---- */
 
 .cmp-codeblock__pre {
     margin: 0;
@@ -143,9 +157,9 @@
    Dark Theme
    ============================================================ */
 
-.cmp-codeblock--dark {
+.cmp-codeblock--dark .cmp-codeblock__body {
     background-color: #1b1b1b;
-    border: 2px solid #3a3a3a;
+    border-color: #3a3a3a;
 }
 
 .cmp-codeblock--dark .cmp-codeblock__copy,
@@ -177,10 +191,6 @@
     color: #90c8ff;
 }
 
-.cmp-codeblock--dark .cmp-codeblock__body {
-    background-color: #1b1b1b;
-}
-
 .cmp-codeblock--dark .cmp-codeblock__code {
     color: #d4d4d4;
 }
@@ -195,16 +205,9 @@
    Light Theme
    ============================================================ */
 
-.cmp-codeblock--light {
-    background-color: #ffffff;
-    border: 2px solid #e0e0e0;
-}
-
-.cmp-codeblock--light .cmp-codeblock__copy,
-.cmp-codeblock--light .cmp-codeblock__cffiddle {
-    /* background-color: transparent;
-    border: 1.5px solid #999999;
-    color: #444444; */
+.cmp-codeblock--light .cmp-codeblock__body {
+    background-color: #F8F8F8;
+    border-color: #e0e0e0;
 }
 
 .cmp-codeblock--light .cmp-codeblock__copy:hover,
@@ -223,10 +226,6 @@
     background-color: #e6f0fa;
     border-color: #1976d2;
     color: #1565c0;
-}
-
-.cmp-codeblock--light .cmp-codeblock__body {
-    background-color: #F8F8F8;
 }
 
 .cmp-codeblock--light .cmp-codeblock__code {
@@ -300,12 +299,33 @@
 }
 
 /* ============================================================
+   DITA-sourced content styling
+   ============================================================ */
+
+/* .cmp-codeblock__content .dlentry {
+    margin-bottom: 1.5rem;
+} */
+
+.cmp-codeblock__content .dt {
+    font-weight: 600;
+    /* margin-bottom: 0.25rem; */
+}
+
+.cmp-codeblock__content .dd {
+    margin-left: 0;
+    /* margin-bottom: 0.5rem; */
+}
+
+.cmp-codeblock__content .dd .p {
+    margin: 0.25rem 0;
+}
+
+/* ============================================================
    Responsive
    ============================================================ */
 
 @media (max-width: 768px) {
-    .cmp-codeblock {
-        font-size: 12px;
+    .cmp-codeblock__body {
         border-radius: 8px;
     }
 
