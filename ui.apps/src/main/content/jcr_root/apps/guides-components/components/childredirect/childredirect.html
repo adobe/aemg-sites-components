@@ -13,7 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
-<sly data-sly-use.redirectModel="com.adobe.guides.aem.components.core.models.ChildRedirect">
+<sly data-sly-test="${!wcmmode.edit}" data-sly-use.redirectModel="com.adobe.guides.aem.components.core.models.ChildRedirect">
     <h1 class="cq-redirect-notice">
     This page redirects to <a href="${redirectModel.redirectTarget @ context='html'}">here</a>
     </h1>
