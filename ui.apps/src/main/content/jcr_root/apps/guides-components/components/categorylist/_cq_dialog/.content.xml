@@ -11,6 +11,13 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/coral/foundation/container">
                 <items jcr:primaryType="nt:unstructured">
+                    <parentPath
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                            fieldLabel="Parent Path"
+                            fieldDescription="Path under which category pages will be listed. If left empty, the current page path is used."
+                            name="./parentPath"
+                            rootPath="/content"/>
                 </items>
             </column>
         </items>

@@ -16,13 +16,11 @@
 class CategoryList {
     private protocol: string;
     private host: string;
-    private pathName: string;
     private static ITEMS_PER_GROUP = 5;
 
     constructor() {
         this.protocol = window.location.protocol;
         this.host = window.location.host;
-        this.pathName = window.location.pathname;
     }
 
     private safeText(value: string | null): string {
@@ -53,7 +51,6 @@ class CategoryList {
         }
 
         const listFragment = new DocumentFragment();
-        const templateName = this.pathName.split("/")[2];
 
         for (let i = 0; i < resultData.length; i += CategoryList.ITEMS_PER_GROUP) {
             const categoryPath = resultData[i];
@@ -63,10 +60,6 @@ class CategoryList {
             const firstChildPath = resultData[i + 4];
             const targetPath = firstChildPath || categoryPath;
             const categoryURL = `${this.protocol}//${this.host}${targetPath}.html`;
-
-            if (!categoryPath.startsWith('/content/' + templateName)) {
-                continue;
-            }
 
             const card = document.createElement('a');
             card.classList.add('category-list-item');
