@@ -29,6 +29,7 @@ import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -70,6 +71,10 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     @ScriptVariable
     private Page currentPage;
 
+    @ValueMapValue
+    @Nullable
+    private String parentPath;
+
     @Nullable
     private String templateName;
 
@@ -85,7 +90,8 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
 
         try {
             templateName = getTemplateName(cqTemplate);
-            categoryList = findPagesByTemplate(request.getResourceResolver(), currentPage.getPath());
+            String searchPath = StringUtils.isNotEmpty(parentPath) ? parentPath : currentPage.getPath();
+            categoryList = findPagesByTemplate(request.getResourceResolver(), searchPath);
         } catch (RepositoryException e) {
             logger.error("Unable to retrieve category list for current template.", e);
         } catch (GuidesRuntimeException e) {

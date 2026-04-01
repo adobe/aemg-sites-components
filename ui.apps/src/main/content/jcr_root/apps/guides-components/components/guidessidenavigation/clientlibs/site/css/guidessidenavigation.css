@@ -100,7 +100,7 @@
 
 .cmp-guidesnav-filter__input {
     width: 100%;
-    padding: 0.625rem 0.75rem 0.625rem 2.75rem;
+    padding: 0.625rem 0.75rem 0.625rem 2rem;
     border: 2px solid var(--Palette-gray-300, #DADADA);
     border-radius: 1.5rem;
     font-family: "Adobe Clean";
