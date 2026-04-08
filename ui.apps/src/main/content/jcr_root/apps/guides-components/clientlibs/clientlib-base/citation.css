@@ -1,0 +1,26 @@
+/*
+Copyright 2022 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it.
+*/
+
+/* Citation popover */
+#cite-popover {
+    display: none;
+    position: absolute;
+    z-index: 10000;
+}
+
+/* AMA inline citation number — the hoverable superscript span */
+span [data-citation-bib] {
+    cursor: pointer;
+}
+
+.ama {
+	vertical-align: super !important;
+  	font-size: 0.8em !important;
+  	line-height: normal !important;
+ }
