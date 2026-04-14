@@ -95,24 +95,6 @@ public class ChildRedirectImpl extends AbstractComponentImpl implements ChildRed
         flattenToc(toc, categoryPath, flat);
         LOGGER.info("Pager: flatten toc {}", flat);
         redirectUrl = flat.get(0).getUrl();
-    }
-
-    @PostConstruct
-    private void activate() throws RepositoryException, JSONException, IOException {
-        String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
-        Session session = request.getResourceResolver().adaptTo(Session.class);
-        String categoryPath = Utils.getCategoryPathFromPage(currentPage);
-        Node node = session.getNode(sitePath + SLASH_SEPARATOR + JCR_CONTENT);
-        Binary tocBinary = node.getProperty("guides-navigation").getBinary();
-        String tocBinaryString = IOUtils.toString(tocBinary.getStream(), CharEncoding.UTF_8);
-        String allowedPagesStr = Utils.getPagesAsJson(session, categoryPath);
-        JSONObject toc = new JSONObject(tocBinaryString);
-        Utils.updateVisibility(toc, new JSONObject(allowedPagesStr), categoryPath);
-        toc.put("visible", true);
-        ArrayList<PagerItem> flat = new ArrayList<>();
-        flattenToc(toc, categoryPath, flat);
-        LOGGER.info("Pager: flatten toc {}", flat);
-        redirectUrl = flat.get(0).getUrl();
         if (redirectUrl != null) {
             LOGGER.info("Redirecting ({}) to {}", 301, redirectUrl);
             response.sendRedirect(categoryPath + redirectUrl);
