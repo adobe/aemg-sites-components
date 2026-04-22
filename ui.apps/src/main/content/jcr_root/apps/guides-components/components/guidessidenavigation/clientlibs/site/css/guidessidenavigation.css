@@ -278,7 +278,6 @@ ul.cmp-guidesnavigation__group {
     /* margin: 0 0 .75rem; */
     list-style-type: none;
     padding: 0;
-    max-height: 90vh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
@@ -330,4 +329,14 @@ ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
 ul.cmp-guidesnavigation__group .toc-list-item a {
     word-wrap: break-word;
     overflow: auto;
+}
+
+.guides-navigation {
+    height: 90vh;
+}
+
+@media (max-width: 768px) {
+    .guides-navigation {
+        height: auto;
+    }
 }
