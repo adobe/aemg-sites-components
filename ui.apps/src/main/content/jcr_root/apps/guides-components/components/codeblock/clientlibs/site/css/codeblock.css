@@ -120,6 +120,8 @@
     font-size: 1rem !important;
     line-height: 150% !important;
     letter-spacing: normal !important;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 .cmp-codeblock__code,
