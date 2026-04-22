@@ -278,6 +278,27 @@ ul.cmp-guidesnavigation__group {
     /* margin: 0 0 .75rem; */
     list-style-type: none;
     padding: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar {
+    width: 4px;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.35);
 }
 
 ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
