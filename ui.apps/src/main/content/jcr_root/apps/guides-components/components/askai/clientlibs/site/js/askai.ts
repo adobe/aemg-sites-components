@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-const DEFAULT_ENDPOINT = 'https://guidesai.adobe.io/flameback/api/v1/sites/46b038a7-9878-4c69-ac4c-001e290cb88a/answer';
+const DEFAULT_ENDPOINT = 'https://guides.adobe.com/flameback/api/v1/answer';
 
 class AskAI {
     private wrapper: HTMLElement;
@@ -34,6 +34,8 @@ class AskAI {
     private sourcesContainer: HTMLElement;
     private sourcesList: HTMLElement;
     private endpoint: string;
+    private apiKey: string;
+    private isNewConversation: boolean;
     private isExpanded: boolean;
     private isLiked: boolean;
     private isDisliked: boolean;
@@ -49,6 +51,8 @@ class AskAI {
         this.collapsedHeight = 150;
 
         this.endpoint = this.wrapper.getAttribute('data-cmp-endpoint') || DEFAULT_ENDPOINT;
+        this.apiKey = 'fb_sk_FZJ87HDrZ7YWssJmaz72_twxybnkN6XB3iTH1HrJwsE';
+        this.isNewConversation = false;
         this.showMoreLabel = this.wrapper.getAttribute('data-cmp-show-more') || 'Show more';
         this.showLessLabel = this.wrapper.getAttribute('data-cmp-show-less') || 'Show less';
 
@@ -151,6 +155,10 @@ class AskAI {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', this.endpoint, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('Accept', 'application/json');
+        if (this.apiKey) {
+            xhr.setRequestHeader('X-Api-Key', this.apiKey);
+        }
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
                 this.loading.style.display = 'none';
@@ -172,7 +180,7 @@ class AskAI {
                 this.applyCollapse();
             }
         };
-        xhr.send(JSON.stringify({ question: query }));
+        xhr.send(JSON.stringify({ question: query, new_conversation: this.isNewConversation }));
     }
 
     private renderMarkdown(md: string): void {

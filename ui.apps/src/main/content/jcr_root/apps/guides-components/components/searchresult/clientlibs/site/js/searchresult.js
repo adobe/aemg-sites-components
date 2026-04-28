@@ -56,6 +56,7 @@ it.
     var showCountVal = 0;
     var LIST_GROUP;
     var NUMBER_OF_RECORDS;
+    var seenUrls = {};
 
     var getSortAscDesVal = getSortingVal($getSortAscDesVal);
     var getSortDirVal = getSortingVal($getSortDirVal);
@@ -163,6 +164,7 @@ it.
                 displayUrl = window.location.origin + url;
             }
         } catch (e) { /* keep relative url */ }
+        displayUrl = displayUrl.replace(/\/content\/[^/]+/, "/coldfusion");
 
         var html = "<li class='cmp-searchresult-item'>" +
             "<div class='cmp-searchresult-icon'>" + ARTICLE_ICON + "</div>" +
@@ -188,8 +190,15 @@ it.
         if (resultSize === parseInt(0)) {
             searchFieldListGroup.innerHTML = "";
             LIST_GROUP = "";
+            seenUrls = {};
         }
         var data = resultData.data;
+        data = data.filter(function(item) {
+            var key = item.url;
+            if (seenUrls[key]) return false;
+            seenUrls[key] = true;
+            return true;
+        });
         var hasMore = resultData.hasMore === true;
         var dataCount = Object.keys(data).length;
         if (dataCount !== 0) {
