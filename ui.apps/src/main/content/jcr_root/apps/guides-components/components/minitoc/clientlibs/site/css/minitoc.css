@@ -38,7 +38,7 @@
 .minitoc-list {
     text-transform: none;
     list-style: none;
-    font-size: 1rem;
+    font-size: 0.875rem;
     padding: 0;
     font-weight: 400;
     color: #292929;
@@ -47,7 +47,7 @@
 
 .minitoc-list li a {
     color: #484848;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
