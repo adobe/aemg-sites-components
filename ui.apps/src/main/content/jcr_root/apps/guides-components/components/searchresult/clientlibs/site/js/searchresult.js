@@ -194,7 +194,7 @@ it.
         }
         var data = resultData.data;
         data = data.filter(function(item) {
-            var key = item.url;
+            var key = item.title;
             if (seenUrls[key]) return false;
             seenUrls[key] = true;
             return true;
