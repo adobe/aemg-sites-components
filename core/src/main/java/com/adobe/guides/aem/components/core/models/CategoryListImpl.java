@@ -115,6 +115,19 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
         return cqTemplateStringArray[indexOfTemplateName];
     }
 
+    private static final String REFERENCES_PAGE_NAME = "__references__";
+
+    private static String getFirstChildPagePath(Page parentPage) {
+        Iterator<Page> children = parentPage.listChildren();
+        while (children.hasNext()) {
+            Page child = children.next();
+            if (!REFERENCES_PAGE_NAME.equals(child.getName())) {
+                return child.getPath();
+            }
+        }
+        return "";
+    }
+
     public static List<String> findPagesByTemplate(final ResourceResolver resourceResolver, final String path) throws RepositoryException {
         Session session = resourceResolver.adaptTo(Session.class);
         QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -133,8 +146,7 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
             String description = aemPage.getDescription();
             newCategoryList.add(description != null ? description : "");
             newCategoryList.add(aemPage.getPath()+".thumb.480.300.png");
-            Iterator<Page> children = aemPage.listChildren();
-            String firstChildPath = children.hasNext() ? children.next().getPath() : "";
+            String firstChildPath = getFirstChildPagePath(aemPage);
             newCategoryList.add(firstChildPath);
         }
         return newCategoryList;
