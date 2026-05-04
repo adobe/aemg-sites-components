@@ -75,6 +75,10 @@ class GuidesNavigation {
 
             chevron.classList.remove('hide-children')
             ul.classList.remove('hide-children')
+
+            requestAnimationFrame(() => {
+                container.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+            })
         }
     }
 
@@ -123,6 +127,10 @@ class GuidesNavigation {
                 chevron.classList.add('hide-children')
             }
             chevron.addEventListener('click', () => {
+                this.handleExpand(chevron, listItem, currPath, item, -1, incrementer)
+            })
+            anchor.style.cursor = 'pointer'
+            anchor.addEventListener('click', () => {
                 this.handleExpand(chevron, listItem, currPath, item, -1, incrementer)
             })
             container.appendChild(chevron)
