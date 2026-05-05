@@ -58,7 +58,7 @@ it.
     var NUMBER_OF_RECORDS;
     var seenUrls = {};
 
-    var getSortAscDesVal = getSortingVal($getSortAscDesVal);
+    var getSortAscDesVal = getSortingVal($getSortAscDesVal) || "asc";
     var getSortDirVal = getSortingVal($getSortDirVal);
 
     function getSortingVal(val) {
@@ -111,7 +111,7 @@ it.
         $getSortDirVal.addEventListener("change", function(event) {
             resultSize = 0;
             showCountVal = 0
-            getSortDirVal = getSortingVal($getSortDirVal.options);
+            getSortDirVal = getSortingVal($getSortDirVal);
             getCategory.length > 0 ? fetchDataNew(getCategory) : fetchDataNew();
         });
     }
