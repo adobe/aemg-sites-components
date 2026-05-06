@@ -208,8 +208,11 @@ class AskAI {
         filtered.forEach((doc, index) => {
             const link = document.createElement('a');
             link.className = 'cmp-askai__sources-link';
-            link.href = doc.outputPath || doc.published_url || '#';
-            link.textContent = `${doc.title}`;
+            const url = doc.outputPath || doc.published_url;
+            if (url) {
+                link.href = url;
+            }
+            link.textContent = doc.title;
             link.setAttribute('data-index', String(index + 1));
             this.sourcesList.appendChild(link);
         });

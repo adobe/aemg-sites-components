@@ -374,7 +374,11 @@ class GuidesNavigation {
     scrollSelectedIntoView(navigationParent: Element) {
         const selectedItem = navigationParent.querySelector('.cmp-nav-item-selected')
         if (selectedItem) {
-            selectedItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    selectedItem.scrollIntoView({ block: 'center', behavior: 'smooth' })
+                })
+            })
         }
     }
 
