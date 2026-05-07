@@ -16,182 +16,81 @@
 
 class PrologMetaInjector {
 
-    private static PASS_THROUGH_CLASSES = ['prolog', 'metadata'];
     private static PROCESSED_ATTR = 'data-prolog-processed';
-    private static MAX_DEPTH = 10;
-
-    private safeText(node: Element | Node | null): string {
-        if (!node || !node.textContent) {
-            return '';
-        }
-        return node.textContent.trim();
-    }
-
-    private cleanKey(raw: string): string {
-        if (!raw) {
-            return '';
-        }
-        let key = raw.trim();
-        key = key.replace(/[:]\s*$/, '').trim();
-        key = key.toLowerCase();
-        key = key.replace(/\s+/g, '-');
-        return key;
-    }
+    private static MAX_DEPTH = 20;
+    private static SKIP_CLASSES = ['display-inline', 'tcx-empty-element', 'collapsible-tags', 'collapsed-tag', 'prolog'];
+    private static DATA_ATTR_PREFIX = 'data-attr-';
+    private static TCX_ATTR_PREFIX = 'data-tcx-attr-';
 
     private createMetaTag(name: string, content: string): void {
         if (!name || !content || !document.head) {
             return;
         }
         const meta = document.createElement('meta');
-        meta.setAttribute('name', name);
-        meta.setAttribute('content', content);
+        meta.setAttribute('name', name.trim());
+        meta.setAttribute('content', content.trim());
         document.head.appendChild(meta);
     }
 
-    private getDirectTextContent(element: Element): string {
-        let text = '';
-        for (let i = 0; i < element.childNodes.length; i++) {
-            const node = element.childNodes[i];
-            if (node.nodeType === Node.TEXT_NODE) {
-                text += (node.textContent || '');
-            }
-        }
-        return text.trim();
-    }
-
-    private getPrefixContent(element: Element): Element | null {
-        if (!element || !element.children) {
-            return null;
-        }
-        for (let i = 0; i < element.children.length; i++) {
-            const child = element.children[i];
-            if (child.classList && child.classList.contains('prefix-content')) {
-                return child;
-            }
-        }
-        return null;
-    }
-
-    private getTextAfterPrefix(element: Element, prefixEl: Element): string {
+    private getTextAfterPrefix(element: Element): string {
         let text = '';
         let pastPrefix = false;
+        let foundPrefix = false;
         for (let i = 0; i < element.childNodes.length; i++) {
             const node = element.childNodes[i];
-            if (node === prefixEl) {
+            if (node.nodeType === Node.ELEMENT_NODE &&
+                (node as Element).classList &&
+                (node as Element).classList.contains('prefix-content')) {
                 pastPrefix = true;
+                foundPrefix = true;
                 continue;
             }
             if (pastPrefix && node.nodeType === Node.TEXT_NODE) {
                 text += (node.textContent || '');
             }
         }
+        if (!foundPrefix) {
+            for (let i = 0; i < element.childNodes.length; i++) {
+                const node = element.childNodes[i];
+                if (node.nodeType === Node.TEXT_NODE) {
+                    text += (node.textContent || '');
+                }
+            }
+        }
         return text.trim();
     }
 
-    private getChildElements(element: Element, excludePrefix: boolean): Element[] {
-        if (!element || !element.children) {
-            return [];
-        }
-        const children: Element[] = [];
-        for (let i = 0; i < element.children.length; i++) {
-            const child = element.children[i];
-            if (excludePrefix && child.classList && child.classList.contains('prefix-content')) {
-                continue;
-            }
-            children.push(child);
-        }
-        return children;
-    }
-
-    private extractValueForCombination(element: Element, depth: number): string {
-        if (depth > PrologMetaInjector.MAX_DEPTH) {
+    private getMeaningfulClassName(element: Element): string {
+        if (!element || !element.classList) {
             return '';
         }
-
-        const prefixEl = this.getPrefixContent(element);
-        if (!prefixEl) {
-            return this.getDirectTextContent(element) || this.safeText(element);
-        }
-
-        const textAfter = this.getTextAfterPrefix(element, prefixEl);
-        const nestedChildren = this.getChildElements(element, true);
-
-        if (nestedChildren.length === 0) {
-            return textAfter || this.safeText(prefixEl);
-        }
-
-        const values: string[] = [];
-        for (const child of nestedChildren) {
-            const val = this.extractValueForCombination(child, depth + 1);
-            if (val) {
-                values.push(val);
+        for (let i = 0; i < element.classList.length; i++) {
+            const cls = element.classList[i];
+            if (PrologMetaInjector.SKIP_CLASSES.indexOf(cls) === -1) {
+                return cls;
             }
         }
-        return values.join(', ');
+        return '';
     }
 
-    private extractKeyAndValue(element: Element): { key: string; value: string } | null {
-        const prefixEl = this.getPrefixContent(element);
-        if (!prefixEl) {
-            return null;
+    private getDataAttributes(element: Element): Array<{ key: string; value: string }> {
+        const result: Array<{ key: string; value: string }> = [];
+        if (!element || !element.attributes) {
+            return result;
         }
-
-        const prefixText = this.safeText(prefixEl);
-        if (!prefixText) {
-            return null;
-        }
-
-        const colonIdx = prefixText.indexOf(':');
-        const key = this.cleanKey(colonIdx !== -1
-            ? prefixText.substring(0, colonIdx)
-            : prefixText);
-
-        if (!key) {
-            return null;
-        }
-
-        const textAfter = this.getTextAfterPrefix(element, prefixEl);
-        const nestedChildren = this.getChildElements(element, true);
-
-        let value: string;
-        if (nestedChildren.length > 0) {
-            const values: string[] = [];
-            for (const child of nestedChildren) {
-                const val = this.extractValueForCombination(child, 0);
-                if (val) {
-                    values.push(val);
+        for (let i = 0; i < element.attributes.length; i++) {
+            const attr = element.attributes[i];
+            if (attr.name.indexOf(PrologMetaInjector.TCX_ATTR_PREFIX) === 0) {
+                continue;
+            }
+            if (attr.name.indexOf(PrologMetaInjector.DATA_ATTR_PREFIX) === 0) {
+                const key = attr.name.substring(PrologMetaInjector.DATA_ATTR_PREFIX.length);
+                if (key && key !== 'name' && key !== 'content' && key !== 'value') {
+                    result.push({ key: key, value: attr.value });
                 }
             }
-            value = values.join(', ');
-        } else if (textAfter) {
-            value = textAfter;
-        } else if (colonIdx !== -1) {
-            value = prefixText.substring(colonIdx + 1).trim();
-        } else {
-            value = prefixText;
         }
-
-        return { key, value };
-    }
-
-    private isPassThrough(element: Element): boolean {
-        if (!element || !element.classList) {
-            return false;
-        }
-        for (const cls of PrologMetaInjector.PASS_THROUGH_CLASSES) {
-            if (element.classList.contains(cls)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private processOthermeta(element: Element): void {
-        const name = element.getAttribute('data-attr-name');
-        const content = element.getAttribute('data-attr-content');
-        if (name && content) {
-            this.createMetaTag(name.trim(), content.trim());
-        }
+        return result;
     }
 
     private processKeywords(element: Element): void {
@@ -201,7 +100,7 @@ class PrologMetaInjector {
         }
         const keywords: string[] = [];
         for (let i = 0; i < keywordEls.length; i++) {
-            const text = this.safeText(keywordEls[i]);
+            const text = (keywordEls[i].textContent || '').trim();
             if (text) {
                 keywords.push(text);
             }
@@ -211,29 +110,62 @@ class PrologMetaInjector {
         }
     }
 
-    private processChildren(container: Element, depth: number): void {
+    private processElement(element: Element, depth: number): void {
         if (depth > PrologMetaInjector.MAX_DEPTH) {
             return;
         }
 
-        const children = this.getChildElements(container, true);
+        if (!element || !element.classList) {
+            return;
+        }
 
-        for (const child of children) {
-            if (!child || !child.classList) {
-                continue;
-            }
-            if (child.classList.contains('othermeta')) {
-                this.processOthermeta(child);
-            } else if (child.classList.contains('keywords')) {
-                this.processKeywords(child);
-            } else if (this.isPassThrough(child)) {
-                this.processChildren(child, depth + 1);
-            } else {
-                const result = this.extractKeyAndValue(child);
-                if (result && result.key && result.value) {
-                    this.createMetaTag(result.key, result.value);
+        if (element.classList.contains('prefix-content')) {
+            return;
+        }
+
+        let handled = false;
+
+        const attrName = element.getAttribute('data-attr-name');
+        const attrContent = element.getAttribute('data-attr-content');
+        const attrValue = element.getAttribute('data-attr-value');
+
+        if (attrName && attrContent) {
+            this.createMetaTag(attrName, attrContent);
+            handled = true;
+        } else if (attrName && attrValue) {
+            this.createMetaTag(attrName, attrValue);
+            handled = true;
+        }
+
+        if (!handled && element.classList.contains('keywords')) {
+            this.processKeywords(element);
+            handled = true;
+        }
+
+        if (!handled) {
+            const textAfter = this.getTextAfterPrefix(element);
+            if (textAfter) {
+                const className = this.getMeaningfulClassName(element);
+                if (className) {
+                    this.createMetaTag(className, textAfter);
+                    handled = true;
                 }
             }
+        }
+
+        if (!handled) {
+            const dataAttrs = this.getDataAttributes(element);
+            if (dataAttrs.length > 0) {
+                const className = this.getMeaningfulClassName(element);
+                for (const attr of dataAttrs) {
+                    const metaName = className ? className + '.' + attr.key : attr.key;
+                    this.createMetaTag(metaName, attr.value);
+                }
+            }
+        }
+
+        for (let i = 0; i < element.children.length; i++) {
+            this.processElement(element.children[i], depth + 1);
         }
     }
 
@@ -249,7 +181,7 @@ class PrologMetaInjector {
         prologElement.setAttribute(PrologMetaInjector.PROCESSED_ATTR, 'true');
 
         try {
-            this.processChildren(prologElement, 0);
+            this.processElement(prologElement, 0);
             (prologElement as HTMLElement).style.display = 'none';
         } catch (e) {
             if (typeof console !== 'undefined' && console.error) {
