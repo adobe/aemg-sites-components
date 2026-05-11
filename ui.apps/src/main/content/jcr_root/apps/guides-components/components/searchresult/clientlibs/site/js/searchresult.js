@@ -58,7 +58,7 @@ it.
     var NUMBER_OF_RECORDS;
     var seenUrls = {};
 
-    var getSortAscDesVal = getSortingVal($getSortAscDesVal) || "asc";
+    var getSortAscDesVal = getSortingVal($getSortAscDesVal);
     var getSortDirVal = getSortingVal($getSortDirVal);
 
     function getSortingVal(val) {
@@ -134,7 +134,13 @@ it.
     }
 
     function getDataURL(getCategory) {
-        var fetchAPIURL = getPageURL + "." + RESULTS_JSON + getRelativePath + getQueryParam + "&" + PARAM_RESULTS_OFFSET + "=" + resultSize + "&orderby=" + getSortDirVal + "&sort=" + getSortAscDesVal;
+        var fetchAPIURL = getPageURL + "." + RESULTS_JSON + getRelativePath + getQueryParam + "&" + PARAM_RESULTS_OFFSET + "=" + resultSize;
+        if (getSortDirVal) {
+            fetchAPIURL += "&orderby=" + getSortDirVal;
+        }
+        if (getSortAscDesVal) {
+            fetchAPIURL += "&sort=" + getSortAscDesVal;
+        }
         var fetchAPIURLNew = getCategory ? fetchAPIURL + "&tags=" + getCategory : fetchAPIURL;
         return fetchAPIURLNew;
     }
