@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+interface CategoryItem {
+    path: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    redirectPath: string;
+}
+
 class CategoryList {
     private protocol: string;
     private host: string;
-    private static ITEMS_PER_GROUP = 5;
 
     constructor() {
         this.protocol = window.location.protocol;
         this.host = window.location.host;
-    }
-
-    private safeText(value: string | null): string {
-        return value ?? "";
     }
 
     private createChevronSVG(): SVGSVGElement {
@@ -44,33 +47,28 @@ class CategoryList {
         return svg;
     }
 
-    displayCategory(resultData: string[]) {
+    displayCategory(items: CategoryItem[]) {
         const categoryDiv = document.querySelector(".cmp-category-list-group");
-        if (!categoryDiv || !resultData || resultData.length === 0) {
+        if (!categoryDiv || !items || items.length === 0) {
             return;
         }
 
         const listFragment = new DocumentFragment();
 
-        for (let i = 0; i < resultData.length; i += CategoryList.ITEMS_PER_GROUP) {
-            const categoryPath = resultData[i];
-            const categoryTitle = resultData[i + 1];
-            const categoryDescription = resultData[i + 2];
-            const categoryThumbnail = resultData[i + 3];
-            const firstChildPath = resultData[i + 4];
-            const targetPath = firstChildPath || categoryPath;
+        for (const item of items) {
+            const targetPath = item.redirectPath || item.path;
             const categoryURL = `${this.protocol}//${this.host}${targetPath}.html`;
 
             const card = document.createElement('a');
             card.classList.add('category-list-item');
-            card.href = this.safeText(categoryURL);
+            card.href = categoryURL;
             card.setAttribute('role', 'listitem');
 
             const iconWrapper = document.createElement('div');
             iconWrapper.classList.add('category-list-item-icon');
-            if (categoryThumbnail) {
+            if (item.thumbnail) {
                 const img = document.createElement('img');
-                img.src = categoryThumbnail;
+                img.src = item.thumbnail;
                 img.alt = "";
                 img.loading = "lazy";
                 iconWrapper.appendChild(img);
@@ -81,13 +79,13 @@ class CategoryList {
 
             const titleEl = document.createElement('span');
             titleEl.classList.add('category-list-item-title');
-            titleEl.textContent = this.safeText(categoryTitle);
+            titleEl.textContent = item.title ?? "";
             textWrapper.appendChild(titleEl);
 
-            if (categoryDescription) {
+            if (item.description) {
                 const descEl = document.createElement('span');
                 descEl.classList.add('category-list-item-description');
-                descEl.textContent = this.safeText(categoryDescription);
+                descEl.textContent = item.description;
                 textWrapper.appendChild(descEl);
             }
 
@@ -109,8 +107,16 @@ class CategoryList {
         if (!categoryParentDiv) {
             return;
         }
-        const categoryList = categoryParentDiv.getAttribute("data-cmp-category-list").split(",");
-        this.displayCategory(categoryList);
+        const rawData = categoryParentDiv.getAttribute("data-cmp-category-list");
+        if (!rawData) {
+            return;
+        }
+        try {
+            const items: CategoryItem[] = JSON.parse(rawData);
+            this.displayCategory(items);
+        } catch (e) {
+            console.error("Failed to parse category list data", e);
+        }
     }
 }
 
