@@ -211,8 +211,14 @@ public class AdvanceSearchResultServlet extends SlingSafeMethodsServlet {
 		predicatesMap.put("fulltext.relPath", "jcr:content");
 		predicatesMap.put(PREDICATE_PATH, searchRootPagePath);
 		predicatesMap.put(PREDICATE_TYPE, NameConstants.NT_PAGE);
-		predicatesMap.put(PREDICATE_ORDERBY, orderBy);
-		predicatesMap.put(PREDICATE_SORT, sort);
+		if (StringUtils.isNotEmpty(orderBy)) {
+			predicatesMap.put(PREDICATE_ORDERBY, orderBy);
+			if (orderBy.contains("jcr:score")) {
+				predicatesMap.put(PREDICATE_SORT, "desc");
+			} else if (StringUtils.isNotEmpty(sort)) {
+				predicatesMap.put(PREDICATE_SORT, sort);
+			}
+		}
 		predicatesMap.put(PREDICATE_GUESS_TOTAL, guessTotal);
 		if (tags.length > 0) {
 			predicatesMap.put(PREDICATE_TAG, tagProperty);
