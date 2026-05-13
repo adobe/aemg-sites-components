@@ -66,7 +66,10 @@ class MiniTOC {
             }
             return selector
         }
-        this.headings = content.querySelectorAll(getListOfHeadings());
+        this.headings = Array.from(content.querySelectorAll(getListOfHeadings()));
+        if (this.headings.length > 0) {
+            this.headings.shift();
+        }
         this.tagList = []
         for (var i = 0; i < this.headings.length; i++) {
             var heading = this.headings[i];

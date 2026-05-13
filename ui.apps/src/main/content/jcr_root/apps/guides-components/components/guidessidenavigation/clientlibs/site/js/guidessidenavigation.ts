@@ -77,7 +77,19 @@ class GuidesNavigation {
             ul.classList.remove('hide-children')
 
             requestAnimationFrame(() => {
-                container.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+                const navParent = container.closest('.guides-navigation')
+                const scrollable = navParent?.querySelector(':scope > ul.cmp-guidesnavigation__group') || navParent
+                if (scrollable) {
+                    const parentRect = scrollable.getBoundingClientRect()
+                    const itemRect = container.getBoundingClientRect()
+                    if (itemRect.bottom > parentRect.bottom || itemRect.top < parentRect.top) {
+                        const offsetTop = itemRect.top - parentRect.top + scrollable.scrollTop
+                        scrollable.scrollTo({
+                            top: offsetTop - scrollable.clientHeight / 2,
+                            behavior: 'smooth'
+                        })
+                    }
+                }
             })
         }
     }
@@ -376,7 +388,14 @@ class GuidesNavigation {
         if (selectedItem) {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    selectedItem.scrollIntoView({ block: 'center', behavior: 'smooth' })
+                    const scrollable = navigationParent.querySelector(':scope > ul.cmp-guidesnavigation__group') || navigationParent
+                    const parentRect = scrollable.getBoundingClientRect()
+                    const itemRect = selectedItem.getBoundingClientRect()
+                    const offsetTop = itemRect.top - parentRect.top + scrollable.scrollTop
+                    scrollable.scrollTo({
+                        top: offsetTop - scrollable.clientHeight / 2,
+                        behavior: 'smooth'
+                    })
                 })
             })
         }
