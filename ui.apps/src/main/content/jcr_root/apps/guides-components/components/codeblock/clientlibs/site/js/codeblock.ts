@@ -145,6 +145,7 @@ function createCodeBlockActions(): HTMLElement {
     fiddleBtn.type = "button";
     fiddleBtn.title = "Try CFFiddle";
     fiddleBtn.innerHTML = CFFIDDLE_ICON_SVG;
+    fiddleBtn.style.display = "none";
 
     actions.appendChild(copyBtn);
     actions.appendChild(fiddleBtn);
