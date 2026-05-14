@@ -200,14 +200,25 @@ function handleCopyMcp(config: PageActionsConfig): void {
 }
 
 function handleConnectCursor(config: PageActionsConfig): void {
-    if (!config.mcpConfig || !config.mcpName) {
+    if (!config.mcpConfig) {
         showToast(config.messages.mcpConfigMissing);
         return;
     }
-    const encodedName = encodeURIComponent(config.mcpName);
-    const encodedConfig = btoa(config.mcpConfig);
-    const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
-    window.open(url, "_self");
+    try {
+        const parsed = JSON.parse(config.mcpConfig);
+        const name = Object.keys(parsed)[0];
+        if (!name) {
+            showToast(config.messages.mcpConfigMissing);
+            return;
+        }
+        const serverConfig = parsed[name];
+        const encodedName = encodeURIComponent(name);
+        const encodedConfig = btoa(JSON.stringify(serverConfig));
+        const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
+        window.open(url, "_self");
+    } catch {
+        showToast(config.messages.mcpConfigMissing);
+    }
 }
 
 function loadHtml2Pdf(): Promise<void> {
