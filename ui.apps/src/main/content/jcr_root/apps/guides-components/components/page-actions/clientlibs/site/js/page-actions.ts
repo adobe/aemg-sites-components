@@ -16,6 +16,15 @@
 
 const CURSOR_DEEPLINK = "cursor://anysphere.cursor-deeplink/mcp/install";
 
+const MCP_SERVER_CONFIG = {
+    name: "coldfusion-documentation",
+    url: "https://guidesai.adobe.io/mcp",
+    description: "Knowledge base for coldfusion-documentation",
+    headers: {
+        "X-Api-Key": "fb_sk_ZIIm5oNLfXLV1fQhPe84M3mOlNRV1jO6KA_8sBia5gQ",
+    },
+};
+
 interface PageActionsMessages {
     noContent: string;
     pageCopied: string;
@@ -199,26 +208,12 @@ function handleCopyMcp(config: PageActionsConfig): void {
         .catch(() => showToast(config.messages.mcpCopyFailed));
 }
 
-function handleConnectCursor(config: PageActionsConfig): void {
-    if (!config.mcpConfig) {
-        showToast(config.messages.mcpConfigMissing);
-        return;
-    }
-    try {
-        const parsed = JSON.parse(config.mcpConfig);
-        const name = Object.keys(parsed)[0];
-        if (!name) {
-            showToast(config.messages.mcpConfigMissing);
-            return;
-        }
-        const serverConfig = parsed[name];
-        const encodedName = encodeURIComponent(name);
-        const encodedConfig = btoa(JSON.stringify(serverConfig));
-        const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
-        window.open(url, "_self");
-    } catch {
-        showToast(config.messages.mcpConfigMissing);
-    }
+function handleConnectCursor(): void {
+    const { name, ...serverConfig } = MCP_SERVER_CONFIG;
+    const encodedName = encodeURIComponent(name);
+    const encodedConfig = btoa(JSON.stringify(serverConfig));
+    const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
+    window.open(url, "_self");
 }
 
 function loadHtml2Pdf(): Promise<void> {
@@ -412,7 +407,7 @@ function initPageActions(root: HTMLElement): void {
                     handleCopyMcp(config);
                     break;
                 case "connect-cursor":
-                    handleConnectCursor(config);
+                    handleConnectCursor();
                     break;
                 case "download-topic":
                     handleDownloadTopic(config);

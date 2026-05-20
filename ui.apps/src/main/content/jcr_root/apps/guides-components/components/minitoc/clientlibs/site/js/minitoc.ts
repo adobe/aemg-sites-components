@@ -94,8 +94,10 @@ class MiniTOC {
             miniTOCList.classList.add('minitoc-list')
             minitocContainer.appendChild(miniTOCList)
         } else {
-            const minitocContainerSection = document.getElementsByClassName('minitoc-container')[0]
-            minitocContainerSection.classList.add('force-hide')
+            const miniTocMain = document.getElementsByClassName('mini-toc-main')[0]
+            if (miniTocMain) {
+                miniTocMain.classList.add('force-hide')
+            }
         }
 
         this.tagList.forEach(tag => {

@@ -125,3 +125,6 @@
     width: 2rem;
     margin-left: auto;
 }
+.mini-toc-main.force-hide {
+    display: none;
+}
