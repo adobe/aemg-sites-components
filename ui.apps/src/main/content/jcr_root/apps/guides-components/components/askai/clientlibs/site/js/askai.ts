@@ -361,8 +361,16 @@ class AskAI {
             this.body.classList.remove('cmp-askai__summary-body--collapsed');
             this.toggleText.textContent = this.showLessLabel;
             this.toggleBtn.classList.remove('cmp-askai__toggle-btn--collapsed');
+            setTimeout(() => {
+                if (this.isExpanded) {
+                    this.body.style.maxHeight = 'none';
+                }
+            }, 350);
         } else {
-            this.body.style.maxHeight = this.collapsedHeight + 'px';
+            this.body.style.maxHeight = this.body.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+                this.body.style.maxHeight = this.collapsedHeight + 'px';
+            });
             this.body.classList.add('cmp-askai__summary-body--collapsed');
             this.toggleText.textContent = this.showMoreLabel;
             this.toggleBtn.classList.add('cmp-askai__toggle-btn--collapsed');
