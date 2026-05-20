@@ -169,27 +169,42 @@ class PrologMetaInjector {
         }
     }
 
-    onDocumentReady(): void {
-        const prologElement = document.querySelector('.prolog');
-        if (!prologElement) {
+    private initBlock(block: HTMLElement): void {
+        if (block.getAttribute(PrologMetaInjector.PROCESSED_ATTR) === 'true') {
             return;
         }
-
-        if (prologElement.getAttribute(PrologMetaInjector.PROCESSED_ATTR) === 'true') {
-            return;
-        }
-        prologElement.setAttribute(PrologMetaInjector.PROCESSED_ATTR, 'true');
+        block.setAttribute(PrologMetaInjector.PROCESSED_ATTR, 'true');
 
         try {
-            this.processElement(prologElement, 0);
-            (prologElement as HTMLElement).style.display = 'none';
+            this.processElement(block, 0);
         } catch (e) {
             if (typeof console !== 'undefined' && console.error) {
                 console.error('PrologMetaInjector: failed to process prolog content', e);
             }
         }
     }
+
+    initAllPrologBlocks(): void {
+        const blocks = document.querySelectorAll<HTMLElement>('.cmp-prolog');
+        for (let i = 0; i < blocks.length; i++) {
+            this.initBlock(blocks[i]);
+        }
+    }
 }
 
 const prologMetaInjector = new PrologMetaInjector();
-document.addEventListener('DOMContentLoaded', prologMetaInjector.onDocumentReady.bind(prologMetaInjector));
+
+function initProlog(): void {
+    prologMetaInjector.initAllPrologBlocks();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProlog);
+} else {
+    initProlog();
+}
+
+const prologObserver = new MutationObserver(() => {
+    initProlog();
+});
+prologObserver.observe(document.body, { childList: true, subtree: true });
