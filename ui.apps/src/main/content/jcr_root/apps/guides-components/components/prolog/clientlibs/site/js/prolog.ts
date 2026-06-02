@@ -26,9 +26,17 @@ class PrologMetaInjector {
         if (!name || !content || !document.head) {
             return;
         }
+        const trimmedName = name.trim();
+        const trimmedContent = content.trim();
+        const existing = document.head.querySelector(
+            'meta[name="' + trimmedName + '"][content="' + trimmedContent + '"]'
+        );
+        if (existing) {
+            return;
+        }
         const meta = document.createElement('meta');
-        meta.setAttribute('name', name.trim());
-        meta.setAttribute('content', content.trim());
+        meta.setAttribute('name', trimmedName);
+        meta.setAttribute('content', trimmedContent);
         document.head.appendChild(meta);
     }
 
