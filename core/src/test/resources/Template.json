@@ -36,6 +36,17 @@
             }
           }
         }
+      },
+      "article1": {
+        "jcr:primaryType": "cq:Page",
+        "jcr:createdBy": "admin",
+        "jcr:created": "Thu Mar 09 2023 18:35:00 GMT+0530",
+        "jcr:content": {
+          "jcr:primaryType": "cq:PageContent",
+          "jcr:createdBy": "admin",
+          "jcr:title": "First Article",
+          "sling:resourceType": "core/wcm/components/page/v2/page"
+        }
       }
     }
   },

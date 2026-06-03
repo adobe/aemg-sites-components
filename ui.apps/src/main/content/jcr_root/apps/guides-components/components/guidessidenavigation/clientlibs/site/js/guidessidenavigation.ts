@@ -34,6 +34,7 @@ class GuidesNavigation {
     limit: number
     loadMoreText: string
     categoryPath: string
+    navigationParent: Element | null
 
     generatePath(prefix, suffix) {
         if (prefix) {
@@ -74,6 +75,22 @@ class GuidesNavigation {
 
             chevron.classList.remove('hide-children')
             ul.classList.remove('hide-children')
+
+            requestAnimationFrame(() => {
+                const navParent = container.closest('.guides-navigation')
+                const scrollable = navParent?.querySelector(':scope > ul.cmp-guidesnavigation__group') || navParent
+                if (scrollable) {
+                    const parentRect = scrollable.getBoundingClientRect()
+                    const itemRect = container.getBoundingClientRect()
+                    if (itemRect.bottom > parentRect.bottom || itemRect.top < parentRect.top) {
+                        const offsetTop = itemRect.top - parentRect.top + scrollable.scrollTop
+                        scrollable.scrollTo({
+                            top: offsetTop - scrollable.clientHeight / 2,
+                            behavior: 'smooth'
+                        })
+                    }
+                }
+            })
         }
     }
 
@@ -86,15 +103,17 @@ class GuidesNavigation {
         const isSelected = (currPath === this.selectedPath)
         const isActive = item.active !== false
         container.classList.add('toc-list-item')
-        const paddingDepth = 1.25 * incrementer;
-        container.style.paddingLeft = `${paddingDepth}rem`;
+        const marginDepth = 1 * incrementer;
+        container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
         const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
             anchor.setAttribute("href", outputPath);
+            
         } else {
-            anchor.style.cursor = "default";
+            anchor.style.color = "#505050";
+            anchor.style.fontWeight = "400";
         }
         anchor.setAttribute("title", item.displayName)
         anchor.innerText = item.displayName
@@ -114,7 +133,7 @@ class GuidesNavigation {
         } else {
             listItem.classList.add("cmp-guidesnavigation__item--inactive")
         }
-
+        container.appendChild(anchor)
         if (hasChildren) {
             if (!expandChildren) {
                 chevron.classList.add('hide-children')
@@ -122,9 +141,13 @@ class GuidesNavigation {
             chevron.addEventListener('click', () => {
                 this.handleExpand(chevron, listItem, currPath, item, -1, incrementer)
             })
+            anchor.style.cursor = 'pointer'
+            anchor.addEventListener('click', () => {
+                this.handleExpand(chevron, listItem, currPath, item, -1, incrementer)
+            })
             container.appendChild(chevron)
         }
-        container.appendChild(anchor)
+        
         listItem.appendChild(container)
         if (subtree) {
             listItem.appendChild(subtree)
@@ -218,11 +241,172 @@ class GuidesNavigation {
         return path.substring(0, path.lastIndexOf('.')) || path
     }
 
+    expandAllSections(navigationParent: Element) {
+        let collapsed: NodeListOf<Element>
+        do {
+            collapsed = navigationParent.querySelectorAll(
+                '.cmp-guidesnavigation__item-has-children > .toc-list-item > .item-child-toggle.hide-children'
+            )
+            collapsed.forEach((chevron: HTMLElement) => chevron.click())
+        } while (collapsed.length > 0)
+    }
+
+    collapseAllSections(navigationParent: Element) {
+        const expanded = navigationParent.querySelectorAll(
+            '.cmp-guidesnavigation__item-has-children > .toc-list-item > .item-child-toggle.show-children'
+        )
+        expanded.forEach((chevron: HTMLElement) => chevron.click())
+    }
+
+    initExpandAllToggle(navigationParent: Element) {
+        const toggleBtn = document.querySelector('.cmp-guidesnav-expand-all__toggle')
+        if (!toggleBtn) return
+
+        toggleBtn.addEventListener('click', () => {
+            const isChecked = toggleBtn.getAttribute('aria-checked') === 'true'
+            const newState = !isChecked
+            toggleBtn.setAttribute('aria-checked', String(newState))
+
+            if (newState) {
+                this.expandAllSections(navigationParent)
+            } else {
+                this.collapseAllSections(navigationParent)
+            }
+        })
+    }
+
+    initFilterInput() {
+        const input = document.querySelector('.cmp-guidesnav-filter__input') as HTMLInputElement
+        if (!input || !this.navigationParent) return
+
+        let debounceTimer: number
+        input.addEventListener('input', () => {
+            clearTimeout(debounceTimer)
+            debounceTimer = window.setTimeout(() => {
+                this.filterNavigation(input.value.trim())
+            }, 200)
+        })
+    }
+
+    filterNavigation(keyword: string) {
+        const nav = this.navigationParent
+        if (!nav) return
+
+        if (!keyword) {
+            this.clearFilter()
+            return
+        }
+
+        this.expandAllSections(nav)
+
+        const lowerKeyword = keyword.toLowerCase()
+        const allItems = Array.from(
+            nav.querySelectorAll('li.cmp-guidesnavigation__item')
+        ) as HTMLElement[]
+
+        allItems.forEach(li => {
+            li.classList.remove('cmp-guidesnav-filter-hidden')
+            li.removeAttribute('data-filter-match')
+        })
+
+        allItems.forEach(li => {
+            const anchor = li.querySelector(':scope > .toc-list-item > a')
+            if (anchor && anchor.textContent.toLowerCase().includes(lowerKeyword)) {
+                li.setAttribute('data-filter-match', 'true')
+            }
+        })
+
+        for (let i = allItems.length - 1; i >= 0; i--) {
+            const li = allItems[i]
+            if (li.getAttribute('data-filter-match') === 'true') continue
+            if (li.querySelector('li[data-filter-match="true"]')) {
+                li.setAttribute('data-filter-match', 'true')
+            }
+        }
+
+        allItems.forEach(li => {
+            if (li.getAttribute('data-filter-match') === 'true') {
+                li.classList.remove('cmp-guidesnav-filter-hidden')
+                const childUl = li.querySelector(':scope > ul.cmp-guidesnavigation__group')
+                const chevron = li.querySelector(':scope > .toc-list-item > .item-child-toggle')
+                if (childUl && chevron) {
+                    childUl.classList.remove('hide-children')
+                    childUl.classList.add('show-children')
+                    chevron.classList.remove('hide-children')
+                    chevron.classList.add('show-children')
+                }
+            } else {
+                li.classList.add('cmp-guidesnav-filter-hidden')
+            }
+        })
+
+        const toggleBtn = document.querySelector('.cmp-guidesnav-expand-all__toggle')
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-checked', 'true')
+        }
+    }
+
+    clearFilter() {
+        const nav = this.navigationParent
+        if (!nav) return
+
+        const allItems = nav.querySelectorAll('li.cmp-guidesnavigation__item')
+        allItems.forEach((li: HTMLElement) => {
+            li.classList.remove('cmp-guidesnav-filter-hidden')
+            li.removeAttribute('data-filter-match')
+        })
+
+        this.collapseAllSections(nav)
+
+        const selectedItem = nav.querySelector('.cmp-nav-item-selected')
+        if (selectedItem) {
+            let current = selectedItem.parentElement
+            while (current && current !== nav) {
+                if (current.tagName === 'UL' && current.classList.contains('cmp-guidesnavigation__group')) {
+                    current.classList.remove('hide-children')
+                    current.classList.add('show-children')
+                }
+                if (current.tagName === 'LI') {
+                    const chevron = current.querySelector(':scope > .toc-list-item > .item-child-toggle')
+                    if (chevron) {
+                        chevron.classList.remove('hide-children')
+                        chevron.classList.add('show-children')
+                    }
+                }
+                current = current.parentElement
+            }
+        }
+
+        const toggleBtn = document.querySelector('.cmp-guidesnav-expand-all__toggle')
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-checked', 'false')
+        }
+    }
+
+    scrollSelectedIntoView(navigationParent: Element) {
+        const selectedItem = navigationParent.querySelector('.cmp-nav-item-selected')
+        if (selectedItem) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    const scrollable = navigationParent.querySelector(':scope > ul.cmp-guidesnavigation__group') || navigationParent
+                    const parentRect = scrollable.getBoundingClientRect()
+                    const itemRect = selectedItem.getBoundingClientRect()
+                    const offsetTop = itemRect.top - parentRect.top + scrollable.scrollTop
+                    scrollable.scrollTo({
+                        top: offsetTop - scrollable.clientHeight / 2,
+                        behavior: 'smooth'
+                    })
+                })
+            })
+        }
+    }
+
     onDocumentReady() {
         const navigationParent = document.querySelector(".guides-navigation");
         if (navigationParent === null) {
             return;
         }
+        this.navigationParent = navigationParent
         try {
             const navData = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-list"));
             const navDataIndex = JSON.parse(navigationParent.getAttribute("data-cmp-guides-side-nav-index"));
@@ -241,8 +425,11 @@ class GuidesNavigation {
             this.selectedPath = this.tokens.join('-')
             this.loadMoreText = loadMoreText
             this.categoryPath = categoryPath
-            const ul = this.renderLevel(navData.children, 0, '', 0, 0)
+            const ul = this.renderLevel(navData.children, 0, '', -1, 0)
             navigationParent.appendChild(ul)
+            this.initExpandAllToggle(navigationParent)
+            this.initFilterInput()
+            this.scrollSelectedIntoView(navigationParent)
         } catch (e) {
 
         }

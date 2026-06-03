@@ -14,9 +14,53 @@
 ~ limitations under the License.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
 
-<div data-sly-use.guidesnavigation="com.adobe.guides.aem.components.core.models.GuidesNavigation"
-     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
-     data-cmp-guides-side-nav-list="${guidesnavigation.guidesNavigation}"
+<sly data-sly-use.guidesnavigation="com.adobe.guides.aem.components.core.models.GuidesNavigation"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"/>
+
+<div data-sly-test="${properties.productLogo || properties.productTitle || properties.appLinkText}"
+     class="cmp-guidesnav-product-header">
+    <a class="cmp-guidesnav-product-header__left"
+       href="${properties.appLinkUrl}">
+        <img data-sly-test="${properties.productLogo}"
+             class="cmp-guidesnav-product-header__logo"
+             src="${properties.productLogo}"
+             alt="${properties.productTitle || 'Product logo' @ i18n}"
+             loading="lazy"/>
+        <span data-sly-test="${properties.productTitle}"
+              class="cmp-guidesnav-product-header__title">${properties.productTitle}</span>
+    </a>
+    <a data-sly-test="${properties.appLinkText && properties.appLinkUrl}"
+       class="cmp-guidesnav-product-header__app-link"
+       href="${properties.appLinkUrl}"
+       target="_blank"
+       rel="noopener noreferrer">${properties.appLinkText}</a>
+</div>
+
+<div class="cmp-guidesnav-filter">
+    <svg class="cmp-guidesnav-filter__icon" width="19.5" height="19.5" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.3829 19.2163L14.7913 13.6247C15.8576 12.3032 16.4996 10.6256 16.4996 8.79961C16.4996 4.55429 13.0449 1.09961 8.79961 1.09961C4.55429 1.09961 1.09961 4.55428 1.09961 8.7996C1.09961 13.0449 4.55429 16.4996 8.79961 16.4996C10.6256 16.4996 12.3032 15.8576 13.6247 14.7913L19.2163 20.3829C19.3774 20.544 19.588 20.6246 19.7996 20.6246C20.0112 20.6246 20.2218 20.544 20.3829 20.3829C20.7052 20.0606 20.7052 19.5386 20.3829 19.2163ZM8.79961 14.8496C5.46416 14.8496 2.74961 12.1351 2.74961 8.7996C2.74961 5.46415 5.46416 2.7496 8.79961 2.7496C12.1351 2.7496 14.8496 5.46415 14.8496 8.7996C14.8496 12.1351 12.1351 14.8496 8.79961 14.8496Z" fill="#717171"/>
+    </svg>
+    <input class="cmp-guidesnav-filter__input"
+           type="text"
+           placeholder="${'Filter by keyword' @ i18n}"
+           aria-label="${'Filter navigation by keyword' @ i18n}" />
+</div>
+
+<div data-sly-test="${properties.expandAllText}"
+     class="cmp-guidesnav-expand-all">
+    <button class="cmp-guidesnav-expand-all__toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            aria-label="${properties.expandAllText}">
+        <span class="cmp-guidesnav-expand-all__toggle-track">
+            <span class="cmp-guidesnav-expand-all__toggle-thumb"></span>
+        </span>
+    </button>
+    <span class="cmp-guidesnav-expand-all__label">${properties.expandAllText}</span>
+</div>
+
+<div data-cmp-guides-side-nav-list="${guidesnavigation.guidesNavigation}"
      data-cmp-guides-side-nav-index="${guidesnavigation.guidesNavigationIndex}"
      data-cmp-guides-current-page-relative-url="${guidesnavigation.currentPageRelativeUrl}"
      data-cmp-guides-side-nav-items-limit="${guidesnavigation.limit}"

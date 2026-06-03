@@ -18,46 +18,37 @@ package com.adobe.guides.aem.components.core.models;
 
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
-import com.adobe.guides.aem.components.core.exception.GuidesRuntimeException;
 import com.day.cq.wcm.api.Page;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
+import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-@Model(adaptables = SlingHttpServletRequest.class, adapters = {CategoryList.class, ComponentExporter.class}, resourceType = {CategoryListImpl.RESOURCE_TYPE_V1})
+@Model(adaptables = SlingHttpServletRequest.class,
+        adapters = {CategoryList.class, ComponentExporter.class},
+        resourceType = CategoryListImpl.RESOURCE_TYPE_V1,
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class CategoryListImpl extends AbstractComponentImpl implements CategoryList {
 
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/categorylist";
-    private static final String SLASH = "/";
-    private static final String QUERY_PATH_TOKEN = "{PATH}";
-    private static final String QUERY_ID_TOKEN = "{ID}";
-    private static final String PAGES_BY_TEMPLATE_QUERY = "SELECT * FROM [cq:Page] AS s WHERE ISDESCENDANTNODE([" + QUERY_PATH_TOKEN + "]) AND s.[jcr:content/id]='" + QUERY_ID_TOKEN + "'";
-    private static final String CONF_PATH_TOKEN = "conf";
-    private static final String CONTENT_PATH_TOKEN = "content";
-    private static final String TEMPLATE_ID_TOKEN = "category-page";
+    protected static final String PN_PAGE_PATH = "pagePath";
+    protected static final String PN_REDIRECT_PATH = "redirectPath";
+
     private static final Logger logger = LoggerFactory.getLogger(CategoryListImpl.class);
 
     @Self
@@ -66,70 +57,73 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     @ScriptVariable
     private Resource resource;
 
-    @ScriptVariable
-    private Page currentPage;
+    @ChildResource
+    @Named("categoryPages")
+    private List<Resource> categoryPages;
 
-    @Nullable
-    private String templateName;
-
-    private List<String> categoryList;
+    private String categoryList = "[]";
 
     @PostConstruct
     private void initModel() {
-        String cqTemplate = currentPage.getContentResource().getValueMap().get("cq:template", String.class);
-        if (StringUtils.isEmpty(cqTemplate)) {
-            logger.error("Unable to retrieve template name.");
+        if (categoryPages == null || categoryPages.isEmpty()) {
             return;
         }
-
-        try {
-            templateName = getTemplateName(cqTemplate);
-            categoryList = findPagesByTemplate(request.getResourceResolver(), currentPage.getPath());
-        } catch (RepositoryException e) {
-            logger.error("Unable to retrieve category list for current template.", e);
-        } catch (GuidesRuntimeException e) {
-            logger.error(e.getMessage(), e);
-        }
+        categoryList = buildCategoryListJson(categoryPages, request.getResourceResolver());
     }
 
-    public static String getTemplateName(final String cqTemplateString) throws GuidesRuntimeException {
-        String[] cqTemplateStringArray = cqTemplateString.split("/");
-        int indexOfTemplate = -1;
-        for (int i = 0; i < cqTemplateStringArray.length; i++) {
-            if (cqTemplateStringArray[i].equals(CONF_PATH_TOKEN)) {
-                indexOfTemplate = i;
-                break;
+    static String buildCategoryListJson(List<Resource> items, ResourceResolver resolver) {
+        List<String> entries = new ArrayList<>();
+
+        for (Resource item : items) {
+            ValueMap props = item.getValueMap();
+            String pagePath = props.get(PN_PAGE_PATH, String.class);
+            if (pagePath == null || pagePath.isEmpty()) {
+                continue;
             }
+
+            Resource pageResource = resolver.getResource(pagePath);
+            if (pageResource == null) {
+                logger.warn("Configured page path not found: {}", pagePath);
+                continue;
+            }
+
+            Page page = pageResource.adaptTo(Page.class);
+            if (page == null) {
+                logger.warn("Resource is not a page: {}", pagePath);
+                continue;
+            }
+
+            String title = page.getTitle() != null ? page.getTitle() : page.getName();
+            String description = page.getDescription() != null ? page.getDescription() : "";
+            String redirectPath = props.get(PN_REDIRECT_PATH, "");
+
+            StringBuilder obj = new StringBuilder("{");
+            obj.append("\"path\":\"").append(escapeJson(page.getPath())).append("\",");
+            obj.append("\"title\":\"").append(escapeJson(title)).append("\",");
+            obj.append("\"description\":\"").append(escapeJson(description)).append("\",");
+            obj.append("\"thumbnail\":\"").append(escapeJson(page.getPath() + ".thumb.480.300.png")).append("\",");
+            obj.append("\"redirectPath\":\"").append(escapeJson(redirectPath)).append("\"");
+            obj.append("}");
+            entries.add(obj.toString());
         }
-        if (indexOfTemplate == -1) {
-            throw new GuidesRuntimeException("Unable to retrieve template name for" + cqTemplateString);
-        }
-        int indexOfTemplateName = indexOfTemplate + 1;
-        return cqTemplateStringArray[indexOfTemplateName];
+
+        return "[" + String.join(",", entries) + "]";
     }
 
-    public static List<String> findPagesByTemplate(final ResourceResolver resourceResolver, final String path) throws RepositoryException {
-        Session session = resourceResolver.adaptTo(Session.class);
-        QueryManager queryManager = session.getWorkspace().getQueryManager();
-        final String userQuery = PAGES_BY_TEMPLATE_QUERY.replace(QUERY_PATH_TOKEN, FilenameUtils.separatorsToUnix(path)).replace(QUERY_ID_TOKEN, TEMPLATE_ID_TOKEN);
-        logger.info("QUERY for category list: {}", userQuery);
-        Query query = queryManager.createQuery(userQuery, Query.JCR_SQL2);
-        QueryResult res = query.execute();
-        NodeIterator nodes = res.getNodes();
-        List<String> newCategoryList = new ArrayList<>(Collections.emptyList());
-
-        while (nodes.hasNext()) {
-            Node node = nodes.nextNode();
-            Page aemPage = resourceResolver.getResource(node.getPath()).adaptTo(Page.class);
-            newCategoryList.add(aemPage.getPath());
-            newCategoryList.add(aemPage.getTitle());
-            newCategoryList.add(aemPage.getPath()+".thumb.480.300.png");
+    static String escapeJson(String value) {
+        if (value == null) {
+            return "";
         }
-        return newCategoryList;
+        return value
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 
     @Override
-    public List<String> getCategoryList() {
+    public String getCategoryList() {
         return categoryList;
     }
 
@@ -138,5 +132,4 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     public String getExportedType() {
         return resource.getResourceType();
     }
-
 }

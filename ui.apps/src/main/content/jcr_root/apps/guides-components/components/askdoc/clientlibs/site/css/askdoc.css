@@ -1,0 +1,576 @@
+/*
+ *  Copyright 2024 Adobe Systems Incorporated
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+/* ========================================================================
+   AskDoc – Conversational Chat Panel
+   ======================================================================== */
+
+.cmp-askdoc {
+    font-family: "Adobe Clean", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ========================================================================
+   Backdrop
+   ======================================================================== */
+
+.cmp-askdoc__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cmp-askdoc--open .cmp-askdoc__backdrop {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ========================================================================
+   Panel
+   ======================================================================== */
+
+.cmp-askdoc__panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 9999;
+    background: #fff;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cmp-askdoc--open .cmp-askdoc__panel {
+    transform: translateX(0);
+}
+
+/* ========================================================================
+   Header
+   ======================================================================== */
+
+.cmp-askdoc__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.cmp-askdoc__header-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.cmp-askdoc__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cmp-askdoc__header-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0;
+    transition: background-color 0.15s ease;
+}
+
+.cmp-askdoc__header-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.cmp-askdoc__header-refresh {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask%20id%3D%22mask0_824_13979%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Cpath%20d%3D%22M18.2067%203.89745C17.8015%203.80272%2017.3986%204.04784%2017.3015%204.45116L16.921%206.02587C15.5233%203.59399%2012.9191%202.02148%2010.0002%202.02148C6.31562%202.02148%203.1247%204.52148%202.24091%208.10156C2.1413%208.5039%202.38691%208.91015%202.78925%209.00976C3.19062%209.10937%203.59784%208.86328%203.69696%208.46093C4.41522%205.55273%207.00702%203.52148%2010.0002%203.52148C12.517%203.52148%2014.7352%204.96777%2015.8091%207.1538L13.7067%206.6455C13.3034%206.55175%2012.8991%206.79589%2012.8014%207.19921C12.7043%207.60155%2012.9518%208.00683%2013.3542%208.10448L16.5994%208.88866C16.7242%208.97728%2016.873%209.03124%2017.0309%209.03124C17.0905%209.03124%2017.1511%209.0244%2017.2111%209.00976C17.2593%208.9978%2017.2969%208.96874%2017.3403%208.94872C17.4098%208.93017%2017.4836%208.92919%2017.5461%208.89061C17.7155%208.78709%2017.8371%208.6201%2017.884%208.42674L18.7595%204.80272C18.8566%204.40038%2018.6091%203.9951%2018.2067%203.89745Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M17.211%2011.0329C16.8141%2010.9362%2016.4029%2011.1794%2016.3033%2011.5817C15.5851%2014.4909%2012.9933%2016.5222%2010.0001%2016.5222C7.48307%2016.5222%205.26487%2015.0756%204.19096%2012.8886L6.29356%2013.3972C6.69639%2013.489%207.10167%2013.2468%207.19883%2012.8434C7.296%2012.4411%207.04844%2012.0358%206.6461%2011.9382L3.39116%2011.1516C3.22014%2011.0334%203.00585%2010.9802%202.78917%2011.0329C2.77397%2011.0368%202.76317%2011.0476%202.74846%2011.0522C2.64525%2011.0654%202.54454%2011.0964%202.45421%2011.152C2.28478%2011.2556%202.16319%2011.4226%202.11632%2011.6159L1.24083%2015.2399C1.14366%2015.6423%201.39122%2016.0476%201.79356%2016.1452C1.85313%2016.1589%201.91221%2016.1657%201.97032%2016.1657C2.3087%2016.1657%202.61583%2015.9352%202.69884%2015.5915L3.07927%2014.0168C4.47691%2016.4489%207.08116%2018.0222%2010.0001%2018.0222C13.6847%2018.0222%2016.8756%2015.5212%2017.7594%2011.9411C17.859%2011.5388%2017.6134%2011.1325%2017.211%2011.0329Z%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_824_13979)%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+
+.cmp-askdoc__header-close {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask%20id%3D%22mask0_824_16078%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Cpath%20d%3D%22M11.0601%2010L16.2666%204.79395C16.5596%204.50098%2016.5596%204.02637%2016.2666%203.7334C15.9736%203.44043%2015.499%203.44043%2015.2061%203.7334L9.99951%208.93945L4.79297%203.7334C4.5%203.44043%204.02539%203.44043%203.73242%203.7334C3.43945%204.02637%203.43945%204.50098%203.73242%204.79395L8.9389%2010L3.73242%2015.206C3.43945%2015.499%203.43945%2015.9736%203.73242%2016.2666C3.8789%2016.4131%204.0708%2016.4863%204.26269%2016.4863C4.45458%2016.4863%204.64648%2016.4131%204.79296%2016.2666L9.9995%2011.0605L15.206%2016.2666C15.3525%2016.4131%2015.5444%2016.4863%2015.7363%2016.4863C15.9282%2016.4863%2016.1201%2016.4131%2016.2666%2016.2666C16.5596%2015.9736%2016.5596%2015.499%2016.2666%2015.206L11.0601%2010Z%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_824_16078)%22%3E%3Crect%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+}
+
+/* ========================================================================
+   Messages Area
+   ======================================================================== */
+
+.cmp-askdoc__messages {
+    background-color: #F8F8F8;
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cmp-askdoc__messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.cmp-askdoc__messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cmp-askdoc__messages::-webkit-scrollbar-thumb {
+    background: #d0d0d0;
+    border-radius: 2px;
+}
+
+/* ========================================================================
+   Message Bubbles
+   ======================================================================== */
+
+.cmp-askdoc__message {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.cmp-askdoc__message--bot {
+    align-items: flex-start;
+}
+
+.cmp-askdoc__message--user {
+    align-items: flex-end;
+}
+
+.cmp-askdoc__message-bubble {
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.cmp-askdoc__message--bot .cmp-askdoc__message-bubble {
+    background: transparent;
+    color: #333;
+    border-radius: 12px 12px 12px 4px;
+    max-width: 100%;
+    padding: 0;
+}
+
+.cmp-askdoc__message--user .cmp-askdoc__message-bubble {
+    background: linear-gradient(135deg, #6C3AED 0%, #5B21B6 100%);
+    color: #fff;
+    border-radius: 12px 12px 4px 12px;
+    max-width: 85%;
+    padding: 10px 16px;
+}
+
+/* ========================================================================
+   Bot Message Markdown Content
+   ======================================================================== */
+
+.cmp-askdoc__message-bubble p {
+    margin: 0 0 10px;
+}
+
+.cmp-askdoc__message-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.cmp-askdoc__message-bubble strong {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.cmp-askdoc__message--user .cmp-askdoc__message-bubble strong {
+    color: #fff;
+}
+
+.cmp-askdoc__message-bubble em {
+    font-style: italic;
+}
+
+.cmp-askdoc__message-bubble a {
+    color: #7C4DFF;
+    text-decoration: none;
+}
+
+.cmp-askdoc__message-bubble a:hover {
+    text-decoration: underline;
+}
+
+.cmp-askdoc__message--user .cmp-askdoc__message-bubble a {
+    color: #e0d4ff;
+}
+
+.cmp-askdoc__message-bubble ul,
+.cmp-askdoc__message-bubble ol {
+    margin: 6px 0 10px 0;
+    padding-left: 20px;
+}
+
+.cmp-askdoc__message-bubble li {
+    margin-bottom: 4px;
+    line-height: 1.55;
+}
+
+.cmp-askdoc__message-bubble ul li {
+    list-style-type: disc;
+}
+
+.cmp-askdoc__message-bubble ol li {
+    list-style-type: decimal;
+}
+
+.cmp-askdoc__message-bubble code {
+    font-family: "Source Code Pro", "Courier New", monospace;
+    background-color: #f5f3ff;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: #5b21b6;
+}
+
+.cmp-askdoc__message-bubble pre {
+    background-color: #f8f8f8;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 8px 0;
+}
+
+.cmp-askdoc__message-bubble pre code {
+    background: none;
+    padding: 0;
+    font-size: 12.5px;
+    color: #333;
+}
+
+.cmp-askdoc__message-bubble h1,
+.cmp-askdoc__message-bubble h2,
+.cmp-askdoc__message-bubble h3,
+.cmp-askdoc__message-bubble h4,
+.cmp-askdoc__message-bubble h5,
+.cmp-askdoc__message-bubble h6 {
+    color: #1a1a1a;
+    margin: 12px 0 6px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.cmp-askdoc__message-bubble h1 { font-size: 18px; }
+.cmp-askdoc__message-bubble h2 { font-size: 16px; }
+.cmp-askdoc__message-bubble h3 { font-size: 15px; }
+
+/* ========================================================================
+   Suggestion Chips
+   ======================================================================== */
+
+.cmp-askdoc__suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.cmp-askdoc__suggestion-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    background: #fff;
+    color: #333;
+    font-size: 13.5px;
+    line-height: 1.45;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    font-family: inherit;
+}
+
+.cmp-askdoc__suggestion-btn:hover {
+    background-color: #fafafa;
+    border-color: #ccc;
+}
+
+.cmp-askdoc__suggestion-btn::before {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(180deg) scaleX(-1);
+}
+
+/* ========================================================================
+   Loading Indicator
+   ======================================================================== */
+
+.cmp-askdoc__typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.cmp-askdoc__typing-dot {
+    width: 7px;
+    height: 7px;
+    background: #b0b0b0;
+    border-radius: 50%;
+    animation: cmp-askdoc-bounce 1.4s ease-in-out infinite;
+}
+
+.cmp-askdoc__typing-dot:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+.cmp-askdoc__typing-dot:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+@keyframes cmp-askdoc-bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+/* ========================================================================
+   Input Area
+   ======================================================================== */
+
+.cmp-askdoc__input-area {
+    flex-shrink: 0;
+    padding: 12px 20px 16px;
+    border-top: 1px solid #f0f0f0;
+    background: #F8F8F8
+}
+
+.cmp-askdoc__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #8F8F8FA6;
+    border-radius: 12px;
+    padding: 12px 14px 8px;
+    transition: border-color 0.2s ease;
+    background: #ffffff;
+}
+
+.cmp-askdoc__input-wrapper:focus-within {
+    border-color: #c4b5fd;
+}
+
+.cmp-askdoc__input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    resize: none;
+    min-height: 24px;
+    max-height: 120px;
+    font-family: inherit;
+    padding: 0;
+    width: 100%;
+}
+
+.cmp-askdoc__input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.cmp-askdoc__input-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.cmp-askdoc__attach-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E");
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0;
+    transition: background-color 0.15s ease;
+}
+
+.cmp-askdoc__attach-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.cmp-askdoc__send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='%23999'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E");
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0;
+    transition: background-color 0.15s ease;
+}
+
+.cmp-askdoc__send-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.cmp-askdoc__send-btn--active {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='%236C3AED'%3E%3Cpath d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'/%3E%3C/svg%3E");
+}
+
+/* ========================================================================
+   Disclaimer
+   ======================================================================== */
+
+.cmp-askdoc__disclaimer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #999;
+    line-height: 1.5;
+}
+
+.cmp-askdoc__disclaimer-link {
+    color: #666;
+    text-decoration: underline;
+    margin-left: 2px;
+}
+
+.cmp-askdoc__disclaimer-link:hover {
+    color: #333;
+}
+
+/* ========================================================================
+   Header Trigger Button (injected into page header)
+   ======================================================================== */
+
+.cmp-askdoc__trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #E8503A;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    font-family: inherit;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.cmp-askdoc__trigger-btn:hover {
+    background: #d44430;
+}
+
+.cmp-askdoc__trigger-btn::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 12 18.469c-1.006 0-1.938.43-2.536 1.09l-.548-.547z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ========================================================================
+   Dig Deeper Button (in askai component footer)
+   ======================================================================== */
+
+.cmp-askai__dig-deeper-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(95.85deg, #D73220 0%, #D92361 33%, #7155FA 100%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    font-family: inherit;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.cmp-askai__dig-deeper-btn::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 3C10.348 3 9 4.348 9 6c0 1.086.578 2.035 1.441 2.563C9.578 9.965 9 10.914 9 12c0 1.086.578 2.035 1.441 2.563C9.578 15.965 9 16.914 9 18c0 1.652 1.348 3 3 3s3-1.348 3-3c0-1.086-.578-2.035-1.441-2.563C14.422 14.035 15 13.086 15 12c0-1.086-.578-2.035-1.441-2.563C14.422 8.035 15 7.086 15 6c0-1.652-1.348-3-3-3z' fill='%23fff'/%3E%3Ccircle cx='6' cy='8' r='1.5' fill='%23fff'/%3E%3Ccircle cx='18' cy='8' r='1.5' fill='%23fff'/%3E%3Ccircle cx='6' cy='16' r='1.5' fill='%23fff'/%3E%3Ccircle cx='18' cy='16' r='1.5' fill='%23fff'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ========================================================================
+   Responsive
+   ======================================================================== */
+
+@media (max-width: 480px) {
+    .cmp-askdoc__panel {
+        width: 100vw;
+    }
+}

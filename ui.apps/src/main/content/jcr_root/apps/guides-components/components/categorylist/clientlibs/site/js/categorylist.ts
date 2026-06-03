@@ -13,74 +13,110 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+interface CategoryItem {
+    path: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    redirectPath: string;
+}
+
 class CategoryList {
     private protocol: string;
     private host: string;
-    private pathName: string;
+
     constructor() {
         this.protocol = window.location.protocol;
         this.host = window.location.host;
-        this.pathName = window.location.pathname;
     }
 
-    checkNull(inputValue) {
-        const value = "";
-        if (inputValue === null) {
-            return value;
-        } else {
-            return inputValue;
-        }
+    private createChevronSVG(): SVGSVGElement {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "20");
+        svg.setAttribute("height", "20");
+        svg.setAttribute("viewBox", "0 0 20 20");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("aria-hidden", "true");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M7.5 4.167L13.333 10 7.5 15.833");
+        path.setAttribute("stroke", "currentColor");
+        path.setAttribute("stroke-width", "1.5");
+        path.setAttribute("stroke-linecap", "round");
+        path.setAttribute("stroke-linejoin", "round");
+        svg.appendChild(path);
+        return svg;
     }
 
-    displayCategory(resultData) {
+    displayCategory(items: CategoryItem[]) {
         const categoryDiv = document.querySelector(".cmp-category-list-group");
-        const listFragment = new DocumentFragment();
-
-        if(resultData == null || resultData.length === 0) {
+        if (!categoryDiv || !items || items.length === 0) {
             return;
         }
 
-        resultData.forEach((categoryPath, index) => {
-            if (index % 3 === 0) {
-                const categoryTitle = resultData[index + 1];
-                const categoryTumbnail = resultData[index + 2];
-                const categoryURL = this.protocol + '//' + this.host + categoryPath + '.html';
-                const templateName = this.pathName.split("/")[2];
-                if (categoryPath.startsWith('/content/' + templateName)) {
-                    const listItem = document.createElement('div');
-                    listItem.classList.add('category-list-item');
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('category-list-item-image-container');
-                    imageContainer.style.backgroundImage = `url('${categoryTumbnail}')`
-                    const titleElement = document.createElement('span');
-                    titleElement.classList.add('category-list-item-title');
+        const listFragment = new DocumentFragment();
 
-                    const linkElement = document.createElement('a');
-                    linkElement.classList.add('category-list-item-link');
-                    linkElement.target = '_blank';
-                    linkElement.rel = 'noopener noreferrer';
-                    linkElement.href = this.checkNull(categoryURL);
-                    linkElement.textContent = this.checkNull(categoryTitle);
+        for (const item of items) {
+            const targetPath = item.redirectPath || item.path;
+            const categoryURL = `${this.protocol}//${this.host}${targetPath}.html`;
 
-                    titleElement.appendChild(linkElement);
-                    listItem.appendChild(imageContainer);
-                    listItem.appendChild(titleElement);
-                    listFragment.appendChild(listItem);
-                }
+            const card = document.createElement('a');
+            card.classList.add('category-list-item');
+            card.href = categoryURL;
+            card.setAttribute('role', 'listitem');
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.classList.add('category-list-item-icon');
+            if (item.thumbnail) {
+                const img = document.createElement('img');
+                img.src = item.thumbnail;
+                img.alt = "";
+                img.loading = "lazy";
+                iconWrapper.appendChild(img);
             }
-        });
 
+            const textWrapper = document.createElement('div');
+            textWrapper.classList.add('category-list-item-text');
+
+            const titleEl = document.createElement('span');
+            titleEl.classList.add('category-list-item-title');
+            titleEl.textContent = item.title ?? "";
+            textWrapper.appendChild(titleEl);
+
+            if (item.description) {
+                const descEl = document.createElement('span');
+                descEl.classList.add('category-list-item-description');
+                descEl.textContent = item.description;
+                textWrapper.appendChild(descEl);
+            }
+
+            const chevron = document.createElement('span');
+            chevron.classList.add('category-list-item-chevron');
+            chevron.appendChild(this.createChevronSVG());
+
+            card.appendChild(iconWrapper);
+            card.appendChild(textWrapper);
+            card.appendChild(chevron);
+            listFragment.appendChild(card);
+        }
 
         categoryDiv.appendChild(listFragment);
     }
 
     onDocumentReady() {
         const categoryParentDiv = document.querySelector(".category-list");
-        if(categoryParentDiv === null) {
+        if (!categoryParentDiv) {
             return;
         }
-        const categoryList = categoryParentDiv.getAttribute("data-cmp-category-list").split(",");
-        this.displayCategory(categoryList);
+        const rawData = categoryParentDiv.getAttribute("data-cmp-category-list");
+        if (!rawData) {
+            return;
+        }
+        try {
+            const items: CategoryItem[] = JSON.parse(rawData);
+            this.displayCategory(items);
+        } catch (e) {
+            console.error("Failed to parse category list data", e);
+        }
     }
 }
 
