@@ -17,7 +17,13 @@ The main parts of the template are:
 
 ## Prebuilt packages
 
-* Go to <https://github.com/adobe/aemg-sites-components/releases/latest> and download guides-components.all-{version}.zip.
+Go to <https://github.com/adobe/aemg-sites-components/releases/latest> and download the artifact that matches your AEM target:
+
+| AEM target | Artifact to download |
+| --- | --- |
+| AEM as a Cloud Service | `guides-components.all-{version}.zip` |
+| AEM 6.5 on-prem | `on-prem-guides-components.all-aem6.5-{version}.zip` |
+| AEM 6.6 (LTS) | `on-prem-guides-components.all-aem6.6-{version}.zip` |
 
 
 ## How to build locally
@@ -42,6 +48,24 @@ Or alternatively
 Or to deploy only the bundle to the author, run
 
     mvn clean install -Pclassic -PautoInstallBundle
+
+
+## Release Guidelines
+
+When publishing a new release on GitHub, build the appropriate variant for each AEM target and upload the artifacts using the naming convention below. Replace `{version}` with the release version (for example `1.5.1`).
+
+| AEM target | Build command | Source artifact (`all/target/`) | Renamed asset to upload |
+| --- | --- | --- | --- |
+| AEM as a Cloud Service | `mvn clean install` | `guides-components.all-{version}.zip` | `guides-components.all-{version}.zip` |
+| AEM 6.5 on-prem | `mvn clean install -Pclassic` | `guides-components.all-{version}.zip` | `on-prem-guides-components.all-aem6.5-{version}.zip` |
+| AEM 6.6 (LTS) | `mvn clean install -Pclassic` (built against the AEM 6.6 LTS WCM Core Components) | `guides-components.all-{version}.zip` | `on-prem-guides-components.all-aem6.6-{version}.zip` |
+
+Steps for cutting a release:
+
+1. Bump the project version in every `pom.xml` (parent, `all`, `core`, `ui.apps`, `ui.apps.structure`, `ui.config`).
+2. Open and merge a `dev-to-main-{version}-release` PR from `develop` into `main`.
+3. Tag the merge commit on `main` as `v{version}` (for example `v1.5.1`).
+4. Build each variant from the tagged commit, rename the output `guides-components.all-{version}.zip` according to the table above, and attach all three variants to the GitHub Release for `v{version}`.
 
 
 ## Testing
@@ -116,3 +140,12 @@ A ClientLib will consist of the following files and directories:
 The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
 
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
+
+## TODO
+
+### LTS version creation
+
+Right now we are picking up the latest version of `core.wcm.components.version` and then we create the package.
+
+**TODO:** Automate the build for LTS as well.
+
