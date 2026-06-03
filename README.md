@@ -141,5 +141,11 @@ The project comes with the auto-public repository configured. To setup the repos
 
     http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
 
+## TODO
 
+### LTS version creation
+
+Right now we are picking up the latest version of `core.wcm.components.version` and then we create the package.
+
+**TODO:** Automate the build for LTS as well.
 
