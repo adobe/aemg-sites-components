@@ -106,11 +106,6 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
         return "[" + String.join(",", entries) + "]";
     }
 
-    /**
-     * Builds the category list from the direct child pages of the given parent page.
-     * Used as a fallback when the author has not configured any category pages.
-     * Each child links to its own page (empty redirect path).
-     */
     static String buildChildPagesJson(Page parentPage) {
         List<String> entries = new ArrayList<>();
         Iterator<Page> children = parentPage.listChildren(new PageFilter());
