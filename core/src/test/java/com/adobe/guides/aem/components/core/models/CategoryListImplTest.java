@@ -1,5 +1,6 @@
 package com.adobe.guides.aem.components.core.models;
 
+import com.day.cq.wcm.api.Page;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
 import org.apache.sling.api.resource.Resource;
@@ -116,6 +117,54 @@ public class CategoryListImplTest {
         assertTrue(firstIndex > -1, "First Article should be present");
         assertTrue(secondIndex > -1, "Category should be present");
         assertTrue(firstIndex < secondIndex, "First Article should come before Category");
+    }
+
+    @Test
+    public void shouldListDirectChildPagesWhenNoneConfigured() {
+        Page parent = context.create().page("/content/auto", "/conf/test/settings/wcm/templates/page", "Auto Root");
+        context.create().page("/content/auto/child1", "/conf/test/settings/wcm/templates/page", "Child One");
+        context.create().page("/content/auto/child2", "/conf/test/settings/wcm/templates/page", "Child Two");
+
+        String result = CategoryListImpl.buildChildPagesJson(parent);
+
+        assertTrue(result.contains("\"path\":\"/content/auto/child1\""), "Child One should be listed");
+        assertTrue(result.contains("\"title\":\"Child One\""));
+        assertTrue(result.contains("\"path\":\"/content/auto/child2\""), "Child Two should be listed");
+        assertTrue(result.contains("\"title\":\"Child Two\""));
+    }
+
+    @Test
+    public void shouldUseSelfRedirectForAutoListedChildren() {
+        Page parent = context.create().page("/content/auto", "/conf/test/settings/wcm/templates/page", "Auto Root");
+        context.create().page("/content/auto/child1", "/conf/test/settings/wcm/templates/page", "Child One");
+
+        String result = CategoryListImpl.buildChildPagesJson(parent);
+
+        assertTrue(result.contains("\"path\":\"/content/auto/child1\""));
+        // Empty redirectPath => client JS links each card to its own page.
+        assertTrue(result.contains("\"redirectPath\":\"\""));
+        assertTrue(!result.contains("\"redirectPath\":\"/"), "Auto-listed children must not carry an explicit redirect");
+    }
+
+    @Test
+    public void shouldOnlyIncludeDirectChildrenNotGrandchildren() {
+        Page parent = context.create().page("/content/auto", "/conf/test/settings/wcm/templates/page", "Auto Root");
+        context.create().page("/content/auto/child1", "/conf/test/settings/wcm/templates/page", "Child One");
+        context.create().page("/content/auto/child1/grandchild", "/conf/test/settings/wcm/templates/page", "Grand Child");
+
+        String result = CategoryListImpl.buildChildPagesJson(parent);
+
+        assertTrue(result.contains("\"path\":\"/content/auto/child1\""), "Direct child should be listed");
+        assertTrue(!result.contains("/content/auto/child1/grandchild"), "Grandchildren must not be flattened in");
+    }
+
+    @Test
+    public void shouldReturnEmptyJsonWhenPageHasNoChildren() {
+        Page parent = context.create().page("/content/auto", "/conf/test/settings/wcm/templates/page", "Auto Root");
+
+        String result = CategoryListImpl.buildChildPagesJson(parent);
+
+        assertEquals("[]", result);
     }
 
     @Test
