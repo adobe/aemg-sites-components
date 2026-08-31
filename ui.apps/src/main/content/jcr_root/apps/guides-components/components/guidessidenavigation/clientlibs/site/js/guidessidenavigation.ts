@@ -26,6 +26,7 @@ interface GuidesNavigationItem {
     outputPath: string
     active: boolean
     visible: boolean
+    external?: boolean
 }
 
 class GuidesNavigation {
@@ -107,10 +108,14 @@ class GuidesNavigation {
         container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
-        const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
+        const isExternal = item.external === true || this.isExternalUrl(item.outputPath);
+        const outputPath = isExternal ? item.outputPath : this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
             anchor.setAttribute("href", outputPath);
-            
+            if (isExternal) {
+                anchor.setAttribute("target", "_blank");
+                anchor.setAttribute("rel", "noopener noreferrer");
+            }
         } else {
             anchor.style.color = "#505050";
             anchor.style.fontWeight = "400";
@@ -202,6 +207,9 @@ class GuidesNavigation {
         return ul
     }
 
+    isExternalUrl(url) {
+        return !!url && (/^[a-z][a-z0-9+.\-]*:/i.test(url) || url.indexOf("//") === 0)
+    }
     makeFullPath(relUrl, baseUrl) {
         relUrl = relUrl || ''
 
