@@ -108,7 +108,7 @@ class GuidesNavigation {
         container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
-        const isExternal = item.external === true || this.isExternalUrl(item.outputPath);
+        const isExternal = item.external || this.isExternalUrl(item.outputPath);
         const outputPath = isExternal ? item.outputPath : this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
             anchor.setAttribute("href", outputPath);
@@ -208,7 +208,28 @@ class GuidesNavigation {
     }
 
     isExternalUrl(url) {
-        return !!url && (/^[a-z][a-z0-9+.\-]*:/i.test(url) || url.indexOf("//") === 0)
+        if (!url) {
+            return false
+        }
+        // protocol-relative URL, e.g. //example.com
+        if (url.indexOf("//") === 0) {
+            return true
+        }
+        // absolute URL with a scheme, e.g. https:, mailto:, tel:
+        const colonIndex = url.indexOf(":")
+        return colonIndex > 0 && this.isValidUriScheme(url.substring(0, colonIndex))
+    }
+    isValidUriScheme(scheme) {
+        for (let i = 0; i < scheme.length; i++) {
+            const ch = scheme.charAt(i)
+            const isAlpha = (ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+            const isDigit = ch >= "0" && ch <= "9"
+            const isSchemeSymbol = ch === "+" || ch === "-" || ch === "."
+            if (i === 0 ? !isAlpha : !(isAlpha || isDigit || isSchemeSymbol)) {
+                return false
+            }
+        }
+        return true
     }
     makeFullPath(relUrl, baseUrl) {
         relUrl = relUrl || ''
