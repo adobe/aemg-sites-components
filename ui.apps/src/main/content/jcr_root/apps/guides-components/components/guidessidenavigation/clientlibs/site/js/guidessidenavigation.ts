@@ -26,6 +26,7 @@ interface GuidesNavigationItem {
     outputPath: string
     active: boolean
     visible: boolean
+    external?: boolean
 }
 
 class GuidesNavigation {
@@ -107,10 +108,14 @@ class GuidesNavigation {
         container.style.marginLeft = `${marginDepth}rem`;
         chevron.classList.add('item-child-toggle')
         chevron.setAttribute("children-rendered", "false")
-        const outputPath = this.makeFullPath(item.outputPath, this.categoryPath);
+        const isExternal = item.external || this.isExternalUrl(item.outputPath);
+        const outputPath = isExternal ? item.outputPath : this.makeFullPath(item.outputPath, this.categoryPath);
         if (isActive) {
             anchor.setAttribute("href", outputPath);
-            
+            if (isExternal) {
+                anchor.setAttribute("target", "_blank");
+                anchor.setAttribute("rel", "noopener noreferrer");
+            }
         } else {
             anchor.style.color = "#505050";
             anchor.style.fontWeight = "400";
@@ -202,6 +207,30 @@ class GuidesNavigation {
         return ul
     }
 
+    isExternalUrl(url) {
+        if (!url) {
+            return false
+        }
+        // protocol-relative URL, e.g. //example.com
+        if (url.indexOf("//") === 0) {
+            return true
+        }
+        // absolute URL with a scheme, e.g. https:, mailto:, tel:
+        const colonIndex = url.indexOf(":")
+        return colonIndex > 0 && this.isValidUriScheme(url.substring(0, colonIndex))
+    }
+    isValidUriScheme(scheme) {
+        for (let i = 0; i < scheme.length; i++) {
+            const ch = scheme.charAt(i)
+            const isAlpha = (ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+            const isDigit = ch >= "0" && ch <= "9"
+            const isSchemeSymbol = ch === "+" || ch === "-" || ch === "."
+            if (i === 0 ? !isAlpha : !(isAlpha || isDigit || isSchemeSymbol)) {
+                return false
+            }
+        }
+        return true
+    }
     makeFullPath(relUrl, baseUrl) {
         relUrl = relUrl || ''
 
