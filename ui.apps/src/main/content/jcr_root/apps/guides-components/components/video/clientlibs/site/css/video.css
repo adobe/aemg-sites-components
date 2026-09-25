@@ -1,0 +1,10 @@
+.cmp-video {
+  margin: 1em 0;
+}
+
+.cmp-video__player {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}

@@ -58,6 +58,13 @@
                             sling:resourceType="granite/ui/components/coral/foundation/container"
                             margin="{Boolean}true">
                         <items jcr:primaryType="nt:unstructured">
+                            <sitePath
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldDescription="Navigation index source root (holds the guides-navigation and guides-navigation-index data). Leave empty to use the sitePath written at publish time."
+                                    fieldLabel="Navigation Index Root"
+                                    name="./sitePath"
+                                    rootPath="/content" />
                             <limit
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
