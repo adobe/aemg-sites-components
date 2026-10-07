@@ -20,6 +20,7 @@ import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.adobe.cq.wcm.core.components.models.datalayer.ComponentData;
 import com.adobe.cq.wcm.core.components.models.datalayer.builder.DataLayerBuilder;
+import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.LanguageManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
@@ -98,6 +99,8 @@ public class PagePropertyImpl extends AbstractComponentImpl implements PagePrope
                 val = pageProperties.get(property);
             } else if (contentProperties.containsKey(property)) {
                 val = contentProperties.get(property);
+            } else if (JcrConstants.JCR_LASTMODIFIED.equals(property)) {
+                val = pageProperties.get(JcrConstants.JCR_CREATED);
             }
             if (val instanceof String) {
                 property = (String) val;

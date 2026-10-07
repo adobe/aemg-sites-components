@@ -19,6 +19,7 @@ package com.adobe.guides.aem.components.core.models;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageFilter;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -36,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Model(adaptables = SlingHttpServletRequest.class,
@@ -57,6 +59,9 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     @ScriptVariable
     private Resource resource;
 
+    @ScriptVariable
+    private Page currentPage;
+
     @ChildResource
     @Named("categoryPages")
     private List<Resource> categoryPages;
@@ -65,10 +70,11 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
 
     @PostConstruct
     private void initModel() {
-        if (categoryPages == null || categoryPages.isEmpty()) {
-            return;
+        if (categoryPages != null && !categoryPages.isEmpty()) {
+            categoryList = buildCategoryListJson(categoryPages, request.getResourceResolver());
+        } else if (currentPage != null) {
+            categoryList = buildChildPagesJson(currentPage);
         }
-        categoryList = buildCategoryListJson(categoryPages, request.getResourceResolver());
     }
 
     static String buildCategoryListJson(List<Resource> items, ResourceResolver resolver) {
@@ -93,21 +99,34 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
                 continue;
             }
 
-            String title = page.getTitle() != null ? page.getTitle() : page.getName();
-            String description = page.getDescription() != null ? page.getDescription() : "";
             String redirectPath = props.get(PN_REDIRECT_PATH, "");
-
-            StringBuilder obj = new StringBuilder("{");
-            obj.append("\"path\":\"").append(escapeJson(page.getPath())).append("\",");
-            obj.append("\"title\":\"").append(escapeJson(title)).append("\",");
-            obj.append("\"description\":\"").append(escapeJson(description)).append("\",");
-            obj.append("\"thumbnail\":\"").append(escapeJson(page.getPath() + ".thumb.480.300.png")).append("\",");
-            obj.append("\"redirectPath\":\"").append(escapeJson(redirectPath)).append("\"");
-            obj.append("}");
-            entries.add(obj.toString());
+            entries.add(buildPageJson(page, redirectPath));
         }
 
         return "[" + String.join(",", entries) + "]";
+    }
+
+    static String buildChildPagesJson(Page parentPage) {
+        List<String> entries = new ArrayList<>();
+        Iterator<Page> children = parentPage.listChildren(new PageFilter());
+        while (children.hasNext()) {
+            entries.add(buildPageJson(children.next(), ""));
+        }
+        return "[" + String.join(",", entries) + "]";
+    }
+
+    static String buildPageJson(Page page, String redirectPath) {
+        String title = page.getTitle() != null ? page.getTitle() : page.getName();
+        String description = page.getDescription() != null ? page.getDescription() : "";
+
+        StringBuilder obj = new StringBuilder("{");
+        obj.append("\"path\":\"").append(escapeJson(page.getPath())).append("\",");
+        obj.append("\"title\":\"").append(escapeJson(title)).append("\",");
+        obj.append("\"description\":\"").append(escapeJson(description)).append("\",");
+        obj.append("\"thumbnail\":\"").append(escapeJson(page.getPath() + ".thumb.480.300.png")).append("\",");
+        obj.append("\"redirectPath\":\"").append(escapeJson(redirectPath)).append("\"");
+        obj.append("}");
+        return obj.toString();
     }
 
     static String escapeJson(String value) {
