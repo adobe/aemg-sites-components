@@ -102,7 +102,6 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
                 String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
                 logger.info("AEMSITE: sitePath: {}", sitePath);
                 Node node = session.getNode(sitePath + "/jcr:content");
-                System.out.println(node.getPath());
                 logger.info("AEMSITE: nodePath: {}", node.getPath());
 
                 Binary tocBinary = node.getProperty("guides-navigation").getBinary();
@@ -128,7 +127,6 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
                 }
                 guidesNavigation = new ArrayList<>();
                 JSONObject toc = new JSONObject(tocBinaryString);
-                Utils.updateVisibility(toc, new JSONObject(guidesAllowedPages), this.getCategoryPath());
                 guidesNavigation.add(toc.toString());
             }
 

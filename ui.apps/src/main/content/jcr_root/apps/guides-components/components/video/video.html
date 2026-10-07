@@ -1,0 +1,9 @@
+<div class="cmp-video" data-sly-test="${properties.src}">
+    <video class="cmp-video__player"
+           controls
+           preload="metadata"
+           data-sly-attribute.poster="${properties.poster}">
+        <source src="${properties.src @ context='uri'}"
+                type="${properties.videoType || 'video/mp4'}"/>
+    </video>
+</div>
