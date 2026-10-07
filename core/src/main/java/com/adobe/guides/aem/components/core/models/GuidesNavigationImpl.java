@@ -34,6 +34,7 @@ import javax.jcr.query.QueryResult;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
@@ -64,6 +65,7 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
     protected static final String LOAD_MORE_TEXT = "loadMoreText";
     protected static final String LOAD_MORE_TEXT_DEFAULT_VALUE = "load more...";
     protected static final String LIMIT_DEFAULT_VALUE = "1000";
+    protected static final String SITE_PATH = "sitePath";
     private static final Logger logger = LoggerFactory.getLogger(GuidesNavigationImpl.class);
 
     @Self
@@ -99,10 +101,16 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             if(Objects.nonNull(request))
             {
                 Session session = request.getResourceResolver().adaptTo(Session.class);
-                String sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+                String sitePath = properties.get(SITE_PATH, String.class);
+                if (StringUtils.isBlank(sitePath)) {
+                    sitePath = currentPage.getContentResource().getValueMap().get("sitePath", String.class);
+                }
+                if (StringUtils.isBlank(sitePath)) {
+                    logger.warn("AEMSITE: sitePath is not configured on {}", currentPage.getPath());
+                    return;
+                }
                 logger.info("AEMSITE: sitePath: {}", sitePath);
                 Node node = session.getNode(sitePath + "/jcr:content");
-                System.out.println(node.getPath());
                 logger.info("AEMSITE: nodePath: {}", node.getPath());
 
                 Binary tocBinary = node.getProperty("guides-navigation").getBinary();

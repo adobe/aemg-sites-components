@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    cq:icon="movie"
+    jcr:description="Renders a native HTML5 video player for DITA object/video content"
+    jcr:primaryType="cq:Component"
+    jcr:title="Video"
+    componentGroup="Guides Components - Content"/>

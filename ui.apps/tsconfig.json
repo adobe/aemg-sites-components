@@ -3,6 +3,7 @@
     "target": "es6",
     "module": "amd",
     "esModuleInterop": true,
+    "types": []
   },
   "include": [
     "src/**/*.ts"
