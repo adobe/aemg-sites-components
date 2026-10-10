@@ -50,6 +50,7 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
     protected static final String RESOURCE_TYPE_V1 = "guides-components/components/categorylist";
     protected static final String PN_PAGE_PATH = "pagePath";
     protected static final String PN_REDIRECT_PATH = "redirectPath";
+    private static final String REFERENCES_PAGE_NAME = "__references__";
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryListImpl.class);
 
@@ -99,6 +100,10 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
                 continue;
             }
 
+            if (REFERENCES_PAGE_NAME.equals(page.getName())) {
+                continue;
+            }
+
             String redirectPath = props.get(PN_REDIRECT_PATH, "");
             entries.add(buildPageJson(page, redirectPath));
         }
@@ -110,7 +115,11 @@ public class CategoryListImpl extends AbstractComponentImpl implements CategoryL
         List<String> entries = new ArrayList<>();
         Iterator<Page> children = parentPage.listChildren(new PageFilter());
         while (children.hasNext()) {
-            entries.add(buildPageJson(children.next(), ""));
+            Page child = children.next();
+            if (REFERENCES_PAGE_NAME.equals(child.getName())) {
+                continue;
+            }
+            entries.add(buildPageJson(child, ""));
         }
         return "[" + String.join(",", entries) + "]";
     }
