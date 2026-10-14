@@ -24,14 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TocListImplTest {
 
     private static final String SITE_PATH = "/content/output/sites/mysite";
-    private static final String PAGE_PATH = "/content/mysite/en/home";
+    private static final String CATEGORY_PATH = "/content/mysite/en/kb";
+    private static final String PAGE_PATH = CATEGORY_PATH + "/home";
     private static final String TEMPLATE = "/conf/mysite/settings/wcm/templates/kb-content";
 
     private static final String TOC_JSON = "{\"children\":["
-            + "{\"displayName\":\"Getting Started, Basics\",\"outputPath\":\"/content/mysite/en/getting-started\",\"active\":true,\"visible\":true,"
-            + "\"children\":[{\"displayName\":\"Nested\",\"outputPath\":\"/content/mysite/en/getting-started/nested\",\"active\":true,\"visible\":true,\"children\":[]}]},"
-            + "{\"displayName\":\"Hidden\",\"outputPath\":\"/content/mysite/en/hidden\",\"active\":true,\"visible\":false,\"children\":[]},"
-            + "{\"displayName\":\"Topic Head\",\"outputPath\":\"/content/mysite/en/topic-head\",\"active\":false,\"children\":[]}"
+            + "{\"displayName\":\"Getting Started, Basics\",\"outputPath\":\"getting-started.html\",\"active\":true,\"visible\":true,"
+            + "\"children\":[{\"displayName\":\"Nested\",\"outputPath\":\"getting-started/nested.html\",\"active\":true,\"visible\":true,\"children\":[]}]},"
+            + "{\"displayName\":\"Hidden\",\"outputPath\":\"hidden.html\",\"active\":true,\"visible\":false,\"children\":[]},"
+            + "{\"displayName\":\"Topic Head\",\"outputPath\":\"topic-head.html\",\"active\":false,\"children\":[]}"
             + "]}";
 
     private final AemContext context = new AemContext(ResourceResolverType.JCR_MOCK);
@@ -54,6 +55,7 @@ public class TocListImplTest {
     }
 
     private TocList adaptModel(String sitePath) {
+        context.create().page(CATEGORY_PATH, TEMPLATE, "id", "category-page");
         Page page = sitePath == null
                 ? context.create().page(PAGE_PATH)
                 : context.create().page(PAGE_PATH, TEMPLATE, TocListImpl.SITE_PATH_PROPERTY, sitePath);
@@ -74,8 +76,8 @@ public class TocListImplTest {
         assertEquals(2, result.length());
         JSONObject first = result.getJSONObject(0);
         assertEquals("Getting Started, Basics", first.getString("title"));
-        assertEquals("/content/mysite/en/getting-started", first.getString("path"));
-        assertEquals("/content/mysite/en/getting-started.thumb.480.300.png", first.getString("thumbnail"));
+        assertEquals(CATEGORY_PATH + "/getting-started.html", first.getString("url"));
+        assertEquals(CATEGORY_PATH + "/getting-started.thumb.480.300.png", first.getString("thumbnail"));
         assertTrue(first.getBoolean("active"));
         assertFalse(first.has("children"));
 
@@ -111,7 +113,26 @@ public class TocListImplTest {
 
     @Test
     public void shouldReturnEmptyArrayWhenNoChildren() {
-        assertEquals("[]", TocListImpl.buildTopLevelTocList("{}"));
+        assertEquals("[]", TocListImpl.buildTopLevelTocList("{}", CATEGORY_PATH + "/"));
+    }
+
+    @Test
+    public void shouldResolveOutputPathsAgainstCategoryPath() throws Exception {
+        String toc = "{\"children\":["
+                + "{\"displayName\":\"Sub\",\"outputPath\":\"category/submap.html#anchor\"},"
+                + "{\"displayName\":\"Up\",\"outputPath\":\"../other/page.html\"},"
+                + "{\"displayName\":\"Absolute\",\"outputPath\":\"/content/abs/page\"},"
+                + "{\"displayName\":\"External\",\"outputPath\":\"https://example.com/doc\"}"
+                + "]}";
+        JSONArray result = new JSONArray(TocListImpl.buildTopLevelTocList(toc, CATEGORY_PATH + "/"));
+
+        assertEquals(CATEGORY_PATH + "/category/submap.html#anchor", result.getJSONObject(0).getString("url"));
+        assertEquals(CATEGORY_PATH + "/category/submap.thumb.480.300.png", result.getJSONObject(0).getString("thumbnail"));
+        assertEquals("/content/mysite/en/other/page.html", result.getJSONObject(1).getString("url"));
+        assertEquals("/content/abs/page.html", result.getJSONObject(2).getString("url"));
+        assertEquals("/content/abs/page.thumb.480.300.png", result.getJSONObject(2).getString("thumbnail"));
+        assertEquals("https://example.com/doc", result.getJSONObject(3).getString("url"));
+        assertEquals("", result.getJSONObject(3).getString("thumbnail"));
     }
 
     @Test

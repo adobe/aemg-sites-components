@@ -19,6 +19,7 @@ package com.adobe.guides.aem.components.core.models;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 
 import javax.annotation.PostConstruct;
 import javax.jcr.Binary;
@@ -26,6 +27,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -53,6 +55,7 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
     static final String SITE_PATH_PROPERTY = "sitePath";
     static final String GUIDES_NAVIGATION_PROPERTY = "guides-navigation";
     static final String THUMBNAIL_SUFFIX = ".thumb.480.300.png";
+    private static final String HTML_EXTENSION = ".html";
     private static final String EMPTY_JSON_ARRAY = "[]";
     private static final Logger logger = LoggerFactory.getLogger(TocListImpl.class);
 
@@ -71,7 +74,7 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
     private void initModel() {
         String tocJson = readGuidesNavigation();
         if (tocJson != null) {
-            tocList = buildTopLevelTocList(tocJson);
+            tocList = buildTopLevelTocList(tocJson, Utils.getCategoryPathFromPage(currentPage));
         }
     }
 
@@ -115,8 +118,9 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
 
     /**
      * Builds a JSON array of the visible root-level TOC entries; nested children are not included.
+     * TOC output paths are relative to the category page, so they are resolved against {@code basePath}.
      */
-    static String buildTopLevelTocList(final String tocJson) {
+    static String buildTopLevelTocList(final String tocJson, final String basePath) {
         JSONArray result = new JSONArray();
         try {
             JSONArray children = new JSONObject(tocJson).optJSONArray("children");
@@ -128,11 +132,24 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
                 if (entry == null || !entry.optBoolean("visible", true)) {
                     continue;
                 }
-                String path = entry.optString("outputPath", "");
+                String outputPath = entry.optString("outputPath", "");
                 JSONObject item = new JSONObject();
                 item.put("title", entry.optString("displayName", ""));
-                item.put("path", path);
-                item.put("thumbnail", path + THUMBNAIL_SUFFIX);
+                if (StringUtils.isBlank(outputPath)) {
+                    item.put("url", "");
+                    item.put("thumbnail", "");
+                } else if (isExternalUrl(outputPath)) {
+                    item.put("url", outputPath);
+                    item.put("thumbnail", "");
+                } else {
+                    String url = resolvePath(outputPath, basePath);
+                    String pagePath = removeExtension(Utils.filePath(url));
+                    if (pagePath.equals(Utils.filePath(url))) {
+                        url = pagePath + HTML_EXTENSION + url.substring(pagePath.length());
+                    }
+                    item.put("url", url);
+                    item.put("thumbnail", pagePath + THUMBNAIL_SUFFIX);
+                }
                 item.put("active", entry.optBoolean("active", true));
                 result.put(item);
             }
@@ -141,6 +158,25 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
             return EMPTY_JSON_ARRAY;
         }
         return result.toString();
+    }
+
+    private static String resolvePath(final String outputPath, final String basePath) {
+        String path = Utils.filePath(outputPath);
+        String suffix = outputPath.substring(path.length());
+        String resolved = path.startsWith("/") || StringUtils.isBlank(basePath)
+                ? Paths.get(path).normalize().toString()
+                : Paths.get(basePath, path).normalize().toString();
+        return FilenameUtils.separatorsToUnix(resolved) + suffix;
+    }
+
+    private static String removeExtension(final String path) {
+        int lastSlash = path.lastIndexOf('/');
+        int lastDot = path.lastIndexOf('.');
+        return lastDot > lastSlash ? path.substring(0, lastDot) : path;
+    }
+
+    private static boolean isExternalUrl(final String url) {
+        return url.startsWith("//") || url.matches("^[A-Za-z][A-Za-z0-9+.-]*:.*");
     }
 
     @Override

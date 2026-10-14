@@ -25,7 +25,8 @@ public interface TocList extends Component {
     /**
      * Returns a JSON array string of the top-level (depth 1) visible TOC entries of the
      * site referenced by the current page's {@code sitePath} property. Each entry has
-     * {@code title}, {@code path}, {@code thumbnail} and {@code active} fields.
+     * {@code title}, {@code url} (resolved against the category page), {@code thumbnail}
+     * and {@code active} fields.
      *
      * @return JSON array string, {@code "[]"} if no entries are available
      */

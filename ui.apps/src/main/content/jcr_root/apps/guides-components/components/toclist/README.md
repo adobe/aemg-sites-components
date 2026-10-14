@@ -23,6 +23,10 @@ Category List component. The TOC is read from the `guides-navigation` binary pro
 (same source as the Guides Side Navigation component). Only visible root-level entries are rendered;
 their children are not. Entries with `active: false` are rendered without a link.
 
+TOC `outputPath` values are relative to the category page (the ancestor page with `id=category-page`)
+and are resolved against it, like the Side Navigation does. The card icon uses the page thumbnail
+(`<page>.thumb.480.300.png`) and falls back to a document icon when no thumbnail is available.
+
 ## BEM Description
 ```
 BLOCK cmp-toc-list

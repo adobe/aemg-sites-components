@@ -14,19 +14,28 @@
  * limitations under the License.
  ******************************************************************************/
 interface TocListItem {
-    path: string;
+    url: string;
     title: string;
     thumbnail: string;
     active: boolean;
 }
 
 class TocList {
-    private protocol: string;
-    private host: string;
-
-    constructor() {
-        this.protocol = window.location.protocol;
-        this.host = window.location.host;
+    private createDocumentSVG(): SVGSVGElement {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
+        svg.setAttribute("viewBox", "0 0 24 24");
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("aria-hidden", "true");
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5zM14 3v5h5M9 13h6M9 17h6");
+        path.setAttribute("stroke", "currentColor");
+        path.setAttribute("stroke-width", "1.5");
+        path.setAttribute("stroke-linecap", "round");
+        path.setAttribute("stroke-linejoin", "round");
+        svg.appendChild(path);
+        return svg;
     }
 
     private createChevronSVG(): SVGSVGElement {
@@ -56,8 +65,8 @@ class TocList {
         for (const item of items) {
             const card = document.createElement('a');
             card.classList.add('toc-list-card');
-            if (item.active !== false && item.path) {
-                card.href = `${this.protocol}//${this.host}${item.path}.html`;
+            if (item.active !== false && item.url) {
+                card.href = item.url;
             } else {
                 card.style.cursor = 'default';
             }
@@ -67,10 +76,13 @@ class TocList {
             iconWrapper.classList.add('toc-list-card-icon');
             if (item.thumbnail) {
                 const img = document.createElement('img');
-                img.src = item.thumbnail;
                 img.alt = "";
                 img.loading = "lazy";
+                img.addEventListener('error', () => img.replaceWith(this.createDocumentSVG()), { once: true });
+                img.src = item.thumbnail;
                 iconWrapper.appendChild(img);
+            } else {
+                iconWrapper.appendChild(this.createDocumentSVG());
             }
 
             const textWrapper = document.createElement('div');
