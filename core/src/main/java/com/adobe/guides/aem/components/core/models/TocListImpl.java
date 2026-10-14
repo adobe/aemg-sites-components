@@ -136,10 +136,12 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
     }
 
     /**
-     * Builds a JSON array of the visible root-level TOC entries; nested children are not included.
-     * TOC output paths are relative to the category page, so they are resolved against {@code basePath}.
-     * The title comes from the resolved page (via {@code pageTitleResolver}) when available, otherwise
-     * from the TOC display name.
+     * Builds a JSON array of the visible root-level TOC entries; nested children are not rendered.
+     * Each entry links to its own internal page or, if it has none (e.g. a topichead), to the first
+     * internal page found depth-first among its visible descendants. External URLs are never used, and
+     * entries without any internal page are omitted. TOC output paths are relative to the category page,
+     * so they are resolved against {@code basePath}. The title comes from the entry's own page (via
+     * {@code pageTitleResolver}) when available, otherwise from the TOC display name.
      */
     static String buildTopLevelTocList(final String tocJson, final String basePath,
                                        final UnaryOperator<String> pageTitleResolver) {
@@ -151,33 +153,30 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
             }
             for (int i = 0; i < children.length(); i++) {
                 JSONObject entry = children.optJSONObject(i);
-                if (entry == null || !entry.optBoolean("visible", true)) {
+                if (!isVisible(entry)) {
                     continue;
                 }
-                String outputPath = entry.optString("outputPath", "");
-                JSONObject item = new JSONObject();
+                String outputPath = findFirstInternalPath(entry);
+                if (outputPath == null) {
+                    continue;
+                }
+                String url = resolvePath(outputPath, basePath);
+                String pagePath = removeExtension(Utils.filePath(url));
+                if (pagePath.equals(Utils.filePath(url))) {
+                    url = pagePath + HTML_EXTENSION + url.substring(pagePath.length());
+                }
                 String title = entry.optString("displayName", "");
-                if (StringUtils.isBlank(outputPath)) {
-                    item.put("url", "");
-                    item.put("thumbnail", "");
-                } else if (isExternalUrl(outputPath)) {
-                    item.put("url", outputPath);
-                    item.put("thumbnail", "");
-                } else {
-                    String url = resolvePath(outputPath, basePath);
-                    String pagePath = removeExtension(Utils.filePath(url));
-                    if (pagePath.equals(Utils.filePath(url))) {
-                        url = pagePath + HTML_EXTENSION + url.substring(pagePath.length());
-                    }
-                    item.put("url", url);
-                    item.put("thumbnail", pagePath + THUMBNAIL_SUFFIX);
+                if (outputPath.equals(getInternalPath(entry))) {
                     String pageTitle = pageTitleResolver.apply(pagePath);
                     if (StringUtils.isNotBlank(pageTitle)) {
                         title = pageTitle;
                     }
                 }
+                JSONObject item = new JSONObject();
                 item.put("title", title);
-                item.put("active", entry.optBoolean("active", true));
+                item.put("url", url);
+                item.put("thumbnail", pagePath + THUMBNAIL_SUFFIX);
+                item.put("active", true);
                 result.put(item);
             }
         } catch (JSONException e) {
@@ -185,6 +184,46 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
             return EMPTY_JSON_ARRAY;
         }
         return result.toString();
+    }
+
+    /**
+     * Depth-first (pre-order) search for the first visible entry with an internal output path.
+     */
+    private static String findFirstInternalPath(final JSONObject entry) {
+        String path = getInternalPath(entry);
+        if (path != null) {
+            return path;
+        }
+        JSONArray children = entry.optJSONArray("children");
+        if (children != null) {
+            for (int i = 0; i < children.length(); i++) {
+                JSONObject child = children.optJSONObject(i);
+                if (isVisible(child)) {
+                    String childPath = findFirstInternalPath(child);
+                    if (childPath != null) {
+                        return childPath;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the entry's output path if it is a linkable internal page, otherwise null.
+     */
+    private static String getInternalPath(final JSONObject entry) {
+        String outputPath = entry.optString("outputPath", "");
+        if (StringUtils.isBlank(outputPath) || "null".equals(outputPath)
+                || !entry.optBoolean("active", true)
+                || entry.optBoolean("external", false) || isExternalUrl(outputPath)) {
+            return null;
+        }
+        return outputPath;
+    }
+
+    private static boolean isVisible(final JSONObject entry) {
+        return entry != null && entry.optBoolean("visible", true);
     }
 
     private static String resolvePath(final String outputPath, final String basePath) {

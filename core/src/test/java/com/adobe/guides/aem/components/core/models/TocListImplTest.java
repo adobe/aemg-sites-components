@@ -75,7 +75,7 @@ public class TocListImplTest {
         String raw = adaptModel(SITE_PATH).getTocList();
         JSONArray result = new JSONArray(raw);
 
-        assertEquals(2, result.length());
+        assertEquals(1, result.length());
         JSONObject first = result.getJSONObject(0);
         assertEquals("Getting Started, Basics", first.getString("title"));
         assertEquals(CATEGORY_PATH + "/getting-started.html", first.getString("url"));
@@ -83,10 +83,7 @@ public class TocListImplTest {
         assertTrue(first.getBoolean("active"));
         assertFalse(first.has("children"));
 
-        JSONObject second = result.getJSONObject(1);
-        assertEquals("Topic Head", second.getString("title"));
-        assertFalse(second.getBoolean("active"));
-
+        assertFalse(raw.contains("Topic Head"));
         assertFalse(raw.contains("Nested"));
         assertFalse(raw.contains("Hidden"));
     }
@@ -133,8 +130,7 @@ public class TocListImplTest {
         assertEquals("/content/mysite/en/other/page.html", result.getJSONObject(1).getString("url"));
         assertEquals("/content/abs/page.html", result.getJSONObject(2).getString("url"));
         assertEquals("/content/abs/page.thumb.480.300.png", result.getJSONObject(2).getString("thumbnail"));
-        assertEquals("https://example.com/doc", result.getJSONObject(3).getString("url"));
-        assertEquals("", result.getJSONObject(3).getString("thumbnail"));
+        assertEquals(3, result.length());
     }
 
     @Test
@@ -153,11 +149,39 @@ public class TocListImplTest {
 
         JSONArray result = new JSONArray(adaptModel(SITE_PATH).getTocList());
 
-        assertEquals(4, result.length());
+        assertEquals(3, result.length());
         assertEquals("Topic Two, Title", result.getJSONObject(0).getString("title"));
         assertEquals("untitled", result.getJSONObject(1).getString("title"));
         assertEquals("No Page", result.getJSONObject(2).getString("title"));
-        assertEquals("External Link", result.getJSONObject(3).getString("title"));
+    }
+
+    @Test
+    public void shouldLinkTopicHeadsToFirstInternalDescendantDepthFirst() throws Exception {
+        String toc = "{\"children\":["
+                + "{\"displayName\":\"Empty Section\",\"outputPath\":null,\"active\":false,\"children\":[]},"
+                + "{\"displayName\":\"External Resources\",\"outputPath\":null,\"active\":false,\"children\":["
+                + "  {\"displayName\":\"Ext\",\"outputPath\":\"https://example.com\",\"active\":true,\"external\":true}]},"
+                + "{\"displayName\":\"Setup\",\"outputPath\":null,\"active\":false,\"children\":["
+                + "  {\"displayName\":\"Ext\",\"outputPath\":\"https://example.com\",\"active\":true,\"external\":true},"
+                + "  {\"displayName\":\"Hidden\",\"outputPath\":\"hidden.html\",\"visible\":false},"
+                + "  {\"displayName\":\"Nested Head\",\"active\":false,\"children\":["
+                + "    {\"displayName\":\"Deep\",\"outputPath\":\"deep.html\",\"active\":true}]},"
+                + "  {\"displayName\":\"Later\",\"outputPath\":\"later.html\",\"active\":true}]},"
+                + "{\"displayName\":\"User Guide\",\"outputPath\":\"user-guide.html\",\"active\":true,\"children\":["
+                + "  {\"displayName\":\"Child\",\"outputPath\":\"user-guide/child.html\",\"active\":true}]}"
+                + "]}";
+        JSONArray result = new JSONArray(TocListImpl.buildTopLevelTocList(toc, CATEGORY_PATH + "/",
+                pagePath -> "Page Title"));
+
+        assertEquals(2, result.length());
+        JSONObject setup = result.getJSONObject(0);
+        assertEquals("Setup", setup.getString("title"));
+        assertEquals(CATEGORY_PATH + "/deep.html", setup.getString("url"));
+        assertEquals(CATEGORY_PATH + "/deep.thumb.480.300.png", setup.getString("thumbnail"));
+        assertTrue(setup.getBoolean("active"));
+        JSONObject guide = result.getJSONObject(1);
+        assertEquals("Page Title", guide.getString("title"));
+        assertEquals(CATEGORY_PATH + "/user-guide.html", guide.getString("url"));
     }
 
     @Test
