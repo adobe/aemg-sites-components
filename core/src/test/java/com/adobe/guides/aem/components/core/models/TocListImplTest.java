@@ -55,7 +55,9 @@ public class TocListImplTest {
     }
 
     private TocList adaptModel(String sitePath) {
-        context.create().page(CATEGORY_PATH, TEMPLATE, "id", "category-page");
+        if (context.pageManager().getPage(CATEGORY_PATH) == null) {
+            context.create().page(CATEGORY_PATH, TEMPLATE, "id", "category-page");
+        }
         Page page = sitePath == null
                 ? context.create().page(PAGE_PATH)
                 : context.create().page(PAGE_PATH, TEMPLATE, TocListImpl.SITE_PATH_PROPERTY, sitePath);
@@ -133,6 +135,29 @@ public class TocListImplTest {
         assertEquals("/content/abs/page.thumb.480.300.png", result.getJSONObject(2).getString("thumbnail"));
         assertEquals("https://example.com/doc", result.getJSONObject(3).getString("url"));
         assertEquals("", result.getJSONObject(3).getString("thumbnail"));
+    }
+
+    @Test
+    public void shouldUsePageTitleLikeCategoryList() throws Exception {
+        String toc = "{\"children\":["
+                + "{\"displayName\":\"topic2.dita\",\"outputPath\":\"topic2.html\",\"visible\":true},"
+                + "{\"displayName\":\"untitled.dita\",\"outputPath\":\"untitled.html\",\"visible\":true},"
+                + "{\"displayName\":\"No Page\",\"outputPath\":\"missing.html\",\"visible\":true},"
+                + "{\"displayName\":\"External Link\",\"outputPath\":\"https://example.com\",\"visible\":true}"
+                + "]}";
+        createSite(toc);
+        context.create().page(CATEGORY_PATH, TEMPLATE, "id", "category-page");
+        context.create().page(CATEGORY_PATH + "/topic2", TEMPLATE, "Topic Two, Title");
+        context.create().resource(CATEGORY_PATH + "/untitled", "jcr:primaryType", "cq:Page");
+        context.create().resource(CATEGORY_PATH + "/untitled/jcr:content", "jcr:primaryType", "cq:PageContent");
+
+        JSONArray result = new JSONArray(adaptModel(SITE_PATH).getTocList());
+
+        assertEquals(4, result.length());
+        assertEquals("Topic Two, Title", result.getJSONObject(0).getString("title"));
+        assertEquals("untitled", result.getJSONObject(1).getString("title"));
+        assertEquals("No Page", result.getJSONObject(2).getString("title"));
+        assertEquals("External Link", result.getJSONObject(3).getString("title"));
     }
 
     @Test

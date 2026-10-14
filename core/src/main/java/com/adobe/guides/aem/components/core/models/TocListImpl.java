@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.function.UnaryOperator;
 
 import javax.annotation.PostConstruct;
 import javax.jcr.Binary;
@@ -46,6 +47,7 @@ import org.slf4j.LoggerFactory;
 import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.export.json.ExporterConstants;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
 
 @Model(adaptables = SlingHttpServletRequest.class, adapters = {TocList.class, ComponentExporter.class}, resourceType = {TocListImpl.RESOURCE_TYPE_V1})
 @Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
@@ -74,7 +76,9 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
     private void initModel() {
         String tocJson = readGuidesNavigation();
         if (tocJson != null) {
-            tocList = buildTopLevelTocList(tocJson, Utils.getCategoryPathFromPage(currentPage));
+            PageManager pageManager = request.getResourceResolver().adaptTo(PageManager.class);
+            tocList = buildTopLevelTocList(tocJson, Utils.getCategoryPathFromPage(currentPage),
+                    pagePath -> getPageTitle(pageManager, pagePath));
         }
     }
 
@@ -117,10 +121,28 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
     }
 
     /**
+     * Returns the page title (falling back to the page name), as Category List does, or null if no page exists.
+     */
+    private static String getPageTitle(final PageManager pageManager, final String pagePath) {
+        Page page = pageManager != null ? pageManager.getPage(pagePath) : null;
+        if (page == null) {
+            return null;
+        }
+        return StringUtils.isNotBlank(page.getTitle()) ? page.getTitle() : page.getName();
+    }
+
+    static String buildTopLevelTocList(final String tocJson, final String basePath) {
+        return buildTopLevelTocList(tocJson, basePath, pagePath -> null);
+    }
+
+    /**
      * Builds a JSON array of the visible root-level TOC entries; nested children are not included.
      * TOC output paths are relative to the category page, so they are resolved against {@code basePath}.
+     * The title comes from the resolved page (via {@code pageTitleResolver}) when available, otherwise
+     * from the TOC display name.
      */
-    static String buildTopLevelTocList(final String tocJson, final String basePath) {
+    static String buildTopLevelTocList(final String tocJson, final String basePath,
+                                       final UnaryOperator<String> pageTitleResolver) {
         JSONArray result = new JSONArray();
         try {
             JSONArray children = new JSONObject(tocJson).optJSONArray("children");
@@ -134,7 +156,7 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
                 }
                 String outputPath = entry.optString("outputPath", "");
                 JSONObject item = new JSONObject();
-                item.put("title", entry.optString("displayName", ""));
+                String title = entry.optString("displayName", "");
                 if (StringUtils.isBlank(outputPath)) {
                     item.put("url", "");
                     item.put("thumbnail", "");
@@ -149,7 +171,12 @@ public class TocListImpl extends AbstractComponentImpl implements TocList {
                     }
                     item.put("url", url);
                     item.put("thumbnail", pagePath + THUMBNAIL_SUFFIX);
+                    String pageTitle = pageTitleResolver.apply(pagePath);
+                    if (StringUtils.isNotBlank(pageTitle)) {
+                        title = pageTitle;
+                    }
                 }
+                item.put("title", title);
                 item.put("active", entry.optBoolean("active", true));
                 result.put(item);
             }

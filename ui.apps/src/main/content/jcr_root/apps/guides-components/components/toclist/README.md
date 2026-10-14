@@ -26,6 +26,8 @@ their children are not. Entries with `active: false` are rendered without a link
 TOC `outputPath` values are relative to the category page (the ancestor page with `id=category-page`)
 and are resolved against it, like the Side Navigation does. The card icon uses the page thumbnail
 (`<page>.thumb.480.300.png`) and falls back to a document icon when no thumbnail is available.
+The card title is the resolved page's title (falling back to the page name), like Category List;
+the TOC `displayName` is used only when no page exists (e.g. external links).
 
 ## BEM Description
 ```
