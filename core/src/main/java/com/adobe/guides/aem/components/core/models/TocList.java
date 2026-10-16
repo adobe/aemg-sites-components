@@ -1,0 +1,36 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ Copyright 2022 Adobe Systems Incorporated
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~     http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+package com.adobe.guides.aem.components.core.models;
+
+import com.adobe.cq.wcm.core.components.models.Component;
+import org.osgi.annotation.versioning.ConsumerType;
+
+@ConsumerType
+public interface TocList extends Component {
+
+    /**
+     * Returns a JSON array string of the top-level (depth 1) visible TOC entries of the
+     * site referenced by the current page's {@code sitePath} property. Each entry has
+     * {@code title} (the entry's page title, falling back to the TOC display name),
+     * {@code url} (the first internal page found depth-first in the entry's subtree, resolved
+     * against the category page), {@code thumbnail} and {@code active} fields. Entries without
+     * any internal page (empty or external-only) are omitted.
+     *
+     * @return JSON array string, {@code "[]"} if no entries are available
+     */
+    String getTocList();
+}
