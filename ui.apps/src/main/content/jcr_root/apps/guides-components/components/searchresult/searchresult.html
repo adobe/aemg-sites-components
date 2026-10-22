@@ -28,7 +28,7 @@
 	data-cmp-relative-path="${search.relativePath}"
 	class="search__field--view" id="js-display-diff-view">
 	<div class="search-result-header">
-		<div data-cmp-format="Showing {total} results" class="cmp-search__total-records"></div>
+		<div data-cmp-format="${'Showing {total} results' @ i18n}" class="cmp-search__total-records"></div>
 		<div data-sly-test="${search.sortEnabled}" class="cmp-sort__wrapper">
 			<sly data-sly-call="${sortTemplate.sort @ search=search}"></sly>
 		</div>

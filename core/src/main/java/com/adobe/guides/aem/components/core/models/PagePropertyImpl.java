@@ -43,6 +43,7 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -116,16 +117,15 @@ public class PagePropertyImpl extends AbstractComponentImpl implements PagePrope
 
     private String getDateFormat() {
         ValueMap properties = this.resource.getValueMap();
-        return properties.get(DATE_FORMAT, "MMM d, yyyy");
+        return properties.get(DATE_FORMAT, String.class);
     }
 
     private String formatDate(final Calendar calendar, String dateFormat, Locale locale) {
-        SimpleDateFormat format;
-        if(locale == null) {
-            format = new SimpleDateFormat(dateFormat);
-        } else {
-            format = new SimpleDateFormat(dateFormat, locale);
-        }
+        Locale effectiveLocale = locale != null ? locale : Locale.getDefault();
+        DateFormat format = StringUtils.isNotBlank(dateFormat)
+                ? new SimpleDateFormat(dateFormat, effectiveLocale)
+                // Locale-standard medium date, e.g. "Oct 5, 2026", "05.10.2026", "2026/10/05"
+                : DateFormat.getDateInstance(DateFormat.MEDIUM, effectiveLocale);
         format.setTimeZone(calendar.getTimeZone());
         return format.format(calendar.getTime());
     }
