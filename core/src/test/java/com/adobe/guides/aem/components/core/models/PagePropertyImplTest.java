@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -36,10 +37,11 @@ public class PagePropertyImplTest {
     private static final String CREATED_RENDERED = "Sep 29, 2026";
 
     private final AemContext context = new AemContext(ResourceResolverType.JCR_MOCK);
+    private final LanguageManager languageManager = mock(LanguageManager.class);
+    private int renders;
 
     @BeforeEach
     public void setUp() {
-        LanguageManager languageManager = mock(LanguageManager.class);
         when(languageManager.getLanguage(any(Resource.class))).thenReturn(Locale.ENGLISH);
         context.registerService(LanguageManager.class, languageManager);
         context.addModelsForClasses(PagePropertyImpl.class);
@@ -73,6 +75,28 @@ public class PagePropertyImplTest {
         assertEquals("About RoboHelp", render(page, DESCRIPTION));
     }
 
+    @Test
+    public void shouldRenderLocaleStandardDateForPageLanguage() throws PersistenceException {
+        Page page = createPage(Collections.singletonMap(LAST_MODIFIED, SOURCE_DATE));
+
+        assertEquals("10.05.2024", renderIn(Locale.GERMAN, page));
+        assertEquals("10 mai 2024", renderIn(Locale.FRENCH, page));
+        assertEquals("2024/05/10", renderIn(Locale.JAPANESE, page));
+    }
+
+    @Test
+    public void shouldHonorAuthoredDateFormat() throws PersistenceException {
+        Page page = createPage(Collections.singletonMap(LAST_MODIFIED, SOURCE_DATE));
+        when(languageManager.getLanguage(any(Resource.class))).thenReturn(Locale.GERMAN);
+
+        assertEquals("10. Mai 2024", render(page, LAST_MODIFIED, "d. MMMM yyyy"));
+    }
+
+    private String renderIn(Locale locale, Page page) {
+        when(languageManager.getLanguage(any(Resource.class))).thenReturn(locale);
+        return render(page, LAST_MODIFIED);
+    }
+
     private Page createPage(Map<String, Object> contentProps) throws PersistenceException {
         Page page = context.create().page(PAGE_PATH, TEMPLATE, contentProps);
         page.adaptTo(Resource.class).adaptTo(ModifiableValueMap.class).put("jcr:created", CREATED_DATE);
@@ -81,9 +105,17 @@ public class PagePropertyImplTest {
     }
 
     private String render(Page page, String property) {
-        Resource component = context.create().resource(page.getContentResource().getPath() + "/date",
-                "sling:resourceType", PagePropertyImpl.RESOURCE_TYPE_V1,
-                "property", property);
+        return render(page, property, null);
+    }
+
+    private String render(Page page, String property, String dateFormat) {
+        Map<String, Object> props = new HashMap<>();
+        props.put("sling:resourceType", PagePropertyImpl.RESOURCE_TYPE_V1);
+        props.put("property", property);
+        if (dateFormat != null) {
+            props.put("dateFormat", dateFormat);
+        }
+        Resource component = context.create().resource(page.getContentResource().getPath() + "/date" + (++renders), props);
         context.currentPage(page);
         context.currentResource(component);
         return context.request().adaptTo(PageProperty.class).getProperty();

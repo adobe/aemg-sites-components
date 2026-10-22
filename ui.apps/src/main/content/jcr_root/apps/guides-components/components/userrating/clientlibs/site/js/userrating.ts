@@ -22,6 +22,12 @@ class UserRating {
   // TODO: Need to remove below two once able to get user session or similar data. Remove global state also
   private rated: boolean = false;
   private ratedValue: number = 0;
+  private messages = {
+    rating: "Rating",
+    rate: "Rate this content",
+    rated: "Thank you for the rating",
+    ratingCount: "({0} ratings)",
+  };
   constructor() {
     this.protocol = window.location.protocol;
     this.host = window.location.host;
@@ -91,7 +97,7 @@ class UserRating {
   createUserCountParagraph(count: string) {
     const div = document.createElement("div");
     div.classList.add("cmp-userrating-total-reviews");
-    div.innerHTML = "(" + count + " ratings)";
+    div.textContent = this.messages.ratingCount.replace("{0}", count);
     return div;
   }
 
@@ -148,9 +154,9 @@ class UserRating {
     const div = document.createElement("div");
     div.classList.add("cmp-userrating-popup-text");
     if (this.rated) {
-      div.innerHTML = "Thank you for the rating";
+      div.textContent = this.messages.rated;
     } else {
-      div.innerHTML = "Rate this content";
+      div.textContent = this.messages.rate;
     }
     return div;
   }
@@ -227,7 +233,7 @@ class UserRating {
     const ratingDiv = parent.querySelector(".cmp-userrating") as HTMLDivElement;
     const ratingParagraph = document.createElement("div");
     ratingParagraph.classList.add("cmp-userrating-rating-paragraph");
-    ratingParagraph.innerHTML = "Rating";
+    ratingParagraph.textContent = this.messages.rating;
     ratingDiv.appendChild(ratingParagraph);
 
     const ratingGroup = this.createRatingGroup(rating, count);
@@ -237,6 +243,12 @@ class UserRating {
   onDocumentReady() {
     const ratingDivs = document.querySelectorAll(".userrating");
     ratingDivs.forEach((div) => {
+      this.messages = {
+        rating: div.getAttribute("data-msg-rating") || this.messages.rating,
+        rate: div.getAttribute("data-msg-rate") || this.messages.rate,
+        rated: div.getAttribute("data-msg-rated") || this.messages.rated,
+        ratingCount: div.getAttribute("data-msg-rating-count") || this.messages.ratingCount,
+      };
       //TODO: send the data to analytics api once api is ready
       let topicUuid = div.getAttribute("data-cmp-topic-uuid");
       let rootMapUuid = div.getAttribute("data-cmp-root-map-uuid");

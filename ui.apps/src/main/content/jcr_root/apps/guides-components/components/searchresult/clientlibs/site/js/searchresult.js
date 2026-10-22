@@ -49,7 +49,7 @@ it.
         '</g>' +
         '</svg>';
 
-    var SHORT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var SHORT_DATE_FORMAT = new Intl.DateTimeFormat(document.documentElement.lang || undefined, { month: "short", year: "numeric" });
 
     var getCategory = new Array();
     var resultSize = 0;
@@ -71,7 +71,7 @@ it.
         try {
             var date = new Date(dateStr);
             if (isNaN(date.getTime())) return dateStr;
-            return SHORT_MONTHS[date.getMonth()] + " " + date.getFullYear();
+            return SHORT_DATE_FORMAT.format(date);
         } catch (e) {
             return dateStr;
         }
