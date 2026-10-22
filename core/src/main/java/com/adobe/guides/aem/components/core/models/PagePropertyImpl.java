@@ -81,8 +81,10 @@ public class PagePropertyImpl extends AbstractComponentImpl implements PagePrope
 
     @PostConstruct
     private void initModel() {
-        Resource resource = currentPage.adaptTo(Resource.class);
-        ValueMap properties = resource.getValueMap();
+        Resource pageResource = currentPage.adaptTo(Resource.class);
+        ValueMap pageProperties = pageResource.getValueMap();
+        Resource contentResource = currentPage.getContentResource();
+        ValueMap contentProperties = contentResource != null ? contentResource.getValueMap() : ValueMap.EMPTY;
         Locale locale = null;
         try {
             locale = languageManager.getLanguage(currentPage.getContentResource());
@@ -90,12 +92,17 @@ public class PagePropertyImpl extends AbstractComponentImpl implements PagePrope
             logger.error("Error: {}", e);
         }
         logger.info("locale for date format: {}", locale);
-        if (StringUtils.isNotBlank(property) && properties.containsKey(property)) {
-            Object val = properties.get(property);
+        if (StringUtils.isNotBlank(property)) {
+            Object val = null;
+            if (pageProperties.containsKey(property)) {
+                val = pageProperties.get(property);
+            } else if (contentProperties.containsKey(property)) {
+                val = contentProperties.get(property);
+            }
             if (val instanceof String) {
                 property = (String) val;
             } else if (val instanceof Calendar) {
-                property = formatDate((Calendar)val, getDateFormat(), locale);
+                property = formatDate((Calendar) val, getDateFormat(), locale);
             } else {
                 property = "";
             }

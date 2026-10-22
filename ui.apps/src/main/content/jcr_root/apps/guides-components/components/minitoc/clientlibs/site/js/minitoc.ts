@@ -66,7 +66,10 @@ class MiniTOC {
             }
             return selector
         }
-        this.headings = content.querySelectorAll(getListOfHeadings());
+        this.headings = Array.from(content.querySelectorAll(getListOfHeadings()));
+        if (this.headings.length > 0) {
+            this.headings.shift();
+        }
         this.tagList = []
         for (var i = 0; i < this.headings.length; i++) {
             var heading = this.headings[i];
@@ -91,8 +94,10 @@ class MiniTOC {
             miniTOCList.classList.add('minitoc-list')
             minitocContainer.appendChild(miniTOCList)
         } else {
-            const minitocContainerSection = document.getElementsByClassName('minitoc-container')[0]
-            minitocContainerSection.classList.add('force-hide')
+            const miniTocMain = document.getElementsByClassName('mini-toc-main')[0]
+            if (miniTocMain) {
+                miniTocMain.classList.add('force-hide')
+            }
         }
 
         this.tagList.forEach(tag => {
@@ -113,7 +118,7 @@ class MiniTOC {
                         let targetNode
                         for (var i = 0; i < this.headings.length; i++) {
                             let heading = this.headings[i]
-                            let id = heading.attributes['id'].value
+                            let id = heading.attributes?.['id']?.value
                             if (id === target_id) {
                                 targetNode = heading
                                 break;
@@ -121,7 +126,7 @@ class MiniTOC {
                         }
                         if (targetNode) {
                             const parentScrollNode = htmlTag
-                            this.scrollContentWRTMinitoc(targetNode, parentScrollNode, 300)
+                            this.scrollContentWRTMinitoc(targetNode, parentScrollNode, 80)
                         }
                     }
                 }, 0)
@@ -134,11 +139,9 @@ class MiniTOC {
     }
 
     scrollContentWRTMinitoc(element, parentScrollNode, offset) {
-        if (element.offsetTop < parentScrollNode.scrollTop || element.offsetTop + element.offsetHeight > parentScrollNode.scrollTop + parentScrollNode.clientHeight) {
-            parentScrollNode.scrollTo({
-                top: Math.max(element.offsetTop - offset, 0)
-            });
-        }
+        parentScrollNode.scrollTo({
+            top: Math.max(element.offsetTop - offset, 0)
+        });
         setTimeout(() => {
             parentScrollNode.style.overflowY = ''
         }, 100)
@@ -147,7 +150,7 @@ class MiniTOC {
     isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
-            rect.top >= 100 &&
+            rect.top >= 70 &&
             rect.left >= 0 &&
             rect.bottom <= (window.innerHeight || (document.documentElement.clientHeight - 100)) &&
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)

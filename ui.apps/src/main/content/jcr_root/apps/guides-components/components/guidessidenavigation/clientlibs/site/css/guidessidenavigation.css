@@ -13,12 +13,202 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+/* ===== Product Header ===== */
+.cmp-guidesnav-product-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+}
+
+.cmp-guides-navigation {
+    padding-top: 0.15rem;
+}
+
+.cmp-guidesnav-product-header__left {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-width: 0;
+}
+
+.cmp-guidesnav-product-header__logo {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.cmp-guidesnav-product-header__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cmp-guidesnav-product-header__app-link {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1473e6;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 0.75rem;
+}
+
+.cmp-guidesnav-product-header__app-link::before {
+    content: "";
+    display: inline-block;
+    width: 2.25rem;
+    height: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2236%22%20height%3D%2232%22%20viewBox%3D%220%200%2036%2032%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask%20id%3D%22mask0_743_7795%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%2210%22%20y%3D%226%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Cpath%20d%3D%22M28%2021.75V10.25C28%209.00928%2026.9907%208%2025.75%208H14.25C13.0093%208%2012%209.00928%2012%2010.25V13.9678C12%2014.3818%2012.3359%2014.7178%2012.75%2014.7178C13.1641%2014.7178%2013.5%2014.3818%2013.5%2013.9678V10.25C13.5%209.83643%2013.8364%209.5%2014.25%209.5H25.75C26.1636%209.5%2026.5%209.83643%2026.5%2010.25V21.75C26.5%2022.1636%2026.1636%2022.5%2025.75%2022.5H21.939C21.5249%2022.5%2021.189%2022.8359%2021.189%2023.25C21.189%2023.6641%2021.5249%2024%2021.939%2024H25.75C26.9907%2024%2028%2022.9907%2028%2021.75Z%22%20fill%3D%22%23292929%22%2F%3E%3Cpath%20d%3D%22M21%2015.75V19.9927C21%2020.4067%2020.6641%2020.7427%2020.25%2020.7427C19.8359%2020.7427%2019.5%2020.4067%2019.5%2019.9927V17.5605L13.0303%2024.0303C12.8838%2024.1768%2012.6919%2024.25%2012.5%2024.25C12.3081%2024.25%2012.1162%2024.1768%2011.9697%2024.0303C11.6768%2023.7373%2011.6768%2023.2627%2011.9697%2022.9697L18.4395%2016.5H16.0073C15.5933%2016.5%2015.2573%2016.1641%2015.2573%2015.75C15.2573%2015.3359%2015.5933%2015%2016.0073%2015H20.25C20.6641%2015%2021%2015.3359%2021%2015.75Z%22%20fill%3D%22%23292929%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_743_7795)%22%3E%3Crect%20x%3D%2210%22%20y%3D%226%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%233B63FB%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+.cmp-guidesnav-product-header__app-link:hover {
+    text-decoration: underline;
+    color: #0d57af;
+}
+
+/* ===== Filter Input ===== */
+
+.cmp-guidesnav-filter {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+}
+
+.cmp-guidesnav-filter__icon {
+    position: absolute;
+    left: 2rem;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.cmp-guidesnav-filter__input {
+    width: 100%;
+    height: 40px;
+    padding: 0.625rem 0.75rem 0.625rem 2rem;
+    border: 2px solid var(--Palette-gray-300, #DADADA);
+    border-radius: 1.5rem;
+    font-family: "Adobe Clean";
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 125%;
+    color: #292929;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.cmp-guidesnav-filter__input:focus {
+    border-color: #1473e6;
+}
+
+.cmp-guidesnav-filter__input::placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #292929;
+}
+
+.cmp-guidesnav-filter-hidden {
+    display: none !important;
+}
+
+/* ===== Expand All Toggle ===== */
+
+.cmp-guidesnav-expand-all {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 3rem;
+}
+
+.cmp-guidesnav-expand-all__toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.cmp-guidesnav-expand-all__toggle-track {
+    display: block;
+    width: 1.875rem;
+    height: 1.125rem;
+    border-radius: 1rem;
+    border: 2px solid #6e6e6e;
+    background-color: transparent;
+    position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.cmp-guidesnav-expand-all__toggle-thumb {
+    position: absolute;
+    top: 50%;
+    left: 0.1875rem;
+    transform: translateY(-50%);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background-color: #6e6e6e;
+    transition: left 0.2s ease, background-color 0.2s ease;
+}
+
+.cmp-guidesnav-expand-all__toggle[aria-checked="true"] .cmp-guidesnav-expand-all__toggle-track {
+    background-color: #002258;
+    border-color: #002258;
+}
+
+.cmp-guidesnav-expand-all__toggle[aria-checked="true"] .cmp-guidesnav-expand-all__toggle-thumb {
+    left: calc(100% - 0.725rem);
+    background-color: #fff;
+}
+
+.cmp-guidesnav-expand-all__label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #4b4b4b;
+    line-height: 1.375;
+    user-select: none;
+}
+
+/* ===== Side Navigation TOC ===== */
+
+ .cmp-guidesnavigation__group {
+    display: grid;
+    font-size: 1rem;
+    width: 264px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    /* gap: 0.25rem; */
+ }
+
+
  .cmp-guidesnavigation__group .cmp-guidesnavigation__item .toc-list-item {
     display: flex;
     height: fit-content;
+    justify-content: space-between;
     min-height: 2rem;
     align-items: center;
-    margin: 0.5rem 0;
+    padding: 0.35rem 0.5rem;
 }
 
 
@@ -27,7 +217,7 @@
     content: "";
     width: 1rem;
     height: 1rem;
-    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_9111%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12%209C12%209.1309%2011.9742%209.26053%2011.924%209.38142C11.8738%209.50232%2011.8002%209.61212%2011.7075%209.7045L7.71596%2013.6945C7.62768%2013.7993%207.5188%2013.8848%207.39608%2013.9458C7.27336%2014.0068%207.13942%2014.0419%207.00258%2014.0489C6.86573%2014.0559%206.7289%2014.0348%206.60057%2013.9867C6.47224%2013.9387%206.35515%2013.8648%206.25658%2013.7696C6.158%2013.6744%206.08004%2013.56%206.02752%2013.4335C5.97501%2013.3069%205.94907%2013.1709%205.95131%2013.0339C5.95354%2012.8969%205.98392%2012.7618%206.04054%2012.637C6.09716%2012.5122%206.17882%2012.4004%206.28046%2012.3085L6.30496%2012.284L9.59046%209L6.30446%205.715C6.13453%205.52692%206.04237%205.28132%206.04662%205.02788C6.05086%204.77443%206.15119%204.53206%206.32732%204.34977C6.50345%204.16748%206.74223%204.05888%206.99538%204.04592C7.24853%204.03297%207.49715%204.11664%207.69096%204.28L7.71546%204.3045L11.707%208.2945C11.7999%208.38696%2011.8737%208.4969%2011.9239%208.61798C11.9742%208.73906%2012.0001%208.86889%2012%209Z%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_9111)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8%203.5L8%208L3.5%208C3.36739%208%203.24022%208.05268%203.14645%208.14645C3.05268%208.24022%203%208.36739%203%208.5L3%209.5C3%209.63261%203.05268%209.75979%203.14645%209.85355C3.24022%209.94732%203.36739%2010%203.5%2010L8%2010L8%2014.5C8%2014.6326%208.05268%2014.7598%208.14645%2014.8536C8.24022%2014.9473%208.36739%2015%208.5%2015L9.5%2015C9.63261%2015%209.75979%2014.9473%209.85355%2014.8536C9.94732%2014.7598%2010%2014.6326%2010%2014.5L10%2010L14.5%2010C14.6326%2010%2014.7598%209.94732%2014.8536%209.85355C14.9473%209.75979%2015%209.63261%2015%209.5L15%208.5C15%208.36739%2014.9473%208.24021%2014.8536%208.14645C14.7598%208.05268%2014.6326%208%2014.5%208L10%208L10%203.5C10%203.36739%209.94732%203.24021%209.85355%203.14645C9.75979%203.05268%209.63261%203%209.5%203L8.5%203C8.36739%203%208.24021%203.05268%208.14645%203.14645C8.05268%203.24021%208%203.36739%208%203.5Z%22%20fill%3D%22%23505050%22%2F%3E%3C%2Fsvg%3E");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -51,11 +241,11 @@
 }
 
 .cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active.cmp-nav-item-selected > .toc-list-item .item-child-toggle.show-children {
-    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_2579%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12.2933%206.29299L9.00032%209.58592L5.70732%206.29299C5.51923%206.10828%205.26581%206.00532%205.0022%206.00651C4.73858%206.00771%204.4861%206.11296%204.2997%206.29936C4.11329%206.48577%204.00804%206.73825%204.00685%207.00186C4.00565%207.26548%204.10861%207.5189%204.29332%207.70699L8.29332%2011.707C8.48074%2011.8945%208.73497%2011.9999%209.00009%2012C9.26521%2012%209.5195%2011.8948%209.70701%2011.7074L13.7074%207.70699C13.8929%207.51907%2013.9966%207.26537%2013.9958%207.00127C13.995%206.73717%2013.8897%206.48413%2013.7029%206.29739C13.5162%206.11065%2013.2631%206.00538%2012.999%206.00455C12.7349%206.00373%2012.4812%206.10742%2012.2933%206.29299Z%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_2579)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5%208H3.5C3.22386%208%203%208.22386%203%208.5V9.5C3%209.77614%203.22386%2010%203.5%2010H14.5C14.7761%2010%2015%209.77614%2015%209.5V8.5C15%208.22386%2014.7761%208%2014.5%208Z%22%20fill%3D%22%23505050%22%2F%3E%3C%2Fsvg%3E");
 }
 
-.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavigation__item-has-children.cmp-guidesnavigation__item--active.cmp-nav-item-selected > .toc-list-item .item-child-toggle.hide-children {
-    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_9111%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12%209C12%209.1309%2011.9742%209.26053%2011.924%209.38142C11.8738%209.50232%2011.8002%209.61212%2011.7075%209.7045L7.71596%2013.6945C7.62768%2013.7993%207.5188%2013.8848%207.39608%2013.9458C7.27336%2014.0068%207.13942%2014.0419%207.00258%2014.0489C6.86573%2014.0559%206.7289%2014.0348%206.60057%2013.9867C6.47224%2013.9387%206.35515%2013.8648%206.25658%2013.7696C6.158%2013.6744%206.08004%2013.56%206.02752%2013.4335C5.97501%2013.3069%205.94907%2013.1709%205.95131%2013.0339C5.95354%2012.8969%205.98392%2012.7618%206.04054%2012.637C6.09716%2012.5122%206.17882%2012.4004%206.28046%2012.3085L6.30496%2012.284L9.59046%209L6.30446%205.715C6.13453%205.52692%206.04237%205.28132%206.04662%205.02788C6.05086%204.77443%206.15119%204.53206%206.32732%204.34977C6.50345%204.16748%206.74223%204.05888%206.99538%204.04592C7.24853%204.03297%207.49715%204.11664%207.69096%204.28L7.71546%204.3045L11.707%208.2945C11.7999%208.38696%2011.8737%208.4969%2011.9239%208.61798C11.9742%208.73906%2012.0001%208.86889%2012%209Z%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_9111)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+.cmp-guidesnavigation__group .cmp-guidesnavigation__item.cmp-guidesnavig`ation__item-has-children.cmp-guidesnavigation__item--active.cmp-nav-item-selected > .toc-list-item .item-child-toggle.hide-children {
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M8%203.5L8%208L3.5%208C3.36739%208%203.24022%208.05268%203.14645%208.14645C3.05268%208.24022%203%208.36739%203%208.5L3%209.5C3%209.63261%203.05268%209.75979%203.14645%209.85355C3.24022%209.94732%203.36739%2010%203.5%2010L8%2010L8%2014.5C8%2014.6326%208.05268%2014.7598%208.14645%2014.8536C8.24022%2014.9473%208.36739%2015%208.5%2015L9.5%2015C9.63261%2015%209.75979%2014.9473%209.85355%2014.8536C9.94732%2014.7598%2010%2014.6326%2010%2014.5L10%2010L14.5%2010C14.6326%2010%2014.7598%209.94732%2014.8536%209.85355C14.9473%209.75979%2015%209.63261%2015%209.5L15%208.5C15%208.36739%2014.9473%208.24021%2014.8536%208.14645C14.7598%208.05268%2014.6326%208%2014.5%208L10%208L10%203.5C10%203.36739%209.94732%203.24021%209.85355%203.14645C9.75979%203.05268%209.63261%203%209.5%203L8.5%203C8.36739%203%208.24021%203.05268%208.14645%203.14645C8.05268%203.24021%208%203.36739%208%203.5Z%22%20fill%3D%22%23505050%22%2F%3E%3C%2Fsvg%3E");
 
 }
 
@@ -65,8 +255,7 @@
     content: "";
     width: 1rem;
     height: 1rem;
-    
-    background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%3E%3Cmask%20id%3D%22mask0_348_2579%22%20style%3D%22mask-type%3Aalpha%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2218%22%20height%3D%2218%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M12.2933%206.29299L9.00032%209.58592L5.70732%206.29299C5.51923%206.10828%205.26581%206.00532%205.0022%206.00651C4.73858%206.00771%204.4861%206.11296%204.2997%206.29936C4.11329%206.48577%204.00804%206.73825%204.00685%207.00186C4.00565%207.26548%204.10861%207.5189%204.29332%207.70699L8.29332%2011.707C8.48074%2011.8945%208.73497%2011.9999%209.00009%2012C9.26521%2012%209.5195%2011.8948%209.70701%2011.7074L13.7074%207.70699C13.8929%207.51907%2013.9966%207.26537%2013.9958%207.00127C13.995%206.73717%2013.8897%206.48413%2013.7029%206.29739C13.5162%206.11065%2013.2631%206.00538%2012.999%206.00455C12.7349%206.00373%2012.4812%206.10742%2012.2933%206.29299Z%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fmask%3E%3Cg%20mask%3D%22url(%23mask0_348_2579)%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20fill%3D%22%23222222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5%208H3.5C3.22386%208%203%208.22386%203%208.5V9.5C3%209.77614%203.22386%2010%203.5%2010H14.5C14.7761%2010%2015%209.77614%2015%209.5V8.5C15%208.22386%2014.7761%208%2014.5%208Z%22%20fill%3D%22%23505050%22%2F%3E%3C%2Fsvg%3E");
     flex-shrink: 0;
     background-size: contain;
     background-repeat: no-repeat;
@@ -87,8 +276,29 @@ ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.show-children {
 
 ul.cmp-guidesnavigation__group {
     /* margin: 0 0 .75rem; */
+    gap: 0.25rem;
     list-style-type: none;
     padding: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar {
+    width: 4px;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+ul.cmp-guidesnavigation__group::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.35);
 }
 
 ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
@@ -98,18 +308,36 @@ ul.cmp-guidesnavigation__group ul.cmp-guidesnavigation__group.hide-children {
 }
 
 .cmp-guidesnavigation__item.cmp-guidesnavigation__item-no-children a {
-    padding-left: .5rem;
+    /* padding: 0.5rem 0.75rem; */
 }
 
 ul.cmp-guidesnavigation__group .cmp-nav-item-selected>.toc-list-item {
-    --tw-text-opacity: 1;
-    color: rgba(31, 41, 55, var(--tw-text-opacity));
-    background-color: #0054b6;
-    border-radius: .25rem;
-    color: #fff;
+    background-color: #EBEEFF;
+    border-radius: 0.5rem;
+
+    a {
+        flex: 1;
+        min-width: 0;
+        color: #2C2C2C;
+        font-weight: 700;
+    }
+}
+
+.cmp-guidesnavigation__item-has-children > .toc-list-item {
+    cursor: pointer;
 }
 
 ul.cmp-guidesnavigation__group .toc-list-item a {
     word-wrap: break-word;
     overflow: auto;
+}
+
+.guides-navigation {
+    height: 90vh;
+}
+
+@media (max-width: 768px) {
+    .guides-navigation {
+        height: auto;
+    }
 }

@@ -1,3 +1,15 @@
 {
-  "&amp;copy; {0} Guides Components Site. All rights reserved." : "&amp;copy; {0} Guides Components Site. Tous droits réservés."
+  "&amp;copy; {0} Guides Components Site. All rights reserved." : "&amp;copy; {0} Guides Components Site. Tous droits réservés.",
+  "Copy summary": "Copier le résumé",
+  "Helpful": "Utile",
+  "Not helpful": "Pas utile",
+  "Clear": "Effacer",
+  "AI Overview": "Aperçu IA",
+  "Sources:": "Sources :",
+  "Show more": "Afficher plus",
+  "Show less": "Afficher moins",
+  "Terms": "Conditions",
+  "Generating response...": "Génération de la réponse...",
+  "Ask a question...": "Posez une question...",
+  "AI responses may be inaccurate and any offers provided are non-binding.": "Les réponses de l'IA peuvent être inexactes et les offres fournies ne sont pas contraignantes."
 }

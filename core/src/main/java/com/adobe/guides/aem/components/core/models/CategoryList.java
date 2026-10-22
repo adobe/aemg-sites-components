@@ -16,21 +16,17 @@
 
 package com.adobe.guides.aem.components.core.models;
 
-import com.adobe.cq.export.json.ComponentExporter;
 import com.adobe.cq.wcm.core.components.models.Component;
-import org.jetbrains.annotations.NotNull;
 import org.osgi.annotation.versioning.ConsumerType;
-
-import java.util.List;
 
 @ConsumerType
 public interface CategoryList extends Component {
 
     /**
-     * Returns the list of categories present in a template.
+     * Returns the categories present in a template as a JSON array string.
+     * Each entry contains path, title, description, thumbnail, and firstChildPath.
      *
-     * @return categories list if it exists and empty list otherwise
-     * @since com.adobe.cq.wcm.core.components.models 11.0.0; marked <code>default</code> in 12.1.0
+     * @return JSON array string of categories, or "[]" if none found
      */
-    List<String> getCategoryList();
+    String getCategoryList();
 }

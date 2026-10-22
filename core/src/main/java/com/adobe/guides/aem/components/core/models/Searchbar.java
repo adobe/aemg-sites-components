@@ -44,6 +44,13 @@ public interface Searchbar extends ComponentExporter {
     String PN_RESULT_PAGE = "resultpage";
 
     /**
+     * Name of the configuration policy property that defines the placeholder text for the search input.
+     *
+     * @since com.adobe.cq.wcm.core.components.models 12.2.0
+     */
+    String PN_PLACEHOLDER = "placeholder";
+
+    /**
      * The minimum length of the search term to start the search.
      *
      * @return minimum length of the search term
@@ -59,6 +66,16 @@ public interface Searchbar extends ComponentExporter {
      */
     
     default String getResultpage() {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Returns the placeholder text for the search input field.
+     *
+     * @return placeholder text, or "Search" if not configured
+     * @since com.adobe.cq.wcm.core.components.models 12.2.0
+     */
+    default String getPlaceholder() {
         throw new UnsupportedOperationException();
     }
            

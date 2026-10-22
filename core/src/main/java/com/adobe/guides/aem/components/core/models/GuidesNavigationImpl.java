@@ -125,7 +125,6 @@ public class GuidesNavigationImpl extends AbstractComponentImpl implements Guide
             }
             guidesNavigation = new ArrayList<>();
             JSONObject toc = new JSONObject(tocBinaryString);
-            Utils.updateVisibility(toc, new JSONObject(guidesAllowedPages), this.getCategoryPath());
             guidesNavigation.add(toc.toString());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

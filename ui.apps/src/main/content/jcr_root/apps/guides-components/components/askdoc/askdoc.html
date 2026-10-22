@@ -1,0 +1,62 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright 2024 Adobe Systems Incorporated
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div class="cmp-askdoc"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-cmp-chat-endpoint="${properties.chatEndpoint || ''}"
+     data-cmp-welcome-message="${properties.welcomeMessage || 'Hey buddy! 👋 I’m AskDoc, your partner for exploring everything related to this product. Just tell me what you want to learn about!'}"
+     data-cmp-chat-placeholder="${properties.chatPlaceholder || 'You can ask me anything related to this product'}"
+     data-cmp-chat-disclaimer="${properties.chatDisclaimerText || 'Be sure to double-check responses as they may be inaccurate.'}"
+     data-cmp-guidelines-link="${properties.guidelinesLink || '#'}">
+
+    <!-- Backdrop overlay -->
+    <div class="cmp-askdoc__backdrop"></div>
+
+    <!-- Chat Panel -->
+    <aside class="cmp-askdoc__panel">
+
+        <!-- Panel Header -->
+        <header class="cmp-askdoc__header">
+            <span class="cmp-askdoc__header-title">AskDoc</span>
+            <div class="cmp-askdoc__header-actions">
+                <button type="button" class="cmp-askdoc__header-btn cmp-askdoc__header-refresh" title="Reset conversation"></button>
+                <button type="button" class="cmp-askdoc__header-btn cmp-askdoc__header-close" title="Close"></button>
+            </div>
+        </header>
+
+        <!-- Chat Messages Area -->
+        <div class="cmp-askdoc__messages">
+            <!-- Messages are rendered dynamically by JS -->
+        </div>
+
+        <!-- Chat Input Area -->
+        <footer class="cmp-askdoc__input-area">
+            <div class="cmp-askdoc__input-wrapper">
+                <textarea class="cmp-askdoc__input"
+                          rows="1"
+                          placeholder="${properties.chatPlaceholder @ i18n}"></textarea>
+                <div class="cmp-askdoc__input-actions">
+                    <button type="button" class="cmp-askdoc__attach-btn" title="Attach file"></button>
+                    <button type="button" class="cmp-askdoc__send-btn" title="Send message"></button>
+                </div>
+            </div>
+            <div class="cmp-askdoc__disclaimer">
+                <span class="cmp-askdoc__disclaimer-text">Be sure to double-check responses as they may be inaccurate.</span>
+                <a class="cmp-askdoc__disclaimer-link" href="${properties.guidelinesLink || '#'}">Generative AI User Guidelines.</a>
+            </div>
+        </footer>
+    </aside>
+</div>

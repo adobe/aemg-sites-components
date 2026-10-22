@@ -13,94 +13,143 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
- .category-list-item {
-    height: 13rem;
-    width: 26rem;
-    position: relative;
-    font-size: 2rem;
-    background: #F1F8FF;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-     justify-content: center;
+.category-list {
+    margin: 0 auto;
 }
 
-.category-list-item::before {
-    content: "";
-    display: block;
-    width: 100%;
+.cmp-category-list {
+    margin: 1.25rem 0;
 }
-
-.category-list-item::after {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-}
-
-.category-list-item-image-container {
-    width: 4rem;
-    height: 4rem;
-    align-self: center;
-    margin-bottom: .5rem;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100% 100%;
-}
-
-.category-list-item-title {
-    width: 100%;
-    margin-bottom: 0px;
-    display: -webkit-box;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    color: #1532AD;
-    font-family: Roboto, serif;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;}
 
 .cmp-category-list-group {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.category-list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem;
+    background: #F8F8F8;
+    border: 1px solid #E8E8E8;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.category-list-item:hover {
+    background: #f3f3f3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.category-list-item:focus-visible {
+    outline: 2px solid #4a6cf7;
+    outline-offset: 2px;
+}
+
+.category-list-item-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.625rem;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 3rem;    
-    max-width: 100%;
+    overflow: hidden;
+}
+
+.category-list-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.625rem;
+}
+
+.category-list-item-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.category-list-item-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2C2C2C;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.category-list-item-description {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #2C2C2C;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.category-list-item-chevron {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: #292929;
+    transition: color 0.15s ease;
+}
+
+.category-list-item:hover .category-list-item-chevron {
+    color: #292929;
 }
 
 @media (max-width: 768px) {
-    .category-list-item-title {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        text-align: center;
-        margin-top: 1rem;
-    }
-    .cmp-category-list-group {
-        grid-template-columns: 1fr;
+
+    .category-list-item {
+        padding: 1rem 1.125rem;
+        gap: 0.75rem;
     }
 
-    .wide {
-        grid-column: span 2;
+    .category-list-item-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.5rem;
+    }
+
+    .category-list-item-icon img {
+        border-radius: 0.5rem;
+    }
+
+    .category-list-item-title {
+        font-size: 0.9375rem;
+    }
+
+    .category-list-item-description {
+        font-size: 0.8125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cmp-category-list-group {
+        gap: 0.5rem;
     }
 
     .category-list-item {
-        height: 9.5rem;
-        width: 9.5rem;
+        padding: 0.875rem 1rem;
+        border-radius: 0.625rem;
+    }
+
+    .category-list-item-title {
+        white-space: normal;
+    }
+
+    .category-list-item-description {
+        white-space: normal;
     }
 }

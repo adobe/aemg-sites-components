@@ -1,0 +1,74 @@
+<!--/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ Copyright 2024 Adobe Systems Incorporated
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~     http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/-->
+
+<div class="cmp-page-actions"
+     data-cmp-page-actions
+     data-copy-selector="#topic-container"
+     data-mcp-name="${properties.mcpName}"
+     data-mcp-config="${properties.mcpConfig}"
+     data-mcp-server="${properties.mcpServer}"
+     data-pdf-path="${properties.pdfPath}"
+     data-msg-no-content="${'No content found to copy' @ i18n}"
+     data-msg-page-copied="${'Page copied to clipboard' @ i18n}"
+     data-msg-page-copy-failed="${'Failed to copy page' @ i18n}"
+     data-msg-mcp-missing="${'MCP Server configuration is missing' @ i18n}"
+     data-msg-mcp-copied="${'MCP Server config copied to clipboard' @ i18n}"
+     data-msg-mcp-copy-failed="${'Failed to copy MCP config' @ i18n}"
+     data-msg-mcp-config-missing="${'MCP configuration is missing' @ i18n}"
+     data-msg-topic-no-content="${'No topic content found to download' @ i18n}"
+     data-msg-pdf-missing="${'PDF path is not configured' @ i18n}">
+
+    <button class="cmp-page-actions__trigger"
+            type="button"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="${'Page actions menu' @ i18n}">
+        <span class="cmp-page-actions__trigger-icon cmp-page-actions__icon--copy-page" aria-hidden="true"></span>
+        <span class="cmp-page-actions__trigger-text">${'Copy page' @ i18n}</span>
+        <svg class="cmp-page-actions__trigger-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <div class="cmp-page-actions__panel" aria-label="${'Page actions' @ i18n}" hidden>
+        <div class="cmp-page-actions__backdrop"></div>
+        <div class="cmp-page-actions__menu" role="menu">
+            <button class="cmp-page-actions__item" role="menuitem" data-action="copy-page">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--copy-page" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Copy page' @ i18n}</span>
+            </button>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="copy-mcp">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--copy-mcp" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Copy MCP Server' @ i18n}</span>
+            </button>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="connect-cursor">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--connect-cursor" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Connect to Cursor' @ i18n}</span>
+            </button>
+            <div class="cmp-page-actions__separator" role="separator"></div>
+            <button class="cmp-page-actions__item" role="menuitem" data-action="download-topic">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--download-topic" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Download page' @ i18n}</span>
+            </button>
+            <!--/* Download guide – hidden for now
+            <button class="cmp-page-actions__item" role="menuitem" data-action="download-document">
+                <span class="cmp-page-actions__item-icon cmp-page-actions__icon--download-document" aria-hidden="true"></span>
+                <span class="cmp-page-actions__item-text">${'Download guide' @ i18n}</span>
+            </button>
+            */-->
+        </div>
+    </div>
+</div>

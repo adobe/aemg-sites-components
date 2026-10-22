@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    cq:icon="more"
+    jcr:description="Dropdown button with configurable page actions (Copy Page, Copy MCP Server, Connect to Cursor)"
+    jcr:primaryType="cq:Component"
+    jcr:title="Page Actions"
+    componentGroup="Guides Components - Content"/>
