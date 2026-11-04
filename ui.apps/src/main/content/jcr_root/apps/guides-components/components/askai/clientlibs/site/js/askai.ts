@@ -15,6 +15,8 @@
  */
 
 const DEFAULT_ENDPOINT = 'https://guides.adobe.com/flameback/api/v1/answer';
+// Fallback key for backward compatibility; configure per-site via the component dialog.
+const DEFAULT_API_KEY = 'fb_sk_FZJ87HDrZ7YWssJmaz72_twxybnkN6XB3iTH1HrJwsE';
 
 class AskAI {
     private wrapper: HTMLElement;
@@ -51,7 +53,7 @@ class AskAI {
         this.collapsedHeight = 150;
 
         this.endpoint = this.wrapper.getAttribute('data-cmp-endpoint') || DEFAULT_ENDPOINT;
-        this.apiKey = 'fb_sk_FZJ87HDrZ7YWssJmaz72_twxybnkN6XB3iTH1HrJwsE';
+        this.apiKey = (this.wrapper.getAttribute('data-cmp-api-key') || '').trim() || DEFAULT_API_KEY;
         this.isNewConversation = false;
         this.showMoreLabel = this.wrapper.getAttribute('data-cmp-show-more') || 'Show more';
         this.showLessLabel = this.wrapper.getAttribute('data-cmp-show-less') || 'Show less';

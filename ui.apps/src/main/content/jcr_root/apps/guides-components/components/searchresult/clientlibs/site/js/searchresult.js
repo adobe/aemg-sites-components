@@ -161,6 +161,16 @@ it.
         return ""
     }
 
+    function getPublicSiteRoot(fallback) {
+        var path = window.location.pathname || "";
+        var match = path.match(/^\/([^/]+)\/.+/);
+        if (match && match[1] !== "content") {
+            return "/" + match[1];
+        }
+        var contentMatch = path.match(/^\/content(\/[^/]+)/);
+        return contentMatch ? contentMatch[1] : fallback;
+    }
+
     function buildResultItem(item, breadcrumb) {
         var shortDate = formatShortDate(item.formattedLastModifiedDate);
         var url = checkNull(item.url);
@@ -170,7 +180,9 @@ it.
                 displayUrl = window.location.origin + url;
             }
         } catch (e) { /* keep relative url */ }
-        displayUrl = displayUrl.replace(/\/content\/[^/]+/, "/coldfusion");
+        displayUrl = displayUrl.replace(/\/content(\/[^/]+)/, function(_, contentSite) {
+            return getPublicSiteRoot(contentSite);
+        });
 
         var html = "<li class='cmp-searchresult-item'>" +
             "<div class='cmp-searchresult-icon'>" + ARTICLE_ICON + "</div>" +
