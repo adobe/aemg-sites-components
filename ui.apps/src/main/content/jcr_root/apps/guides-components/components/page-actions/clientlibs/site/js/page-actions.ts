@@ -14,51 +14,26 @@
  ~ limitations under the License.
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-const CURSOR_DEEPLINK = "cursor://anysphere.cursor-deeplink/mcp/install";
-
-const MCP_SERVER_CONFIG = {
-    name: "coldfusion-documentation",
-    url: "https://guidesai.adobe.io/mcp",
-    description: "Knowledge base for coldfusion-documentation",
-    headers: {
-        "X-Api-Key": "fb_sk_ZIIm5oNLfXLV1fQhPe84M3mOlNRV1jO6KA_8sBia5gQ",
-    },
-};
-
 interface PageActionsMessages {
     noContent: string;
     pageCopied: string;
     pageCopyFailed: string;
-    mcpMissing: string;
-    mcpCopied: string;
-    mcpCopyFailed: string;
-    mcpConfigMissing: string;
     topicNoContent: string;
     pdfMissing: string;
 }
 
 interface PageActionsConfig {
-    mcpConfig: string;
-    mcpServer: string;
-    mcpName: string;
     pdfPath: string;
     messages: PageActionsMessages;
 }
 
 function getConfig(root: HTMLElement): PageActionsConfig {
     return {
-        mcpConfig: root.getAttribute("data-mcp-config") || "",
-        mcpServer: root.getAttribute("data-mcp-server") || "",
-        mcpName: root.getAttribute("data-mcp-name") || "",
         pdfPath: root.getAttribute("data-pdf-path") || "",
         messages: {
             noContent: root.getAttribute("data-msg-no-content") || "No content found to copy",
             pageCopied: root.getAttribute("data-msg-page-copied") || "Page copied to clipboard",
             pageCopyFailed: root.getAttribute("data-msg-page-copy-failed") || "Failed to copy page",
-            mcpMissing: root.getAttribute("data-msg-mcp-missing") || "MCP Server configuration is missing",
-            mcpCopied: root.getAttribute("data-msg-mcp-copied") || "MCP Server config copied to clipboard",
-            mcpCopyFailed: root.getAttribute("data-msg-mcp-copy-failed") || "Failed to copy MCP config",
-            mcpConfigMissing: root.getAttribute("data-msg-mcp-config-missing") || "MCP configuration is missing",
             topicNoContent: root.getAttribute("data-msg-topic-no-content") || "No topic content found to download",
             pdfMissing: root.getAttribute("data-msg-pdf-missing") || "PDF path is not configured",
         },
@@ -75,28 +50,6 @@ function showToast(message: string): void {
     document.body.appendChild(toast);
 
     setTimeout(() => toast.remove(), 2000);
-}
-
-function copyToClipboard(text: string): Promise<void> {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
-    }
-    return new Promise((resolve, reject) => {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        try {
-            document.execCommand("copy");
-            resolve();
-        } catch (e) {
-            reject(e);
-        } finally {
-            document.body.removeChild(ta);
-        }
-    });
 }
 
 function buildStyledHtml(contentEl: HTMLElement): string {
@@ -196,24 +149,6 @@ function handleCopyPage(config: PageActionsConfig): void {
     copyRichContent(styledHtml, plainText)
         .then(() => showToast(config.messages.pageCopied))
         .catch(() => showToast(config.messages.pageCopyFailed));
-}
-
-function handleCopyMcp(config: PageActionsConfig): void {
-    if (!config.mcpServer) {
-        showToast(config.messages.mcpMissing);
-        return;
-    }
-    copyToClipboard(config.mcpServer)
-        .then(() => showToast(config.messages.mcpCopied))
-        .catch(() => showToast(config.messages.mcpCopyFailed));
-}
-
-function handleConnectCursor(): void {
-    const { name, ...serverConfig } = MCP_SERVER_CONFIG;
-    const encodedName = encodeURIComponent(name);
-    const encodedConfig = btoa(JSON.stringify(serverConfig));
-    const url = `${CURSOR_DEEPLINK}?name=${encodedName}&config=${encodedConfig}`;
-    window.open(url, "_self");
 }
 
 function loadHtml2Pdf(): Promise<void> {
@@ -402,12 +337,6 @@ function initPageActions(root: HTMLElement): void {
             switch (action) {
                 case "copy-page":
                     handleCopyPage(config);
-                    break;
-                case "copy-mcp":
-                    handleCopyMcp(config);
-                    break;
-                case "connect-cursor":
-                    handleConnectCursor();
                     break;
                 case "download-topic":
                     handleDownloadTopic(config);

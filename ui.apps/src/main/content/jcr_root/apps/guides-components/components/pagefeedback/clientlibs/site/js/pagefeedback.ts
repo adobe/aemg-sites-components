@@ -152,6 +152,11 @@ class Pagefeedback {
         })
     }
 
+    skipFeedback(isHelpful: boolean) {
+        this.submitFeedback({ helpful: isHelpful, reasons: [], suggestions: "", pageUrl: window.location.href, timestamp: Date.now(), skipped: true })
+        this.hideSection(this.component)
+    }
+
     subscribeEvents() {
         this.yesButton.addEventListener('click', () => {
             this.currentSentiment = true
@@ -178,11 +183,7 @@ class Pagefeedback {
             this.showSection(this.thankyou)
         })
 
-        this.positiveSkipButton.addEventListener('click', () => {
-            this.submitFeedback({ helpful: true, reasons: [], suggestions: "", pageUrl: window.location.href, timestamp: Date.now(), skipped: true })
-            this.hideSection(this.positiveForm)
-            this.showSection(this.thankyou)
-        })
+        this.positiveSkipButton.addEventListener('click', () => this.skipFeedback(true))
 
         this.negativeSubmitButton.addEventListener('click', () => {
             const payload = this.buildPayload(this.negativeForm, false)
@@ -195,11 +196,7 @@ class Pagefeedback {
             this.showSection(this.thankyou)
         })
 
-        this.negativeSkipButton.addEventListener('click', () => {
-            this.submitFeedback({ helpful: false, reasons: [], suggestions: "", pageUrl: window.location.href, timestamp: Date.now(), skipped: true })
-            this.hideSection(this.negativeForm)
-            this.showSection(this.thankyou)
-        })
+        this.negativeSkipButton.addEventListener('click', () => this.skipFeedback(false))
     }
 }
 

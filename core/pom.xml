@@ -46,6 +46,8 @@
 Import-Package: javax.annotation;version=0.0.0,\
   javax.annotation.meta;resolution:=optional,\
   *
+Sling-ContextAware-Configuration-Classes: com.adobe.guides.aem.components.core.linklocalization.LinkLocalizationConfig,\
+  com.adobe.guides.aem.components.core.linklocalization.LinkLocalizationRule
 # Embed Jsoup library for HTML parsing
 -includeresource: @jsoup-*.jar!/**
 Embed-Dependency: jsoup;scope=compile|runtime;inline=true
