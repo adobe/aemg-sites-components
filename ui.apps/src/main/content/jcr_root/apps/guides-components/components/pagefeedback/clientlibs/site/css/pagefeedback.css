@@ -324,6 +324,7 @@
    Hidden state utility
    -------------------------------------------------------------------------- */
 
+.cmp-page-feedback.tcx-hide,
 .cmp-page-feedback .tcx-hide {
     display: none !important;
 }
